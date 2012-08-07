@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <title>{{ page.title }} | Bandoneon</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="Nico Kaiser">
+
+  <script src="/js/jquery.min.js"></script>
+  <script src="/js/bootstrap.min.js"></script>
+  <script src="/js/raphael-min.js"></script>
+
+  <script src="/js/bandoneon.js"></script>
+
+  <link href="/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+
+    body {
+      padding-top: 60px;
+    }
+
+    .keyboard {
+      margin: 20px 0;
+      text-align: center;
+      width: auto;
+      height: 450px;
+      margin-bottom: 30px;
+      background-color: #EEE;
+      -webkit-border-radius: 6px;
+      -moz-border-radius: 6px;
+      border-radius: 6px;
+      border: 1px solid #E1E1E8;
+    }
+
+    #container {
+      width: 800px;
+      height: 450px;
+      margin: 0 auto;
+      text-align: left;
+    }
+
+  </style>
+  <!--
+  <link href="./assets/css/bootstrap-responsive.css" rel="stylesheet">
+  -->
+
+  <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+</head>
+
+<body>
+
+  <div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </a>
+        <a class="brand" href="/">Bandoneon</a>
+        <div class="nav-collapse">
+          <ul class="nav">
+            <li><a href="/">Übersicht</a></li>
+            <li><a href="/about/">Info</a></li>
+            <li><a href="/scales/">Tonleitern</a></li>
+            <li><a href="/chords/">Akkorde</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+
+    {{ content }}
+
+    <hr>
+
+    <footer>
+      <p class="pull-right"><a href="#">Nach oben</a></p>
+      <p>
+        Copyright &copy; 2012 <a href="http://siriux.net/">Nico Kaiser</a>.
+      </p>
+    </footer>
+
+  </div> <!-- /container -->
+
+</body>
+</html>
