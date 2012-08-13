@@ -31,7 +31,6 @@ title: Tonleitern
     <option value="a">A</option>
     <option value="d">D</option>
     <option value="g">G</option>
-    
     <option value="c">C</option>
     <option value="f">F</option>
     <option value="a#">B♭</option>
@@ -45,81 +44,9 @@ title: Tonleitern
   <select class="span2" id="select-mode">
     <option value="">Modus</option>
     <option value="chromatic">Chromatisch</option>
-    <option value="major">Dur (Ionisch)</option>
-    <option value="minor">Moll natürlich (Äolisch)</option>
-    <!--
-    <option value="">Moll harmonisch</option>
-    <option value="">Moll melodisch</option>
-    <option value="">Dorisch</option>
-    <option value="">Phrygisch</option>
-    <option value="">Lydisch</option>
-    <option value="">Mixolydisch</option>
-    -->
+    <option value="major">Dur</option>
+    <option value="minor">Moll</option>
   </select>
+
   <button class="btn btn-primary" id="toggle-octavecolors">Farbige Knöpfe</button>
-
 </form>
-
-<script type="text/javascript">
-
-/*
-$(document).ready(function() {
-
-  Bandoneon.paper = Raphael(document.getElementById('container'), 800, 450);
-  
-  Bandoneon.redraw();
-
-  $('#nav-sides a[data-toggle="tab"]').on('shown', function(e) {
-    switch (e.target.hash) {
-      case '#left-pull':
-        Bandoneon.config.side = 'left';
-        Bandoneon.config.dir = 'pull';
-        break;
-     case '#left-push':
-        Bandoneon.config.side = 'left';
-        Bandoneon.config.dir = 'push';
-        break;
-      case '#right-pull':
-        Bandoneon.config.side = 'right';
-        Bandoneon.config.dir = 'pull';
-        break;
-      case '#right-push':
-        Bandoneon.config.side = 'right';
-        Bandoneon.config.dir = 'push';
-        break;
-    }
-    Bandoneon.redraw();
-  });
-  
-  $('#select-key').change(function() {
-    $('#select-key option:selected').each(function() {
-      Bandoneon.config.key = $(this).val();
-      Bandoneon.redraw();
-    });
-  });
-
-  $('#select-mode').change(function() {
-    $('#select-mode option:selected').each(function() {
-      Bandoneon.config.mode = $(this).val();
-      Bandoneon.redraw();
-    });
-  });
-
-  $('#toggle-colorbuttons').button();
-  $('#toggle-colorbuttons').click(function() {
-    if ($(this).hasClass('active')) {
-      $(this).removeClass('active');
-      Bandoneon.config.showOctaveColors = false;
-    } else {
-      $(this).addClass('active');
-      Bandoneon.config.showOctaveColors = true;
-    }
-    Bandoneon.redraw();
-    return false;
-  });
-
-});
-*/
-
-</script>
-

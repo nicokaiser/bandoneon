@@ -184,7 +184,7 @@ $(function() {
       var mode = this.model.get('mode');
 
       if (!key || !mode) {
-        appRouter.navigate('scales/' + side + '/' + direction);
+        appRouter.navigate('scales/' + side + '/' + direction, {replace: true});
         return;
       }
 
@@ -195,7 +195,7 @@ $(function() {
       }
 
       appRouter.navigate('scales/' + side + '/' + direction + '/' 
-        + key + '/' + mode);
+        + key + '/' + mode, {replace: true});
       return this;
     },
 
@@ -211,6 +211,9 @@ $(function() {
 
   Backbone.history.start();
 
+  
+  // Scales
+
   // don't submit the form
   $('#scale-form').submit(function() {
     return false;
@@ -222,7 +225,36 @@ $(function() {
     $('#toggle-octavecolors').button('toggle');
   });
 
-  // DEBUG
-  window.appView = appView; 
-  window.appRouter = appRouter;
+  // side / direction navigation
+  $('#nav-sides a[data-toggle="tab"]').on('shown', function(e) {
+    switch (e.target.hash) {
+      case '#left-pull':
+        appModel.set({ 'side': 'left', 'direction': 'pull' });
+        break;
+      case '#left-push':
+        appModel.set({ 'side': 'left', 'direction': 'push' });
+        break;
+      case '#right-pull':
+        appModel.set({ 'side': 'right', 'direction': 'pull' });
+        break;
+      case '#right-push':
+        appModel.set({ 'side': 'right', 'direction': 'push' });
+        break;
+    }
+  });
+
+  // key select
+  $('#select-key').change(function() {
+    $('#select-key option:selected').each(function() {
+      appModel.set('key', $(this).val());
+    });
+  });
+
+  // mode select
+  $('#select-mode').change(function() {
+    $('#select-mode option:selected').each(function() {
+      appModel.set('mode', $(this).val());
+    });
+  });
+
 });
