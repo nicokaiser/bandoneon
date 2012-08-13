@@ -1,303 +1,383 @@
 
-Bandoneon = {};
+(function() {
+  window.Bandoneon = {};
+})();
 
-Bandoneon.Layouts = {
+/**
+ * Keyboard Layout
+ */
+
+Bandoneon.layout = {
+
   'right': {
+
     'pull': {
-      'b4': [138, 26],
-      'g#4': [208, 23],
-      'g4': [286, 23],
-      'f4': [359, 28],
 
-      'c#2': [107, 64],
-      'a4': [171, 58],
-      'f#4': [241, 58],
-      'e4': [320, 58],
-      'd#4': [381, 68],
-
-      'c2': [79, 102],
-      'd2': [140, 94],
-      'g2': [206, 88],
-      'a#3': [277, 91],
-      'c4': [344, 98],
-      'd4': [410, 108],
-
-      'b1': [47, 148],
-      'e2': [109, 137],
-      'c#3': [176, 130],
-      'f#2': [240, 127],
-      'a2': [305, 130],
-      'c3': [373, 137],
-      'e3': [434, 150],
-
-      'a1': [22, 192],
-      'f2': [82, 179],
-      'a#2': [142, 172],
-      'g#2': [204, 166],
-      'b2': [264, 164],
-      'd3': [333, 167],
-      'g#3': [394, 178],
-      'b3': [460, 193],
-
-      'a#1': [54, 228],
-      'd#2': [114, 214],
-      'f3': [175, 205],
-      'd#3': [235, 201],
-      'f#3': [298, 202],
-      'a3': [359, 208],
-      'c#4': [419, 218],
-      'g3': [476, 238]
+      'b4': [207, 39],
+      'g#4': [312, 34],
+      'g4': [429, 34],
+      'f4': [538, 42],
+      'c#2': [160, 96],
+      'a4': [256, 87],
+      'f#4': [361, 87],
+      'e4': [480, 87],
+      'd#4': [571, 102],
+      'c2': [118, 153],
+      'd2': [210, 141],
+      'g2': [309, 132],
+      'a#3': [415, 136],
+      'c4': [516, 147],
+      'd4': [615, 162],
+      'b1': [70, 222],
+      'e2': [163, 205],
+      'c#3': [264, 195],
+      'f#2': [360, 190],
+      'a2': [457, 195],
+      'c3': [559, 205],
+      'e3': [651, 225],
+      'a1': [33, 288],
+      'f2': [123, 268],
+      'a#2': [213, 258],
+      'g#2': [306, 249],
+      'b2': [396, 246],
+      'd3': [499, 250],
+      'g#3': [591, 267],
+      'b3': [690, 289],
+      'a#1': [81, 342],
+      'd#2': [171, 321],
+      'f3': [262, 307],
+      'd#3': [352, 301],
+      'f#3': [447, 303],
+      'a3': [538, 312],
+      'c#4': [628, 327],
+      'g3': [714, 357]
     },
 
     'push': {
-      'a4': [138, 26],
-      'g#4': [208, 23],
-      'f#4': [286, 23],
-      'f4': [359, 28],
 
-      'c2': [107, 64],
-      'g4': [171, 58],
-      'a#3': [241, 58],
-      'c4': [320, 58],
-      'd#4': [381, 68],
-
-      'd2': [79, 102],
-      'c#2': [140, 94],
-      'g#2': [206, 88],
-      'a#2': [277, 91],
-      'c3': [344, 98],
-      'd4': [410, 108],
-
-      'b1': [47, 148],
-      'f#2': [109, 137],
-      'f#3': [176, 130],
-      'g2': [240, 127],
-      'b2': [305, 130],
-      'd3': [373, 137],
-      'g3': [434, 150],
-
-      'a1': [22, 192],
-      'f2': [82, 179],
-      'e2': [142, 172],
-      'a2': [204, 166],
-      'c#3': [264, 164],
-      'b2 ': [333, 167],
-      'a3': [394, 178],
-      'c#4': [460, 193],
-
-      'a#1': [54, 228],
-      'd#2': [114, 214],
-      'f3': [175, 205],
-      'e3': [235, 201],
-      'g#3': [298, 202],
-      'b3': [359, 208],
-      'e4': [419, 218],
-      'd#3': [476, 238]
+      'a4': [207, 39],
+      'g#4': [312, 34],
+      'f#4': [429, 34],
+      'f4': [538, 42],
+      'c2': [160, 96],
+      'g4': [256, 87],
+      'a#3': [361, 87],
+      'c4': [480, 87],
+      'd#4': [571, 102],
+      'd2': [118, 153],
+      'c#2': [210, 141],
+      'g#2': [309, 132],
+      'a#2': [415, 136],
+      'c3': [516, 147],
+      'd4': [615, 162],
+      'b1': [70, 222],
+      'f#2': [163, 205],
+      'f#3': [264, 195],
+      'g2': [360, 190],
+      'b2': [457, 195],
+      'd3': [559, 205],
+      'g3': [651, 225],
+      'a1': [33, 288],
+      'f2': [123, 268],
+      'e2': [213, 258],
+      'a2': [306, 249],
+      'c#3': [396, 246],
+      'b2 ': [499, 250],
+      'a3': [591, 267],
+      'c#4': [690, 289],
+      'a#1': [81, 342],
+      'd#2': [171, 321],
+      'f3': [262, 307],
+      'e3': [352, 301],
+      'g#3': [447, 303],
+      'b3': [538, 312],
+      'e4': [628, 327],
+      'd#3': [714, 357]
     }
-
+  
   },
 
   'left': {
+
     'pull': {
-      'g#0': [132, 35],
-      'a#0': [197, 25],
-      'c#1': [270, 24],
-      'f1': [347, 25],
-      'g#2': [414, 31],
 
-      'e0': [45, 87],
-      'a0': [102, 78],
-      'g1': [168, 66],
-      'd#1': [238, 61],
-      'f2': [308, 58],
-      'a#1': [379, 66],
-      'f0': [444, 72],
-
-      'd1': [77, 127],
-      'a1': [139, 114],
-      'c2': [209, 109],
-      'e2': [276, 100],
-      'c1': [342, 102],
-      'g0': [410, 107],
-
-      'e1': [49, 173],
-      'g#1': [113, 161],
-      'b1': [180, 152],
-      'd2': [244, 144],
-      'f#2': [310, 144],
-      'c#2': [377, 149],
-      'f#0': [440, 153],
-
-      'd0': [26, 228],
-      'b0': [89, 211],
-      'g2': [152, 198],
-      'a2': [216, 185],
-      'd#2': [280, 185],
-      'f#1': [346, 189],
-      'd#0': [408, 194],
-      'c0': [471, 202]
+      'g#0': [198, 52],
+      'a#0': [295, 37],
+      'c#1': [405, 36],
+      'f1': [520, 37],
+      'g#2': [621, 46],
+      'e0': [67, 130],
+      'a0': [153, 117],
+      'g1': [252, 99],
+      'd#1': [357, 91],
+      'f2': [462, 87],
+      'a#1': [568, 99],
+      'f0': [666, 108],
+      'd1': [115, 190],
+      'a1': [208, 171],
+      'c2': [313, 163],
+      'e2': [414, 150],
+      'c1': [513, 153],
+      'g0': [615, 160],
+      'e1': [73, 259],
+      'g#1': [169, 241],
+      'b1': [270, 228],
+      'd2': [366, 216],
+      'f#2': [465, 216],
+      'c#2': [565, 223],
+      'f#0': [660, 229],
+      'd0': [39, 342],
+      'b0': [133, 316],
+      'g2': [228, 297],
+      'a2': [324, 277],
+      'd#2': [420, 277],
+      'f#1': [519, 283],
+      'd#0': [612, 291],
+      'c0': [706, 303]
     },
 
     'push': {
-      'g#0': [132, 35],
-      'a#0': [197, 25],
-      'd#1': [270, 24],
-      'd#2': [347, 25],
-      'g2': [414, 31],
 
-      'd0': [45, 87],
-      'd1': [102, 78],
-      'a#1': [168, 66],
-      'c2': [238, 61],
-      'c#1': [308, 58],
-      'c1': [379, 66],
-      'f#0': [444, 72],
-
-      'g0': [77, 127],
-      'g1': [139, 114],
-      'b1': [209, 109],
-      'd2': [276, 100],
-      'f2': [342, 102],
-      'f#1': [410, 107],
-
-      'a0': [49, 173],
-      'e1': [113, 161],
-      'a1': [180, 152],
-      'c#2': [244, 144],
-      'e2': [310, 144],
-      'g#1': [377, 149],
-      'b0': [440, 153],
-
-      'e0': [26, 228],
-      'e1 ': [89, 211],
-      'f#2': [152, 198],
-      'g#2': [216, 185],
-      'b2': [280, 185],
-      'f1': [346, 189],
-      'c#0': [408, 194],
-      'f0': [471, 202]
+      'g#0': [198, 52],
+      'a#0': [295, 37],
+      'd#1': [405, 36],
+      'd#2': [520, 37],
+      'g2': [621, 46],
+      'd0': [67, 130],
+      'd1': [153, 117],
+      'a#1': [252, 99],
+      'c2': [357, 91],
+      'c#1': [462, 87],
+      'c1': [568, 99],
+      'f#0': [666, 108],
+      'g0': [115, 190],
+      'g1': [208, 171],
+      'b1': [313, 163],
+      'd2': [414, 150],
+      'f2': [513, 153],
+      'f#1': [615, 160],
+      'a0': [73, 259],
+      'e1': [169, 241],
+      'a1': [270, 228],
+      'c#2': [366, 216],
+      'e2': [465, 216],
+      'g#1': [565, 223],
+      'b0': [660, 229],
+      'e0': [39, 342],
+      'e1 ': [133, 316],
+      'f#2': [228, 297],
+      'g#2': [324, 277],
+      'b2': [420, 277],
+      'f1': [519, 283],
+      'c#0': [612, 291],
+      'f0': [706, 303]
     }
-  }
-};
 
-Bandoneon.Keys = [ 'c', 'c#', 'd', 'd#', 'e', 'f', 'f#', 'g', 'g#', 'a', 'a#', 'b' ];
-
-Bandoneon.Scale = function(key, octave, mode) {
-  var pos = Bandoneon.Keys.indexOf(key);
-  if (pos === -1) return [];
-
-  var intervals = Bandoneon.Modes[Bandoneon.config.mode];
-  if (typeof intervals === 'undefined') return [];
-
-  var scale = [];
-  for (var s in intervals) {
-    scale.push(Bandoneon.Keys[pos] + '' + octave);
-    pos += intervals[s];
-    if (pos >= Bandoneon.Keys.length) {
-      octave++;
-    }
-    pos %= Bandoneon.Keys.length;
   }
 
-  return scale;
 };
 
-Bandoneon.Modes = {
-    'major': [ 2, 2, 1, 2, 2, 2, 1 ]
-  , 'minor': [ 2, 1, 2, 2, 1, 2, 2 ]
-  , 'chromatic': [ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ]
-};
 
-Bandoneon.config = {
-    key: ''
-  , mode: ''
-  , dir: 'pull'
-  , side: 'right'
+/**
+ * Key names
+ */
+
+Bandoneon.keys = [ 
   
-  , scaleColors: ['blue', 'red', 'green', 'orange', 'blue']
-  , octaveColors: ['#bcf', '#fdc', '#cfc', '#fea']
-  , showOctaveColors: false
+  'c', 'c#', 'd', 'd#', 'e', 'f', 'f#', 'g', 'g#', 'a', 'a#', 'b'
+
+];
+
+
+/**
+ * Available modes
+ */
+
+Bandoneon.modes = {
+
+  'major': [ 2, 2, 1, 2, 2, 2, 1 ],
+  'minor': [ 2, 1, 2, 2, 1, 2, 2 ],
+  'chromatic': [ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ]
+
 };
 
-Bandoneon.drawButtons = function(layout) {
-  for (var k in layout) {
-    layout[k][0] *= 1.5; // FIXME
-    layout[k][1] *= 1.5;
 
-    var label = k;
+/**
+ * Helper functions
+ */
 
-    // label
-    var l = label[0];
-    var octave = label[1];
-    if (label[1] == '#') {
-      octave = label[2];
+Bandoneon.utils = {
+
+  // Build a scale of a key, octave and mode, e.g. ('d', 3, 'major')
+  scale: function(key, octave, mode) {
+    var pos = Bandoneon.keys.indexOf(key);
+    if (pos === -1) return [];
+
+    var intervals = Bandoneon.modes[mode];
+    if (typeof intervals === 'undefined') return [];
+
+    var scale = [];
+    for (var s in intervals) {
+      scale.push(Bandoneon.keys[pos] + '' + octave);
+      pos += intervals[s];
+      if (pos >= Bandoneon.keys.length) {
+        octave++;
+      }
+      pos %= Bandoneon.keys.length;
     }
-    if (octave == 0) l = label[0].toUpperCase();
-    if (label[1] == '#') l += '♯';
-    else if (label[1] == 'b') l += '♭';
-    if (octave == 1) l += '';
-    else if (octave == 2) l += 'ʹ';
-    else if (octave == 3) l += 'ʹʹ';
-    else if (octave == 4) l += 'ʹʹʹ';
 
-    var fill = 'white';
-    if (Bandoneon.config.showOctaveColors) {
-      fill = Bandoneon.config.octaveColors[octave % (Bandoneon.config.octaveColors.length)];
-    }
-
-    Bandoneon.paper.circle(layout[k][0] + 30, layout[k][1] + 30, 30)
-      .attr({
-        'stroke-width': 2,
-        'fill': fill,
-      });
-
-    Bandoneon.paper.text(layout[k][0] + 30, layout[k][1] + 30, l)
-      .attr({
-        'font-family': 'serif',
-        'font-size': 21,
-        'font-style': 'italic',
-        'cursor': 'default'
-      });
-  }
-};
-
-Bandoneon.drawScale = function(layout, scale, color) {
-  var pathString = '';
-  for (var t in scale) {
-    if (layout.hasOwnProperty(scale[t])) {
-      pathString += (pathString === '')?'M':'L';
-      pathString += layout[scale[t]][0] + 30;
-      pathString += ',';
-      pathString += layout[scale[t]][1] + 30;
-    }
+    return scale;
   }
 
-  if (pathString === '') return;
-
-  // draw line    
-  return Bandoneon.paper.path(pathString)
-    .attr({
-      'stroke': color,
-      'stroke-linecap': 'round',
-      'stroke-linejoin': 'round',
-      'stroke-width': 7,
-      'stroke-opacity': 0.33
-    });
 };
 
-Bandoneon.redraw = function() {
-  Bandoneon.paper.clear();
+
+/**
+ * Backbone model and view
+ */
+
+$(function() {
+
+  // Colors
+  var scaleColors = ['blue', 'red', 'green', 'orange', 'blue'];
+  var octaveColors = ['#bcf', '#fdc', '#cfc', '#fea'];
+
+  // Bandoneon model
+  var BandoneonModel = Backbone.Model.extend({
+
+    initialize: function() {
+      this.set('direction', 'pull');
+      this.set('side', 'right');
+      this.set('key', null);
+      this.set('mode', null);
+    }
+
+  });
+
+  // Bandoneon view
+  var BandoneonView = Backbone.View.extend({
+
+    paper: null,
+    showOctaveColors: false,
+
+    el: document.getElementById('container'), /* $('#bandoneonapp'),*/
+
+    events: {
+      "click #toggle-colorbuttons" : "toggleOctaveColors"
+    },
+
+    initialize: function() {
+      this.paper = Raphael(this.el, 800, 450);
+      this.render();
+      this.model.bind('change', this.render, this);
+    },
+
+    _drawButtons: function(side, direction) {
+      var layout = _.clone(Bandoneon.layout[side][direction]);
+
+      // Draw buttons
+      for (var k in layout) {
+        var label = k;
+
+        // label
+        var l = label[0];
+        var octave = label[1];
+        if (label[1] == '#') {
+          octave = label[2];
+        }
+        if (octave === 0) l = label[0].toUpperCase();
+        if (label[1] == '#') l += '♯';
+        else if (label[1] == 'b') l += '♭';
+        if (octave == 1) l += '';
+        else if (octave == 2) l += 'ʹ';
+        else if (octave == 3) l += 'ʹʹ';
+        else if (octave == 4) l += 'ʹʹʹ';
+
+        var fill = 'white';
+        if (this.showOctaveColors) {
+          fill = octaveColors[octave % (octaveColors.length)];
+        }
+
+        this.paper.circle(layout[k][0] + 30, layout[k][1] + 30, 30)
+          .attr({
+            'stroke-width': 2,
+            'fill': fill
+          });
+
+        this.paper.text(layout[k][0] + 30, layout[k][1] + 30, l)
+          .attr({
+            'font-family': 'serif',
+            'font-size': 21,
+            'font-style': 'italic',
+            'cursor': 'default'
+          });
+      }
+    },
+
+    _drawScale: function(side, direction, scale, color) {
+      var layout = _.clone(Bandoneon.layout[side][direction]);
+      if (!layout) return;
+
+      var pathString = '';
+      for (var t in scale) {
+        if (layout.hasOwnProperty(scale[t])) {
+          pathString += (pathString === '')?'M':'L';
+          pathString += layout[scale[t]][0] + 30;
+          pathString += ',';
+          pathString += layout[scale[t]][1] + 30;
+        }
+      }
+
+      if (pathString === '') return;
+
+      // draw line    
+      return this.paper.path(pathString)
+        .attr({
+          'stroke': color,
+          'stroke-linecap': 'round',
+          'stroke-linejoin': 'round',
+          'stroke-width': 7,
+          'stroke-opacity': 0.33
+        });
+    },
+
+    render: function() {
+      var side = this.model.get('side');
+      var direction = this.model.get('direction');
   
-  if (!Bandoneon.config.side || !Bandoneon.config.dir) return;
+      if (!side || !direction) return;
 
-  var layout = JSON.parse(JSON.stringify(Bandoneon.Layouts[Bandoneon.config.side][Bandoneon.config.dir])); // FIXME
-  Bandoneon.drawButtons(layout);
+      this.paper.clear();
 
-  if (!Bandoneon.config.key || !Bandoneon.config.mode) return;
+      // Draw buttons
+      this._drawButtons(side, direction);
 
-  for (var o = 0; o < 5; o++) {
-    var scale = Bandoneon.Scale(Bandoneon.config.key, o, Bandoneon.config.mode);
-    scale.push(Bandoneon.config.key + '' + (o + 1));
-    Bandoneon.drawScale(layout, scale, Bandoneon.config.scaleColors[o]);
-  }
-};
+      // Draw colored scales
+      var key = this.model.get('key');
+      var mode = this.model.get('mode');
+
+      if (!key || !mode) return;
+
+      for (var o = 0; o < 5; o++) {
+        var scale = Bandoneon.utils.scale(key, o, mode);
+        scale.push(key + '' + (o + 1));
+        this._drawScale(side, direction, scale, scaleColors[o]);
+      }
+
+      return this;
+    },
+
+    toggleOctaveColors: function() {
+      this.showOctaveColors = !this.showOctaveColors;
+      this.render();
+      return false;
+    }
+
+  });
+
+  var band = new BandoneonModel();
+  var app = new BandoneonView({ model: band });
+
+  window.app = app; // DEBUG
+
+});
