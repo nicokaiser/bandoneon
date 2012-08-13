@@ -238,32 +238,31 @@ Bandoneon.utils = {
 
 $(function() {
 
-  // Colors
   var scaleColors = ['blue', 'red', 'green', 'orange', 'blue'];
   var octaveColors = ['#bcf', '#fdc', '#cfc', '#fea'];
 
-  // Bandoneon model
-  var BandoneonModel = Backbone.Model.extend({
+  var AppModel = Backbone.Model.extend({
 
-    initialize: function() {
-      this.set('direction', 'pull');
-      this.set('side', 'right');
-      this.set('key', null);
-      this.set('mode', null);
-    }
+    defaults: {
+      direction: 'pull',
+      side: 'right',
+      key: null,
+      mode: null
+    },
+
+    initialize: function() { }
 
   });
 
-  // Bandoneon view
-  var BandoneonView = Backbone.View.extend({
+  var AppView = Backbone.View.extend({
 
     paper: null,
     showOctaveColors: false,
 
-    el: document.getElementById('container'), /* $('#bandoneonapp'),*/
+    el: document.getElementById('container'),
 
     events: {
-      "click #toggle-colorbuttons" : "toggleOctaveColors"
+      "click #toggle-colorbuttons": "toggleOctaveColors"
     },
 
     initialize: function() {
@@ -272,7 +271,7 @@ $(function() {
       this.model.bind('change', this.render, this);
     },
 
-    _drawButtons: function(side, direction) {
+    renderButtons: function(side, direction) {
       var layout = _.clone(Bandoneon.layout[side][direction]);
 
       // Draw buttons
@@ -288,15 +287,12 @@ $(function() {
         if (octave === 0) l = label[0].toUpperCase();
         if (label[1] == '#') l += '♯';
         else if (label[1] == 'b') l += '♭';
-        if (octave == 1) l += '';
-        else if (octave == 2) l += 'ʹ';
-        else if (octave == 3) l += 'ʹʹ';
-        else if (octave == 4) l += 'ʹʹʹ';
+        if (octave === 1) l += '';
+        else if (octave === 2) l += 'ʹ';
+        else if (octave === 3) l += 'ʹʹ';
+        else if (octave === 4) l += 'ʹʹʹ';
 
-        var fill = 'white';
-        if (this.showOctaveColors) {
-          fill = octaveColors[octave % (octaveColors.length)];
-        }
+        var fill = (this.showOctaveColors ? octaveColors[octave % (octaveColors.length)] : 'white');
 
         this.paper.circle(layout[k][0] + 30, layout[k][1] + 30, 30)
           .attr({
@@ -314,7 +310,7 @@ $(function() {
       }
     },
 
-    _drawScale: function(side, direction, scale, color) {
+    renderScale: function(side, direction, scale, color) {
       var layout = _.clone(Bandoneon.layout[side][direction]);
       if (!layout) return;
 
@@ -330,7 +326,6 @@ $(function() {
 
       if (pathString === '') return;
 
-      // draw line    
       return this.paper.path(pathString)
         .attr({
           'stroke': color,
@@ -348,11 +343,8 @@ $(function() {
       if (!side || !direction) return;
 
       this.paper.clear();
+      this.renderButtons(side, direction);
 
-      // Draw buttons
-      this._drawButtons(side, direction);
-
-      // Draw colored scales
       var key = this.model.get('key');
       var mode = this.model.get('mode');
 
@@ -361,7 +353,7 @@ $(function() {
       for (var o = 0; o < 5; o++) {
         var scale = Bandoneon.utils.scale(key, o, mode);
         scale.push(key + '' + (o + 1));
-        this._drawScale(side, direction, scale, scaleColors[o]);
+        this.renderScale(side, direction, scale, scaleColors[o]);
       }
 
       return this;
@@ -375,9 +367,24 @@ $(function() {
 
   });
 
-  var band = new BandoneonModel();
-  var app = new BandoneonView({ model: band });
+  var appModel = new AppModel();
 
-  window.app = app; // DEBUG
+  var AppRouter = Backbone.Router.extend({
+
+    routes: {
+      "scales/:key/:mode": "selectScale"
+    },
+
+    selectScale: function(key, mode) {
+      appModel.set({ 'key': key, 'mode': mode });
+    }
+
+  });
+
+  var appView = new AppView({ model: appModel, router: appRouter });
+  var appRouter = new AppRouter();
+  Backbone.history.start();
+
+  window.appView = appView; // DEBUG
 
 });

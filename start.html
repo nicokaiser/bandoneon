@@ -1,139 +1,42 @@
-<!DOCTYPE html>
-<html lang="de">
-<head>
-  <meta charset="utf-8">
-  <title>Tonleitern | Bandoneon</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="">
-  <meta name="author" content="Nico Kaiser">
+---
+layout: default
+title: Start
+---
 
-  <script src="./js/jquery.min.js"></script>
+<div class="hero-unit">
+  <h1>Bandoneon</h1>
 
-  <script src="./js/underscore-1.3.1.js"></script>
-  <script src="./js/backbone-min.js"></script>
+  <p>Eine visuelle Übersicht über Tonleitern und Akkorde auf dem Alfred Arnold-Bandoneon mit 142 Knöpfen.</p>
+</div>
 
-  <script src="./js/bootstrap.min.js"></script>
-  <script src="./js/raphael-min.js"></script>
-
-  <script src="./js/bandoneon.js"></script>
-
-  <link href="./css/bootstrap.min.css" rel="stylesheet">
-  <style>
-
-    body {
-      padding-top: 60px;
-    }
-
-    .keyboard {
-      margin: 20px 0;
-      text-align: center;
-      width: auto;
-      height: 450px;
-      margin-bottom: 30px;
-      background-color: #EEE;
-      -webkit-border-radius: 6px;
-      -moz-border-radius: 6px;
-      border-radius: 6px;
-      border: 1px solid #E1E1E8;
-    }
-
-    #container {
-      width: 800px;
-      height: 450px;
-      margin: 0 auto;
-      text-align: left;
-    }
-
-    .hero-unit {
-      text-align: center;
-    }
-
-    .hero-unit p {
-      margin: 18px 0;
-    }
-
-  </style>
-  <!--
-  <link href="./assets/css/bootstrap-responsive.css" rel="stylesheet">
-  -->
-
-  <!--[if lt IE 9]>
-    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-  <![endif]-->
-</head>
-
-<body>
-
-  <div class="navbar navbar-fixed-top">
-    <div class="navbar-inner">
-      <div class="container">
-        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </a>
-        <a class="brand" href="#">Bandoneon</a>
-        <div class="nav-collapse">
-          <ul class="nav">
-            <!-- <li><a href="#">Übersicht</a></li> -->
-            <!-- <li><a href="#">Info</a></li> -->
-            <li class="active"><a href="#">Tonleitern</a></li>
-            <!-- <li><a href="#">Akkorde</a></li> -->
-          </ul>
-        </div><!--/.nav-collapse -->
-      </div>
-    </div>
+<div class="row">
+  <div class="span4">
+    <h2>Tonleitern</h2>
+    <p>
+      Die Lage der Töne anhand von farbigen Knöpfen und Verbindungen zwischen den Tönen mit Linien kennzeichnen
+    </p>
+    <p><a class="btn" href="/scales/">Tonleitern &raquo;</a></p>
   </div>
 
-  <div class="container">
-    <div class="hero-unit">
-      <h1>Bandoneon</h1>
+  <div class="span4">
+    <h2>Akkorde <span class="label">coming soon</span></h2>
+    <p>
+      Alle Akkorde des Quintenzirkels in Dur, Moll, Septim, Vermindert, Übermäßig in sinnvoller Lage für die linke Seite
+    </p>
+    <p><a class="btn" href="#">Akkorde &raquo;</a></p>
+  </div>
 
-      <p>Eine visuelle Übersicht über Tonleitern und Akkorde auf dem Alfred Arnold-Bandoneon mit 142 Knöpfen.</p>
-    </div>
-
-    <div class="row">
-      <div class="span4">
-        <h2>Tonleitern</h2>
-        <p>
-          Die Lage der Töne anhand von farbigen Knöpfen und Verbindungen zwischen den Tönen mit Linien kennzeichnen
-        </p>
-        <p><a class="btn" href="#">Tonleitern &raquo;</a></p>
-      </div>
-
-      <div class="span4">
-        <h2>Akkorde</h2>
-        <p>
-          Alle Akkorde des Quintenzirkels in Dur, Moll, Septim, Vermindert, Übermäßig in sinnvoller Lage für die linke Seite
-        </p>
-        <p><a class="btn" href="#">Akkorde &raquo;</a></p>
-      </div>
-
-      <div class="span4">
-        <h2>Mehr &hellip;</h2>
-        <p>
-          Anregungen? Kritik? Kontakt?<br>
-          Wünsche für andere Layouts (z.B. Einheitsbandoneon)?
-        </p>
-        <p>
-          Dieses Projekt ist frei verfügbar auf <a href="https://github.com/nicokaiser/bandoneon/">GitHub</a>.
-        </p>
-        <p><a class="btn" href="#">Kontakt &raquo;</a></p>
-      </div>
+  <div class="span4">
+    <h2>Mehr &hellip;</h2>
+    <p>
+      Anregungen? Kritik? Kontakt?<br>
+      Wünsche für andere Layouts (z.B. Einheitsbandoneon)?
+    </p>
+    <p>
+      Dieses Projekt ist frei verfügbar auf <a href="https://github.com/nicokaiser/bandoneon/">GitHub</a>.
+    </p>
+    <p><a class="btn" href="#">Kontakt &raquo;</a></p>
+  </div>
 
 
-    </div>
-
-    <hr>
-
-    <footer>
-      <p class="pull-right"><a href="#">Nach oben</a></p>
-      <p>
-        Copyright &copy; 2012 <a href="http://siriux.net/">Nico Kaiser</a>.
-      </p>
-    </footer>
-
-  </div> <!-- /container -->
-
-</body>
-</html>
+</div>
