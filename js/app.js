@@ -70,7 +70,6 @@ $(function() {
     },
 
     selectScale: function(side, direction, key, mode) {
-      console.log('selectScale');
       appModel.set({
         'side': side,
         'direction': direction,
@@ -179,6 +178,8 @@ $(function() {
 
       this.paper.clear();
       this.renderButtons(side, direction);
+
+      $('#nav-sides a[href="#' + side + '-' + direction + '"]').tab('show');
 
       var key = this.model.get('key');
       var mode = this.model.get('mode');
