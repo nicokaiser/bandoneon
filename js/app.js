@@ -58,8 +58,8 @@ $(function() {
   var AppRouter = Backbone.Router.extend({
 
     routes: {
-      'scales/:side/:direction': 'selectLayout',
-      'scales/:side/:direction/:key/:mode': 'selectScale'
+      '!/:side/:direction': 'selectLayout',
+      '!/:side/:direction/scale/:key/:mode': 'selectScale'
     },
 
     selectLayout: function(side, direction) {
@@ -185,7 +185,7 @@ $(function() {
       var mode = this.model.get('mode');
 
       if (!key || !mode) {
-        appRouter.navigate('scales/' + side + '/' + direction, {replace: true});
+        appRouter.navigate('!/' + side + '/' + direction, {replace: true});
         return;
       }
 
@@ -198,7 +198,7 @@ $(function() {
         this.renderScale(side, direction, scale, scaleColors[o]);
       }
 
-      appRouter.navigate('scales/' + side + '/' + direction + '/' 
+      appRouter.navigate('!/' + side + '/' + direction + '/scale/' 
         + key + '/' + mode, {replace: true});
       return this;
     },

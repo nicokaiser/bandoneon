@@ -1,11 +1,16 @@
 ---
 layout: default
-title: Tonleitern
+title: Bandoneon
 ---
 
 <div class="page-header">
+  <ul class="nav nav-pills pull-right">
+    <li>
+      <a href="#help" data-toggle="modal">Hilfe</a>
+    </li>
+  </ul>
   <h1>
-    Tonleitern
+    Bandoneon
     <small>Alfred Arnold 142</small>
   </h1>
 </div>
@@ -17,9 +22,9 @@ title: Tonleitern
   <li><a href="#right-push" data-toggle="tab">Rechte Hand Druck</a></li>
 </ul>
 
-<div class="alert alert-info" id="intro-alert">
+<div class="alert alert-info fade in" id="intro-alert">
   <button class="close" data-dismiss="alert">×</button>
-  Tonart und Modus auswählen, um eine Tonleiter auf der Tastatur zu anzuzeigen.
+  Tonart und Modus auswählen, um eine Tonleiter auf der Tastatur zu anzuzeigen, z.B. <strong><a href="#!/right/pull/scale/c/major">C-Dur</a></strong>.
 </div>
 
 <div class="well">
@@ -53,5 +58,28 @@ title: Tonleitern
     <option value="minor">Moll</option>
   </select>
 
-  <button class="btn btn-primary pull-right" id="toggle-octavecolors">Farbige Knöpfe</button>
+  <button class="btn btn-primary pull-right" id="toggle-octavecolors">Farbige Oktaven</button>
 </form>
+
+<div class="modal fade hide" id="help">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">×</button>
+    <h3>Hilfe</h3>
+  </div>
+  <div class="modal-body">
+    <p>Diese Website soll ein Hilfsmittel zum Erlernen des Bandoneon-Spiels sein.</p>
+    
+    <p>Um den Aufbau der beiden jeweils auf Zug und Druck unterschiedlich belegten Manuale zu verinnerlichen kann hier die Knopfbelegung angezeigt werden.</p>
+
+    <ul>
+      <li>Über die Reiter über der Tastatur können <strong>Balgrichtung</strong> und <strong>Seite&nbsp;(Manual)</strong> ausgewählt werden.</li>
+      <li>Mithilfe der Dropdown-Menüs unterhalb der Tastatur können <strong>Tonart</strong> und <strong>Modus</strong> (Dur, Moll, chromatisch) ausgewählt werden, um auf der Tastatur die Abfolge der Knöpfe für die entsprechende Tonart darzustellen.</li>
+      <li>Um die auf dem Manual befindlichen Oktaven zu unterscheiden, können diese farblich unterschieden werden.</li>
+    </ul>
+
+    <p>Zugrunde liegt die Belegung des 142-knöpfigen Bandoneons in Rheinischer Tonlage.</p>
+  </div>
+  <div class="modal-footer">
+    <a href="#" class="btn btn-primary" data-dismiss="modal">Schließen</a>
+  </div>
+</div>
