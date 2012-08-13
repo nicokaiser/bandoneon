@@ -116,13 +116,13 @@ $(function() {
         if (label[1] == '#') {
           octave = label[2];
         }
-        if (octave === 0) l = label[0].toUpperCase();
+        if (octave == 0) l = label[0].toUpperCase();
         if (label[1] == '#') l += '♯';
         else if (label[1] == 'b') l += '♭';
-        if (octave === 1) l += '';
-        else if (octave === 2) l += 'ʹ';
-        else if (octave === 3) l += 'ʹʹ';
-        else if (octave === 4) l += 'ʹʹʹ';
+        if (octave == 1) l += '';
+        else if (octave == 2) l += 'ʹ';
+        else if (octave == 3) l += 'ʹʹ';
+        else if (octave == 4) l += 'ʹʹʹ';
 
         var fill = (this.showOctaveColors ? octaveColors[octave % (octaveColors.length)] : 'white');
 
