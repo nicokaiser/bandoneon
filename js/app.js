@@ -1,3 +1,4 @@
+
 $(function() {
 
   // Color codes for coloring the scale lines
@@ -19,9 +20,68 @@ $(function() {
       side: 'right',
       key: null,
       mode: null
+    },
+
+    validate: function(attrs) {
+      // side: left, right
+      if (attrs.side && _.indexOf(['left', 'right'], attrs.side) === -1) {
+        return 'invalid side';
+      }
+
+      // direction: push, pull
+      if (attrs.direction && _.indexOf(['push', 'pull'], attrs.direction) === -1) {
+        return 'invalid direction';
+      }
+
+      // key: from Bandoneon.keys
+      if (attrs.key && _.indexOf(Bandoneon.keys, attrs.key) === -1) {
+        return 'invalid key';
+      }
+
+      // mode: from Bandoneon.modes
+      if (attrs.mode && !Bandoneon.modes.hasOwnProperty(attrs.mode)) {
+        return 'invalid mode';
+      }
+
+      return;
     }
 
   });
+
+  var appModel = new AppModel();
+
+
+  // Router
+  // ------
+
+  // Configure URL routes for scale selection
+  var AppRouter = Backbone.Router.extend({
+
+    routes: {
+      'scales/:side/:direction': 'selectLayout',
+      'scales/:side/:direction/:key/:mode': 'selectScale'
+    },
+
+    selectLayout: function(side, direction) {
+      appModel.set({ 
+        'side': side,
+        'direction': direction
+      });
+    },
+
+    selectScale: function(side, direction, key, mode) {
+      console.log('selectScale');
+      appModel.set({
+        'side': side,
+        'direction': direction,
+        'key': key,
+        'mode': mode
+      });
+    }
+
+  });
+
+  var appRouter = new AppRouter();
 
 
   // View
@@ -36,7 +96,7 @@ $(function() {
     el: document.getElementById('container'),
 
     events: {
-      "click #toggle-colorbuttons": "toggleOctaveColors"
+      'click #toggle-octavecolors': 'toggleOctaveColors'
     },
 
     // Initialie Raphaël and listen to changes
@@ -123,7 +183,10 @@ $(function() {
       var key = this.model.get('key');
       var mode = this.model.get('mode');
 
-      if (!key || !mode) return;
+      if (!key || !mode) {
+        appRouter.navigate('scales/' + side + '/' + direction);
+        return;
+      }
 
       for (var o = 0; o < 5; o++) {
         var scale = Bandoneon.utils.scale(key, o, mode);
@@ -131,6 +194,8 @@ $(function() {
         this.renderScale(side, direction, scale, scaleColors[o]);
       }
 
+      appRouter.navigate('scales/' + side + '/' + direction + '/' 
+        + key + '/' + mode);
       return this;
     },
 
@@ -138,35 +203,26 @@ $(function() {
     toggleOctaveColors: function() {
       this.showOctaveColors = !this.showOctaveColors;
       this.render();
-      return false;
     }
 
   });
-
-  var appModel = new AppModel();
-
-
-  // Router
-  // ------
-
-  // Configure URL routes for scale selection
-  var AppRouter = Backbone.Router.extend({
-
-    routes: {
-      "scales/:key/:mode": "selectScale"
-    },
-
-    selectScale: function(key, mode) {
-      appModel.set({ 'key': key, 'mode': mode });
-    }
-
-  });
-
 
   var appView = new AppView({ model: appModel, router: appRouter });
-  var appRouter = new AppRouter();
+
   Backbone.history.start();
 
-  window.appView = appView; // DEBUG
+  // don't submit the form
+  $('#scale-form').submit(function() {
+    return false;
+  });
 
+  // octave color toggle
+  $('#toggle-octavecolors').click(function() { 
+    appView.toggleOctaveColors();
+    $('#toggle-octavecolors').button('toggle');
+  });
+
+  // DEBUG
+  window.appView = appView; 
+  window.appRouter = appRouter;
 });
