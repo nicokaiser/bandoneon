@@ -189,6 +189,9 @@ $(function() {
         return;
       }
 
+      // dismiss introduction alert
+      $("#intro-alert").alert('close');
+
       for (var o = 0; o < 5; o++) {
         var scale = Bandoneon.utils.scale(key, o, mode);
         scale.push(key + '' + (o + 1));
