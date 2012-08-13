@@ -274,11 +274,8 @@ $(function() {
     renderButtons: function(side, direction) {
       var layout = _.clone(Bandoneon.layout[side][direction]);
 
-      // Draw buttons
       for (var k in layout) {
         var label = k;
-
-        // label
         var l = label[0];
         var octave = label[1];
         if (label[1] == '#') {
