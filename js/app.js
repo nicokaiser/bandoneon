@@ -58,8 +58,9 @@ $(function() {
   var AppRouter = Backbone.Router.extend({
 
     routes: {
+      '!/:side/:direction/scale/:key/:mode': 'selectScale',
+      '!/:side/:direction/chord/:key/:quality': 'selectChord',
       '!/:side/:direction': 'selectLayout',
-      '!/:side/:direction/scale/:key/:mode': 'selectScale'
     },
 
     selectLayout: function(side, direction) {
@@ -74,7 +75,18 @@ $(function() {
         'side': side,
         'direction': direction,
         'key': key,
-        'mode': mode
+        'mode': mode,
+        'quality': null
+      });
+    },
+
+    selectChord: function(side, direction, key, quality) {
+      appModel.set({
+        'side': 'left', // chords only on left side
+        'direction': direction,
+        'key': key,
+        'mode': null,
+        'quality': quality
       });
     }
 
@@ -107,32 +119,34 @@ $(function() {
 
     // Render button layout (with colored octaves)
     renderButtons: function(side, direction) {
-      var layout = _.clone(Bandoneon.layout[side][direction]);
+      var layout = Bandoneon.layout[side][direction];
 
       for (var k in layout) {
         var label = k;
-        var l = label[0];
+        var key = label[0];
+        var labelDisplay = label[0];
         var octave = label[1];
         if (label[1] == '#') {
           octave = label[2];
+          key += label[1];
         }
-        if (octave == 0) l = label[0].toUpperCase();
-        if (label[1] == '#') l += '♯';
-        else if (label[1] == 'b') l += '♭';
-        if (octave == 1) l += '';
-        else if (octave == 2) l += 'ʹ';
-        else if (octave == 3) l += 'ʹʹ';
-        else if (octave == 4) l += 'ʹʹʹ';
+        if (octave == 0) labelDisplay = label[0].toUpperCase();
+        if (label[1] == '#') labelDisplay += '♯';
+        else if (label[1] == 'b') labelDisplay += '♭';
+        if (octave == 1) labelDisplay += '';
+        else if (octave == 2) labelDisplay += 'ʹ';
+        else if (octave == 3) labelDisplay += 'ʹʹ';
+        else if (octave == 4) labelDisplay += 'ʹʹʹ';
 
         var fill = (this.showOctaveColors ? octaveColors[octave % (octaveColors.length)] : 'white');
 
         this.paper.circle(layout[k][0] + 30, layout[k][1] + 30, 30)
           .attr({
-            'stroke-width': 2,
+            'stroke-width': 2, /* (label[0] === 'c') ? 3 : 1 */
             'fill': fill
           });
 
-        this.paper.text(layout[k][0] + 30, layout[k][1] + 30, l)
+        this.paper.text(layout[k][0] + 30, layout[k][1] + 30, label /* labelDisplay */)
           .attr({
             'font-family': 'serif',
             'font-size': 21,
@@ -144,7 +158,7 @@ $(function() {
 
     // Render a specific scale
     renderScale: function(side, direction, scale, color) {
-      var layout = _.clone(Bandoneon.layout[side][direction]);
+      var layout = Bandoneon.layout[side][direction];
       if (!layout) return;
 
       var pathString = '';
@@ -169,6 +183,27 @@ $(function() {
         });
     },
 
+    // Render a chord (left side only)
+    renderChord: function(side, direction, key, quality) {
+      if (side !== 'left') return;
+
+      var chord = Bandoneon.chords[quality][key];
+      if (!chord) return;
+      
+      var layout = Bandoneon.layout[side][direction];
+      if (!layout) return;
+
+      for (var k in layout) {
+        if (_.indexOf(chord, k) === -1) continue;
+        var label = k;
+        this.paper.circle(layout[k][0] + 30, layout[k][1] + 30, 30)
+          .attr({
+            'fill': '#f00',
+            'opacity': (_.indexOf(chord, k) == 0) ? 0.4 : 0.2
+          });
+      }
+    },
+
     // Render the whole layout with buttons, octaves and scale
     render: function() {
       var side = this.model.get('side');
@@ -183,8 +218,9 @@ $(function() {
 
       var key = this.model.get('key');
       var mode = this.model.get('mode');
+      var quality = this.model.get('quality');
 
-      if (!key || !mode) {
+      if (!key || (!mode && !quality)) {
         appRouter.navigate('!/' + side + '/' + direction, {replace: true});
         return;
       }
@@ -192,14 +228,24 @@ $(function() {
       // dismiss introduction alert
       $("#intro-alert").alert('close');
 
-      for (var o = 0; o < 5; o++) {
-        var scale = Bandoneon.utils.scale(key, o, mode);
-        scale.push(key + '' + (o + 1));
-        this.renderScale(side, direction, scale, scaleColors[o]);
+      if (mode) {
+        // render scale
+        for (var o = 0; o < 5; o++) {
+          var scale = Bandoneon.utils.scale(key, o, mode);
+          scale.push(key + '' + (o + 1));
+          this.renderScale(side, direction, scale, scaleColors[o]);
+        }
+
+        appRouter.navigate('!/' + side + '/' + direction + '/scale/' 
+          + key + '/' + mode, {replace: true});
+      } else if (quality) {
+        // render chord
+        this.renderChord(side, direction, key, quality);
+
+        appRouter.navigate('!/' + side + '/' + direction + '/chord/' 
+          + key + '/' + quality, {replace: true});
       }
 
-      appRouter.navigate('!/' + side + '/' + direction + '/scale/' 
-        + key + '/' + mode, {replace: true});
       return this;
     },
 
@@ -214,9 +260,6 @@ $(function() {
   var appView = new AppView({ model: appModel, router: appRouter });
 
   Backbone.history.start();
-
-  
-  // Scales
 
   // don't submit the form
   $('#scale-form').submit(function() {
@@ -260,5 +303,10 @@ $(function() {
       appModel.set('mode', $(this).val());
     });
   });
+
+
+  // DEBUG
+
+  window.appView = appView;
 
 });
