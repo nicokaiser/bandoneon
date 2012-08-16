@@ -2,9 +2,9 @@
   window.Bandoneon = {};
 })();
 
-/**
- * Keyboard Layout
- */
+
+// Keyboard layout
+// ---------------
 
 Bandoneon.layout = {
 
@@ -200,12 +200,13 @@ Bandoneon.chords = {
 
   }
 
+  // ...
+
 };
 
 
-/**
- * Key names
- */
+// Key names
+// ---------
 
 Bandoneon.keys = [ 
   
@@ -214,9 +215,8 @@ Bandoneon.keys = [
 ];
 
 
-/**
- * Available modes
- */
+// Available modes
+// ---------------
 
 Bandoneon.modes = {
 
@@ -227,9 +227,8 @@ Bandoneon.modes = {
 };
 
 
-/**
- * Helper functions
- */
+// Helper functions
+// ----------------
 
 Bandoneon.utils = {
 
