@@ -146,7 +146,7 @@ $(function() {
             'fill': fill
           });
 
-        this.paper.text(layout[k][0] + 30, layout[k][1] + 30, label /* labelDisplay */)
+        this.paper.text(layout[k][0] + 30, layout[k][1] + 30, labelDisplay)
           .attr({
             'font-family': 'serif',
             'font-size': 21,
