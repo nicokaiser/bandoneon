@@ -1,7 +1,7 @@
 [Bandoneon](http://bandoneon.kaiser.me)
 ========
 
-A simple JavaScript application that wants to help learning the Alfred Arnold 142 bandoneon.
+A little JavaScript application that wants to help learning the Alfred Arnold 142 bandoneon.
 
 
 Author
