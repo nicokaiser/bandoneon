@@ -14,7 +14,6 @@ Author
 + http://github/nicokaiser
 
 
-
 Copyright and license
 ---------------------
 

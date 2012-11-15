@@ -10,7 +10,7 @@ Bandoneon.layout = {
 
   'right': {
 
-    'pull': {
+    'open': {
 
       'b4': [207, 39],
       'g#4': [312, 34],
@@ -52,7 +52,7 @@ Bandoneon.layout = {
       'g3': [714, 357]
     },
 
-    'push': {
+    'close': {
 
       'a4': [207, 39],
       'g#4': [312, 34],
@@ -98,7 +98,7 @@ Bandoneon.layout = {
 
   'left': {
 
-    'pull': {
+    'open': {
 
       'g#0': [198, 52],
       'a#0': [295, 37],
@@ -135,7 +135,7 @@ Bandoneon.layout = {
       'c0': [706, 303]
     },
 
-    'push': {
+    'close': {
 
       'g#0': [198, 52],
       'a#0': [295, 37],

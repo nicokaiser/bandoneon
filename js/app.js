@@ -12,11 +12,11 @@ $(function() {
   // -----
 
   // Represents the bandoneon keyboard that can(!) have a
-  // direction (push/pull), a side (right/left) and key + mode
+  // direction (open/close), a side (right/left) and key + mode
   var AppModel = Backbone.Model.extend({
 
     defaults: {
-      direction: 'pull',
+      direction: 'open',
       side: 'right',
       key: null,
       mode: null
@@ -28,8 +28,8 @@ $(function() {
         return 'invalid side';
       }
 
-      // direction: push, pull
-      if (attrs.direction && _.indexOf(['push', 'pull'], attrs.direction) === -1) {
+      // direction: open, close
+      if (attrs.direction && _.indexOf(['open', 'close'], attrs.direction) === -1) {
         return 'invalid direction';
       }
 
@@ -236,14 +236,14 @@ $(function() {
           this.renderScale(side, direction, scale, scaleColors[o]);
         }
 
-        appRouter.navigate('!/' + side + '/' + direction + '/scale/' 
-          + key + '/' + mode, {replace: true});
+        appRouter.navigate('!/' + side + '/' + direction + '/scale/' +
+          key + '/' + mode, {replace: true});
       } else if (quality) {
         // render chord
         this.renderChord(side, direction, key, quality);
 
-        appRouter.navigate('!/' + side + '/' + direction + '/chord/' 
-          + key + '/' + quality, {replace: true});
+        appRouter.navigate('!/' + side + '/' + direction + '/chord/' +
+          key + '/' + quality, {replace: true});
       }
 
       return this;
@@ -275,17 +275,17 @@ $(function() {
   // side / direction navigation
   $('#nav-sides a[data-toggle="tab"]').on('shown', function(e) {
     switch (e.target.hash) {
-      case '#left-pull':
-        appModel.set({ 'side': 'left', 'direction': 'pull' });
+      case '#left-open':
+        appModel.set({ 'side': 'left', 'direction': 'open' });
         break;
-      case '#left-push':
-        appModel.set({ 'side': 'left', 'direction': 'push' });
+      case '#left-close':
+        appModel.set({ 'side': 'left', 'direction': 'close' });
         break;
-      case '#right-pull':
-        appModel.set({ 'side': 'right', 'direction': 'pull' });
+      case '#right-open':
+        appModel.set({ 'side': 'right', 'direction': 'open' });
         break;
-      case '#right-push':
-        appModel.set({ 'side': 'right', 'direction': 'push' });
+      case '#right-close':
+        appModel.set({ 'side': 'right', 'direction': 'close' });
         break;
     }
   });
