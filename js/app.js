@@ -7,6 +7,9 @@ $(function() {
   // Color codes for coloring the octaves
   var octaveColors = ['#bcf', '#fdc', '#cfc', '#fea'];
 
+  // Color codes for coloring the chords
+  var chordColors = ['red', 'yellow', 'green', 'blue'];
+
 
   // Model
   // -----
@@ -60,11 +63,11 @@ $(function() {
     routes: {
       '!/:side/:direction/scale/:key/:mode': 'selectScale',
       '!/:side/:direction/chord/:key/:quality': 'selectChord',
-      '!/:side/:direction': 'selectLayout',
+      '!/:side/:direction': 'selectLayout'
     },
 
     selectLayout: function(side, direction) {
-      appModel.set({ 
+      appModel.set({
         'side': side,
         'direction': direction
       });
@@ -198,8 +201,8 @@ $(function() {
         var label = k;
         this.paper.circle(layout[k][0] + 30, layout[k][1] + 30, 30)
           .attr({
-            'fill': '#f00',
-            'opacity': (_.indexOf(chord, k) == 0) ? 0.4 : 0.2
+            'fill': chordColors[_.indexOf(chord, k)],
+            'opacity': 0.33
           });
       }
     },
@@ -267,7 +270,7 @@ $(function() {
   });
 
   // octave color toggle
-  $('#toggle-octavecolors').click(function() { 
+  $('#toggle-octavecolors').click(function() {
     appView.toggleOctaveColors();
     $('#toggle-octavecolors').button('toggle');
   });
