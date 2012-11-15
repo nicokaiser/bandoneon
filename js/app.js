@@ -2,7 +2,7 @@
 $(function() {
 
   // Color codes for coloring the scale lines
-  var scaleColors = ['blue', 'red', 'green', 'orange', 'blue'];
+  var scaleColors = ['orange', 'blue', 'red', 'green', 'orange', 'blue'];
 
   // Color codes for coloring the octaves
   var octaveColors = ['#bcf', '#fdc', '#cfc', '#fea'];
@@ -233,10 +233,10 @@ $(function() {
 
       if (mode) {
         // render scale
-        for (var o = 0; o < 5; o++) { // FIXME: o = -1 ?
+        for (var o = -1; o < 5; o++) { // FIXME: o = -1 ?
           var scale = Bandoneon.utils.scale(key, o, mode);
           scale.push(key + '' + (o + 1));
-          this.renderScale(side, direction, scale, scaleColors[o]);
+          this.renderScale(side, direction, scale, scaleColors[o + 1]);
         }
 
         appRouter.navigate('!/' + side + '/' + direction + '/scale/' +
