@@ -233,7 +233,7 @@ $(function() {
 
       if (mode) {
         // render scale
-        for (var o = 0; o < 5; o++) {
+        for (var o = 0; o < 5; o++) { // FIXME: o = -1 ?
           var scale = Bandoneon.utils.scale(key, o, mode);
           scale.push(key + '' + (o + 1));
           this.renderScale(side, direction, scale, scaleColors[o]);
