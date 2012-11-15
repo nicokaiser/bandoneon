@@ -307,9 +307,7 @@ $(function() {
     });
   });
 
-
-  // DEBUG
-
+  // debug
   window.appView = appView;
 
 });
