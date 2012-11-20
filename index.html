@@ -1,41 +1,89 @@
 ---
 layout: default
-title: Bandoneon
+title: Bandoneón
 ---
 
+<!-- page header -->
 <div class="page-header">
   <ul class="nav nav-pills pull-right">
-    <li>
-      <a href="#help" data-toggle="modal">Hilfe</a>
-    </li>
+    <li><a href="#help" data-toggle="modal">Help</a></li>
+    <li><a href="mailto:nico@kaiser.me">Contact</a></li>
   </ul>
-  <h2>Bandoneon</h2>
+  <h3>Bandoneón</h3>
 </div>
 
+<!-- navigation bar -->
 <div class="navbar">
   <div class="navbar-inner">
     <ul id="nav-sides" class="nav">
-      <li><a href="#left-open" data-toggle="tab">Linke Hand Zug</a></li>
-      <li><a href="#left-close" data-toggle="tab">Linke Hand Druck</a></li>
+      <li><a href="#left-open" data-toggle="tab" title="Left hand opening">Left ⨅</a></li>
+      <li><a href="#left-close" data-toggle="tab" title="Left hand closing">Left ∨</a></li>
       <li class="divider-vertical"></li>
-      <li><a href="#right-open" data-toggle="tab">Rechte Hand Zug</a></li>
-      <li><a href="#right-close" data-toggle="tab">Rechte Hand Druck</a></li>
+      <li><a href="#right-open" data-toggle="tab" title="Right hand opening">Right ⨅</a></li>
+      <li><a href="#right-close" data-toggle="tab" title="Right hand closing">Right ∨</a></li>
     </ul>
   </div>
 </div>
 
-<div class="alert alert-info fade in" id="intro-alert">
-  <button class="close" data-dismiss="alert">×</button>
-  Tonart und Modus auswählen, um eine Tonleiter auf der Tastatur zu anzuzeigen, z.B. <strong><a href="#!/right/open/scale/c/major">C-Dur</a></strong>.
+<!-- main container -->
+<div id="container"></div>
+
+<!-- key selection -->
+<div class="btn-toolbar">
+  <div class="btn-group">
+    <button class="btn btn-large" href="#" data-key="c#">C♯</button>
+    <button class="btn btn-large" href="#" data-key="f#">F♯</button>
+    <button class="btn btn-large" href="#" data-key="b" >B </button>
+    <button class="btn btn-large" href="#" data-key="e" >E </button>
+    <button class="btn btn-large" href="#" data-key="a" >A </button>
+    <button class="btn btn-large" href="#" data-key="d" >D </button>
+    <button class="btn btn-large" href="#" data-key="g" >G </button>
+  </div>
+  
+  <div class="btn-group">
+    <button class="btn btn-primary btn-large" href="#" data-key="c" >C </button>
+  </div>
+
+  <div class="btn-group">
+    <button class="btn btn-large" href="#" data-key="f" >F </button>
+    <button class="btn btn-large" href="#" data-key="a#">B♭</button>
+    <button class="btn btn-large" href="#" data-key="d#">E♭</button>
+    <button class="btn btn-large" href="#" data-key="g#">A♭</button>
+    <button class="btn btn-large" href="#" data-key="c#">D♭</button>
+    <button class="btn btn-large" href="#" data-key="f#">G♭</button>
+    <button class="btn btn-large" href="#" data-key="b"> C♭</button>
+  </div>
 </div>
 
-<div class="well">
-  <div id="container"></div>
+<!-- mode, quality, color -->
+<div class="btn-toolbar">
+  
+  <!-- mode selection -->
+  <div class="btn-group">
+    <button class="btn btn-primary" href="#" data-mode="major">major</button>
+    <button class="btn" href="#" data-mode="minor">minor</button>
+    <button class="btn" href="#" data-mode="chromatic">chromatic</button>
+  </div>
+
+  <!-- chord quality selection -->
+  <div class="btn-group">
+    <button class="btn disabled" href="#" data-key="f" >major</button>
+    <button class="btn disabled" href="#" data-key="a#">minor</button>
+    <button class="btn disabled" href="#" data-key="d#">augmented</button>
+    <button class="btn disabled" href="#" data-key="g#">diminished</button>
+    <button class="btn disabled" href="#" data-key="c#">seventh</button>
+  </div>
+
+  <!-- octave color toggle -->
+  <div class="btn-group">
+    <button class="btn btn-primary pull-right" id="toggle-octavecolors">button colors</button>
+  </div>
 </div>
 
+<!--
 <form class="well form-inline" id="scale-form">
   <select class="span2" id="select-key">
-    <option value="">Tonart</option>
+    <option value="">Key</option>
     <option value="c#">C♯</option>
     <option value="f#">F♯</option>
     <option value="b">B</option>
@@ -54,21 +102,25 @@ title: Bandoneon
   </select>
 
   <select class="span2" id="select-mode">
-    <option value="">Modus</option>
-    <option value="chromatic">Chromatisch</option>
-    <option value="major">Dur</option>
-    <option value="minor">Moll</option>
+    <option value="">Mode</option>
+    <option value="chromatic">chromatic</option>
+    <option value="major">major</option>
+    <option value="minor">minor</option>
   </select>
-
-  <button class="btn btn-primary pull-right" id="toggle-octavecolors">Farbige Oktaven</button>
 </form>
+-->
+
 
 <div class="modal fade hide" id="help">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal">×</button>
-    <h3>Hilfe</h3>
+    <h3>Help</h3>
   </div>
   <div class="modal-body">
+
+    <p>This website wants to help learning the 142 button bandoneon.</p>
+
+    <!--
     <p>Diese Website soll ein Hilfsmittel zum Erlernen des Bandoneon-Spiels sein.</p>
     
     <p>Um den Aufbau der beiden jeweils auf Zug und Druck unterschiedlich belegten Manuale zu verinnerlichen kann hier die Knopfbelegung angezeigt werden.</p>
@@ -80,8 +132,9 @@ title: Bandoneon
     </ul>
 
     <p>Zugrunde liegt die Belegung des 142-knöpfigen Bandoneons in Rheinischer Tonlage.</p>
+  -->
   </div>
   <div class="modal-footer">
-    <a href="#" class="btn btn-primary" data-dismiss="modal">Schließen</a>
+    <a href="#" class="btn btn-primary" data-dismiss="modal">Close</a>
   </div>
 </div>

@@ -228,9 +228,6 @@ $(function() {
         return;
       }
 
-      // dismiss introduction alert
-      $("#intro-alert").alert('close');
-
       if (mode) {
         // render scale
         for (var o = -1; o < 5; o++) { // FIXME: o = -1 ?
