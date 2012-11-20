@@ -231,13 +231,14 @@ $(function() {
       var quality = this.model.get('quality');
 
       if (!key || (!mode && !quality)) {
+        // render keyboard only
         appRouter.navigate('!/' + side + '/' + direction, {replace: true});
         return;
       }
 
       if (mode) {
         // render scale
-        for (var o = -1; o < 5; o++) { // FIXME: o = -1 ?
+        for (var o = -1; o < 5; o++) {
           var scale = Bandoneon.utils.scale(key, o, mode);
           scale.push(key + '' + (o + 1));
           this.renderScale(side, direction, scale, scaleColors[o + 1]);
@@ -246,10 +247,13 @@ $(function() {
         appRouter.navigate('!/' + side + '/' + direction + '/scale/' +
           key + '/' + mode, {replace: true});
       } else if (quality) {
+        if (side !== 'left') {
+          // chords can be displayed only on the left side
+          this.model.set('side', 'left');
+        }
         // render chord
         this.renderChord(side, direction, key, quality);
-
-        appRouter.navigate('!/' + side + '/' + direction + '/chord/' +
+        appRouter.navigate('!/left/' + direction + '/chord/' +
           key + '/' + quality, {replace: true});
       }
 
@@ -288,7 +292,7 @@ $(function() {
       appModel.set('key', null);
     } else {
       appModel.set('key', key);
-      if (! appModel.get('mode')) {
+      if (!appModel.get('mode') && !appModel.get('quality')) {
         // set default mode if none is set yet
         appModel.set('mode', 'major');
       }
@@ -317,7 +321,6 @@ $(function() {
   });
 
   // chord quality selection
-  /*
   $('#select-quality button').click(function() {
     var quality = $(this).data('quality');
     $('#select-key button').removeClass('btn-primary');
@@ -336,7 +339,6 @@ $(function() {
     // unset mode
     appModel.set('mode', null);
   });
-  */
 
   // side / direction navigation
   $('#nav-sides a[data-toggle="tab"]').on('shown', function(e) {
@@ -357,6 +359,7 @@ $(function() {
   });
 
   // debug
+  window.appModel = appModel;
   window.appView = appView;
 
 });
