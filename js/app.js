@@ -362,6 +362,18 @@ $(function() {
   // keypress events
   $('body').keypress(function(e) {
     switch (e.keyCode) {
+      case 114: // r
+        appModel.set({ 'side': 'right', 'direction': 'open' });
+        break;
+      case 82: // R
+        appModel.set({ 'side': 'right', 'direction': 'close' });
+        break;
+      case 108: // l
+        appModel.set({ 'side': 'left', 'direction': 'open' });
+        break;
+      case 76: // L
+        appModel.set({ 'side': 'left', 'direction': 'close' });
+        break;
       case 35: // #
         var key = appModel.get('key');
         if (key && (key.length === 1)) {
