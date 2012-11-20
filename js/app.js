@@ -280,10 +280,8 @@ $(function() {
   });
 
   // key selection
-  $('#select-key button').click(function() {
-    var key = $(this).data('key');
-    $('#select-key button').removeClass('btn-primary');
-    if (appModel.get('key') === key) {
+  function selectKey(key, force) {
+    if (!force && appModel.get('key') === key) {
       // unset key
       appModel.set('key', null);
     } else {
@@ -292,16 +290,17 @@ $(function() {
         // set default mode if none is set yet
         appModel.set('mode', 'major');
       }
-      $(this).addClass('btn-primary');
+      //$(this).addClass('btn-primary');
     }
+  }
+
+  $('#select-key button').click(function() {
+    selectKey($(this).data('key'));
   });
 
   // mode selection
-  $('#select-mode button').click(function() {
-    var mode = $(this).data('mode');
-    $('#select-key button').removeClass('btn-primary');
-    
-    if (appModel.get('mode') === mode) {
+  function selectMode(mode, force) {
+    if (!force && appModel.get('mode') === mode) {
       // unset mode
       appModel.set('mode', null);
     } else {
@@ -310,18 +309,18 @@ $(function() {
         // set default key if none is set yet
         appModel.set('key', 'c');
       }
-      $(this).addClass('btn-primary');
     }
     // unset quality
     appModel.set('quality', null);
+  }
+
+  $('#select-mode button').click(function() {
+    selectMode($(this).data('mode'));
   });
 
   // chord quality selection
-  $('#select-quality button').click(function() {
-    var quality = $(this).data('quality');
-    $('#select-key button').removeClass('btn-primary');
-    
-    if (appModel.get('quality') === quality) {
+  function selectQuality(quality, force) {
+    if (!force && appModel.get('quality') === quality) {
       // unset quality
       appModel.set('quality', null);
     } else {
@@ -333,10 +332,13 @@ $(function() {
       if (appModel.get('side') !== 'left') {
         appModel.set('side', 'left');
       }
-      $(this).addClass('btn-primary');
     }
     // unset mode
     appModel.set('mode', null);
+  }
+
+  $('#select-quality button').click(function() {
+    selectQuality($(this).data('quality'));
   });
 
   // side / direction navigation
@@ -353,6 +355,40 @@ $(function() {
         break;
       case '#right-close':
         appModel.set({ 'side': 'right', 'direction': 'close' });
+        break;
+    }
+  });
+
+  // keypress events
+  $('body').keypress(function(e) {
+    switch (e.keyCode) {
+      case 35: // #
+        var key = appModel.get('key');
+        if (key && (key.length === 1)) {
+          appModel.set('key', key + '#');
+        }
+        break;
+      case 67: // C
+        appView.toggleOctaveColors();
+        $('#toggle-octavecolors').button('toggle');
+        break;
+      case 77: // M
+        selectQuality('major', true);
+        break;
+      case 109: // m
+        selectQuality('minor', true);
+        break;
+      case 55: // 7
+        selectQuality('seventh', true);
+        break;
+      case 97:
+      case 98:
+      case 99:
+      case 100:
+      case 101:
+      case 102:
+      case 103:
+        appModel.set('key', String.fromCharCode(e.keyCode));
         break;
     }
   });
