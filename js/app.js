@@ -247,10 +247,6 @@ $(function() {
         appRouter.navigate('!/' + side + '/' + direction + '/scale/' +
           key + '/' + mode, {replace: true});
       } else if (quality) {
-        if (side !== 'left') {
-          // chords can be displayed only on the left side
-          this.model.set('side', 'left');
-        }
         // render chord
         this.renderChord(side, direction, key, quality);
         appRouter.navigate('!/left/' + direction + '/chord/' +
@@ -333,6 +329,9 @@ $(function() {
       if (! appModel.get('key')) {
         // set default key if none is set yet
         appModel.set('key', 'c');
+      }
+      if (appModel.get('side') !== 'left') {
+        appModel.set('side', 'left');
       }
       $(this).addClass('btn-primary');
     }
