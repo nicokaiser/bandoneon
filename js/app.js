@@ -115,9 +115,16 @@ $(function() {
 
     // Initialie Raphaël and listen to changes
     initialize: function() {
+      var self = this;
       this.paper = Raphael(this.el, 800, 450);
       this.render();
       this.model.bind('change', this.render, this);
+      this.model.bind('change', function() {
+        _.each(['key', 'mode', 'quality'], function(e) {
+          $('#select-' + e + ' button').removeClass('btn-primary');
+          $('#select-' + e + ' button[data-' + e + '="' + self.model.get(e) + '"]').addClass('btn-primary');
+        });
+      });
     },
 
     // Render button layout (with colored octaves)
@@ -181,8 +188,8 @@ $(function() {
           'stroke': color,
           'stroke-linecap': 'round',
           'stroke-linejoin': 'round',
-          'stroke-width': 7,
-          'stroke-opacity': 0.33
+          'stroke-width': 4,
+          'stroke-opacity': 0.66
         });
     },
 
@@ -272,6 +279,65 @@ $(function() {
     $('#toggle-octavecolors').button('toggle');
   });
 
+  // key selection
+  $('#select-key button').click(function() {
+    var key = $(this).data('key');
+    $('#select-key button').removeClass('btn-primary');
+    if (appModel.get('key') === key) {
+      // unset key
+      appModel.set('key', null);
+    } else {
+      appModel.set('key', key);
+      if (! appModel.get('mode')) {
+        // set default mode if none is set yet
+        appModel.set('mode', 'major');
+      }
+      $(this).addClass('btn-primary');
+    }
+  });
+
+  // mode selection
+  $('#select-mode button').click(function() {
+    var mode = $(this).data('mode');
+    $('#select-key button').removeClass('btn-primary');
+    
+    if (appModel.get('mode') === mode) {
+      // unset mode
+      appModel.set('mode', null);
+    } else {
+      appModel.set('mode', mode);
+      if (! appModel.get('key')) {
+        // set default key if none is set yet
+        appModel.set('key', 'c');
+      }
+      $(this).addClass('btn-primary');
+    }
+    // unset quality
+    appModel.set('quality', null);
+  });
+
+  // chord quality selection
+  /*
+  $('#select-quality button').click(function() {
+    var quality = $(this).data('quality');
+    $('#select-key button').removeClass('btn-primary');
+    
+    if (appModel.get('quality') === quality) {
+      // unset quality
+      appModel.set('quality', null);
+    } else {
+      appModel.set('quality', quality);
+      if (! appModel.get('key')) {
+        // set default key if none is set yet
+        appModel.set('key', 'c');
+      }
+      $(this).addClass('btn-primary');
+    }
+    // unset mode
+    appModel.set('mode', null);
+  });
+  */
+
   // side / direction navigation
   $('#nav-sides a[data-toggle="tab"]').on('shown', function(e) {
     switch (e.target.hash) {
@@ -288,20 +354,6 @@ $(function() {
         appModel.set({ 'side': 'right', 'direction': 'close' });
         break;
     }
-  });
-
-  // key select
-  $('#select-key').change(function() {
-    $('#select-key option:selected').each(function() {
-      appModel.set('key', $(this).val());
-    });
-  });
-
-  // mode select
-  $('#select-mode').change(function() {
-    $('#select-mode option:selected').each(function() {
-      appModel.set('mode', $(this).val());
-    });
   });
 
   // debug
