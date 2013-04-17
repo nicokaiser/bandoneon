@@ -197,6 +197,8 @@ $(function() {
     renderChord: function(side, direction, key, quality) {
       if (side !== 'left') return;
 
+      if (! Bandoneon.chords[quality]) return;
+
       var chord = Bandoneon.chords[quality][key];
       if (!chord) return;
       
@@ -288,7 +290,7 @@ $(function() {
       appModel.set('key', key);
       if (!appModel.get('mode') && !appModel.get('quality')) {
         // set default mode if none is set yet
-        appModel.set('mode', 'major');
+        appModel.set('mode', 'M');
       }
       //$(this).addClass('btn-primary');
     }
@@ -385,13 +387,13 @@ $(function() {
         $('#toggle-octavecolors').button('toggle');
         break;
       case 77: // M
-        selectQuality('major', true);
+        selectQuality('M', true);
         break;
       case 109: // m
-        selectQuality('minor', true);
+        selectQuality('m', true);
         break;
       case 55: // 7
-        selectQuality('seventh', true);
+        selectQuality('7', true);
         break;
       case 97:
       case 98:
