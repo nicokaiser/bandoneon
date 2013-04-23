@@ -1,5 +1,6 @@
 # TODO
 
 - finish chords
-- connect select dropdowns to model
-- change dropdowns to button-groups
+- use browserify or yeoman
+- split JS classes
+- fix chords that are different for open/close
