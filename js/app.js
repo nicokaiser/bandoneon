@@ -85,7 +85,7 @@ $(function() {
 
     selectChord: function(side, direction, key, quality) {
       appModel.set({
-        'side': 'left', // chords only on left side
+        'side': side,
         'direction': direction,
         'key': key,
         'mode': null,
@@ -197,9 +197,9 @@ $(function() {
     renderChord: function(side, direction, key, quality) {
       if (side !== 'left') return;
 
-      if (! Bandoneon.chords[quality]) return;
+      if (! Bandoneon.chords[side][direction][quality]) return;
 
-      var chord = Bandoneon.chords[quality][key];
+      var chord = Bandoneon.chords[side][direction][quality][key];
       if (!chord) return;
       
       var layout = Bandoneon.layout[side][direction];
