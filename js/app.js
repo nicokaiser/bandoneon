@@ -7,9 +7,6 @@ $(function() {
   // Color codes for coloring the octaves
   var octaveColors = ['#bcf', '#fdc', '#cfc', '#fea'];
 
-  // Color codes for coloring the chords
-  var chordColors = ['red', 'yellow', 'green', 'blue'];
-
 
   // Model
   // -----
@@ -195,8 +192,6 @@ $(function() {
 
     // Render a chord (left side only)
     renderChord: function(side, direction, key, quality) {
-      if (side !== 'left') return;
-
       if (! Bandoneon.chords[side][direction][quality]) return;
 
       var chord = Bandoneon.chords[side][direction][quality][key];
@@ -210,7 +205,7 @@ $(function() {
         var label = k;
         this.paper.circle(layout[k][0] + 30, layout[k][1] + 30, 30)
           .attr({
-            'fill': chordColors[_.indexOf(chord, k)],
+            'fill': 'red',
             'opacity': 0.33
           });
       }
@@ -251,7 +246,7 @@ $(function() {
       } else if (quality) {
         // render chord
         this.renderChord(side, direction, key, quality);
-        appRouter.navigate('!/left/' + direction + '/chord/' +
+        appRouter.navigate('!/' + side + '/' + direction + '/chord/' +
           key + '/' + quality, {replace: true});
       }
 
@@ -330,9 +325,6 @@ $(function() {
       if (! appModel.get('key')) {
         // set default key if none is set yet
         appModel.set('key', 'c');
-      }
-      if (appModel.get('side') !== 'left') {
-        appModel.set('side', 'left');
       }
     }
     // unset mode
