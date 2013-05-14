@@ -7,6 +7,8 @@ $(function() {
   // Color codes for coloring the octaves
   var octaveColors = ['#bcf', '#fdc', '#cfc', '#fea'];
 
+  octaveColors = ['#71a8d7', '#e37e7b', '#85ca85', '#e6cb84'];
+
 
   // Model
   // -----
@@ -150,7 +152,8 @@ $(function() {
         this.paper.circle(layout[k][0] + 30, layout[k][1] + 30, 30)
           .attr({
             'stroke-width': 2, /* (label[0] === 'c') ? 3 : 1 */
-            'fill': fill
+            'fill': fill,
+            'fill-opacity': 0.5
           });
 
         this.paper.text(layout[k][0] + 30, layout[k][1] + 30, labelDisplay)
@@ -203,10 +206,11 @@ $(function() {
       for (var k in layout) {
         if (_.indexOf(chord, k) === -1) continue;
         var label = k;
-        this.paper.circle(layout[k][0] + 30, layout[k][1] + 30, 30)
+        this.paper.circle(layout[k][0] + 30, layout[k][1] + 30, 28)
           .attr({
-            'fill': 'red',
-            'opacity': 0.33
+            'stroke-width': 4,
+            'fill': 'black',
+            'fill-opacity': 0.33
           });
       }
     },

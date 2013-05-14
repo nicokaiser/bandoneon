@@ -228,13 +228,26 @@ Bandoneon.chords['right']['open'] = {
     'g': ['c#2', 'g2'],
     'a#': ['c#2', 'g2'],
     'c#': ['c#2', 'g2']
+  },
+
+  'M7': {
+    'c': ['b1', 'e2'],
+    'd': ['c#2', 'f#2'],
+    'e': ['d#2', 'g#2'],
+    'f': ['e2', 'a2'],
+    'g': ['f#2', 'b2'],
+    'a': ['e2', 'g#2'],
+    'b': ['f2#', 'b2'],
+    'c#': ['c2', 'f2'],
+    'd#': ['d', 'g'],
+    'f#': ['f2', 'a#2'],
+    'g#': ['f2', 'a2'],
+    'a#': ['f#2', 'a#2']
   }
 
 };
-
 Bandoneon.chords['right']['open']['m'] = Bandoneon.chords['right']['open']['M'];
 Bandoneon.chords['right']['open']['7'] = Bandoneon.chords['right']['open']['M'];
-
 
 Bandoneon.chords['right']['close'] = Bandoneon.chords['right']['open'];
 
