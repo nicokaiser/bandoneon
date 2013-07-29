@@ -119,10 +119,12 @@ $(function() {
       this.render();
       this.model.bind('change', this.render, this);
       this.model.bind('change', function() {
-        _.each(['key', 'mode', 'quality'], function(e) {
+        _.each(['mode', 'quality'], function(e) {
           $('#select-' + e + ' button').removeClass('btn-primary');
           $('#select-' + e + ' button[data-' + e + '="' + self.model.get(e) + '"]').addClass('btn-primary');
         });
+        $('#select-key a').removeClass('btn-primary');
+        $('#select-key a[data-key="' + self.model.get('key') + '"]').addClass('btn-primary');
       });
     },
 
@@ -295,7 +297,8 @@ $(function() {
     }
   }
 
-  $('#select-key button').click(function() {
+  $('#select-key a').click(function(e) {
+    e.preventDefault();
     selectKey($(this).data('key'));
   });
 
@@ -315,7 +318,8 @@ $(function() {
     appModel.set('quality', null);
   }
 
-  $('#select-mode button').click(function() {
+  $('#select-mode button').click(function(e) {
+    e.preventDefault();
     selectMode($(this).data('mode'));
   });
 
@@ -335,12 +339,13 @@ $(function() {
     appModel.set('mode', null);
   }
 
-  $('#select-quality button').click(function() {
+  $('#select-quality button').click(function(e) {
+    e.preventDefault();
     selectQuality($(this).data('quality'));
   });
 
   // side / direction navigation
-  $('#nav-sides a[data-toggle="tab"]').on('shown', function(e) {
+  $('#nav-sides a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
     switch (e.target.hash) {
       case '#left-open':
         appModel.set({ 'side': 'left', 'direction': 'open' });

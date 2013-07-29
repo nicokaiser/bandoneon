@@ -10,20 +10,18 @@ title: Bandoneón
     <li><a href="#help" data-toggle="modal">Help</a></li>
     <li><a href="mailto:nico@kaiser.me">Contact</a></li>
   </ul>
-  <h3>Bandoneón</h3>
+  <h2>Bandoneón</h2>
 </div>
 
 <!-- navigation bar -->
-<div class="navbar">
-  <div class="navbar-inner">
-    <ul id="nav-sides" class="nav">
-      <li><a href="#left-open" data-toggle="tab" title="Left hand opening">Left open</a></li>
-      <li><a href="#left-close" data-toggle="tab" title="Left hand closing">Left close</a></li>
-      <li class="divider-vertical"></li>
-      <li><a href="#right-open" data-toggle="tab" title="Right hand opening">Right open</a></li>
-      <li><a href="#right-close" data-toggle="tab" title="Right hand closing">Right close</a></li>
-    </ul>
-  </div>
+<div class="navbar navbar">
+  <ul id="nav-sides" class="nav navbar-nav">
+    <li><a href="#left-open" data-toggle="tab" title="Left hand opening">Left open</a></li>
+    <li><a href="#left-close" data-toggle="tab" title="Left hand closing">Left close</a></li>
+    <li class="divider-vertical"></li>
+    <li><a href="#right-open" data-toggle="tab" title="Right hand opening">Right open</a></li>
+    <li><a href="#right-close" data-toggle="tab" title="Right hand closing">Right close</a></li>
+  </ul>
 </div>
 
 <!-- main container -->
@@ -31,28 +29,22 @@ title: Bandoneón
 
 <!-- key selection -->
 <div class="btn-toolbar" id="select-key">
-  <div class="btn-group">
-    <button class="btn btn-large" href="#" data-key="b"> C♭</button>
-    <button class="btn btn-large" href="#" data-key="f#">G♭</button>
-    <button class="btn btn-large" href="#" data-key="c#">D♭</button>
-    <button class="btn btn-large" href="#" data-key="g#">A♭</button>
-    <button class="btn btn-large" href="#" data-key="d#">E♭</button>
-    <button class="btn btn-large" href="#" data-key="a#">B♭</button>
-    <button class="btn btn-large" href="#" data-key="f" >F </button>
-  </div>
-
-  <div class="btn-group">
-    <button class="btn btn-large" href="#" data-key="c" >C </button>
-  </div>
-
-  <div class="btn-group">
-    <button class="btn btn-large" href="#" data-key="g" >G </button>
-    <button class="btn btn-large" href="#" data-key="d" >D </button>
-    <button class="btn btn-large" href="#" data-key="a" >A </button>
-    <button class="btn btn-large" href="#" data-key="e" >E </button>
-    <button class="btn btn-large" href="#" data-key="b" >B </button>
-    <button class="btn btn-large" href="#" data-key="f#">F♯</button>
-    <button class="btn btn-large" href="#" data-key="c#">C♯</button>
+  <div class="btn-group btn-group-justified">
+    <a class="btn btn-default" href="#" data-key="b"> C♭</a>
+    <a class="btn btn-default" href="#" data-key="f#">G♭</a>
+    <a class="btn btn-default" href="#" data-key="c#">D♭</a>
+    <a class="btn btn-default" href="#" data-key="g#">A♭</a>
+    <a class="btn btn-default" href="#" data-key="d#">E♭</a>
+    <a class="btn btn-default" href="#" data-key="a#">B♭</a>
+    <a class="btn btn-default" href="#" data-key="f" >F </a>
+    <a class="btn btn-default" href="#" data-key="c" >C </a>
+    <a class="btn btn-default" href="#" data-key="g" >G </a>
+    <a class="btn btn-default" href="#" data-key="d" >D </a>
+    <a class="btn btn-default" href="#" data-key="a" >A </a>
+    <a class="btn btn-default" href="#" data-key="e" >E </a>
+    <a class="btn btn-default" href="#" data-key="b" >B </a>
+    <a class="btn btn-default" href="#" data-key="f#">F♯</a>
+    <a class="btn btn-default" href="#" data-key="c#">C♯</a>
   </div>
 </div>
 
@@ -81,51 +73,57 @@ title: Bandoneón
   </div>
 </div>
 
-<div class="modal fade hide" id="help">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal">×</button>
-    <h3>Help</h3>
-  </div>
-  <div class="modal-body">
+<div class="modal fade" id="help">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3>Help</h3>
+      </div>
+      <div class="modal-body">
+        <p>This website wants to help learning the 142 button Bandoneon.</p>
 
-    <p>This website wants to help learning the 142 button Bandoneon.</p>
+        <p>To internalize the button location on the both manuals the button map can be displayed.</p>
 
-    <p>To internalize the button location on the both manuals the button map can be displayed.</p>
+        <ul>
+          <li>The tabs above the keyboard switch the <strong>direction of the bellows</strong> (open/pull or close/push) and the <strong>side</strong> (left or right).</li>
+          <li>Select a <strong>key</strong> and a <strong>mode</strong> to display a scale</li>
+          <li>Select a <strong>key</strong> and a <strong>quality</strong> to display a chord (left side only!)</li>
+        </ul>
 
-    <ul>
-      <li>The tabs above the keyboard switch the <strong>direction of the bellows</strong> (open/pull or close/push) and the <strong>side</strong> (left or right).</li>
-      <li>Select a <strong>key</strong> and a <strong>mode</strong> to display a scale</li>
-      <li>Select a <strong>key</strong> and a <strong>quality</strong> to display a chord (left side only!)</li>
-    </ul>
+        <p>The keyboard is based on the 142 button Bandoneon ("Rheinische Tonlage")</p>
 
-    <p>The keyboard is based on the 142 button Bandoneon ("Rheinische Tonlage")</p>
-
-    <p>More information about the Bandoneon on <a href="http://www.inorg.chem.ethz.ch/tango/band/bandoneon.html">Christian's Bandoneon Page</a>.</p>
-  </div>
-  <div class="modal-footer">
-    <a href="#" class="btn btn-primary" data-dismiss="modal">Close</a>
+        <p>More information about the Bandoneon on <a href="http://www.inorg.chem.ethz.ch/tango/band/bandoneon.html">Christian's Bandoneon Page</a>.</p>
+      </div>
+      <div class="modal-footer">
+        <a href="#" class="btn btn-primary" data-dismiss="modal">Close</a>
+      </div>
+    </div>
   </div>
 </div>
 
-<div class="modal fade hide" id="downloads">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal">×</button>
-    <h3>Downloads</h3>
-  </div>
-  <div class="modal-body">
+<div class="modal fade" id="downloads">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3>Downloads</h3>
+      </div>
+      <div class="modal-body">
+        <p>You can download 4 PDF versions of the AA keyboard:</p>
 
-    <p>You can download 4 PDF versions of the AA keyboard:</p>
+        <ul>
+          <li><a href="/download/AA-142-Keyboard.pdf">AA 142 Keyboard</a></li>
+          <li><a href="/download/AA-142-Keyboard-Colors.pdf">AA 142 Keyboard with colored octaves</a></li>
+          <li><a href="/download/AA-142-Keyboard-C-major.pdf">AA 142 Keyboard with C major scale</a></li>
+          <li><a href="/download/AA-142-Keyboard-Chromatic.pdf">AA 142 Keyboard with chromatic scale</a></li>
+        </ul>
 
-    <ul>
-      <li><a href="/download/AA-142-Keyboard.pdf">AA 142 Keyboard</a></li>
-      <li><a href="/download/AA-142-Keyboard-Colors.pdf">AA 142 Keyboard with colored octaves</a></li>
-      <li><a href="/download/AA-142-Keyboard-C-major.pdf">AA 142 Keyboard with C major scale</a></li>
-      <li><a href="/download/AA-142-Keyboard-Chromatic.pdf">AA 142 Keyboard with chromatic scale</a></li>
-    </ul>
-
-    <p>And of course you can download and modify the whole website source from <a href="https://github.com/nicokaiser/bandoneon">GitHub</a>.</p>
-  </div>
-  <div class="modal-footer">
-    <a href="#" class="btn btn-primary" data-dismiss="modal">Close</a>
+        <p>And of course you can download and modify the whole website source from <a href="https://github.com/nicokaiser/bandoneon">GitHub</a>.</p>
+      </div>
+      <div class="modal-footer">
+        <a href="#" class="btn btn-primary" data-dismiss="modal">Close</a>
+      </div>
+    </div>
   </div>
 </div>

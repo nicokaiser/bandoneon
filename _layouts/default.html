@@ -17,11 +17,11 @@
   <script src="/js/app.js"></script>
 
   <link href="/css/bootstrap.min.css" rel="stylesheet">
-  <style>
 
-    body {
-      padding: 20px 0;
-    }
+  <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+
+
+  <style>
 
     .container-narrow {
       margin: 0 auto;
@@ -35,10 +35,19 @@
       text-align: left;
     }
 
+    footer {
+      padding-top: 30px;
+      padding-bottom: 30px;
+      margin-top: 40px;
+      text-align: center;
+      border-top: 1px solid #e5e5e5;
+    }
+
+    #select-key div.btn-group {
+      margin-bottom: 10px;
+    }
+
   </style>
-  <!--[if lt IE 9]>
-    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-  <![endif]-->
 </head>
 
 <body>
@@ -46,8 +55,6 @@
   <div class="container-narrow">
 
     {{ content }}
-
-    <hr>
 
     <footer>
       <p>
