@@ -145,9 +145,9 @@ $(function() {
         if (label[1] == '#') labelDisplay += '♯';
         else if (label[1] == 'b') labelDisplay += '♭';
         if (octave == 1) labelDisplay += '';
-        else if (octave == 2) labelDisplay += 'ʹ';
-        else if (octave == 3) labelDisplay += 'ʹʹ';
-        else if (octave == 4) labelDisplay += 'ʹʹʹ';
+        else if (octave == 2) labelDisplay += '’';
+        else if (octave == 3) labelDisplay += '’’';
+        else if (octave == 4) labelDisplay += '’’’';
 
         var fill = (this.showOctaveColors ? octaveColors[octave % (octaveColors.length)] : 'white');
 
