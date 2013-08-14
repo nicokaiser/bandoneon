@@ -3,127 +3,65 @@ layout: default
 title: Bandoneón
 ---
 
-<!-- page header -->
-<div class="page-header">
-  <ul class="nav nav-pills pull-right">
-    <li><a href="#downloads" data-toggle="modal">Downloads</a></li>
-    <li><a href="#help" data-toggle="modal">Help</a></li>
-    <li><a href="mailto:nico@kaiser.me">Contact</a></li>
-  </ul>
-  <h2>Bandoneón</h2>
-</div>
+<div class="row">
+  <div class="col-xs-12">
 
-<!-- navigation bar -->
-<div class="navbar navbar">
-  <ul id="nav-sides" class="nav navbar-nav">
-    <li><a href="#left-open" data-toggle="tab" title="Left hand opening">Left open</a></li>
-    <li><a href="#left-close" data-toggle="tab" title="Left hand closing">Left close</a></li>
-    <li class="divider-vertical"></li>
-    <li><a href="#right-open" data-toggle="tab" title="Right hand opening">Right open</a></li>
-    <li><a href="#right-close" data-toggle="tab" title="Right hand closing">Right close</a></li>
-  </ul>
-</div>
+    <!-- navigation bar -->
+    <ul id="nav-sides" class="nav nav-tabs nav-justified">
+      <li><a href="#left-open" data-toggle="tab" title="Left hand opening">Left open</a></li>
+      <li><a href="#left-close" data-toggle="tab" title="Left hand closing">Left close</a></li>
+      <li><a href="#right-open" data-toggle="tab" title="Right hand opening">Right open</a></li>
+      <li><a href="#right-close" data-toggle="tab" title="Right hand closing">Right close</a></li>
+    </ul>
 
-<!-- main container -->
-<div id="container"></div>
+    <!-- main container -->
+    <div id="the-keyboard"></div>
 
-<!-- key selection -->
-<div class="btn-toolbar" id="select-key">
-  <div class="btn-group btn-group-justified">
-    <a class="btn btn-default" href="#" data-key="b"> C♭</a>
-    <a class="btn btn-default" href="#" data-key="f#">G♭</a>
-    <a class="btn btn-default" href="#" data-key="c#">D♭</a>
-    <a class="btn btn-default" href="#" data-key="g#">A♭</a>
-    <a class="btn btn-default" href="#" data-key="d#">E♭</a>
-    <a class="btn btn-default" href="#" data-key="a#">B♭</a>
-    <a class="btn btn-default" href="#" data-key="f" >F </a>
-    <a class="btn btn-default" href="#" data-key="c" >C </a>
-    <a class="btn btn-default" href="#" data-key="g" >G </a>
-    <a class="btn btn-default" href="#" data-key="d" >D </a>
-    <a class="btn btn-default" href="#" data-key="a" >A </a>
-    <a class="btn btn-default" href="#" data-key="e" >E </a>
-    <a class="btn btn-default" href="#" data-key="b" >B </a>
-    <a class="btn btn-default" href="#" data-key="f#">F♯</a>
-    <a class="btn btn-default" href="#" data-key="c#">C♯</a>
-  </div>
-</div>
-
-<!-- octave color toggle -->
-<div class="btn-group pull-right">
-  <button class="btn" id="toggle-octavecolors">button colors</button>
-</div>
-
-<!-- mode, quality, color -->
-<div class="btn-toolbar">
-  <!-- mode selection -->
-  <div class="btn-group" id="select-mode">
-    <button class="btn" href="#" data-mode="major">major</button>
-    <button class="btn" href="#" data-mode="minor">minor</button>
-    <button class="btn" href="#" data-mode="chromatic">chromatic</button>
-  </div>
-
-  <!-- chord quality selection -->
-  <div class="btn-group" id="select-quality">
-    <button class="btn" href="#" data-quality="M">M</button>
-    <button class="btn" href="#" data-quality="m">m</button>
-    <button class="btn" href="#" data-quality="7">7</button>
-    <button class="btn" href="#" data-quality="dim">dim</button>
-    <button class="btn" href="#" data-quality="m7">m7</button>
-    <button class="btn" href="#" data-quality="M7">M7</button>
-  </div>
-</div>
-
-<div class="modal fade" id="help">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h3>Help</h3>
-      </div>
-      <div class="modal-body">
-        <p>This website wants to help learning the 142 button Bandoneon.</p>
-
-        <p>To internalize the button location on the both manuals the button map can be displayed.</p>
-
-        <ul>
-          <li>The tabs above the keyboard switch the <strong>direction of the bellows</strong> (open/pull or close/push) and the <strong>side</strong> (left or right).</li>
-          <li>Select a <strong>key</strong> and a <strong>mode</strong> to display a scale</li>
-          <li>Select a <strong>key</strong> and a <strong>quality</strong> to display a chord (left side only!)</li>
-        </ul>
-
-        <p>The keyboard is based on the 142 button Bandoneon ("Rheinische Tonlage")</p>
-
-        <p>More information about the Bandoneon on <a href="http://www.inorg.chem.ethz.ch/tango/band/bandoneon.html">Christian's Bandoneon Page</a>.</p>
-      </div>
-      <div class="modal-footer">
-        <a href="#" class="btn btn-primary" data-dismiss="modal">Close</a>
+    <!-- key selection -->
+    <div class="btn-toolbar" id="select-key">
+      <div class="btn-group btn-group-justified">
+        <a class="btn btn-default" href="#" data-key="b"> C♭</a>
+        <a class="btn btn-default" href="#" data-key="f#">G♭</a>
+        <a class="btn btn-default" href="#" data-key="c#">D♭</a>
+        <a class="btn btn-default" href="#" data-key="g#">A♭</a>
+        <a class="btn btn-default" href="#" data-key="d#">E♭</a>
+        <a class="btn btn-default" href="#" data-key="a#">B♭</a>
+        <a class="btn btn-default" href="#" data-key="f" >F </a>
+        <a class="btn btn-default" href="#" data-key="c" >C </a>
+        <a class="btn btn-default" href="#" data-key="g" >G </a>
+        <a class="btn btn-default" href="#" data-key="d" >D </a>
+        <a class="btn btn-default" href="#" data-key="a" >A </a>
+        <a class="btn btn-default" href="#" data-key="e" >E </a>
+        <a class="btn btn-default" href="#" data-key="b" >B </a>
+        <a class="btn btn-default" href="#" data-key="f#">F♯</a>
+        <a class="btn btn-default" href="#" data-key="c#">C♯</a>
       </div>
     </div>
-  </div>
-</div>
 
-<div class="modal fade" id="downloads">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h3>Downloads</h3>
+    <!-- octave color toggle -->
+    <div class="btn-group pull-right">
+      <button class="btn btn-default" id="toggle-octavecolors">button colors</button>
+    </div>
+
+    <!-- mode, quality, color -->
+    <div class="btn-toolbar">
+      <!-- mode selection -->
+      <div class="btn-group" id="select-mode">
+        <button class="btn btn-default" href="#" data-mode="major">major</button>
+        <button class="btn btn-default" href="#" data-mode="minor">minor</button>
+        <button class="btn btn-default" href="#" data-mode="chromatic">chromatic</button>
       </div>
-      <div class="modal-body">
-        <p>You can download 4 PDF versions of the AA keyboard:</p>
 
-        <ul>
-          <li><a href="/download/AA-142-Keyboard.pdf">AA 142 Keyboard</a></li>
-          <li><a href="/download/AA-142-Keyboard-Colors.pdf">AA 142 Keyboard with colored octaves</a></li>
-          <li><a href="/download/AA-142-Keyboard-C-major.pdf">AA 142 Keyboard with C major scale</a></li>
-          <li><a href="/download/AA-142-Keyboard-Chromatic.pdf">AA 142 Keyboard with chromatic scale</a></li>
-        </ul>
-
-        <p>And of course you can download and modify the whole website source from <a href="https://github.com/nicokaiser/bandoneon">GitHub</a>.</p>
-      </div>
-      <div class="modal-footer">
-        <a href="#" class="btn btn-primary" data-dismiss="modal">Close</a>
+      <!-- chord quality selection -->
+      <div class="btn-group" id="select-quality">
+        <button class="btn btn-default" href="#" data-quality="M">M</button>
+        <button class="btn btn-default" href="#" data-quality="m">m</button>
+        <button class="btn btn-default" href="#" data-quality="7">7</button>
+        <button class="btn btn-default" href="#" data-quality="dim">dim</button>
+        <button class="btn btn-default" href="#" data-quality="m7">m7</button>
+        <button class="btn btn-default" href="#" data-quality="M7">M7</button>
       </div>
     </div>
+
   </div>
 </div>

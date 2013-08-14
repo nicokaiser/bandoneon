@@ -1,0 +1,128 @@
+body {
+  font-weight: 300;
+  min-width: 800px;
+}
+
+h2 {
+  text-align: center;
+  font-weight: 300;
+}
+
+.container {
+  max-width: 800px;
+}
+
+
+/* Header
+-------------------------------------------------- */
+
+.jumbotron {
+  position: relative;
+  font-size: 18px;
+  text-align: center;
+  border-radius: 0;
+  /*
+  background: url(../img/bg.jpg);
+  background-attachment: fixed;
+  background-position: center 0;
+  background-repeat: no-repeat;
+  color: #222;
+  text-shadow: 0 0 20px rgba(255,255,255,.5);
+  */
+}
+
+.jumbotron h1 {
+  font-size: 54px;
+  margin-bottom: 15px;
+  font-weight: 300;
+  letter-spacing: -1px;
+}
+
+.jumbotron:after {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 10;
+  display: block;
+  content: "";
+  height: 30px;
+  background-image: -moz-linear-gradient(rgba(0, 0, 0, 0), rgba(0,0,0,.07));
+  background-image: -webkit-linear-gradient(rgba(0, 0, 0, 0), rgba(0,0,0,.07));
+}
+
+.jumbotron p a,
+.jumbotron-links a {
+  font-weight: 500;
+}
+
+.jumbotron-links {
+  margin-top: 15px;
+  margin-bottom: 0;
+  padding-left: 0;
+  list-style: none;
+  font-size: 14px;
+}
+.jumbotron-links li {
+  display: inline;
+}
+.jumbotron-links li + li {
+  margin-left: 20px;
+}
+
+
+/* Navigation
+-------------------------------------------------- */
+
+.nav-tabs li a {
+  font-weight: 500;
+}
+
+
+/* How to use
+-------------------------------------------------- */
+
+.how-to .container {
+  max-width: 600px;
+}
+
+.how-to h2 {
+  margin-bottom: 40px;
+}
+
+.how-to {
+  padding: 40px 20px;
+  border-top: 1px solid #eee;
+  font-size: 16px;
+  margin-top: 50px;
+}
+
+.how-to li {
+  margin-top: 20px;
+}
+
+
+/* Footer
+-------------------------------------------------- */
+
+.footer {
+  padding: 50px 30px;
+  color: #777;
+  text-align: center;
+  border-top: 1px solid #eee;
+}
+
+
+/* Keyboard
+-------------------------------------------------- */
+
+#the-keyboard {
+  width: 760px;
+  height: 440px;
+  margin: 20px auto;
+  text-align: center;
+}
+
+#select-key .btn-group {
+  margin-bottom: 20px;
+}

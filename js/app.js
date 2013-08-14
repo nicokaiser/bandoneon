@@ -106,7 +106,7 @@ $(function() {
     paper: null,
     showOctaveColors: false,
 
-    el: document.getElementById('container'),
+    el: document.getElementById('the-keyboard'),
 
     events: {
       'click #toggle-octavecolors': 'toggleOctaveColors'
@@ -115,7 +115,7 @@ $(function() {
     // Initialie Raphaël and listen to changes
     initialize: function() {
       var self = this;
-      this.paper = Raphael(this.el, 800, 450);
+      this.paper = Raphael(this.el, 760, 440);
       this.render();
       this.model.bind('change', this.render, this);
       this.model.bind('change', function() {
@@ -151,15 +151,17 @@ $(function() {
 
         var fill = (this.showOctaveColors ? octaveColors[octave % (octaveColors.length)] : 'white');
 
-        this.paper.circle(layout[k][0] + 30, layout[k][1] + 30, 30)
+        this.paper.circle(layout[k][0] + 10, layout[k][1] + 30, 30)
           .attr({
+            'stroke': '#222',
             'stroke-width': 2, /* (label[0] === 'c') ? 3 : 1 */
             'fill': fill,
             'fill-opacity': 0.5
           });
 
-        this.paper.text(layout[k][0] + 30, layout[k][1] + 30, labelDisplay)
+        this.paper.text(layout[k][0] + 10, layout[k][1] + 30, labelDisplay)
           .attr({
+            'fill': '#222',
             'font-family': 'serif',
             'font-size': 21,
             'font-style': 'italic',
@@ -177,7 +179,7 @@ $(function() {
       for (var t in scale) {
         if (layout.hasOwnProperty(scale[t])) {
           pathString += (pathString === '')?'M':'L';
-          pathString += layout[scale[t]][0] + 30;
+          pathString += layout[scale[t]][0] + 10;
           pathString += ',';
           pathString += layout[scale[t]][1] + 30;
         }
@@ -208,8 +210,9 @@ $(function() {
       for (var k in layout) {
         if (_.indexOf(chord, k) === -1) continue;
         var label = k;
-        this.paper.circle(layout[k][0] + 30, layout[k][1] + 30, 28)
+        this.paper.circle(layout[k][0] + 10, layout[k][1] + 30, 28)
           .attr({
+            'stroke': '#222',
             'stroke-width': 4,
             'fill': 'black',
             'fill-opacity': 0.33

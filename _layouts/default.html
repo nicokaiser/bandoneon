@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <title>Bandoneon</title>
@@ -17,51 +17,46 @@
   <script src="/js/app.js"></script>
 
   <link href="/css/bootstrap.min.css" rel="stylesheet">
-
-  <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
-
-
-  <style>
-
-    .page-header {
-      border-bottom: none;
-      margin-bottom: 10px;
-    }
-
-    .container-narrow {
-      margin: 0 auto;
-      width: 890px;
-    }
-
-    #container {
-      width: 800px;
-      height: 450px;
-      margin: 0 auto;
-      text-align: left;
-    }
-
-    footer {
-      padding-top: 30px;
-      padding-bottom: 30px;
-      margin-top: 40px;
-      text-align: center;
-      border-top: 1px solid #e5e5e5;
-    }
-
-    #select-key div.btn-group {
-      margin-bottom: 10px;
-    }
-
-  </style>
+  <link href="/css/bandoneon.css" rel="stylesheet">
 </head>
 
 <body>
 
-  <div class="container-narrow">
+  <div class="jumbotron">
+    <div class="container">
+      <h1>Bandoneón</h1>
+      <p>This website wants to help learning the Bandoneon keyboard.<br>
+        The layout is based on the 142 button version (“Rheinische Tonlage”).</p>
+      <ul class="jumbotron-links">
+        <li><a href="#downloads" data-toggle="modal">Downloads</a></li>
+        <li><a href="#help">Help</a></li>
+        <li><a href="mailto:nico@kaiser.me">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div id="main" class="container">
 
     {{ content }}
 
-    <footer>
+  </div><!-- /container -->
+
+  <div class="how-to" id="help">
+    <div class="container">
+      <h2>How to use</h2>
+      <p>To internalize the button location on the both manuals the button map can be displayed.</p>
+      <ul>
+        <li>The tabs above the keyboard switch the <strong>direction of the bellows</strong> (open/pull or close/push) and the <strong>side</strong> (left or right).</li>
+        <li>Select a <strong>key</strong> and a <strong>mode</strong> to display a scale</li>
+        <li>Select a <strong>key</strong> and a <strong>quality</strong> to display a chord (left side only!)</li>
+      </ul>
+      <p>The keyboard is based on the 142 button Bandoneon ("Rheinische Tonlage")</p>
+      <p>More information about the Bandoneon on <a href="http://www.inorg.chem.ethz.ch/tango/band/bandoneon.html">Christian's Bandoneon Page</a>.</p>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="container">
       <p>
         Copyright &copy; 2013 <a href="http://siriux.net/">Nico Kaiser</a>, MIT License.<br>
         Built with 
@@ -71,9 +66,34 @@
           <a href="http://twitter.github.com/bootstrap/">Bootstrap</a>.
         Available on <a href="https://github.com/nicokaiser/bandoneon">GitHub</a>.
       </p>
-    </footer>
+    </div>
+  </div>
 
-  </div> <!-- /container -->
+  <div class="modal fade" id="downloads">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">Downloads</h4>
+        </div>
+        <div class="modal-body">
+          <p>You can download 4 PDF versions of the AA keyboard:</p>
+
+          <div class="list-group">
+            <a class="list-group-item"href="/download/AA-142-Keyboard.pdf">AA 142 Keyboard</a>
+            <a class="list-group-item" href="/download/AA-142-Keyboard-Colors.pdf">AA 142 Keyboard with colored octaves</a>
+            <a class="list-group-item" href="/download/AA-142-Keyboard-C-major.pdf">AA 142 Keyboard with C major scale</a>
+            <a class="list-group-item" href="/download/AA-142-Keyboard-Chromatic.pdf">AA 142 Keyboard with chromatic scale</a>
+          </div>
+
+          <p>And of course you can download and modify the whole website source from <a href="https://github.com/nicokaiser/bandoneon">GitHub</a>.</p>
+        </div>
+        <div class="modal-footer">
+          <a href="#" class="btn btn-primary" data-dismiss="modal">Close</a>
+        </div>
+      </div>
+    </div>
+  </div>
 
 </body>
 </html>
