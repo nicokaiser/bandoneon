@@ -162,7 +162,7 @@ $(function() {
         this.paper.text(layout[k][0] + 10, layout[k][1] + 30, labelDisplay)
           .attr({
             'fill': '#222',
-            'font-family': 'serif',
+            'font-family': 'Georgia, serif',
             'font-size': 21,
             'font-style': 'italic',
             'cursor': 'default'
