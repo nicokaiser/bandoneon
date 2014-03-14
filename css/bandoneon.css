@@ -28,14 +28,6 @@ h2 {
   text-align: center;
   border-radius: 0;
   background-color: #eee;
-  /*
-  background: url(../img/bg.jpg);
-  background-attachment: fixed;
-  background-position: center 0;
-  background-repeat: no-repeat;
-  color: #222;
-  text-shadow: 0 0 20px rgba(255,255,255,.5);
-  */
 }
 
 .jumbotron h1 {
@@ -138,4 +130,11 @@ h2 {
 
 #select-key .btn-group {
   margin-bottom: 20px;
+}
+
+@media print {
+  .jumbotron,
+  .how-to,
+  .footer,
+  button { display: none; }
 }
