@@ -1,12 +1,12 @@
 requirejs.config({
-    baseUrl: 'js/lib',
+    baseUrl: 'js',
     paths: {
-        app: '../app',
-        backbone: 'backbone-min',
-        bootstrap: 'bootstrap',
-        jquery: 'jquery-2.0.3.min',
-        raphael: 'raphael-min',
-        underscore: 'underscore-min'
+        app: './app',
+        backbone: 'lib/backbone-min',
+        bootstrap: 'lib/bootstrap',
+        jquery: 'lib/jquery-2.0.3.min',
+        raphael: 'lib/raphael-min',
+        underscore: 'lib/underscore-min'
     },
     shim: {
         bootstrap: ['jquery'],
