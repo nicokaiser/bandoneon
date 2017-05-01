@@ -34,7 +34,7 @@ define([
         // Initialie Raphaël and listen to changes
         initialize: function () {
             var self = this;
-            this.paper = raphael(this.el, 760, 440);
+            this.paper = raphael(this.el, 690, 440);
             this.render();
             this.model.bind('change', this.render, this);
             this.model.bind('change', function () {
@@ -72,7 +72,7 @@ define([
 
                 fill = (this.showOctaveColors ? octaveColors[octave % (octaveColors.length)] : 'white');
 
-                this.paper.circle(currentLayout[k][0] + 10, currentLayout[k][1] + 30, 30)
+                this.paper.circle(currentLayout[k][0] + 10, currentLayout[k][1] + 28, 28)
                     .attr({
                         'stroke': '#222',
                         'stroke-width': 2,
@@ -80,7 +80,7 @@ define([
                         'fill-opacity': 0.5
                     });
 
-                this.paper.text(currentLayout[k][0] + 10, currentLayout[k][1] + 30, labelDisplay)
+                this.paper.text(currentLayout[k][0] + 10, currentLayout[k][1] + 28, labelDisplay)
                     .attr({
                         'fill': '#222',
                         'font-family': 'Georgia, serif',

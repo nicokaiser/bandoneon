@@ -1,6 +1,6 @@
 body {
   font-weight: 300;
-  min-width: 800px;
+  min-width: 750px;
 }
 
 h2 {
@@ -9,7 +9,7 @@ h2 {
 }
 
 .container {
-  max-width: 800px;
+  max-width: 750px;
 }
 
 .container .row {
@@ -22,9 +22,7 @@ h2 {
 -------------------------------------------------- */
 
 .jumbotron {
-  padding: 50px 60px;
   position: relative;
-  font-size: 18px;
   text-align: center;
   border-radius: 0;
   background-color: #eee;
@@ -32,7 +30,6 @@ h2 {
 
 .jumbotron h1 {
   font-size: 54px;
-  margin-bottom: 15px;
   font-weight: 300;
   letter-spacing: -1px;
 }
@@ -122,9 +119,9 @@ h2 {
 -------------------------------------------------- */
 
 #the-keyboard {
-  width: 760px;
+  width: 690px;
   height: 440px;
-  margin: 20px auto;
+  margin: 20px 0;
   text-align: center;
 }
 
