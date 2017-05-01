@@ -3,6 +3,13 @@
 
 A little JavaScript application that wants to help learning the Alfred Arnold 142 bandoneon.
 
+Building
+--------
+
+```
+node tools/r.js -o tools/build.js
+```
+
 
 Author
 ------
