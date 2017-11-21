@@ -1,38 +1,21 @@
-// Configure URL routes for scale selection
-
 import Backbone from 'backbone';
 
 import model from './model';
 
 var AppRouter = Backbone.Router.extend({
     routes: {
-        '!/:side/:direction/scale/:key/:mode': 'selectScale',
-        '!/:side/:direction/chord/:key/:quality': 'selectChord',
-        '!/:side/:direction': 'selectLayout'
+        '!/:variant/scale/:tonic/:name': 'selectScale',
+        '!/:variant/chord/:tonic/:name': 'selectChord',
+        '!/:variant': 'selectLayout'
     },
-    selectLayout: function (side, direction) {
-        model.set({
-            'side': side,
-            'direction': direction
-        });
+    selectLayout: (variant) => {
+        model.set({ variant })
     },
-    selectScale: function (side, direction, key, mode) {
-        model.set({
-            'side': side,
-            'direction': direction,
-            'key': key,
-            'mode': mode,
-            'quality': null
-        });
+    selectScale: (variant, tonic, name) => {
+        model.set({ variant, tonic, name, mode: 'scale' })
     },
-    selectChord: function (side, direction, key, quality) {
-        model.set({
-            'side': side,
-            'direction': direction,
-            'key': key,
-            'mode': null,
-            'quality': quality
-        });
+    selectChord: (variant, tonic, name) => {
+        model.set({ variant, tonic, name, mode: 'chord' })
     }
 });
 export default new AppRouter();

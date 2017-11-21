@@ -1,26 +1,22 @@
-// Renders the keyboard to our container DIV via Raphaël.
-
 import $ from 'jquery';
 import bootstrap from 'bootstrap';
 import _ from 'lodash';
 import Backbone from 'backbone';
 import raphael from 'raphael';
+import { transpose, scale } from 'tonal';
+
+import Instrument from './instruments/bandoneon-aa142';
 
 import appModel from './model';
 import appRouter from './router';
-import { buildScale } from './utils';
-import layout from './layout';
-import chords from './chords';
-
-var scaleColors, octaveColors, AppView;
 
 // Color codes for coloring the scale lines
-scaleColors = ['orange', 'blue', 'red', 'green', 'orange', 'blue'];
+const scaleColors = ['orange', 'blue', 'red', 'green', 'orange', 'blue'];
 
 // Color codes for coloring the octaves
-octaveColors = ['#71a8d7', '#e37e7b', '#85ca85', '#e6cb84'];
+const octaveColors = ['#71a8d7', '#e37e7b', '#85ca85', '#e6cb84'];
 
-AppView = Backbone.View.extend({
+const AppView = Backbone.View.extend({
     paper: null,
     showOctaveColors: false,
 
@@ -32,34 +28,43 @@ AppView = Backbone.View.extend({
 
     // Initialie Raphaël and listen to changes
     initialize: function () {
+        this.instrument = Instrument;
+
         var self = this;
         this.paper = raphael(this.el, 690, 440);
         this.render();
         this.model.bind('change', this.render, this);
         this.model.bind('change', function () {
-            _.each(['mode', 'quality'], function (e) {
-                $('#select-' + e + ' button').removeClass('btn-primary');
-                $('#select-' + e + ' button[data-' + e + '="' + self.model.get(e) + '"]').addClass('btn-primary');
-            });
-            $('#select-key a').removeClass('btn-primary');
-            $('#select-key a[data-key="' + self.model.get('key') + '"]').addClass('btn-primary');
+            $('#select-scalename button').removeClass('btn-primary');
+            $('#select-chordname button').removeClass('btn-primary');
+
+            switch (self.model.get('mode')) {
+            case 'chord':
+                $('#select-chordname button[data-chordname="' + self.model.get('name') + '"]').addClass('btn-primary');
+                break;
+            case 'scale':
+                $('#select-scalename button[data-scalename="' + self.model.get('name') + '"]').addClass('btn-primary');
+                break;
+            default:
+            }
+
+            $('#select-tonic a').removeClass('btn-primary');
+            $('#select-tonic a[data-tonic="' + self.model.get('tonic') + '"]').addClass('btn-primary');
         });
     },
 
     // Render button layout (with colored octaves)
-    renderButtons: function (side, direction) {
-        var currentLayout, k, label, key, labelDisplay, octave, fill;
+    renderButtons: function (variant) {
+        const positions = this.instrument.positions(variant);
 
-        currentLayout = layout[side][direction];
-
-        for (k in currentLayout) {
-            label = k;
-            key = label[0];
-            labelDisplay = label[0];
-            octave = +label[1];
+        Object.keys(positions).forEach((k) => {
+            const label = k;
+            let note = label[0];
+            let labelDisplay = label[0].toLowerCase();
+            let octave = +label[1];
             if (label[1] === '#') {
                 octave = +label[2];
-                key += label[1];
+                note += label[1];
             }
             if (octave === 0) labelDisplay = label[0].toUpperCase();
             if (label[1] === '#') labelDisplay += '♯';
@@ -69,9 +74,9 @@ AppView = Backbone.View.extend({
             else if (octave === 3) labelDisplay += '’’';
             else if (octave === 4) labelDisplay += '’’’';
 
-            fill = (this.showOctaveColors ? octaveColors[octave % (octaveColors.length)] : 'white');
-
-            this.paper.circle(currentLayout[k][0] + 10, currentLayout[k][1] + 28, 28)
+            const fill = (this.showOctaveColors ? octaveColors[octave % (octaveColors.length)] : 'white');
+            
+            this.paper.circle(positions[k][0] + 10, positions[k][1] + 28, 28)
                 .attr({
                     'stroke': '#222',
                     'stroke-width': 2,
@@ -79,7 +84,7 @@ AppView = Backbone.View.extend({
                     'fill-opacity': 0.5
                 });
 
-            this.paper.text(currentLayout[k][0] + 10, currentLayout[k][1] + 28, labelDisplay)
+            this.paper.text(positions[k][0] + 10, positions[k][1] + 28, labelDisplay)
                 .attr({
                     'fill': '#222',
                     'font-family': 'Georgia, serif',
@@ -87,25 +92,22 @@ AppView = Backbone.View.extend({
                     'font-style': 'italic',
                     'cursor': 'default'
                 });
-        }
+        });
     },
 
     // Render a specific scale
-    renderScale: function (side, direction, scale, color) {
-        var currentLayout, pathString, t;
+    renderScale: function (variant, notes, color) {
+        const positions = this.instrument.positions(variant);
 
-        currentLayout = layout[side][direction];
-        if (!currentLayout) return;
-
-        pathString = '';
-        for (t in scale) {
-            if (currentLayout.hasOwnProperty(scale[t])) {
+        let pathString = '';
+        notes.forEach((note) => {
+            if (positions.hasOwnProperty(note)) {
                 pathString += (pathString === '') ? 'M' : 'L';
-                pathString += currentLayout[scale[t]][0] + 10;
+                pathString += positions[note][0] + 10;
                 pathString += ',';
-                pathString += currentLayout[scale[t]][1] + 30;
+                pathString += positions[note][1] + 30;
             }
-        }
+        });
 
         if (pathString === '') return;
 
@@ -120,69 +122,62 @@ AppView = Backbone.View.extend({
     },
 
     // Render a chord (left side only)
-    renderChord: function (side, direction, key, quality) {
-        if (! chords[side][direction][quality]) return;
-
-        var chord, currentLayout, k, label;
-
-        chord = chords[side][direction][quality][key];
+    renderChord: function (variant, tonic, name) {
+        const chords = this.instrument.chords(variant);
+        const chord = chords[tonic + name];
         if (!chord) return;
-        
-        currentLayout = layout[side][direction];
-        if (!currentLayout) return;
 
-        for (k in currentLayout) {
-            if (_.indexOf(chord, k) === -1) continue;
-            label = k;
-            this.paper.circle(currentLayout[k][0] + 10, currentLayout[k][1] + 30, 28)
-                .attr({
-                    'stroke': '#222',
-                    'stroke-width': 4,
-                    'fill': 'black',
-                    'fill-opacity': 0.33
-                });
-        }
+        const positions = this.instrument.positions(variant);
+
+        Object.keys(positions).forEach((k) => {
+            if (!chord.includes(k)) return;
+
+            this.paper.circle(positions[k][0] + 10, positions[k][1] + 30, 28)
+            .attr({
+                'stroke': '#222',
+                'stroke-width': 4,
+                'fill': 'black',
+                'fill-opacity': 0.33
+            });
+        });
     },
 
     // Render the whole layout with buttons, octaves and scale
     render: function () {
-        var side, direction, key, mode, quality, o, scale;
-
-        side = this.model.get('side');
-        direction = this.model.get('direction');
-
-        if (!side || !direction) return;
+        const variant = this.model.get('variant');
 
         this.paper.clear();
-        this.renderButtons(side, direction);
+        this.renderButtons(variant);
 
-        $('#nav-sides a[href="#' + side + '-' + direction + '"]').tab('show');
+        $('#nav-sides a[href="#' + variant + '"]').tab('show');
 
-        key = this.model.get('key');
-        mode = this.model.get('mode');
-        quality = this.model.get('quality');
+        const mode = this.model.get('mode');
+        const tonic = this.model.get('tonic');
+        const name = this.model.get('name');
 
-        if (!key || (!mode && !quality)) {
-            // render keyboard only
-            appRouter.navigate('!/' + side + '/' + direction, {replace: true});
-            return;
-        }
-
-        if (mode) {
+        switch (this.model.get('mode')) {
+        case 'scale':
             // render scale
-            for (o = -1; o < 5; o++) {
-                scale = buildScale(key, o, mode);
-                scale.push(key + '' + (o + 1));
-                this.renderScale(side, direction, scale, scaleColors[o + 1]);
+            for (let o = -1; o < 5; o++) {
+                const intervals = scale(name);
+                if (!intervals) return;
+                const notes = intervals.map(transpose(`${tonic}${o}`));
+                notes.push(`${tonic}${o + 1}}`);
+                this.renderScale(variant, notes, scaleColors[o + 1]);
             }
 
-            appRouter.navigate('!/' + side + '/' + direction + '/scale/' +
-                key + '/' + mode, {replace: true});
-        } else if (quality) {
+            appRouter.navigate(`!/${encodeURIComponent(variant)}/scale/${encodeURIComponent(tonic)}/${encodeURIComponent(name)}`, { replace: true });
+            break;
+        case 'chord':
             // render chord
-            this.renderChord(side, direction, key, quality);
-            appRouter.navigate('!/' + side + '/' + direction + '/chord/' +
-                key + '/' + quality, {replace: true});
+            this.renderChord(variant, tonic, name);
+
+            appRouter.navigate(`!/${encodeURIComponent(variant)}/chord/${encodeURIComponent(tonic)}/${encodeURIComponent(name)}`, { replace: true });
+            break;
+        default:
+            // render keyboard only
+            appRouter.navigate('!/' + variant, {replace: true});
+            return;
         }
 
         return this;

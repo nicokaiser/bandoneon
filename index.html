@@ -6,6 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="A little JavaScript application that wants to help learning the Alfred Arnold 142 bandoneon.">
   <meta name="author" content="Nico Kaiser">
+
+  <script type="text/javascript" charset="utf-8" src="dist/bundle.js"></script>
 </head>
 
 <body>
@@ -23,7 +25,6 @@
   <div id="main" class="container">
     <div class="row">
       <div class="col-xs-12">
-        <!-- navigation bar -->
         <ul id="nav-sides" class="nav nav-tabs nav-justified">
           <li><a href="#left-open" data-toggle="tab" title="Left hand opening">Left open</a></li>
           <li><a href="#left-close" data-toggle="tab" title="Left hand closing">Left close</a></li>
@@ -31,52 +32,46 @@
           <li><a href="#right-close" data-toggle="tab" title="Right hand closing">Right close</a></li>
         </ul>
 
-        <!-- main container -->
         <div id="the-keyboard"></div>
 
-        <!-- key selection -->
-        <div class="btn-toolbar" id="select-key">
+        <div class="btn-toolbar" id="select-tonic">
           <div class="btn-group btn-group-justified">
-            <a class="btn btn-default" href="#" data-key="b"> C♭</a>
-            <a class="btn btn-default" href="#" data-key="f#">G♭</a>
-            <a class="btn btn-default" href="#" data-key="c#">D♭</a>
-            <a class="btn btn-default" href="#" data-key="g#">A♭</a>
-            <a class="btn btn-default" href="#" data-key="d#">E♭</a>
-            <a class="btn btn-default" href="#" data-key="a#">B♭</a>
-            <a class="btn btn-default" href="#" data-key="f" >F </a>
-            <a class="btn btn-default" href="#" data-key="c" >C </a>
-            <a class="btn btn-default" href="#" data-key="g" >G </a>
-            <a class="btn btn-default" href="#" data-key="d" >D </a>
-            <a class="btn btn-default" href="#" data-key="a" >A </a>
-            <a class="btn btn-default" href="#" data-key="e" >E </a>
-            <a class="btn btn-default" href="#" data-key="b" >B </a>
-            <a class="btn btn-default" href="#" data-key="f#">F♯</a>
-            <a class="btn btn-default" href="#" data-key="c#">C♯</a>
+            <a class="btn btn-default" href="#" data-tonic="B"> C♭</a>
+            <a class="btn btn-default" href="#" data-tonic="F#">G♭</a>
+            <a class="btn btn-default" href="#" data-tonic="C#">D♭</a>
+            <a class="btn btn-default" href="#" data-tonic="G#">A♭</a>
+            <a class="btn btn-default" href="#" data-tonic="D#">E♭</a>
+            <a class="btn btn-default" href="#" data-tonic="A#">B♭</a>
+            <a class="btn btn-default" href="#" data-tonic="F" >F </a>
+            <a class="btn btn-default" href="#" data-tonic="C" >C </a>
+            <a class="btn btn-default" href="#" data-tonic="G" >G </a>
+            <a class="btn btn-default" href="#" data-tonic="D" >D </a>
+            <a class="btn btn-default" href="#" data-tonic="A" >A </a>
+            <a class="btn btn-default" href="#" data-tonic="E" >E </a>
+            <a class="btn btn-default" href="#" data-tonic="B" >B </a>
+            <a class="btn btn-default" href="#" data-tonic="F#">F♯</a>
+            <a class="btn btn-default" href="#" data-tonic="C#">C♯</a>
           </div>
         </div>
 
-        <!-- octave color toggle -->
         <div class="btn-group pull-right">
           <button class="btn btn-default" id="toggle-octavecolors">button colors</button>
         </div>
 
-        <!-- mode, quality, color -->
         <div class="btn-toolbar">
-          <!-- mode selection -->
-          <div class="btn-group" id="select-mode">
-            <button class="btn btn-default" href="#" data-mode="major">major</button>
-            <button class="btn btn-default" href="#" data-mode="minor">minor</button>
-            <button class="btn btn-default" href="#" data-mode="chromatic">chromatic</button>
+          <div class="btn-group" id="select-scalename">
+            <button class="btn btn-default" href="#" data-scalename="major">major</button>
+            <button class="btn btn-default" href="#" data-scalename="minor">minor</button>
+            <button class="btn btn-default" href="#" data-scalename="chromatic">chromatic</button>
           </div>
 
-          <!-- chord quality selection -->
-          <div class="btn-group" id="select-quality">
-            <button class="btn btn-default" href="#" data-quality="M">M</button>
-            <button class="btn btn-default" href="#" data-quality="m">m</button>
-            <button class="btn btn-default" href="#" data-quality="7">7</button>
-            <button class="btn btn-default" href="#" data-quality="dim">dim</button>
-            <button class="btn btn-default" href="#" data-quality="m7">m7</button>
-            <button class="btn btn-default" href="#" data-quality="M7">M7</button>
+          <div class="btn-group" id="select-chordname">
+            <button class="btn btn-default" href="#" data-chordname="M">M</button>
+            <button class="btn btn-default" href="#" data-chordname="m">m</button>
+            <button class="btn btn-default" href="#" data-chordname="7">7</button>
+            <button class="btn btn-default" href="#" data-chordname="dim">dim</button>
+            <button class="btn btn-default" href="#" data-chordname="m7">m7</button>
+            <button class="btn btn-default" href="#" data-chordname="M7">M7</button>
           </div>
         </div>
       </div>
@@ -91,8 +86,8 @@
       <p>To internalize the button location on the both manuals the button map can be displayed.</p>
       <ul>
         <li>The tabs above the keyboard switch the <strong>direction of the bellows</strong> (open/pull or close/push) and the <strong>side</strong> (left or right).</li>
-        <li>Select a <strong>key</strong> and a <strong>mode</strong> to display a scale — e.g. <a href="/#!/right/open/scale/c/major">C Major</a>.</li>
-        <li>Select a <strong>key</strong> and a <strong>quality</strong> to display a chord — e.g. <a href="/#!/left/open/chord/e/m7">E m7</a>.</li>
+        <li>Select a <strong>key</strong> and a <strong>mode</strong> to display a scale — e.g. <a href="/#!/right-open/scale/C/major">C Major</a>.</li>
+        <li>Select a <strong>key</strong> and a <strong>quality</strong> to display a chord — e.g. <a href="/#!/left-open/chord/E/m7">E m7</a>.</li>
         <li>Keyboard shortcuts: <code>l</code>, <code>L</code>, <code>r</code>, <code>R</code> select the side and direction; 
           <code>M</code>, <code>m</code>, <code>7</code> select Major, Minor and Septime chord;
           <code>c</code>, <code>d</code>, <code>e</code>, <code>f</code>, <code>g</code>, <code>a</code>, <code>b</code> select the key; add <code>#</code> to select sharp key; <code>C</code> toggles button colors.
@@ -142,7 +137,5 @@
       </div>
     </div>
   </div>
-
-  <script type="text/javascript" charset="utf-8" src="dist/bundle.js"></script>
 </body>
 </html>

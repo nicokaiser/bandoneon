@@ -11,93 +11,75 @@ import appModel from './model';
 Backbone.history.start();
 
 $(function() {
-    // don't submit the form
-    $('#scale-form').submit(function () {
-        return false;
-    });
-
     // octave color toggle
     $('#toggle-octavecolors').click(function () {
         appView.toggleOctaveColors();
         $('#toggle-octavecolors').button('toggle');
     });
 
+    $('#scale-form').submit(function () {
+        return false;
+    });
+
     // key selection
-    function selectKey(key, force) {
-        if (!force && appModel.get('key') === key) {
-            // unset key
-            appModel.set('key', null);
+    function selectTonic(tonic, force) {
+        if (!force && appModel.get('tonic') === tonic) {
+            appModel.set({ tonic: null, mode: null, name: null });
         } else {
-            appModel.set('key', key);
-            if (!appModel.get('mode') && !appModel.get('quality')) {
-                // set default mode if none is set yet
-                appModel.set('mode', 'M');
-            }
+            appModel.set('tonic', tonic);
+            if (!appModel.get('name')) appModel.set('name', 'M');
+            if (!appModel.get('mode')) appModel.set('mode', 'chord');
             //$(this).addClass('btn-primary');
         }
     }
 
-    $('#select-key a').click(function (e) {
+    $('#select-tonic a').click(function (e) {
         e.preventDefault();
-        selectKey($(this).data('key'));
+        selectTonic($(this).data('tonic'));
     });
 
     // mode selection
-    function selectMode(mode, force) {
-        if (!force && appModel.get('mode') === mode) {
-            // unset mode
-            appModel.set('mode', null);
-        } else {
-            appModel.set('mode', mode);
-            if (! appModel.get('key')) {
-                // set default key if none is set yet
-                appModel.set('key', 'c');
-            }
-        }
-        // unset quality
-        appModel.set('quality', null);
+    function selectScaleName(name) {
+        appModel.set({
+            tonic: appModel.get('tonic') || 'C',
+            name,
+            mode: 'scale'
+        });
     }
 
-    $('#select-mode button').click(function (e) {
+    $('#select-scalename button').click(function (e) {
         e.preventDefault();
-        selectMode($(this).data('mode'));
+        selectScaleName($(this).data('scalename'));
     });
 
     // chord quality selection
-    function selectQuality(quality, force) {
-        if (!force && appModel.get('quality') === quality) {
-            // unset quality
-            appModel.set('quality', null);
-        } else {
-            appModel.set('quality', quality);
-            if (! appModel.get('key')) {
-                // set default key if none is set yet
-                appModel.set('key', 'c');
-            }
-        }
-        // unset mode
-        appModel.set('mode', null);
+    function selectChordName(name) {
+        appModel.set({
+            tonic: appModel.get('tonic') || 'C',
+            name,
+            mode: 'chord'
+        });
     }
 
-    $('#select-quality button').click(function (e) {
+    $('#select-chordname button').click(function (e) {
         e.preventDefault();
-        selectQuality($(this).data('quality'));
+        selectChordName($(this).data('chordname'));
     });
 
     // side / direction navigation
     $('#nav-sides a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
         switch (e.target.hash) {
         case '#left-open':
-            appModel.set({ 'side': 'left', 'direction': 'open' });
+            appModel.set({ variant: 'left-open' });
             break;
         case '#left-close':
-            appModel.set({ 'side': 'left', 'direction': 'close' });
+        appModel.set({ variant: 'left-close' });
             break;
         case '#right-open':
-            appModel.set({ 'side': 'right', 'direction': 'open' });
+            appModel.set({ variant: 'right-open' });
             break;
         case '#right-close':
-            appModel.set({ 'side': 'right', 'direction': 'close' });
+            appModel.set({ variant: 'right-close' });
             break;
         }
     });
@@ -106,21 +88,21 @@ $(function() {
     $('body').keypress(function (e) {
         switch (e.keyCode) {
         case 114: // r
-            appModel.set({ 'side': 'right', 'direction': 'open' });
+            appModel.set({ variant: 'right-open' });
             break;
         case 82: // R
-            appModel.set({ 'side': 'right', 'direction': 'close' });
+            appModel.set({ variant: 'right-close' });
             break;
         case 108: // l
-            appModel.set({ 'side': 'left', 'direction': 'open' });
+            appModel.set({ variant: 'left-open' });
             break;
         case 76: // L
-            appModel.set({ 'side': 'left', 'direction': 'close' });
+            appModel.set({ variant: 'left-close' });
             break;
         case 35: // #
-            var key = appModel.get('key');
-            if (key && (key.length === 1)) {
-                appModel.set('key', key + '#');
+            const tonic = appModel.get('tonic');
+            if (tonic && (tonic.length === 1)) {
+                appModel.set('tonic', tonic + '#');
             }
             break;
         case 67: // C
@@ -128,13 +110,13 @@ $(function() {
             $('#toggle-octavecolors').button('toggle');
             break;
         case 77: // M
-            selectQuality('M', true);
+            selectChordName('M');
             break;
         case 109: // m
-            selectQuality('m', true);
+            selectChordName('m');
             break;
         case 55: // 7
-            selectQuality('7', true);
+            selectChordName('7');
             break;
         case 97:
         case 98:
@@ -143,7 +125,7 @@ $(function() {
         case 101:
         case 102:
         case 103:
-            appModel.set('key', String.fromCharCode(e.keyCode));
+            appModel.set('tonic', String.fromCharCode(e.keyCode - 32));
             break;
         }
     });
