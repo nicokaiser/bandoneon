@@ -1,6 +1,4 @@
-// Chords
-
-var chords = {};
+const chords = {};
 
 // right
 chords['right'] = {};
@@ -241,4 +239,4 @@ chords['left']['close'] = {
     }
 };
 
-define(chords);
+export default chords;

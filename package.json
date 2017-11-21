@@ -1,0 +1,34 @@
+{
+  "name": "bandoneon",
+  "version": "0.0.1",
+  "description": "A little JavaScript application that wants to help learning the Alfred Arnold 142 bandoneon.",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack-dev-server -d --colors"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nicokaiser/bandoneon.git"
+  },
+  "author": "Nico Kaiser",
+  "license": "MIT",
+  "homepage": "https://bandoneon.kaiser.me",
+  "dependencies": {
+    "backbone": "^1.3.3",
+    "bootstrap": "^3.3.7",
+    "jquery": "^3.2.1",
+    "lodash": "^4.17.4",
+    "raphael": "^2.2.7",
+    "webpack": "^3.8.1",
+    "webpack-dev-server": "^2.9.4"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
+    "babel-regenerator-runtime": "^6.5.0",
+    "css-loader": "^0.28.7",
+    "file-loader": "^1.1.5",
+    "style-loader": "^0.17.0"
+  }
+}

@@ -1,14 +1,16 @@
-require([
-    'backbone',
-    'bootstrap',
-    'jquery',
-    'app/view',
-    'app/model'
-], function (Backbone, bootstrap, $, appView, appModel) {
-    'use strict';
+import Backbone from 'backbone';
+import bootstrap from 'bootstrap';
+import $ from 'jquery';
 
-    Backbone.history.start();
+import 'bootstrap/dist/css/bootstrap.css';
+import 'css/bandoneon.css';
 
+import appView from './view';
+import appModel from './model';
+
+Backbone.history.start();
+
+$(function() {
     // don't submit the form
     $('#scale-form').submit(function () {
         return false;
