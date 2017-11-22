@@ -1,21 +1,21 @@
 import Backbone from 'backbone';
 
-import model from './model';
-
-var AppRouter = Backbone.Router.extend({
+export default Backbone.Router.extend({
+    initialize: function (options) {
+        this.model = options.model;
+    },
     routes: {
         '!/:variant/scale/:tonic/:name': 'selectScale',
         '!/:variant/chord/:tonic/:name': 'selectChord',
         '!/:variant': 'selectLayout'
     },
-    selectLayout: (variant) => {
-        model.set({ variant })
+    selectLayout: function (variant) {
+        this.model.set({ variant })
     },
-    selectScale: (variant, tonic, name) => {
-        model.set({ variant, tonic, name, mode: 'scale' })
+    selectScale: function (variant, tonic, name) {
+        this.model.set({ variant, tonic, name, mode: 'scale' })
     },
-    selectChord: (variant, tonic, name) => {
-        model.set({ variant, tonic, name, mode: 'chord' })
+    selectChord: function (variant, tonic, name) {
+        this.model.set({ variant, tonic, name, mode: 'chord' })
     }
 });
-export default new AppRouter();

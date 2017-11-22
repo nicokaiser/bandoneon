@@ -1,14 +1,8 @@
 import $ from 'jquery';
 import bootstrap from 'bootstrap';
-import _ from 'lodash';
 import Backbone from 'backbone';
 import raphael from 'raphael';
 import { transpose, scale } from 'tonal';
-
-import Instrument from './instruments/bandoneon-aa142';
-
-import appModel from './model';
-import appRouter from './router';
 
 // Color codes for coloring the scale lines
 const scaleColors = ['orange', 'blue', 'red', 'green', 'orange', 'blue'];
@@ -16,40 +10,40 @@ const scaleColors = ['orange', 'blue', 'red', 'green', 'orange', 'blue'];
 // Color codes for coloring the octaves
 const octaveColors = ['#71a8d7', '#e37e7b', '#85ca85', '#e6cb84'];
 
-const AppView = Backbone.View.extend({
+export default Backbone.View.extend({
     paper: null,
     showOctaveColors: false,
-
-    el: $('#the-keyboard')[0],
 
     events: {
         'click #toggle-octavecolors': 'toggleOctaveColors'
     },
 
-    // Initialie Raphaël and listen to changes
-    initialize: function () {
-        this.instrument = Instrument;
+    // Initialize Raphaël and listen to changes
+    initialize: function (options) {
+        this.router = options.router;
 
-        var self = this;
+        this.instrument = this.model.get('instrument');
+
+        this.el = $('#the-keyboard')[0];
         this.paper = raphael(this.el, 690, 440);
         this.render();
         this.model.bind('change', this.render, this);
-        this.model.bind('change', function () {
+        this.model.bind('change', () => {
             $('#select-scalename button').removeClass('btn-primary');
             $('#select-chordname button').removeClass('btn-primary');
 
-            switch (self.model.get('mode')) {
+            switch (this.model.get('mode')) {
             case 'chord':
-                $('#select-chordname button[data-chordname="' + self.model.get('name') + '"]').addClass('btn-primary');
+                $('#select-chordname button[data-chordname="' + this.model.get('name') + '"]').addClass('btn-primary');
                 break;
             case 'scale':
-                $('#select-scalename button[data-scalename="' + self.model.get('name') + '"]').addClass('btn-primary');
+                $('#select-scalename button[data-scalename="' + this.model.get('name') + '"]').addClass('btn-primary');
                 break;
             default:
             }
 
             $('#select-tonic a').removeClass('btn-primary');
-            $('#select-tonic a[data-tonic="' + self.model.get('tonic') + '"]').addClass('btn-primary');
+            $('#select-tonic a[data-tonic="' + this.model.get('tonic') + '"]').addClass('btn-primary');
         });
     },
 
@@ -155,7 +149,7 @@ const AppView = Backbone.View.extend({
         const tonic = this.model.get('tonic');
         const name = this.model.get('name');
 
-        switch (this.model.get('mode')) {
+        switch (mode) {
         case 'scale':
             // render scale
             for (let o = -1; o < 5; o++) {
@@ -166,17 +160,17 @@ const AppView = Backbone.View.extend({
                 this.renderScale(variant, notes, scaleColors[o + 1]);
             }
 
-            appRouter.navigate(`!/${encodeURIComponent(variant)}/scale/${encodeURIComponent(tonic)}/${encodeURIComponent(name)}`, { replace: true });
+            this.router.navigate(`!/${encodeURIComponent(variant)}/scale/${encodeURIComponent(tonic)}/${encodeURIComponent(name)}`, { replace: true });
             break;
         case 'chord':
             // render chord
             this.renderChord(variant, tonic, name);
 
-            appRouter.navigate(`!/${encodeURIComponent(variant)}/chord/${encodeURIComponent(tonic)}/${encodeURIComponent(name)}`, { replace: true });
+            this.router.navigate(`!/${encodeURIComponent(variant)}/chord/${encodeURIComponent(tonic)}/${encodeURIComponent(name)}`, { replace: true });
             break;
         default:
             // render keyboard only
-            appRouter.navigate('!/' + variant, {replace: true});
+            this.router.navigate('!/' + variant, {replace: true});
             return;
         }
 
@@ -189,5 +183,3 @@ const AppView = Backbone.View.extend({
         this.render();
     }
 });
-
-export default new AppView({ model: appModel, router: appRouter });

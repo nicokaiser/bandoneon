@@ -5,15 +5,20 @@ import $ from 'jquery';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'css/bandoneon.css';
 
-import appView from './view';
-import appModel from './model';
-
-Backbone.history.start();
+import Model from './model';
+import Router from './router';
+import View from './view';
 
 $(function() {
+    const model = new Model();
+    const router = new Router({ model });
+    const view = new View({ model, router });
+
+    Backbone.history.start();
+
     // octave color toggle
     $('#toggle-octavecolors').click(function () {
-        appView.toggleOctaveColors();
+        view.toggleOctaveColors();
         $('#toggle-octavecolors').button('toggle');
     });
 
@@ -23,13 +28,14 @@ $(function() {
 
     // key selection
     function selectTonic(tonic, force) {
-        if (!force && appModel.get('tonic') === tonic) {
-            appModel.set({ tonic: null, mode: null, name: null });
+        if (!force && model.get('tonic') === tonic) {
+            model.set({ tonic: null, mode: null, name: null });
         } else {
-            appModel.set('tonic', tonic);
-            if (!appModel.get('name')) appModel.set('name', 'M');
-            if (!appModel.get('mode')) appModel.set('mode', 'chord');
-            //$(this).addClass('btn-primary');
+            model.set({
+                tonic,
+                name: model.get('name') || 'M',
+                mode: model.get('mode') || 'chord'
+            });
         }
     }
 
@@ -40,8 +46,8 @@ $(function() {
 
     // mode selection
     function selectScaleName(name) {
-        appModel.set({
-            tonic: appModel.get('tonic') || 'C',
+        model.set({
+            tonic: model.get('tonic') || 'C',
             name,
             mode: 'scale'
         });
@@ -54,8 +60,8 @@ $(function() {
 
     // chord quality selection
     function selectChordName(name) {
-        appModel.set({
-            tonic: appModel.get('tonic') || 'C',
+        model.set({
+            tonic: model.get('tonic') || 'C',
             name,
             mode: 'chord'
         });
@@ -70,16 +76,16 @@ $(function() {
     $('#nav-sides a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
         switch (e.target.hash) {
         case '#left-open':
-            appModel.set({ variant: 'left-open' });
+            model.set({ variant: 'left-open' });
             break;
         case '#left-close':
-        appModel.set({ variant: 'left-close' });
+            model.set({ variant: 'left-close' });
             break;
         case '#right-open':
-            appModel.set({ variant: 'right-open' });
+            model.set({ variant: 'right-open' });
             break;
         case '#right-close':
-            appModel.set({ variant: 'right-close' });
+            model.set({ variant: 'right-close' });
             break;
         }
     });
@@ -88,25 +94,25 @@ $(function() {
     $('body').keypress(function (e) {
         switch (e.keyCode) {
         case 114: // r
-            appModel.set({ variant: 'right-open' });
+            model.set({ variant: 'right-open' });
             break;
         case 82: // R
-            appModel.set({ variant: 'right-close' });
+            model.set({ variant: 'right-close' });
             break;
         case 108: // l
-            appModel.set({ variant: 'left-open' });
+            model.set({ variant: 'left-open' });
             break;
         case 76: // L
-            appModel.set({ variant: 'left-close' });
+            model.set({ variant: 'left-close' });
             break;
         case 35: // #
-            const tonic = appModel.get('tonic');
+            const tonic = model.get('tonic');
             if (tonic && (tonic.length === 1)) {
-                appModel.set('tonic', tonic + '#');
+                model.set('tonic', tonic + '#');
             }
             break;
         case 67: // C
-            appView.toggleOctaveColors();
+            view.toggleOctaveColors();
             $('#toggle-octavecolors').button('toggle');
             break;
         case 77: // M
@@ -125,7 +131,7 @@ $(function() {
         case 101:
         case 102:
         case 103:
-            appModel.set('tonic', String.fromCharCode(e.keyCode - 32));
+            model.set('tonic', String.fromCharCode(e.keyCode - 32));
             break;
         }
     });
