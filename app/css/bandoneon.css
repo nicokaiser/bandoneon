@@ -1,5 +1,4 @@
 body {
-  font-weight: 300;
   min-width: 750px;
 }
 
@@ -26,30 +25,7 @@ h2 {
   text-align: center;
   border-radius: 0;
   background-color: #eee;
-}
-
-.jumbotron h1 {
-  font-size: 54px;
-  font-weight: 300;
-  letter-spacing: -1px;
-}
-
-.jumbotron:after {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 10;
-  display: block;
-  content: "";
-  height: 30px;
-  background-image: -moz-linear-gradient(rgba(0, 0, 0, 0), rgba(0,0,0,.07));
-  background-image: -webkit-linear-gradient(rgba(0, 0, 0, 0), rgba(0,0,0,.07));
-}
-
-.jumbotron p a,
-.jumbotron-links a {
-  font-weight: 500;
+  padding: 3rem 2rem;
 }
 
 .jumbotron-links {
@@ -68,15 +44,6 @@ h2 {
   margin-left: 20px;
 }
 
-
-/* Navigation
--------------------------------------------------- */
-
-.nav-tabs li a {
-  font-weight: 500;
-}
-
-
 /* How to use
 -------------------------------------------------- */
 
@@ -84,34 +51,18 @@ h2 {
   max-width: 600px;
 }
 
-.how-to h2 {
-  margin-bottom: 40px;
-}
-
-.how-to {
-  padding: 40px 20px;
-  border-top: 1px solid #eee;
-  font-size: 16px;
-  margin-top: 50px;
-}
-
 .how-to li {
   margin-top: 15px;
   margin-bottom: 15px;
 }
 
-.how-to strong {
-  font-weight: 500;
-}
-
 /* Footer
 -------------------------------------------------- */
 
-.footer {
-  padding: 50px 30px;
+footer {
   color: #777;
   text-align: center;
-  border-top: 1px solid #eee;
+  font-size: 80%;
 }
 
 
@@ -123,10 +74,6 @@ h2 {
   height: 440px;
   margin: 20px 0;
   text-align: center;
-}
-
-#select-tonic .btn-group {
-  margin-bottom: 20px;
 }
 
 @media print {

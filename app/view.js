@@ -29,21 +29,33 @@ export default Backbone.View.extend({
         this.render();
         this.model.bind('change', this.render, this);
         this.model.bind('change', () => {
-            $('#select-scalename button').removeClass('btn-primary');
-            $('#select-chordname button').removeClass('btn-primary');
+            $('#select-scalename button')
+                .removeClass('btn-primary')
+                .addClass('btn-outline-secondary');
+            $('#select-chordname button')
+                .removeClass('btn-primary')
+                .addClass('btn-outline-secondary');
 
             switch (this.model.get('mode')) {
             case 'chord':
-                $('#select-chordname button[data-chordname="' + this.model.get('name') + '"]').addClass('btn-primary');
+                $('#select-chordname button[data-chordname="' + this.model.get('name') + '"]')
+                    .removeClass('btn-outline-secondary')
+                    .addClass('btn-primary');
                 break;
             case 'scale':
-                $('#select-scalename button[data-scalename="' + this.model.get('name') + '"]').addClass('btn-primary');
+                $('#select-scalename button[data-scalename="' + this.model.get('name') + '"]')
+                .removeClass('btn-outline-secondary')
+                    .addClass('btn-primary');
                 break;
             default:
             }
 
-            $('#select-tonic a').removeClass('btn-primary');
-            $('#select-tonic a[data-tonic="' + this.model.get('tonic') + '"]').addClass('btn-primary');
+            $('#select-tonic a')
+                .removeClass('btn-primary')
+                .addClass('btn-outline-secondary');
+            $('#select-tonic a[data-tonic="' + this.model.get('tonic') + '"]')
+                .removeClass('btn-outline-secondary')
+                .addClass('btn-primary');
         });
     },
 

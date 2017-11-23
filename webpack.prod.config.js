@@ -24,10 +24,6 @@ module.exports = {
             {
                 test: /\.css$/,
                 use: [ 'style-loader', 'css-loader' ]
-            },
-            {
-                test: /\.(woff2?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
-                loader: "url-loader"
             }
         ]
     },
@@ -47,7 +43,8 @@ module.exports = {
         new webpack.ProvidePlugin({
             jQuery: 'jquery',
             $: 'jquery',
-            jquery: 'jquery'
+            jquery: 'jquery',
+            Popper: ['popper.js', 'default']
         })
     ]
 }
