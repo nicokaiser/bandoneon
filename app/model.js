@@ -1,6 +1,6 @@
 import Backbone from 'backbone';
 
-import Instrument from './instruments/bandoneon-aa142-orch';
+import Instrument from './instruments/bandoneon-aa142';
 
 export default Backbone.Model.extend({
     defaults: {

@@ -2,7 +2,7 @@ import $ from 'jquery';
 import bootstrap from 'bootstrap';
 import Backbone from 'backbone';
 import raphael from 'raphael';
-import { transpose, scale } from 'tonal';
+import { transpose, scale, Note } from 'tonal';
 
 // Color codes for coloring the scale lines
 const scaleColors = ['orange', 'blue', 'red', 'green', 'orange', 'blue'];
@@ -107,11 +107,12 @@ export default Backbone.View.extend({
 
         let pathString = '';
         notes.forEach((note) => {
-            if (positions.hasOwnProperty(note)) {
+            const enh = Note.names(" #")[Note.chroma(note)] + Note.oct(note);
+            if (positions.hasOwnProperty(enh)) {
                 pathString += (pathString === '') ? 'M' : 'L';
-                pathString += positions[note][0] + 10;
+                pathString += positions[enh][0] + 10;
                 pathString += ',';
-                pathString += positions[note][1] + 30;
+                pathString += positions[enh][1] + 30;
             }
         });
 
@@ -168,7 +169,7 @@ export default Backbone.View.extend({
                 const intervals = scale(name);
                 if (!intervals) return;
                 const notes = intervals.map(transpose(`${tonic}${o}`));
-                notes.push(`${tonic}${o + 1}}`);
+                notes.push(`${tonic}${o + 1}`); // TODO: necessary?
                 this.renderScale(variant, notes, scaleColors[o + 1]);
             }
 
