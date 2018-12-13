@@ -1,4 +1,4 @@
-[Bandoneon](http://bandoneon.kaiser.me)
+[Bandoneon](http://bandoneon.app)
 ========
 
 A little JavaScript application that wants to help learning the Alfred Arnold 142 bandoneon.

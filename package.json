@@ -13,7 +13,7 @@
   },
   "author": "Nico Kaiser",
   "license": "MIT",
-  "homepage": "https://bandoneon.kaiser.me",
+  "homepage": "https://bandoneon.app",
   "dependencies": {
     "backbone": "^1.3.3",
     "bootstrap": "^4.0.0-beta.2",
