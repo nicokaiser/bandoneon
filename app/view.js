@@ -84,8 +84,8 @@ export default Backbone.View.extend({
             
             this.paper.circle(positions[k][0] + 10, positions[k][1] + 28, 28)
                 .attr({
-                    'stroke': '#222',
-                    'stroke-width': 2,
+                    'stroke': '#333',
+                    'stroke-width': 1,
                     'fill': fill,
                     'fill-opacity': 0.5
                 });
@@ -123,7 +123,7 @@ export default Backbone.View.extend({
                 'stroke': color,
                 'stroke-linecap': 'round',
                 'stroke-linejoin': 'round',
-                'stroke-width': 4,
+                'stroke-width': 3,
                 'stroke-opacity': 0.66
             });
     },
@@ -139,10 +139,10 @@ export default Backbone.View.extend({
         Object.keys(positions).forEach((k) => {
             if (!chord.includes(k)) return;
 
-            this.paper.circle(positions[k][0] + 10, positions[k][1] + 30, 28)
+            this.paper.circle(positions[k][0] + 10, positions[k][1] + 29, 28)
             .attr({
                 'stroke': '#222',
-                'stroke-width': 4,
+                'stroke-width': 2,
                 'fill': 'black',
                 'fill-opacity': 0.33
             });

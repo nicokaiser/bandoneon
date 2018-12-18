@@ -12,16 +12,11 @@
 </head>
 
 <body>
-  <div class="jumbotron">
-    <div class="container">
-      <h1 class="display-4">Bandoneón</h1>
-      <ul class="jumbotron-links">
-        <li><a href="#about">About</a></li>
-        <li><a href="#downloads" data-toggle="modal">Downloads</a></li>
-        <li><a href="mailto:nico@kaiser.me">Contact</a></li>
-      </ul>
+  <nav class="navbar navbar-light bg-light mb-5">
+    <div class="container justify-content-center">
+      <a class="navbar-brand" href="/">Bandoneon</a>
     </div>
-  </div>
+  </nav>
 
   <div id="main" class="container mb-5">
     <div class="row">
@@ -79,10 +74,8 @@
     </div>
   </div>
 
-  <hr>
-
-  <div class="how-to" id="about">
-    <div class="container mt-5 mb-5">
+  <div class="how-to bg-light" id="about">
+    <div class="container pt-5 pb-5">
       <h2 class="mb-4">How to use</h2>
       <p>This website wants to help learning the Bandoneon keyboard.<br>
       The layout is based on the 142 button version (“Rheinische Tonlage”).</p>
@@ -100,13 +93,11 @@
       <p>More information about the Bandoneon on <a href="http://www.inorg.chem.ethz.ch/tango/band/bandoneon.html">Christian's Bandoneon Page</a>.</p>
     </div>
   </div>
-
-  <hr>
   
   <footer>
     <div class="container mt-5 mb-4">
       <p>
-        Copyright &copy; 2017 <a href="https://kaiser.me/">Nico Kaiser</a>, MIT License.<br>
+        Copyright &copy; 2018 <a href="https://kaiser.me/">Nico Kaiser</a>, MIT License.<br>
         Built with 
           <a href="https://danigb.github.io/tonal-app">tonal</a>,
           <a href="http://backbonejs.org/">Backbone</a>,
@@ -116,31 +107,5 @@
       </p>
     </div>
   </footer>
-
-  <div class="modal fade" id="downloads">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Downloads</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        </div>
-        <div class="modal-body">
-          <p>You can download 4 PDF versions of the AA keyboard:</p>
-
-          <div class="list-group mb-3">
-            <a class="list-group-item"href="/download/AA-142-Keyboard.pdf">AA 142 Keyboard</a>
-            <a class="list-group-item" href="/download/AA-142-Keyboard-Colors.pdf">AA 142 Keyboard with colored octaves</a>
-            <a class="list-group-item" href="/download/AA-142-Keyboard-C-major.pdf">AA 142 Keyboard with C major scale</a>
-            <a class="list-group-item" href="/download/AA-142-Keyboard-Chromatic.pdf">AA 142 Keyboard with chromatic scale</a>
-          </div>
-
-          <p>And of course you can download and modify the whole website source from <a href="https://github.com/nicokaiser/bandoneon">GitHub</a>.</p>
-        </div>
-        <div class="modal-footer">
-          <a href="#" class="btn btn-primary" data-dismiss="modal">Close</a>
-        </div>
-      </div>
-    </div>
-  </div>
 </body>
 </html>
