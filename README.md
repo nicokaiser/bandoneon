@@ -1,18 +1,13 @@
-[Bandoneon](http://bandoneon.app)
-========
+# [Bandoneon](http://bandoneon.app)
 
 A little JavaScript application that wants to help learning the Alfred Arnold 142 bandoneon.
 
-Building
---------
+## Building
 
-```
-node tools/r.js -o tools/build.js
-```
+    npm install
+    npm build
 
-
-Author
-------
+## Author
 
 **Nico Kaiser**
 
@@ -21,12 +16,11 @@ Author
 + http://github/nicokaiser
 
 
-Copyright and license
----------------------
+### Copyright and license
 
 (The MIT License)
 
-Copyright (c) 2014 Nico Kaiser &lt;nico@kaiser.me&gt;
+Copyright (c) Nico Kaiser &lt;nico@kaiser.me&gt;
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the

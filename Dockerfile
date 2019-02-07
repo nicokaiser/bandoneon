@@ -1,6 +1,6 @@
 FROM nginx:1-alpine
 
-LABEL maintainer="nico@kaiser.me" \
+LABEL maintainer="Nico Kaiser <nico@kaiser.me>" \
     org.label-schema.name="bandoneon" \
     org.label-schema.description="A little JavaScript application that wants to help learning the Alfred Arnold 142 bandoneon." \
     org.label-schema.url="https://bandoneon.app/" \
