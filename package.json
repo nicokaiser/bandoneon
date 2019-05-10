@@ -1,6 +1,6 @@
 {
   "name": "bandoneon",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "A little JavaScript application that wants to help learning the Alfred Arnold 142 bandoneon.",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
