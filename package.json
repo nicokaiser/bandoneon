@@ -24,7 +24,7 @@
     "tonal": "^2.2.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.4.4",
+    "@babel/core": "^7.4.5",
     "@babel/preset-env": "^7.4.5",
     "babel-loader": "^8.0.6",
     "babel-regenerator-runtime": "^6.5.0",
