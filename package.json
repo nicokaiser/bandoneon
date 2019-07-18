@@ -17,22 +17,22 @@
   "dependencies": {
     "backbone": "^1.4.0",
     "bootstrap": "^4.3.1",
-    "file-loader": "^4.0.0",
+    "file-loader": "^4.1.0",
     "jquery": "^3.4.1",
     "popper.js": "^1.15.0",
     "raphael": "^2.2.8",
-    "tonal": "^2.2.0"
+    "tonal": "^2.2.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.4.5",
-    "@babel/preset-env": "^7.4.5",
+    "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
     "babel-loader": "^8.0.6",
     "babel-regenerator-runtime": "^6.5.0",
-    "css-loader": "^3.0.0",
+    "css-loader": "^3.1.0",
     "style-loader": "^0.23.1",
-    "url-loader": "^2.0.0",
-    "webpack": "^4.35.0",
-    "webpack-cli": "^3.3.4",
+    "url-loader": "^2.1.0",
+    "webpack": "^4.36.1",
+    "webpack-cli": "^3.3.6",
     "webpack-dev-server": "^3.7.2"
   }
 }
