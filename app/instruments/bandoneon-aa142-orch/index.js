@@ -7,26 +7,19 @@ export default class {
     }
 
     static variants() {
-        return [
-            'right-open',
-            'right-close',
-            'left-open',
-            'left-close'
-        ];
+        return ['right-open', 'right-close', 'left-open', 'left-close'];
     }
 
     static chords(variant = 'right-open') {
         switch (variant) {
-        case 'right-open':
-        case 'right-close':
-            return chords['right'];
-            break;
-        case 'left-open':
-        case 'left-close':
-            return chords['left'];
-            break;
-        default:
-            return {};
+            case 'right-open':
+            case 'right-close':
+                return chords['right'];
+            case 'left-open':
+            case 'left-close':
+                return chords['left'];
+            default:
+                return {};
         }
     }
 

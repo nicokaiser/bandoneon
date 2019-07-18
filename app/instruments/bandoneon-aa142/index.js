@@ -7,12 +7,7 @@ export default class {
     }
 
     static variants() {
-        return [
-            'right-open',
-            'right-close',
-            'left-open',
-            'left-close'
-        ];
+        return ['right-open', 'right-close', 'left-open', 'left-close'];
     }
 
     static chords(variant = 'right-open') {

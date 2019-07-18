@@ -23,15 +23,12 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                use: [ 'style-loader', 'css-loader' ]
+                use: ['style-loader', 'css-loader']
             }
         ]
     },
     resolve: {
-        modules: [
-            'node_modules',
-            path.resolve(__dirname, 'app')
-        ]
+        modules: ['node_modules', path.resolve(__dirname, 'app')]
     },
     plugins: [
         new webpack.ProvidePlugin({
@@ -41,4 +38,4 @@ module.exports = {
             Popper: ['popper.js', 'default']
         })
     ]
-}
+};

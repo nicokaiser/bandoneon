@@ -1,8 +1,10 @@
 import $ from 'jquery';
-import bootstrap from 'bootstrap';
 import Backbone from 'backbone';
 import raphael from 'raphael';
 import { transpose, scale, Note } from 'tonal';
+
+// eslint-disable-next-line no-unused-vars
+import bootstrap from 'bootstrap';
 
 // Color codes for coloring the scale lines
 const scaleColors = ['orange', 'blue', 'red', 'green', 'orange', 'blue'];
@@ -19,7 +21,7 @@ export default Backbone.View.extend({
     },
 
     // Initialize Raphaël and listen to changes
-    initialize: function (options) {
+    initialize: function(options) {
         this.router = options.router;
 
         this.instrument = this.model.get('instrument');
@@ -37,17 +39,17 @@ export default Backbone.View.extend({
                 .addClass('btn-outline-secondary');
 
             switch (this.model.get('mode')) {
-            case 'chord':
-                $('#select-chordname button[data-chordname="' + this.model.get('name') + '"]')
-                    .removeClass('btn-outline-secondary')
-                    .addClass('btn-primary');
-                break;
-            case 'scale':
-                $('#select-scalename button[data-scalename="' + this.model.get('name') + '"]')
-                .removeClass('btn-outline-secondary')
-                    .addClass('btn-primary');
-                break;
-            default:
+                case 'chord':
+                    $('#select-chordname button[data-chordname="' + this.model.get('name') + '"]')
+                        .removeClass('btn-outline-secondary')
+                        .addClass('btn-primary');
+                    break;
+                case 'scale':
+                    $('#select-scalename button[data-scalename="' + this.model.get('name') + '"]')
+                        .removeClass('btn-outline-secondary')
+                        .addClass('btn-primary');
+                    break;
+                default:
             }
 
             $('#select-tonic a')
@@ -60,18 +62,15 @@ export default Backbone.View.extend({
     },
 
     // Render button layout (with colored octaves)
-    renderButtons: function (variant) {
+    renderButtons: function(variant) {
         const positions = this.instrument.positions(variant);
 
-        Object.keys(positions).forEach((k) => {
+        Object.keys(positions).forEach(k => {
             const label = k;
-            let note = label[0];
             let labelDisplay = label[0].toLowerCase();
             let octave = +label[1];
-            if (label[1] === '#') {
-                octave = +label[2];
-                note += label[1];
-            }
+            if (label[1] === '#') octave = +label[2];
+
             if (octave === 0) labelDisplay = label[0].toUpperCase();
             if (label[1] === '#') labelDisplay += '♯';
             else if (label[1] === 'b') labelDisplay += '♭';
@@ -80,36 +79,34 @@ export default Backbone.View.extend({
             else if (octave === 3) labelDisplay += '’’';
             else if (octave === 4) labelDisplay += '’’’';
 
-            const fill = (this.showOctaveColors ? octaveColors[octave % (octaveColors.length)] : 'white');
-            
-            this.paper.circle(positions[k][0] + 10, positions[k][1] + 28, 28)
-                .attr({
-                    'stroke': '#333',
-                    'stroke-width': 1,
-                    'fill': fill,
-                    'fill-opacity': 0.5
-                });
+            const fill = this.showOctaveColors ? octaveColors[octave % octaveColors.length] : 'white';
 
-            this.paper.text(positions[k][0] + 10, positions[k][1] + 28, labelDisplay)
-                .attr({
-                    'fill': '#222',
-                    'font-family': 'Georgia, serif',
-                    'font-size': 21,
-                    'font-style': 'italic',
-                    'cursor': 'default'
-                });
+            this.paper.circle(positions[k][0] + 10, positions[k][1] + 28, 28).attr({
+                stroke: '#333',
+                'stroke-width': 1,
+                fill: fill,
+                'fill-opacity': 0.5
+            });
+
+            this.paper.text(positions[k][0] + 10, positions[k][1] + 28, labelDisplay).attr({
+                fill: '#222',
+                'font-family': 'Georgia, serif',
+                'font-size': 21,
+                'font-style': 'italic',
+                cursor: 'default'
+            });
         });
     },
 
     // Render a specific scale
-    renderScale: function (variant, notes, color) {
+    renderScale: function(variant, notes, color) {
         const positions = this.instrument.positions(variant);
 
         let pathString = '';
-        notes.forEach((note) => {
-            const enh = Note.names(" #")[Note.chroma(note)] + Note.oct(note);
-            if (positions.hasOwnProperty(enh)) {
-                pathString += (pathString === '') ? 'M' : 'L';
+        notes.forEach(note => {
+            const enh = Note.names(' #')[Note.chroma(note)] + Note.oct(note);
+            if (Object.prototype.hasOwnProperty.call(positions, enh)) {
+                pathString += pathString === '' ? 'M' : 'L';
                 pathString += positions[enh][0] + 10;
                 pathString += ',';
                 pathString += positions[enh][1] + 30;
@@ -118,39 +115,37 @@ export default Backbone.View.extend({
 
         if (pathString === '') return;
 
-        return this.paper.path(pathString)
-            .attr({
-                'stroke': color,
-                'stroke-linecap': 'round',
-                'stroke-linejoin': 'round',
-                'stroke-width': 3,
-                'stroke-opacity': 0.66
-            });
+        return this.paper.path(pathString).attr({
+            stroke: color,
+            'stroke-linecap': 'round',
+            'stroke-linejoin': 'round',
+            'stroke-width': 3,
+            'stroke-opacity': 0.66
+        });
     },
 
     // Render a chord (left side only)
-    renderChord: function (variant, tonic, name) {
+    renderChord: function(variant, tonic, name) {
         const chords = this.instrument.chords(variant);
         const chord = chords[tonic + name];
         if (!chord) return;
 
         const positions = this.instrument.positions(variant);
 
-        Object.keys(positions).forEach((k) => {
+        Object.keys(positions).forEach(k => {
             if (!chord.includes(k)) return;
 
-            this.paper.circle(positions[k][0] + 10, positions[k][1] + 29, 28)
-            .attr({
-                'stroke': '#222',
+            this.paper.circle(positions[k][0] + 10, positions[k][1] + 29, 28).attr({
+                stroke: '#222',
                 'stroke-width': 2,
-                'fill': 'black',
+                fill: 'black',
                 'fill-opacity': 0.33
             });
         });
     },
 
     // Render the whole layout with buttons, octaves and scale
-    render: function () {
+    render: function() {
         const variant = this.model.get('variant');
 
         this.paper.clear();
@@ -163,35 +158,41 @@ export default Backbone.View.extend({
         const name = this.model.get('name');
 
         switch (mode) {
-        case 'scale':
-            // render scale
-            for (let o = -1; o < 5; o++) {
-                const intervals = scale(name);
-                if (!intervals) return;
-                const notes = intervals.map(transpose(`${tonic}${o}`));
-                notes.push(`${tonic}${o + 1}`); // TODO: necessary?
-                this.renderScale(variant, notes, scaleColors[o + 1]);
-            }
+            case 'scale':
+                // render scale
+                for (let o = -1; o < 5; o++) {
+                    const intervals = scale(name);
+                    if (!intervals) return;
+                    const notes = intervals.map(transpose(`${tonic}${o}`));
+                    notes.push(`${tonic}${o + 1}`); // TODO: necessary?
+                    this.renderScale(variant, notes, scaleColors[o + 1]);
+                }
 
-            this.router.navigate(`!/${encodeURIComponent(variant)}/scale/${encodeURIComponent(tonic)}/${encodeURIComponent(name)}`, { replace: true });
-            break;
-        case 'chord':
-            // render chord
-            this.renderChord(variant, tonic, name);
+                this.router.navigate(
+                    `!/${encodeURIComponent(variant)}/scale/${encodeURIComponent(tonic)}/${encodeURIComponent(name)}`,
+                    { replace: true }
+                );
+                break;
+            case 'chord':
+                // render chord
+                this.renderChord(variant, tonic, name);
 
-            this.router.navigate(`!/${encodeURIComponent(variant)}/chord/${encodeURIComponent(tonic)}/${encodeURIComponent(name)}`, { replace: true });
-            break;
-        default:
-            // render keyboard only
-            this.router.navigate('!/' + variant, {replace: true});
-            return;
+                this.router.navigate(
+                    `!/${encodeURIComponent(variant)}/chord/${encodeURIComponent(tonic)}/${encodeURIComponent(name)}`,
+                    { replace: true }
+                );
+                break;
+            default:
+                // render keyboard only
+                this.router.navigate('!/' + variant, { replace: true });
+                return;
         }
 
         return this;
     },
 
     // Toggle colored octaves and re-render
-    toggleOctaveColors: function () {
+    toggleOctaveColors: function() {
         this.showOctaveColors = !this.showOctaveColors;
         this.render();
     }

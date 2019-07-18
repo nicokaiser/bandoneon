@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "A little JavaScript application that wants to help learning the Alfred Arnold 142 bandoneon.",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "eslint .",
+    "lint": "eslint .",
     "start": "webpack-dev-server -d --colors",
     "build": "webpack --config webpack.prod.config.js"
   },
@@ -29,6 +30,10 @@
     "babel-loader": "^8.0.6",
     "babel-regenerator-runtime": "^6.5.0",
     "css-loader": "^3.1.0",
+    "eslint": "^6.0.1",
+    "eslint-config-prettier": "^6.0.0",
+    "eslint-plugin-prettier": "^3.1.0",
+    "prettier": "^1.18.2",
     "style-loader": "^0.23.1",
     "url-loader": "^2.1.0",
     "webpack": "^4.36.1",
