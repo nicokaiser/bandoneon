@@ -2,6 +2,7 @@ const webpack = require('webpack');
 const path = require('path');
 
 module.exports = {
+    mode: 'production',
     context: __dirname,
     entry: './app/app.js',
     output: {
@@ -17,7 +18,7 @@ module.exports = {
                 use: {
                     loader: 'babel-loader',
                     options: {
-                        presets: ['env']
+                        presets: ['@babel/preset-env']
                     }
                 }
             },
@@ -33,10 +34,6 @@ module.exports = {
     plugins: [
         new webpack.optimize.OccurrenceOrderPlugin(),
         new webpack.optimize.AggressiveMergingPlugin(),
-        new webpack.optimize.UglifyJsPlugin({
-            compress: { warnings: true, screw_ie8: true },
-            comments: false
-        }),
         new webpack.ProvidePlugin({
             jQuery: 'jquery',
             $: 'jquery',
