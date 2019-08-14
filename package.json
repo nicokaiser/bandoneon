@@ -21,7 +21,7 @@
     "file-loader": "^4.1.0",
     "jquery": "^3.4.1",
     "popper.js": "^1.15.0",
-    "raphael": "^2.2.8",
+    "raphael": "^2.3.0",
     "tonal": "^2.2.2"
   },
   "devDependencies": {
