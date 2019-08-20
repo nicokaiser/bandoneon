@@ -31,7 +31,7 @@
     "babel-regenerator-runtime": "^6.5.0",
     "css-loader": "^3.1.0",
     "eslint": "^6.1.0",
-    "eslint-config-prettier": "^6.0.0",
+    "eslint-config-prettier": "^6.1.0",
     "eslint-plugin-prettier": "^3.1.0",
     "prettier": "^1.18.2",
     "style-loader": "^0.23.1",
