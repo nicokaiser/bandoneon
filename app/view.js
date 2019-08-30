@@ -3,6 +3,7 @@ import Backbone from 'backbone';
 import raphael from 'raphael';
 import { note, transpose } from '@tonaljs/tonal';
 import { scale } from '@tonaljs/scale';
+import { chord } from '@tonaljs/chord';
 
 // eslint-disable-next-line no-unused-vars
 import bootstrap from 'bootstrap';
@@ -12,6 +13,9 @@ const scaleColors = ['orange', 'blue', 'red', 'green', 'orange', 'blue'];
 
 // Color codes for coloring the octaves
 const octaveColors = ['#71a8d7', '#e37e7b', '#85ca85', '#e6cb84'];
+
+// Color codes for chords
+const chordColors = ['#000', '#666', '#999', '#ccc'];
 
 export default Backbone.View.extend({
     paper: null,
@@ -129,22 +133,28 @@ export default Backbone.View.extend({
 
     // Render a chord (left side only)
     renderChord: function(variant, tonic, name) {
-        const chords = this.instrument.chords(variant);
-        const chord = chords[tonic + name];
-        if (!chord) return;
+        const c = chord(`${tonic}${name}`);
+        if (c.empty) return;
 
+        // console.log(c.tonic + ' ' + c.aliases[0]);
         const positions = this.instrument.positions(variant);
 
-        Object.keys(positions).forEach(k => {
-            if (!chord.includes(k)) return;
+        for (let i = 0; i <= c.notes.length; i++) {
+            const n = note(c.notes[i]);
+            console.log(n);
 
-            this.paper.circle(positions[k][0] + 10, positions[k][1] + 29, 28).attr({
-                stroke: '#222',
-                'stroke-width': 2,
-                fill: 'black',
-                'fill-opacity': 0.33
+            Object.keys(positions).forEach(k => {
+                const { chroma } = note(k);
+                if (chroma !== n.chroma) return;
+
+                this.paper.circle(positions[k][0] + 10, positions[k][1] + 29, 28).attr({
+                    stroke: '#222',
+                    'stroke-width': i === 0 ? 3 : 2,
+                    fill: chordColors[i],
+                    'fill-opacity': 0.5
+                });
             });
-        });
+        }
     },
 
     // Render the whole layout with buttons, octaves and scale
