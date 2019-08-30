@@ -1,7 +1,8 @@
 import $ from 'jquery';
 import Backbone from 'backbone';
 import raphael from 'raphael';
-import { transpose, scale, Note } from 'tonal';
+import { note, transpose } from '@tonaljs/tonal';
+import { scale } from '@tonaljs/scale';
 
 // eslint-disable-next-line no-unused-vars
 import bootstrap from 'bootstrap';
@@ -103,13 +104,15 @@ export default Backbone.View.extend({
         const positions = this.instrument.positions(variant);
 
         let pathString = '';
-        notes.forEach(note => {
-            const enh = Note.names(' #')[Note.chroma(note)] + Note.oct(note);
-            if (Object.prototype.hasOwnProperty.call(positions, enh)) {
+        notes.forEach(n => {
+            const no = note(n);
+            const idx = Object.keys(positions).find(v => note(v).height === no.height);
+            if (idx) {
+                const [x, y] = positions[idx];
                 pathString += pathString === '' ? 'M' : 'L';
-                pathString += positions[enh][0] + 10;
+                pathString += x + 10;
                 pathString += ',';
-                pathString += positions[enh][1] + 30;
+                pathString += y + 30;
             }
         });
 
@@ -157,35 +160,31 @@ export default Backbone.View.extend({
         const tonic = this.model.get('tonic');
         const name = this.model.get('name');
 
-        switch (mode) {
-            case 'scale':
-                // render scale
-                for (let o = -1; o < 5; o++) {
-                    const intervals = scale(name);
-                    if (!intervals) return;
-                    const notes = intervals.map(transpose(`${tonic}${o}`));
-                    notes.push(`${tonic}${o + 1}`); // TODO: necessary?
-                    this.renderScale(variant, notes, scaleColors[o + 1]);
-                }
+        if (mode === 'scale') {
+            // render scale
+            const { intervals, empty } = scale(name);
+            if (empty) return;
+            for (let o = -1; o < 5; o++) {
+                const notes = intervals.map(i => transpose(`${tonic}${o}`, i));
+                notes.push(`${tonic}${o + 1}`);
+                this.renderScale(variant, notes, scaleColors[o + 1]);
+            }
 
-                this.router.navigate(
-                    `!/${encodeURIComponent(variant)}/scale/${encodeURIComponent(tonic)}/${encodeURIComponent(name)}`,
-                    { replace: true }
-                );
-                break;
-            case 'chord':
-                // render chord
-                this.renderChord(variant, tonic, name);
+            this.router.navigate(
+                `!/${encodeURIComponent(variant)}/scale/${encodeURIComponent(tonic)}/${encodeURIComponent(name)}`,
+                { replace: true }
+            );
+        } else if (mode === 'chord') {
+            // render chord
+            this.renderChord(variant, tonic, name);
 
-                this.router.navigate(
-                    `!/${encodeURIComponent(variant)}/chord/${encodeURIComponent(tonic)}/${encodeURIComponent(name)}`,
-                    { replace: true }
-                );
-                break;
-            default:
-                // render keyboard only
-                this.router.navigate('!/' + variant, { replace: true });
-                return;
+            this.router.navigate(
+                `!/${encodeURIComponent(variant)}/chord/${encodeURIComponent(tonic)}/${encodeURIComponent(name)}`,
+                { replace: true }
+            );
+        } else {
+            // render keyboard only
+            this.router.navigate('!/' + variant, { replace: true });
         }
 
         return this;
