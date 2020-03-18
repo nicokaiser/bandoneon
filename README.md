@@ -5,7 +5,7 @@ A little JavaScript application that wants to help learning the Alfred Arnold 14
 ## Building
 
     npm install
-    npm build
+    npm run build
 
 ## Running as Docker container
 
