@@ -1,9 +1,9 @@
 import $ from 'jquery';
 import Backbone from 'backbone';
 import raphael from 'raphael';
-import { note, transpose } from '@tonaljs/tonal';
-import { scale } from '@tonaljs/scale';
-import { chord } from '@tonaljs/chord';
+import Note from '@tonaljs/note';
+import Scale from '@tonaljs/scale';
+import Chord from '@tonaljs/chord';
 
 // eslint-disable-next-line no-unused-vars
 import bootstrap from 'bootstrap';
@@ -103,8 +103,8 @@ export default Backbone.View.extend({
 
         let pathString = '';
         notes.forEach((n) => {
-            const no = note(n);
-            const idx = Object.keys(positions).find((v) => note(v).height === no.height);
+            const no = Note.get(n);
+            const idx = Object.keys(positions).find((v) => Note.get(v).height === no.height);
             if (idx) {
                 const [x, y] = positions[idx];
                 pathString += pathString === '' ? 'M' : 'L';
@@ -127,18 +127,16 @@ export default Backbone.View.extend({
 
     // Render a chord (left side only)
     renderChord: function (variant, tonic, name) {
-        const c = chord(`${tonic}${name}`);
+        const c = Chord.get(`${tonic}${name}`);
         if (c.empty) return;
 
-        // console.log(c.tonic + ' ' + c.aliases[0]);
         const positions = this.instrument.positions(variant);
 
         for (let i = 0; i <= c.notes.length; i++) {
-            const n = note(c.notes[i]);
-            console.log(n);
+            const n = Note.get(c.notes[i]);
 
             Object.keys(positions).forEach((k) => {
-                const { chroma } = note(k);
+                const { chroma } = Note.get(k);
                 if (chroma !== n.chroma) return;
 
                 this.paper.circle(positions[k][0] + 10, positions[k][1] + 29, 28).attr({
@@ -166,10 +164,10 @@ export default Backbone.View.extend({
 
         if (mode === 'scale') {
             // render scale
-            const { intervals, empty } = scale(name);
+            const { intervals, empty } = Scale.get(name);
             if (empty) return;
             for (let o = -1; o < 5; o++) {
-                const notes = intervals.map((i) => transpose(`${tonic}${o}`, i));
+                const notes = intervals.map((i) => Note.transpose(`${tonic}${o}`, i));
                 notes.push(`${tonic}${o + 1}`);
                 this.renderScale(variant, notes, scaleColors[o + 1]);
             }

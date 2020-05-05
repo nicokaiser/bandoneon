@@ -17,8 +17,8 @@
   "homepage": "https://bandoneon.app",
   "dependencies": {
     "@tonaljs/chord": "^3.6.3",
+    "@tonaljs/note": "^3.5.3",
     "@tonaljs/scale": "^3.5.5",
-    "@tonaljs/tonal": "^3.7.3",
     "backbone": "^1.4.0",
     "bootstrap": "^4.4.1",
     "file-loader": "^6.0.0",
