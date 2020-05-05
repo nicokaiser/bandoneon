@@ -1,4 +1,4 @@
-FROM nginx:1-alpine
+FROM nginx:1
 
 LABEL maintainer="Nico Kaiser <nico@kaiser.me>" \
     org.label-schema.name="bandoneon" \
