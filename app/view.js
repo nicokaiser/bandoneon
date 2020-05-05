@@ -26,7 +26,7 @@ export default Backbone.View.extend({
     },
 
     // Initialize Raphaël and listen to changes
-    initialize: function(options) {
+    initialize: function (options) {
         this.router = options.router;
 
         this.instrument = this.model.get('instrument');
@@ -36,12 +36,8 @@ export default Backbone.View.extend({
         this.render();
         this.model.bind('change', this.render, this);
         this.model.bind('change', () => {
-            $('#select-scalename button')
-                .removeClass('btn-primary')
-                .addClass('btn-outline-secondary');
-            $('#select-chordname button')
-                .removeClass('btn-primary')
-                .addClass('btn-outline-secondary');
+            $('#select-scalename button').removeClass('btn-primary').addClass('btn-outline-secondary');
+            $('#select-chordname button').removeClass('btn-primary').addClass('btn-outline-secondary');
 
             switch (this.model.get('mode')) {
                 case 'chord':
@@ -57,9 +53,7 @@ export default Backbone.View.extend({
                 default:
             }
 
-            $('#select-tonic a')
-                .removeClass('btn-primary')
-                .addClass('btn-outline-secondary');
+            $('#select-tonic a').removeClass('btn-primary').addClass('btn-outline-secondary');
             $('#select-tonic a[data-tonic="' + this.model.get('tonic') + '"]')
                 .removeClass('btn-outline-secondary')
                 .addClass('btn-primary');
@@ -67,10 +61,10 @@ export default Backbone.View.extend({
     },
 
     // Render button layout (with colored octaves)
-    renderButtons: function(variant) {
+    renderButtons: function (variant) {
         const positions = this.instrument.positions(variant);
 
-        Object.keys(positions).forEach(k => {
+        Object.keys(positions).forEach((k) => {
             const label = k;
             let labelDisplay = label[0].toLowerCase();
             let octave = +label[1];
@@ -104,13 +98,13 @@ export default Backbone.View.extend({
     },
 
     // Render a specific scale
-    renderScale: function(variant, notes, color) {
+    renderScale: function (variant, notes, color) {
         const positions = this.instrument.positions(variant);
 
         let pathString = '';
-        notes.forEach(n => {
+        notes.forEach((n) => {
             const no = note(n);
-            const idx = Object.keys(positions).find(v => note(v).height === no.height);
+            const idx = Object.keys(positions).find((v) => note(v).height === no.height);
             if (idx) {
                 const [x, y] = positions[idx];
                 pathString += pathString === '' ? 'M' : 'L';
@@ -132,7 +126,7 @@ export default Backbone.View.extend({
     },
 
     // Render a chord (left side only)
-    renderChord: function(variant, tonic, name) {
+    renderChord: function (variant, tonic, name) {
         const c = chord(`${tonic}${name}`);
         if (c.empty) return;
 
@@ -143,7 +137,7 @@ export default Backbone.View.extend({
             const n = note(c.notes[i]);
             console.log(n);
 
-            Object.keys(positions).forEach(k => {
+            Object.keys(positions).forEach((k) => {
                 const { chroma } = note(k);
                 if (chroma !== n.chroma) return;
 
@@ -158,7 +152,7 @@ export default Backbone.View.extend({
     },
 
     // Render the whole layout with buttons, octaves and scale
-    render: function() {
+    render: function () {
         const variant = this.model.get('variant');
 
         this.paper.clear();
@@ -175,7 +169,7 @@ export default Backbone.View.extend({
             const { intervals, empty } = scale(name);
             if (empty) return;
             for (let o = -1; o < 5; o++) {
-                const notes = intervals.map(i => transpose(`${tonic}${o}`, i));
+                const notes = intervals.map((i) => transpose(`${tonic}${o}`, i));
                 notes.push(`${tonic}${o + 1}`);
                 this.renderScale(variant, notes, scaleColors[o + 1]);
             }
@@ -201,7 +195,7 @@ export default Backbone.View.extend({
     },
 
     // Toggle colored octaves and re-render
-    toggleOctaveColors: function() {
+    toggleOctaveColors: function () {
         this.showOctaveColors = !this.showOctaveColors;
         this.render();
     }

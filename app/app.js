@@ -8,7 +8,7 @@ import Model from './model';
 import Router from './router';
 import View from './view';
 
-$(function() {
+$(function () {
     const model = new Model();
     const router = new Router({ model });
     const view = new View({ model, router });
@@ -16,12 +16,12 @@ $(function() {
     Backbone.history.start();
 
     // octave color toggle
-    $('#toggle-octavecolors').click(function() {
+    $('#toggle-octavecolors').click(function () {
         view.toggleOctaveColors();
         $('#toggle-octavecolors').button('toggle');
     });
 
-    $('#scale-form').submit(function() {
+    $('#scale-form').submit(function () {
         return false;
     });
 
@@ -38,7 +38,7 @@ $(function() {
         }
     }
 
-    $('#select-tonic a').click(function(e) {
+    $('#select-tonic a').click(function (e) {
         e.preventDefault();
         selectTonic($(this).data('tonic'));
     });
@@ -52,7 +52,7 @@ $(function() {
         });
     }
 
-    $('#select-scalename button').click(function(e) {
+    $('#select-scalename button').click(function (e) {
         e.preventDefault();
         selectScaleName($(this).data('scalename'));
     });
@@ -66,13 +66,13 @@ $(function() {
         });
     }
 
-    $('#select-chordname button').click(function(e) {
+    $('#select-chordname button').click(function (e) {
         e.preventDefault();
         selectChordName($(this).data('chordname'));
     });
 
     // side / direction navigation
-    $('#nav-sides a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
+    $('#nav-sides a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
         switch (e.target.hash) {
             case '#left-open':
                 model.set({ variant: 'left-open' });
@@ -90,7 +90,7 @@ $(function() {
     });
 
     // keypress events
-    $('body').keypress(function(e) {
+    $('body').keypress(function (e) {
         const tonic = model.get('tonic');
         switch (e.keyCode) {
             case 114: // r

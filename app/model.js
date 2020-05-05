@@ -11,7 +11,7 @@ export default Backbone.Model.extend({
         instrument: Instrument
     },
 
-    validate: function(attrs) {
+    validate: function (attrs) {
         if (attrs.variant && !this.instrument.variants().includes(attrs.variants)) {
             return 'invalid variant';
         }
