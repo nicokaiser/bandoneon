@@ -3,7 +3,6 @@ import Backbone from 'backbone';
 import raphael from 'raphael';
 import Note from '@tonaljs/note';
 import Scale from '@tonaljs/scale';
-import Chord from '@tonaljs/chord';
 
 // eslint-disable-next-line no-unused-vars
 import bootstrap from 'bootstrap';
@@ -78,13 +77,13 @@ export default Backbone.View.extend({
             else if (octave === 3) labelDisplay += '’’';
             else if (octave === 4) labelDisplay += '’’’';
 
-            const fill = this.showOctaveColors ? octaveColors[octave % octaveColors.length] : 'white';
+            const fill = this.showOctaveColors ? octaveColors[octave % octaveColors.length] : '#ddd';
 
             this.paper.circle(positions[k][0] + 10, positions[k][1] + 28, 28).attr({
-                stroke: '#333',
+                stroke: '#999',
                 'stroke-width': 1,
                 fill: fill,
-                'fill-opacity': 0.5
+                'fill-opacity': 0.25
             });
 
             this.paper.text(positions[k][0] + 10, positions[k][1] + 28, labelDisplay).attr({
@@ -127,6 +126,24 @@ export default Backbone.View.extend({
 
     // Render a chord (left side only)
     renderChord: function (variant, tonic, name) {
+        const chords = this.instrument.chords(variant);
+        const chord = chords[`${tonic}${name}`];
+        if (!chord) return;
+
+        const positions = this.instrument.positions(variant);
+
+        for (let i = 0; i <= chord.length; i++) {
+            const n = chord[i];
+            if (!positions[n]) return;
+            this.paper.circle(positions[n][0] + 10, positions[n][1] + 29, 28).attr({
+                stroke: '#222',
+                'stroke-width': i === 0 ? 3 : 2,
+                fill: chordColors[i],
+                'fill-opacity': 0.5
+            });
+        }
+
+        /*
         const c = Chord.get(`${tonic}${name}`);
         if (c.empty) return;
 
@@ -147,6 +164,7 @@ export default Backbone.View.extend({
                 });
             });
         }
+        */
     },
 
     // Render the whole layout with buttons, octaves and scale
