@@ -16,37 +16,6 @@ h2 {
   margin-left: 0;
 }
 
-
-/* Header
--------------------------------------------------- */
-
-.jumbotron {
-  position: relative;
-  text-align: center;
-  border-radius: 0;
-  background-color: #eee;
-  padding: 3rem 2rem;
-}
-
-.jumbotron-links {
-  margin-top: 15px;
-  margin-bottom: 0;
-  padding-left: 0;
-  list-style: none;
-  font-size: 14px;
-}
-
-.jumbotron-links li {
-  display: inline;
-}
-
-.jumbotron-links li + li {
-  margin-left: 20px;
-}
-
-/* How to use
--------------------------------------------------- */
-
 .how-to .container {
   max-width: 600px;
 }
@@ -56,18 +25,11 @@ h2 {
   margin-bottom: 15px;
 }
 
-/* Footer
--------------------------------------------------- */
-
 footer {
   color: #777;
   text-align: center;
   font-size: 80%;
 }
-
-
-/* Keyboard
--------------------------------------------------- */
 
 #the-keyboard {
   width: 690px;
