@@ -6,7 +6,8 @@
     "test": "eslint .",
     "lint": "eslint .",
     "start": "webpack-dev-server -d --colors",
-    "build": "webpack --config webpack.prod.config.js"
+    "build": "webpack --config webpack.prod.config.js",
+    "version": "npm run build && git add dist/"
   },
   "repository": {
     "type": "git",
