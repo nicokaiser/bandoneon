@@ -1,14 +1,8 @@
 {
   "name": "bandoneon",
-  "version": "1.2.0",
+  "version": "2.0.0",
   "description": "A little JavaScript application that wants to help learning the Alfred Arnold 142 bandoneon.",
-  "scripts": {
-    "test": "eslint .",
-    "lint": "eslint .",
-    "start": "webpack-dev-server -d --colors",
-    "build": "webpack --config webpack.prod.config.js",
-    "version": "npm run build && git add dist/"
-  },
+  "private": true,
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nicokaiser/bandoneon.git"
@@ -16,31 +10,61 @@
   "author": "Nico Kaiser",
   "license": "MIT",
   "homepage": "https://bandoneon.app",
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint"
+  },
   "dependencies": {
-    "@tonaljs/chord": "^3.7.0",
+    "@tonaljs/chord": "^3.8.1",
     "@tonaljs/note": "^3.6.0",
-    "@tonaljs/scale": "^3.6.0",
-    "backbone": "^1.4.0",
-    "bootstrap": "^4.5.2",
-    "file-loader": "^6.0.0",
-    "jquery": "^3.5.1",
-    "popper.js": "^1.16.1",
-    "raphael": "^2.3.0"
+    "@tonaljs/scale": "^3.6.1",
+    "bootstrap": "^4.5.3",
+    "core-js": "^3.6.5",
+    "vue": "^2.6.12",
+    "vue-i18n": "^8.22.1",
+    "vue-router": "^3.4.7",
+    "vuex": "^3.5.1",
+    "vuex-router-sync": "^5.0.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.11.1",
-    "@babel/preset-env": "^7.11.0",
-    "babel-loader": "^8.1.0",
-    "babel-regenerator-runtime": "^6.5.0",
-    "css-loader": "^4.2.1",
-    "eslint": "^7.6.0",
-    "eslint-config-prettier": "^6.11.0",
-    "eslint-plugin-prettier": "^3.1.4",
-    "prettier": "^2.0.5",
-    "style-loader": "^1.2.1",
-    "url-loader": "^4.1.0",
-    "webpack": "^4.44.1",
-    "webpack-cli": "^3.3.12",
-    "webpack-dev-server": "^3.11.0"
-  }
+    "@kazupon/vue-i18n-loader": "^0.5.0",
+    "@vue/cli-plugin-babel": "~4.5.7",
+    "@vue/cli-plugin-eslint": "~4.5.7",
+    "@vue/cli-service": "~4.5.7",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.11.0",
+    "eslint-plugin-vue": "^7.0.1",
+    "sass": "^1.27.0",
+    "sass-loader": "^10.0.3",
+    "vue-template-compiler": "^2.6.12"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/recommended",
+      "eslint:recommended"
+    ],
+    "rules": {
+      "vue/script-indent": [
+        "warn",
+        2,
+        {
+          "baseIndent": 1,
+          "switchCase": 1
+        }
+      ]
+    },
+    "parserOptions": {
+      "parser": "babel-eslint"
+    }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
 }
