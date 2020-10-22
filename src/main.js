@@ -3,7 +3,7 @@ import VueRouter from "vue-router"
 import { sync } from 'vuex-router-sync'
 import store from './store'
 import App from './components/App.vue'
-import VueI18n from 'vue-i18n';
+import VueI18n from 'vue-i18n'
 
 Vue.config.productionTip = false
 

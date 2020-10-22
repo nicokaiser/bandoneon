@@ -74,9 +74,9 @@
 
     mounted() {
       document.addEventListener('keypress', ({ key }) => {
-        if (key === 'M') return this.setChordType('M');
-        if (key === 'm') return this.setChordType('m');
-        if (key === '7') return this.setChordType('7');
+        if (key === 'M') return this.setChordType('M')
+        if (key === 'm') return this.setChordType('m')
+        if (key === '7') return this.setChordType('7')
 
         if (key === 'C') return this.toggleButtonColors()
       })

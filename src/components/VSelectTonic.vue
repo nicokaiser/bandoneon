@@ -34,11 +34,11 @@
     mounted() {
       document.addEventListener('keypress', ({ key }) => {
         if (['c', 'd', 'e', 'f', 'g', 'a', 'b'].includes(key)) {
-          return this.setTonic(key.toUpperCase(), true);
+          return this.setTonic(key.toUpperCase(), true)
         }
 
         if (key === '#' && this.currentTonic && this.currentTonic.length === 1) {
-          this.setTonic(this.currentTonic + '#');
+          this.setTonic(this.currentTonic + '#')
         }
       })
     },
@@ -69,11 +69,11 @@
       },
 
       noteNames(noteName) {
-        const names = [noteName.replace('#', '♯')];
+        const names = [noteName.replace('#', '♯')]
         if (noteName.length === 2 && noteName[1] === '#') {
-          names.push(Note.enharmonic(noteName).replace('b', '♭'));
+          names.push(Note.enharmonic(noteName).replace('b', '♭'))
         }
-        return names;
+        return names
       }
     }
   }
