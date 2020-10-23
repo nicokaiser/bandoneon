@@ -30,7 +30,7 @@ const router = new VueRouter({
 })
 
 const i18n = new VueI18n({
-  locale: navigator.language?.split('-')[0] || 'en',
+  locale: store.state.language,
   fallbackLocale: 'en'
 })
 

@@ -20,7 +20,39 @@
 
 <template>
   <footer>
-    <div class="container mt-5 mb-4">
+    <div class="container mt-4 mb-3">
+      <a
+        href="#"
+        class="px-1"
+        @click.prevent="setLanguage('de')"
+      >
+        <img
+          src="@/assets/images/de.svg"
+          class="flag"
+        >
+      </a>
+      <a
+        href="#"
+        class="px-1"
+        @click.prevent="setLanguage('en')"
+      >
+        <img
+          src="@/assets/images/en.svg"
+          class="flag"
+        >
+      </a>
+      <a
+        href="#"
+        class="px-1"
+        @click.prevent="setLanguage('es')"
+      >
+        <img
+          src="@/assets/images/es.svg"
+          class="flag"
+        >
+      </a>
+    </div>
+    <div class="container mt-2 mb-4">
       <p>
         <i18n path="license">
           <template #name>
@@ -50,10 +82,25 @@
   </footer>
 </template>
 
+<script>
+  export default {
+    methods: {
+      setLanguage(language) {
+        this.$store.commit('setLanguage', language)
+        this.$root.$i18n.locale = language
+      }
+    }
+  };
+</script>
+
 <style scoped>
   footer {
     color: #777;
     text-align: center;
     font-size: 80%;
+  }
+
+  footer img.flag {
+    height: 1.25em;
   }
 </style>

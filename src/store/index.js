@@ -1,13 +1,16 @@
 import Vue from "vue"
 import Vuex from "vuex"
+import VueLocalStorage from 'vue-localstorage'
 
 import chords from './chords.json'
 import positions from './positions.json'
 
 Vue.use(Vuex)
+Vue.use(VueLocalStorage)
 
 export default new Vuex.Store({
   state: () => ({
+    language: Vue.localStorage.get('language') || navigator.language?.split('-')[0] || 'en',
     buttonColors: false,
     chords,
     positions,
@@ -33,4 +36,11 @@ export default new Vuex.Store({
       return state.route.params.scaleType
     }
   },
+
+  mutations: {
+    setLanguage(state, language) {
+      Vue.localStorage.set('language', language)
+      state.language = language
+    }
+  }
 })
