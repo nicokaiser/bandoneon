@@ -5,7 +5,7 @@ RUN npm ci
 COPY . .
 RUN npm run build
 
-FROM nginx:1
+FROM nginx:1-alpine
 LABEL maintainer="Nico Kaiser <nico@kaiser.me>" \
     org.label-schema.name="bandoneon" \
     org.label-schema.description="A little JavaScript application that wants to help learning the Alfred Arnold 142 bandoneon." \
