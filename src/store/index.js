@@ -25,7 +25,7 @@ export default new Vuex.Store({
     },
 
     currentTonic(state) {
-      return state.route.params.tonic
+      return decodeURIComponent(state.route.params.tonic);
     },
 
     currentChordType(state) {
