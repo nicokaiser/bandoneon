@@ -50,11 +50,29 @@
 </template>
 
 <script>
-  import { mapGetters } from 'vuex'
   import Note from '@tonaljs/note'
   import Scale from '@tonaljs/scale'
 
   export default {
+    props: {
+      variant: {
+        type: String,
+        default: 'right-open',
+      },
+      tonic: {
+        type: String,
+        default: undefined,
+      },
+      scaleType: {
+        type: String,
+        default: undefined,
+      },
+      chordType: {
+        type: String,
+        default: undefined,
+      }
+    },
+
     data: () => ({
       octaveColors: ['#d7b171', '#71a8d7', '#e37e7b', '#85ca85', '#e6cb84', '#71a8d7'],
       scaleColors: ['orange', 'blue', 'red', 'green', 'orange', 'blue']
@@ -66,7 +84,9 @@
       },
 
       positions() {
-        const p = this.$store.state.keyboard[this.currentVariant]
+        const p = this.$store.state.keyboard[this.variant]
+        if (!p) return {};
+
         const positions = {}
         let offsetX = 0;
         let offsetY = 0;
@@ -95,17 +115,17 @@
       },
 
       chords() {
-        return this.$store.state.chords[this.currentVariant]
+        return this.$store.state.chords[this.variant]
       },
 
       scalePaths() {
-        if (this.currentTonic && this.currentScaleType) {
-          const { intervals, empty } = Scale.get(this.currentScaleType)
+        if (this.tonic && this.scaleType) {
+          const { intervals, empty } = Scale.get(this.scaleType)
           if (empty) return []
           const paths = []
           for (let o = -1; o < 5; o++) {
-            const notes = intervals.map((i) => Note.transpose(`${this.currentTonic}${o}`, i))
-            notes.push(`${this.currentTonic}${o + 1}`)
+            const notes = intervals.map((i) => Note.transpose(`${this.tonic}${o}`, i))
+            notes.push(`${this.tonic}${o + 1}`)
             let pathString = ''
             notes.forEach((n) => {
               const no = Note.get(n)
@@ -123,8 +143,8 @@
       },
 
       chordsPositions() {
-        if (this.currentTonic && this.currentChordType) {
-          const chord = this.chords[`${this.currentTonic}${this.currentChordType}`]
+        if (this.tonic && this.chordType) {
+          const chord = this.chords[`${this.tonic}${this.chordType}`]
           if (!chord) return []
           const positions = []
           for (let i = 0; i <= chord.length; i++) {
@@ -136,8 +156,6 @@
         }
         return []
       },
-
-      ...mapGetters(['currentVariant', 'currentScaleType', 'currentChordType', 'currentTonic'])
     },
 
     methods: {

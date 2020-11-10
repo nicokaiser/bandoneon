@@ -5,7 +5,12 @@
       <div class="row">
         <div class="col-xs-12">
           <v-select-variant />
-          <v-keyboard />
+          <v-keyboard
+            :variant="currentVariant"
+            :tonic="currentTonic"
+            :scale-type="currentScaleType"
+            :chord-type="currentChordType"
+          />
           <v-select-tonic />
           <v-select-scale />
         </div>
@@ -17,6 +22,7 @@
 </template>
 
 <script>
+  import { mapGetters } from 'vuex'
   import VNav from './VNav.vue'
   import VHowTo from './VHowTo.vue'
   import VFooter from './VFooter.vue'
@@ -29,6 +35,9 @@
     name:'App',
     components: {
       VNav, VHowTo, VFooter, VSelectVariant, VKeyboard, VSelectScale, VSelectTonic
+    },
+    computed: {
+      ...mapGetters(['currentVariant', 'currentScaleType', 'currentChordType', 'currentTonic'])
     }
   }
 </script>
