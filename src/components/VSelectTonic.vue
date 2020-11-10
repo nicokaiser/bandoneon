@@ -69,9 +69,9 @@
       },
 
       noteNames(noteName) {
-        const names = [noteName.replace('#', '♯')]
+        const names = [noteName]
         if (noteName.length === 2 && noteName[1] === '#') {
-          names.push(Note.enharmonic(noteName).replace('b', '♭'))
+          names.push(Note.enharmonic(noteName))
         }
         return names
       }
