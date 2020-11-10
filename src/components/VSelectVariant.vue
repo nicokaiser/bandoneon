@@ -19,7 +19,6 @@
     "right-close": "Derecha cerrando"
   }
 }
-
 </i18n>
 
 <template>
