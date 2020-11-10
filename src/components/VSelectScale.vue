@@ -4,51 +4,112 @@
     "major": "Dur",
     "minor": "Moll",
     "chromatic": "chromatisch",
-    "colors": "Farben"
+    "colors": "Farben",
+    "einheitsbandonion144": "144 Töne, Einheitsbandonion",
+    "rheinische142": "142 Töne, Rheinische Tonlage",
+    "rheinische152": "152 Töne, Rheinische Tonlage, klassische Erweiterung",
+    "peguri146": "146 Töne, Peguri system (chromatisch)"
   },
   "en": {
     "major": "major",
     "minor": "minor",
     "chromatic": "chromatic",
-    "colors": "button colors"
+    "colors": "button colors",
+    "einheitsbandonion144": "144 tones, Einheitsbandonion",
+    "rheinische142": "142 tones, Rheinische Tonlage",
+    "rheinische152": "152 tones, Rheinische Tonlage, historic extension",
+    "peguri146": "146 tones, Peguri system (chromatic)"
   },
   "es": {
     "major": "mayor",
     "minor": "menor",
     "chromatic": "cromático",
-    "colors": "colores"
+    "colors": "colores",
+    "einheitsbandonion144": "144 tonos, Einheitsbandonion",
+    "rheinische142": "142 tonos, Rheinische Tonlage",
+    "rheinische152": "152 tonos, Rheinische Tonlage, extensión histórico",
+    "peguri146": "146 tonos, Peguri system (cromatico)"
   }
 }
 </i18n>
 
 <template>
-  <div class="btn-toolbar justify-content-between">
-    <div class="btn-group mr-2">
+  <div>
+    <div class="btn-toolbar justify-content-between">
+      <div class="btn-group">
+        <button
+          v-for="scaleType in scaleTypes" 
+          :key="scaleType"
+          :class="['btn', (currentScaleType === scaleType) ? 'btn-primary' : 'btn-outline-secondary']"
+          @click.stop="setScaleType(scaleType)"
+        >
+          {{ $t(scaleType) }}
+        </button>
+      </div>
+      <div class="btn-group">
+        <button
+          v-for="chordType in chordTypes" 
+          :key="chordType"
+          :class="['btn', (currentChordType === chordType) ? 'btn-primary' : 'btn-outline-secondary']"
+          @click.stop="setChordType(chordType)"
+        >
+          {{ chordType }}
+        </button>
+      </div>
       <button
-        v-for="scaleType in scaleTypes" 
-        :key="scaleType"
-        :class="['btn', (currentScaleType === scaleType) ? 'btn-primary' : 'btn-outline-secondary']"
-        @click.stop="setScaleType(scaleType)"
+        :class="['btn', 'btn-outline-secondary', buttonColors ? 'active' : null]"
+        @click.stop="toggleButtonColors()"
       >
-        {{ $t(scaleType) }}
+        {{ $t('colors') }}
+      </button>
+      <button
+        :class="['btn', 'btn-outline-secondary', showSettings ? 'active' : null]"
+        style="line-height: 1em; display: none;"
+        title="Settings"
+        @click.stop="toggleSettings()"
+      >
+        <svg
+          width="1em"
+          height="1em"
+          viewBox="0 0 16 16"
+          class="bi bi-gear-wide-connected"
+          fill="currentColor"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M8.932.727c-.243-.97-1.62-.97-1.864 0l-.071.286a.96.96 0 0 1-1.622.434l-.205-.211c-.695-.719-1.888-.03-1.613.931l.08.284a.96.96 0 0 1-1.186 1.187l-.284-.081c-.96-.275-1.65.918-.931 1.613l.211.205a.96.96 0 0 1-.434 1.622l-.286.071c-.97.243-.97 1.62 0 1.864l.286.071a.96.96 0 0 1 .434 1.622l-.211.205c-.719.695-.03 1.888.931 1.613l.284-.08a.96.96 0 0 1 1.187 1.187l-.081.283c-.275.96.918 1.65 1.613.931l.205-.211a.96.96 0 0 1 1.622.434l.071.286c.243.97 1.62.97 1.864 0l.071-.286a.96.96 0 0 1 1.622-.434l.205.211c.695.719 1.888.03 1.613-.931l-.08-.284a.96.96 0 0 1 1.187-1.187l.283.081c.96.275 1.65-.918.931-1.613l-.211-.205a.96.96 0 0 1 .434-1.622l.286-.071c.97-.243.97-1.62 0-1.864l-.286-.071a.96.96 0 0 1-.434-1.622l.211-.205c.719-.695.03-1.888-.931-1.613l-.284.08a.96.96 0 0 1-1.187-1.186l.081-.284c.275-.96-.918-1.65-1.613-.931l-.205.211a.96.96 0 0 1-1.622-.434L8.932.727zM8 12.997a4.998 4.998 0 1 0 0-9.995 4.998 4.998 0 0 0 0 9.996z"
+          />
+          <path
+            fill-rule="evenodd"
+            d="M7.375 8L4.602 4.302l.8-.6L8.25 7.5h4.748v1H8.25L5.4 12.298l-.8-.6L7.376 8z"
+          />
+        </svg>
       </button>
     </div>
-    <div class="btn-group">
-      <button
-        v-for="chordType in chordTypes" 
-        :key="chordType"
-        :class="['btn', (currentChordType === chordType) ? 'btn-primary' : 'btn-outline-secondary']"
-        @click.stop="setChordType(chordType)"
-      >
-        {{ chordType }}
-      </button>
-    </div>
-    <button
-      :class="['btn', 'btn-outline-secondary', buttonColors ? 'active' : null]"
-      @click.stop="toggleButtonColors()"
+    <div
+      v-if="showSettings" 
+      class="my-3 form-group"
     >
-      {{ $t('colors') }}
-    </button>
+      <select
+        id="inputState"
+        class="form-control"
+        @change="setKeyboard($event)"
+      >
+        <option value="rheinische142">
+          {{ $t('rheinische142') }}
+        </option>
+        <option value="rheinische152">
+          {{ $t('rheinische152') }}
+        </option>
+        <option value="einheitsbandonion144">
+          {{ $t('einheitsbandonion144') }}
+        </option>
+        <option value="peguri146">
+          {{ $t('peguri146') }}
+        </option>
+      </select>
+    </div>
   </div>
 </template>
 
@@ -56,6 +117,10 @@
   import { mapGetters } from 'vuex'
 
   export default {
+    data: () => ({
+      showSettings: true,
+    }),
+
     computed: {
       buttonColors() {
         return this.$store.state.buttonColors
@@ -103,7 +168,15 @@
 
       toggleButtonColors() {
         this.$store.state.buttonColors = !this.$store.state.buttonColors
-      }
+      },
+
+      toggleSettings() {
+        this.showSettings = !this.showSettings;
+      },
+
+      setKeyboard(event) {
+        this.$store.commit('setKeyboard', event.target.value);
+      },
     }
   }
 </script>

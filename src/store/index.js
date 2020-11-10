@@ -3,7 +3,7 @@ import Vuex from "vuex"
 import VueLocalStorage from 'vue-localstorage'
 
 import chords from './chords.json'
-import keyboard from './keyboards/rheinische142.json'
+import keyboards from './keyboards'
 
 Vue.use(Vuex)
 Vue.use(VueLocalStorage)
@@ -13,7 +13,8 @@ export default new Vuex.Store({
     language: Vue.localStorage.get('language') || navigator.language?.split('-')[0] || 'en',
     buttonColors: false,
     chords,
-    keyboard,
+    keyboards: Object.keys(keyboards),
+    keyboard: keyboards[Vue.localStorage.get('keyboard') || 'rheinische142'],
     variants: ['left-open', 'left-close', 'right-open', 'right-close'],
     scaleTypes: ['major', 'minor', 'chromatic'],
     chordTypes: ['M', 'm', '7', 'dim', 'm7', 'M7']
@@ -34,13 +35,20 @@ export default new Vuex.Store({
 
     currentScaleType(state) {
       return state.route.params.scaleType
-    }
+    },
   },
 
   mutations: {
     setLanguage(state, language) {
       Vue.localStorage.set('language', language)
       state.language = language
-    }
+    },
+
+    setKeyboard(state, keyboard) {
+      if (keyboard in keyboards) {
+        state.keyboard = keyboards[keyboard]
+        Vue.localStorage.set('keyboard', keyboard)
+      }
+    },
   }
 })
