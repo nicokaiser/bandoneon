@@ -3,7 +3,7 @@ import Vuex from "vuex"
 import VueLocalStorage from 'vue-localstorage'
 
 import chords from './chords.json'
-import positions from './positions.json'
+import keyboard from './keyboards/rheinische152.json'
 
 Vue.use(Vuex)
 Vue.use(VueLocalStorage)
@@ -13,7 +13,7 @@ export default new Vuex.Store({
     language: Vue.localStorage.get('language') || navigator.language?.split('-')[0] || 'en',
     buttonColors: false,
     chords,
-    positions,
+    keyboard,
     variants: ['left-open', 'left-close', 'right-open', 'right-close'],
     scaleTypes: ['major', 'minor', 'chromatic'],
     chordTypes: ['M', 'm', '7', 'dim', 'm7', 'M7']

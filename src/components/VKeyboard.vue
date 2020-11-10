@@ -12,8 +12,8 @@
         :key="name"
       >
         <circle 
-          :cx="x + 10"
-          :cy="y + 28"
+          :cx="x + 29"
+          :cy="y + 29"
           r="28"
           :fill="fill(name)"
           stroke="#999"
@@ -21,10 +21,10 @@
           fill-opacity="0.5"
         />
         <text
-          :x="x + 10"
-          :y="y + 28"
+          :x="x + 29"
+          :y="y + 29"
           fill="#222"
-          font-style="italic"
+          :style="(name.endsWith('-1') ? 'text-decoration: underline' : '')"
         >
           <tspan dy="7">{{ format(name) }}</tspan>
         </text>
@@ -38,8 +38,8 @@
       <circle
         v-for="([x, y], index) in chordsPositions"
         :key="index"
-        :cx="x + 10"
-        :cy="y + 28"
+        :cx="x + 29"
+        :cy="y + 29"
         r="28"
         stroke="#222"
         :stroke-width="index === 0 ? 3 : 2"
@@ -56,7 +56,7 @@
 
   export default {
     data: () => ({
-      octaveColors: ['#71a8d7', '#e37e7b', '#85ca85', '#e6cb84'],
+      octaveColors: ['#d7b171', '#71a8d7', '#e37e7b', '#85ca85', '#e6cb84', '#71a8d7'],
       scaleColors: ['orange', 'blue', 'red', 'green', 'orange', 'blue']
     }),
 
@@ -66,7 +66,25 @@
       },
 
       positions() {
-        return this.$store.state.positions[this.currentVariant]
+        const p = this.$store.state.keyboard[this.currentVariant]
+        const positions = {}
+        let offsetX = 0;
+        let offsetY = 0;
+        for (let row = 0; row < p.length; row++) {
+          for (let col = 0; col < p[row].length; col++) {
+            let name = p[row][col]
+            const x = offsetX + col * 79 + 40 - (row % 2 * 40)
+            const y = offsetY + row * 64
+              + 30 * (1 - Math.sin(x / 320 * Math.PI / 2))
+            if (name) {
+              while (positions[name]) {
+                name += ' '
+              }
+              positions[name] = [x, y + offsetY]
+            }
+          }
+        }
+        return positions
       },
 
       chords() {
@@ -87,7 +105,7 @@
               const idx = Object.keys(this.positions).find((v) => Note.get(v).height === no.height)
               if (idx) {
                 const [x, y] = this.positions[idx]
-                pathString += `${pathString === '' ? 'M' : 'L'}${x + 10},${y + 30}`
+                pathString += `${pathString === '' ? 'M' : 'L'}${x + 30},${y + 30}`
               }
             })
             paths.push(pathString)
@@ -118,18 +136,18 @@
     methods: {
       format(tonal) {
         let result = tonal[0].toLowerCase()
-        let octave = +tonal[1]
-        if (tonal[1] === '#') octave = +tonal[2]
-        if (octave === 0) result = tonal[0].toUpperCase()
-        if (tonal[1] === '#') result += '♯'
+        let octave = +tonal.slice(1)
+        if (tonal[1] === '#') octave = +tonal.slice(2)
+        if (octave < 1) result = tonal[0].toUpperCase()
+        if (tonal[1] === '#') result += '#'
         if (octave > 0) result += '’'.repeat(octave - 1)
         return result
       },
 
       fill(tonal) {
-        let octave = +tonal[1]
-        if (tonal[1] === '#') octave = +tonal[2]
-        return this.buttonColors ? this.octaveColors[octave % this.octaveColors.length] : '#ddd'
+        let octave = +tonal.slice(1)
+        if (tonal[1] === '#') octave = +tonal.slice(2)
+        return this.buttonColors ? this.octaveColors[octave + 1] : '#ddd'
       }
     }
   }
@@ -138,8 +156,8 @@
 <style scoped>
   div {
     width: 690px;
-    height: 440px;
-    margin: 20px 0;
+    height: 420px;
+    margin: 30px 0;
     text-align: center;
   }
 
