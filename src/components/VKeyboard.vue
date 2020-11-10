@@ -70,6 +70,13 @@
         const positions = {}
         let offsetX = 0;
         let offsetY = 0;
+
+        // Center
+        const cols = Math.max(...p.map((row) => row.length));
+        const rows = p.reduce((acc, row) => acc + (row.length > 0 ? 1 : 0), 0);
+        if (cols < 9) offsetX += 40 * (9 - cols);
+        if (rows < 6) offsetY -= 32 * (6 - rows);
+
         for (let row = 0; row < p.length; row++) {
           for (let col = 0; col < p[row].length; col++) {
             let name = p[row][col]
@@ -80,7 +87,7 @@
               while (positions[name]) {
                 name += ' '
               }
-              positions[name] = [x, y + offsetY]
+              positions[name] = [x, y]
             }
           }
         }

@@ -3,7 +3,7 @@ import Vuex from "vuex"
 import VueLocalStorage from 'vue-localstorage'
 
 import chords from './chords.json'
-import keyboard from './keyboards/rheinische152.json'
+import keyboard from './keyboards/rheinische142.json'
 
 Vue.use(Vuex)
 Vue.use(VueLocalStorage)
