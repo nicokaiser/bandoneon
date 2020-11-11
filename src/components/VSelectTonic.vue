@@ -1,5 +1,5 @@
 <template>
-  <div class="btn-toolbar mb-3">
+  <div class="btn-toolbar mb-3 d-print-none">
     <div
       class="btn-group"
       style="width: 100%"

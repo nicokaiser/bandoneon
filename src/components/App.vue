@@ -54,10 +54,4 @@
     margin-right: 0;
     margin-left: 0;
   }
-
-  @media print {
-    .how-to,
-    .footer,
-    button { display: none; }
-  }
 </style>

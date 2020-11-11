@@ -37,7 +37,7 @@
 </i18n>
 
 <template>
-  <div class="bg-light">
+  <div class="bg-light d-print-none">
     <div class="container pt-5 pb-5">
       <h2 class="mb-4">
         {{ $t('howToUse') }}

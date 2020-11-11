@@ -1,10 +1,10 @@
 <i18n>
 {
   "de": {
-      "left-open": "Links Zug",
-      "left-close": "Links Druck",
-      "right-open": "Rechts Zug",
-      "right-close": "Rechts Druck"
+    "left-open": "Links Zug",
+    "left-close": "Links Druck",
+    "right-open": "Rechts Zug",
+    "right-close": "Rechts Druck"
   },
   "en": {
     "left-open": "Left open",
@@ -22,7 +22,7 @@
 </i18n>
 
 <template>
-  <ul class="nav nav-tabs nav-fill">
+  <ul class="nav nav-tabs nav-fill d-print-none">
     <li
       v-for="variant in variants"
       :key="variant"

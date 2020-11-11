@@ -25,7 +25,7 @@
   <div class="my-3 form-group">
     <select
       id="inputState"
-      class="form-control"
+      class="form-control d-print-none"
       @change="setKeyboard($event)"
     >
       <option

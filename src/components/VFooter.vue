@@ -19,7 +19,7 @@
 </i18n>
 
 <template>
-  <footer>
+  <footer class="d-print-none">
     <div class="container mt-4 mb-3">
       <a
         href="#"

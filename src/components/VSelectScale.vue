@@ -23,7 +23,7 @@
 
 <template>
   <div>
-    <div class="btn-toolbar justify-content-between">
+    <div class="btn-toolbar justify-content-between d-print-none">
       <div class="btn-group">
         <button
           v-for="scaleType in scaleTypes" 
