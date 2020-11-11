@@ -4,31 +4,19 @@
     "major": "Dur",
     "minor": "Moll",
     "chromatic": "chromatisch",
-    "colors": "Farben",
-    "einheitsbandonion144": "144 Töne, Einheitsbandonion",
-    "rheinische142": "142 Töne, Rheinische Tonlage",
-    "rheinische152": "152 Töne, Rheinische Tonlage, klassische Erweiterung",
-    "peguri146": "146 Töne, Peguri system (chromatisch)"
+    "colors": "Farben"
   },
   "en": {
     "major": "major",
     "minor": "minor",
     "chromatic": "chromatic",
-    "colors": "button colors",
-    "einheitsbandonion144": "144 tones, Einheitsbandonion",
-    "rheinische142": "142 tones, Rheinische Tonlage",
-    "rheinische152": "152 tones, Rheinische Tonlage, historic extension",
-    "peguri146": "146 tones, Peguri system (chromatic)"
+    "colors": "button colors"
   },
   "es": {
     "major": "mayor",
     "minor": "menor",
     "chromatic": "cromático",
-    "colors": "colores",
-    "einheitsbandonion144": "144 tonos, Einheitsbandonion",
-    "rheinische142": "142 tonos, Rheinische Tonlage",
-    "rheinische152": "152 tonos, Rheinische Tonlage, extensión histórico",
-    "peguri146": "146 tonos, Peguri system (cromatico)"
+    "colors": "colores"
   }
 }
 </i18n>
@@ -87,38 +75,19 @@
         </svg>
       </button>
     </div>
-    <div
-      v-if="showSettings" 
-      class="my-3 form-group"
-    >
-      <select
-        id="inputState"
-        class="form-control"
-        @change="setKeyboard($event)"
-      >
-        <option value="rheinische142">
-          {{ $t('rheinische142') }}
-        </option>
-        <option value="rheinische152">
-          {{ $t('rheinische152') }}
-        </option>
-        <option value="einheitsbandonion144">
-          {{ $t('einheitsbandonion144') }}
-        </option>
-        <option value="peguri146">
-          {{ $t('peguri146') }}
-        </option>
-      </select>
-    </div>
+    <v-select-keyboard v-if="showSettings" />
   </div>
 </template>
 
 <script>
   import { mapGetters } from 'vuex'
+  import VSelectKeyboard from './VSelectKeyboard';
 
   export default {
+    components: { VSelectKeyboard },
+
     data: () => ({
-      showSettings: true,
+      showSettings: false,
     }),
 
     computed: {

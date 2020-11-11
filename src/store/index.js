@@ -13,8 +13,8 @@ export default new Vuex.Store({
     language: Vue.localStorage.get('language') || navigator.language?.split('-')[0] || 'en',
     buttonColors: false,
     chords,
-    keyboards: Object.keys(keyboards),
-    keyboard: keyboards[Vue.localStorage.get('keyboard') || 'rheinische142'],
+    keyboards,
+    keyboard: Vue.localStorage.get('keyboard') || 'rheinische142',
     variants: ['left-open', 'left-close', 'right-open', 'right-close'],
     scaleTypes: ['major', 'minor', 'chromatic'],
     chordTypes: ['M', 'm', '7', 'dim', 'm7', 'M7']
@@ -46,7 +46,7 @@ export default new Vuex.Store({
 
     setKeyboard(state, keyboard) {
       if (keyboard in keyboards) {
-        state.keyboard = keyboards[keyboard]
+        state.keyboard = keyboard
         Vue.localStorage.set('keyboard', keyboard)
       }
     },

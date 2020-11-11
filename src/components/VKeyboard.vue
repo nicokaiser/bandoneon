@@ -84,22 +84,23 @@
       },
 
       positions() {
-        const p = this.$store.state.keyboard[this.variant]
-        if (!p) return {};
+        if (!this.currentKeyboard) return {};
+        const keyboard = this.currentKeyboard[this.variant]
+        if (!keyboard) return {};
 
         const positions = {}
         let offsetX = 0;
         let offsetY = 0;
 
         // Center
-        const cols = Math.max(...p.map((row) => row.length));
-        const rows = p.reduce((acc, row) => acc + (row.length > 0 ? 1 : 0), 0);
+        const cols = Math.max(...keyboard.map((row) => row.length));
+        const rows = keyboard.reduce((acc, row) => acc + (row.length > 0 ? 1 : 0), 0);
         if (cols < 9) offsetX += 39 * (9 - cols);
         if (rows < 6) offsetY -= 32 * (6 - rows);
 
-        for (let row = 0; row < p.length; row++) {
-          for (let col = 0; col < p[row].length; col++) {
-            let name = p[row][col]
+        for (let row = 0; row < keyboard.length; row++) {
+          for (let col = 0; col < keyboard[row].length; col++) {
+            let name = keyboard[row][col]
             const x = offsetX + col * 79 + 40 - (row % 2 * 40)
             const y = offsetY + row * 64
               + 30 * (1 - Math.sin(x / 320 * Math.PI / 2))
@@ -155,6 +156,10 @@
           return positions
         }
         return []
+      },
+
+      currentKeyboard() {
+        return this.$store.state.keyboards[this.$store.state.keyboard]
       },
     },
 
