@@ -1,11 +1,10 @@
 <template>
   <div>
     <svg 
-      height="440"
       version="1.1"
-      width="690"
       xmlns="http://www.w3.org/2000/svg"
       xmlns:xlink="http://www.w3.org/1999/xlink"
+      viewBox="0 0 690 410"
     >
       <g
         v-for="([x, y], name) in positions"
@@ -185,8 +184,7 @@
 
 <style scoped>
   div {
-    width: 690px;
-    height: 420px;
+    width: 100%;
     margin: 30px 0;
     text-align: center;
   }

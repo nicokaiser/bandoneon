@@ -2,19 +2,15 @@
   <div id="app">
     <v-nav />
     <div class="container mb-5">
-      <div class="row">
-        <div class="col-xs-12">
-          <v-select-variant />
-          <v-keyboard
-            :variant="currentVariant"
-            :tonic="currentTonic"
-            :scale-type="currentScaleType"
-            :chord-type="currentChordType"
-          />
-          <v-select-tonic />
-          <v-select-scale />
-        </div>
-      </div>
+      <v-select-variant />
+      <v-keyboard
+        :variant="currentVariant"
+        :tonic="currentTonic"
+        :scale-type="currentScaleType"
+        :chord-type="currentChordType"
+      />
+      <v-select-tonic />
+      <v-select-scale />
     </div>
     <v-how-to />
     <v-footer />
