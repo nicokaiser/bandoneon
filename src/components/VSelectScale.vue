@@ -50,9 +50,10 @@
       >
         {{ $t('colors') }}
       </button>
+      <!--
       <button
         :class="['btn', 'btn-outline-secondary', showSettings ? 'active' : null]"
-        style="line-height: 1em; xdisplay: none;"
+        style="line-height: 1em;"
         title="Settings"
         @click.stop="toggleSettings()"
       >
@@ -74,6 +75,7 @@
           />
         </svg>
       </button>
+      -->
     </div>
     <v-select-instrument v-if="showSettings" />
   </div>
