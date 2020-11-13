@@ -9,15 +9,16 @@
       <g
         v-for="([x, y], name) in positions"
         :key="name"
+        @click="toggle(name)"
       >
         <circle 
           :cx="x + 29"
           :cy="y + 29"
           r="28"
           :fill="fill(name)"
-          stroke="#999"
-          stroke-width="1"
-          fill-opacity="0.5"
+          :stroke="selected[name] ? '#222' : '#999'"
+          :stroke-width="selected[name] ? 2 : 1"
+          :fill-opacity="selected[name] ? 1 : 0.25"
         />
         <text
           :x="x + 29"
@@ -34,21 +35,12 @@
         :stroke="scaleColors[index % scaleColors.length]"
         :d="path"
       />
-      <circle
-        v-for="([x, y], index) in chordsPositions"
-        :key="index"
-        :cx="x + 29"
-        :cy="y + 29"
-        r="28"
-        stroke="#222"
-        :stroke-width="index === 0 ? 3 : 2"
-        :fill-opacity="(0.4 - 0.1 * index)"
-      />
     </svg>
   </div>
 </template>
 
 <script>
+  import Vue from "vue"
   import Note from '@tonaljs/note'
   import Scale from '@tonaljs/scale'
 
@@ -73,6 +65,8 @@
     },
 
     data: () => ({
+      modified: false,
+      userSelected: {},
       octaveColors: ['#d7b171', '#71a8d7', '#e37e7b', '#85ca85', '#e6cb84', '#71a8d7'],
       scaleColors: ['orange', 'blue', 'red', 'green', 'orange', 'blue']
     }),
@@ -83,19 +77,19 @@
       },
 
       positions() {
-        if (!this.currentKeyboard) return {};
+        if (!this.currentKeyboard) return {}
         const keyboard = this.currentKeyboard[this.variant]
-        if (!keyboard) return {};
+        if (!keyboard) return {}
 
         const positions = {}
-        let offsetX = 0;
-        let offsetY = 0;
+        let offsetX = 0
+        let offsetY = 0
 
         // Center
-        const cols = Math.max(...keyboard.map((row) => row.length));
-        const rows = keyboard.reduce((acc, row) => acc + (row.length > 0 ? 1 : 0), 0);
-        if (cols < 9) offsetX += 39 * (9 - cols);
-        if (rows < 6) offsetY -= 32 * (6 - rows);
+        const cols = Math.max(...keyboard.map((row) => row.length))
+        const rows = keyboard.reduce((acc, row) => acc + (row.length > 0 ? 1 : 0), 0)
+        if (cols < 9) offsetX += 39 * (9 - cols)
+        if (rows < 6) offsetY -= 32 * (6 - rows)
 
         for (let row = 0; row < keyboard.length; row++) {
           for (let col = 0; col < keyboard[row].length; col++) {
@@ -142,24 +136,36 @@
         return []
       },
 
-      chordsPositions() {
+      selected() {
+        if (this.modified) return this.userSelected
+
+        const selected = {}
         if (this.tonic && this.chordType) {
           const chord = this.chords[`${this.tonic}${this.chordType}`]
-          if (!chord) return []
-          const positions = []
-          for (let i = 0; i <= chord.length; i++) {
-            const n = chord[i]
-            if (!n || !this.positions[n]) continue
-            positions.push(this.positions[n])
+          if (chord) {
+            for (let i = 0; i <= chord.length; i++) {
+              if (chord[i]) selected[chord[i]] = true
+            }
           }
-          return positions
         }
-        return []
+        return selected
       },
 
       currentKeyboard() {
         return this.$store.state.keyboards[this.$store.state.keyboard]
       },
+    },
+
+    watch: {
+      tonic() {
+        this.userSelected = {}
+        this.modified = false
+      },
+
+      chordType() {
+        this.userSelected = {}
+        this.modified = false
+      }
     },
 
     methods: {
@@ -176,9 +182,21 @@
       fill(tonal) {
         let octave = +tonal.slice(1)
         if (tonal[1] === '#') octave = +tonal.slice(2)
-        return this.buttonColors ? this.octaveColors[octave + 1] : '#ddd'
-      }
-    }
+        return this.buttonColors ? this.octaveColors[octave + 1] : '#aaa'
+      },
+
+      toggle(tonal) {
+        if (!this.modified) {
+          this.userSelected = { ...this.selected }
+          this.modified = true
+        }
+        if (this.userSelected[tonal]) {
+          Vue.delete(this.userSelected, tonal)
+        } else {
+          Vue.set(this.userSelected, tonal, true)
+        }
+      },
+    },
   }
 </script>
 
@@ -200,6 +218,7 @@
     font-family: Georgia, serif;
     font-size: 21px;
     font-style: italic;
+    user-select: none;
     cursor: default;
   }
 
