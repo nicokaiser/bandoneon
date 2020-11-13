@@ -26,15 +26,15 @@
     <select
       id="inputState"
       class="form-control d-print-none"
-      @change="setKeyboard($event)"
+      @change="setInstrument($event)"
     >
       <option
-        v-for="keyboard in keyboards"
-        :key="keyboard"
-        :selected="selectedKeyboard === keyboard"
-        :value="keyboard"
+        v-for="instrument in instruments"
+        :key="instrument"
+        :selected="selectedInstrument === instrument"
+        :value="instrument"
       >
-        {{ $t(keyboard) }}
+        {{ $t(instrument) }}
       </option>
     </select>
   </div>
@@ -43,18 +43,18 @@
 <script>
   export default {
     computed: {
-      keyboards() {
-        return Object.keys(this.$store.state.keyboards)
+      instruments() {
+        return Object.keys(this.$store.state.instruments)
       },
 
-      selectedKeyboard() {
-        return this.$store.state.keyboard
+      selectedInstrument() {
+        return this.$store.state.instrument
       }
     },
 
     methods: {
-      setKeyboard(event) {
-        this.$store.commit('setKeyboard', event.target.value);
+      setInstrument(event) {
+        this.$store.commit('setInstrument', event.target.value);
       },
     }
   }

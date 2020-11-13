@@ -52,7 +52,7 @@
       </button>
       <button
         :class="['btn', 'btn-outline-secondary', showSettings ? 'active' : null]"
-        style="line-height: 1em; display: none;"
+        style="line-height: 1em; xdisplay: none;"
         title="Settings"
         @click.stop="toggleSettings()"
       >
@@ -75,16 +75,16 @@
         </svg>
       </button>
     </div>
-    <v-select-keyboard v-if="showSettings" />
+    <v-select-instrument v-if="showSettings" />
   </div>
 </template>
 
 <script>
   import { mapGetters } from 'vuex'
-  import VSelectKeyboard from './VSelectKeyboard';
+  import VSelectInstrument from './VSelectInstrument';
 
   export default {
-    components: { VSelectKeyboard },
+    components: { VSelectInstrument },
 
     data: () => ({
       showSettings: false,
@@ -141,10 +141,6 @@
 
       toggleSettings() {
         this.showSettings = !this.showSettings;
-      },
-
-      setKeyboard(event) {
-        this.$store.commit('setKeyboard', event.target.value);
       },
     }
   }
