@@ -170,13 +170,9 @@
 
     methods: {
       format(tonal) {
-        let result = tonal[0].toLowerCase()
-        let octave = +tonal.slice(1)
-        if (tonal[1] === '#') octave = +tonal.slice(2)
-        if (octave < 1) result = tonal[0].toUpperCase()
-        if (tonal[1] === '#') result += '#'
-        if (octave > 0) result += '’'.repeat(octave - 1)
-        return result
+        const note = Note.get(tonal)
+        return ((note.oct < 1) ? note.letter : note.letter.toLowerCase())
+          + note.acc + ((note.oct > 0) ? '’'.repeat(note.oct - 1) : '')
       },
 
       fill(tonal) {
