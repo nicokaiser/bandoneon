@@ -4,19 +4,22 @@
     "einheitsbandonion144": "144 Töne, Einheitsbandonion",
     "rheinische142": "142 Töne, Rheinische Tonlage",
     "rheinische152": "152 Töne, Rheinische Tonlage, klassische Erweiterung",
-    "peguri146": "146 Töne, Peguri system (chromatisch)"
+    "peguri146": "146 Töne, Peguri-System (chromatisch)",
+    "manouri148": "148 Töne, Manouri-System (chromatisch)"
   },
   "en": {
     "einheitsbandonion144": "144 tones, Einheitsbandonion",
     "rheinische142": "142 tones, Rheinische Tonlage",
     "rheinische152": "152 tones, Rheinische Tonlage, historic extension",
-    "peguri146": "146 tones, Peguri system (chromatic)"
+    "peguri146": "146 tones, Peguri system (chromatic)",
+    "manouri148": "148 tones, Manouri system (chromatic)"
   },
   "es": {
     "einheitsbandonion144": "144 tonos, Einheitsbandonion",
     "rheinische142": "142 tonos, Rheinische Tonlage",
     "rheinische152": "152 tonos, Rheinische Tonlage, extensión histórico",
-    "peguri146": "146 tonos, Peguri system (cromatico)"
+    "peguri146": "146 tonos, Peguri system (cromatico)",
+    "manouri148": "148 tonos, Manouri system (cromatic)"
   }
 }
 </i18n>
