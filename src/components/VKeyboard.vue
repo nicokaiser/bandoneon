@@ -7,26 +7,29 @@
       viewBox="0 0 690 410"
     >
       <g
-        v-for="([x, y], name) in positions"
-        :key="name"
-        @click="toggle(name)"
+        v-for="([x, y], tonal) in positions"
+        :key="tonal"
+        @click="toggle(tonal)"
       >
         <circle 
           :cx="x + 29"
           :cy="y + 29"
           r="28"
-          :fill="fill(name)"
-          :stroke="selected[name] ? '#222' : '#999'"
-          :stroke-width="selected[name] ? 2 : 1"
-          :fill-opacity="selected[name] ? 1 : 0.25"
+          :fill="fill(tonal)"
+          :stroke="selected[tonal] ? '#222' : '#999'"
+          :stroke-width="selected[tonal] ? 2 : 1"
+          :fill-opacity="selected[tonal] ? 1 : 0.25"
         />
         <text
           :x="x + 29"
           :y="y + 29"
           fill="#222"
-          :style="(name.endsWith('-1') ? 'text-decoration: underline' : '')"
+          font-family="Georgia, serif"
+          font-size="21px"
+          font-style="italic"
+          text-anchor="middle"
         >
-          <tspan dy="7">{{ format(name) }}</tspan>
+          <tspan dy="7">{{ format(tonal) }}</tspan>
         </text>
       </g>
       <path
@@ -173,6 +176,7 @@
         const note = Note.get(tonal)
         return ((note.oct < 1) ? note.letter : note.letter.toLowerCase())
           + note.acc + ((note.oct > 0) ? '’'.repeat(note.oct - 1) : '')
+          + ((note.oct < 0) ? ','.repeat(-note.oct) : '')
       },
 
       fill(tonal) {
@@ -210,10 +214,6 @@
   }
 
   svg text {
-    text-anchor: middle;
-    font-family: Georgia, serif;
-    font-size: 21px;
-    font-style: italic;
     user-select: none;
     cursor: default;
   }
