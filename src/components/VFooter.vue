@@ -1,23 +1,3 @@
-<i18n>
-{
-  "de": {
-    "license": "Copyright © {name}, MIT-Lizenz.",
-    "built": "Gebaut mit {tonal}, {vuejs} und {bootstrap}.",
-    "available": "Verfügbar auf {github}."
-  },
-  "en": {
-    "license": "Copyright © {name}, MIT License.",
-    "built": "Built with {tonal}, {vuejs}, and {bootstrap}.",
-    "available": "Available on {github}."
-  },
-  "es": {
-    "license": "Copyright © {name}, licencia MIT.",
-    "built": "Creado con {tonal}, {vuejs} y {bootstrap}.",
-    "available": "Disponible en {github}."
-  }
-}
-</i18n>
-
 <template>
   <footer class="d-print-none">
     <div class="container mt-4 mb-3">

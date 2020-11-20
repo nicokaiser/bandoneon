@@ -174,6 +174,7 @@
     methods: {
       format(tonal) {
         const note = Note.get(tonal)
+        if (note.empty) return '';
         return ((note.oct < 1) ? note.letter : note.letter.toLowerCase())
           + note.acc + ((note.oct > 0) ? '’'.repeat(note.oct - 1) : '')
           + ((note.oct < 0) ? ','.repeat(-note.oct) : '')
