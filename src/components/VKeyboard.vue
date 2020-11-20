@@ -1,6 +1,7 @@
 <template>
   <div>
-    <svg 
+    <svg
+      ref="svg"
       version="1.1"
       xmlns="http://www.w3.org/2000/svg"
       xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -44,6 +45,7 @@
 
 <script>
   import Vue from "vue"
+  import { mapGetters } from 'vuex'
   import Note from '@tonaljs/note'
   import Scale from '@tonaljs/scale'
 
@@ -157,6 +159,8 @@
       currentInstrument() {
         return this.$store.state.instruments[this.$store.state.instrument]
       },
+
+      ...mapGetters(['currentVariant'])
     },
 
     watch: {
@@ -174,7 +178,7 @@
     methods: {
       format(tonal) {
         const note = Note.get(tonal)
-        if (note.empty) return '';
+        if (note.empty) return ''
         return ((note.oct < 1) ? note.letter : note.letter.toLowerCase())
           + note.acc + ((note.oct > 0) ? '’'.repeat(note.oct - 1) : '')
           + ((note.oct < 0) ? ','.repeat(-note.oct) : '')
@@ -197,6 +201,53 @@
           Vue.set(this.userSelected, tonal, true)
         }
       },
+
+      downloadImage() {
+        // https://mybyways.com/blog/convert-svg-to-png-using-your-browser
+
+        const svg = this.$refs.svg
+        const canvas = document.createElement('canvas')
+        canvas.width = svg.getBoundingClientRect().width
+        canvas.height = svg.getBoundingClientRect().height
+        const data = new XMLSerializer().serializeToString(svg)
+        const win = window.URL || window.webkitURL || window
+        const img = new Image()
+        const blob = new Blob([data], { type: 'image/svg+xml' })
+        const url = win.createObjectURL(blob)
+
+        let selected = ''
+        if (this.tonic) {
+          selected = '-' + this.tonic.replace('#', 's')
+          if (this.chordType) selected += this.chordType
+          if (this.scaleType) selected += '-' + this.scaleType
+        }
+
+        const filename = 'bandoneon-' 
+          + this.$store.state.instrument + '-'
+          + this.currentVariant
+          + selected
+          + (this.modified ? '-custom' : '')
+          + '.png'
+
+        img.onload = () => {
+          const ctx = canvas.getContext('2d')
+          ctx.fillStyle = 'white'
+          ctx.fillRect(0, 0, canvas.width, canvas.height)
+          ctx.drawImage(img, 0, 0)
+          win.revokeObjectURL(url)
+          let uri = canvas.toDataURL('image/png').replace('image/png', 'octet/stream')
+          let a = document.createElement('a')
+          document.body.appendChild(a)
+          a.style = 'display: none'
+          a.href = uri
+          a.download = filename
+          a.click()
+          window.URL.revokeObjectURL(uri)
+          document.body.removeChild(a)
+        }
+
+        img.src = url
+      }
     },
   }
 </script>

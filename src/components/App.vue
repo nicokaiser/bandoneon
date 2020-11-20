@@ -27,6 +27,7 @@
         </li>
       </ul>
       <v-keyboard
+        ref="keyboard"
         :variant="currentVariant"
         :tonic="currentTonic"
         :scale-type="currentScaleType"
@@ -74,11 +75,12 @@
         >
           {{ $t('colors') }}
         </button>
-        
+        <!--
         <button
           class="btn btn-outline-secondary"
           style="line-height: 1em;"
           :title="$t('saveImage')"
+          @click.stop="downloadImage()"
         >
           <svg
             width="1em"
@@ -98,6 +100,8 @@
             />
           </svg>
         </button>
+        -->
+        <!--
         <button
           :class="['btn', 'btn-outline-secondary', showSettings ? 'active' : null]"
           style="line-height: 1em;"
@@ -122,6 +126,7 @@
             />
           </svg>
         </button>
+        -->
       </div>
       <div
         v-if="showSettings"
@@ -284,12 +289,16 @@
       },
 
       toggleSettings() {
-        this.showSettings = !this.showSettings;
+        this.showSettings = !this.showSettings
       },
 
       setInstrument(event) {
-        this.$store.commit('setInstrument', event.target.value);
+        this.$store.commit('setInstrument', event.target.value)
       },
+
+      downloadImage() {
+        this.$refs.keyboard.downloadImage()
+      }
     },
   }
 </script>
