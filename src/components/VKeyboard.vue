@@ -6,6 +6,8 @@
       xmlns="http://www.w3.org/2000/svg"
       xmlns:xlink="http://www.w3.org/1999/xlink"
       viewBox="0 0 690 410"
+      width="720"
+      height="428"
     >
       <g
         v-for="([x, y], tonal) in positions"
@@ -38,6 +40,11 @@
         :key="index"
         :stroke="scaleColors[index % scaleColors.length]"
         :d="path"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-opacity="0.66"
+        stroke-width="3px"
+        fill="none"
       />
     </svg>
   </div>
@@ -207,8 +214,8 @@
 
         const svg = this.$refs.svg
         const canvas = document.createElement('canvas')
-        canvas.width = svg.getBoundingClientRect().width
-        canvas.height = svg.getBoundingClientRect().height
+        canvas.width = svg.getBoundingClientRect().width + 30
+        canvas.height = svg.getBoundingClientRect().height + 30
         const data = new XMLSerializer().serializeToString(svg)
         const win = window.URL || window.webkitURL || window
         const img = new Image()
@@ -233,7 +240,7 @@
           const ctx = canvas.getContext('2d')
           ctx.fillStyle = 'white'
           ctx.fillRect(0, 0, canvas.width, canvas.height)
-          ctx.drawImage(img, 0, 0)
+          ctx.drawImage(img, 15, 15)
           win.revokeObjectURL(url)
           let uri = canvas.toDataURL('image/png').replace('image/png', 'octet/stream')
           let a = document.createElement('a')
@@ -259,22 +266,8 @@
     text-align: center;
   }
 
-  svg {
-    overflow: hidden;
-    position: relative;
-    left: -0.5px;
-  }
-
   svg text {
     user-select: none;
     cursor: default;
-  }
-
-  svg path {
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-opacity: 0.66;
-    stroke-width: 3px;
-    fill: none;
   }
 </style>
