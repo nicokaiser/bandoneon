@@ -214,8 +214,8 @@
 
         const svg = this.$refs.svg
         const canvas = document.createElement('canvas')
-        canvas.width = svg.getBoundingClientRect().width + 30
-        canvas.height = svg.getBoundingClientRect().height + 30
+        canvas.width = svg.getBoundingClientRect().width * 2 + 60
+        canvas.height = svg.getBoundingClientRect().height * 2 + 60
         const data = new XMLSerializer().serializeToString(svg)
         const win = window.URL || window.webkitURL || window
         const img = new Image()
@@ -240,7 +240,7 @@
           const ctx = canvas.getContext('2d')
           ctx.fillStyle = 'white'
           ctx.fillRect(0, 0, canvas.width, canvas.height)
-          ctx.drawImage(img, 15, 15)
+          ctx.drawImage(img, 15, 15, canvas.width - 60, canvas.height - 60)
           win.revokeObjectURL(url)
           let uri = canvas.toDataURL('image/png').replace('image/png', 'octet/stream')
           let a = document.createElement('a')
