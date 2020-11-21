@@ -75,7 +75,6 @@
         >
           {{ $t('colors') }}
         </button>
-        <!--
         <button
           class="btn btn-outline-secondary"
           style="line-height: 1em;"
@@ -100,8 +99,6 @@
             />
           </svg>
         </button>
-        -->
-        <!--
         <button
           :class="['btn', 'btn-outline-secondary', showSettings ? 'active' : null]"
           style="line-height: 1em;"
@@ -126,7 +123,6 @@
             />
           </svg>
         </button>
-        -->
       </div>
       <div
         v-if="showSettings"

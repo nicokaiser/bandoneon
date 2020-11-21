@@ -8,8 +8,7 @@
     "cMajor": "C-Dur",
     "usage3": "Tonart und Bezeichnung auswählen, um einen Akkord anzuzeigen – z.B. {em7}",
     "em7": "E m7",
-    "shortcuts": "Tastaturkurzbefehle: {shortcutsVariant} wählt die Seite und Richtung; {shortcutsChordType} wählt Dur, Moll und Septakkord; {shortcutsTonic} wählt die Tonart; {shortcutSharp} hinzufügen um die jeweilige Kreuz-Tonart zu wäheln; {shortcutColors} aktiviert oder deaktiviert die Farbdarstellung.",
-    "keyboardLayout": "Die Tastenbelegung basiert auf dem Alfred Arnold-Bandoneon mit 142 Tasten (wechseltönig, „Rheinische Tonlage“)."
+    "shortcuts": "Tastaturkurzbefehle: {shortcutsVariant} wählt die Seite und Richtung; {shortcutsChordType} wählt Dur, Moll und Septakkord; {shortcutsTonic} wählt die Tonart; {shortcutSharp} hinzufügen um die jeweilige Kreuz-Tonart zu wäheln; {shortcutColors} aktiviert oder deaktiviert die Farbdarstellung."
   },
   "en": {
     "howToUse": "How to use",
@@ -19,8 +18,7 @@
     "cMajor": "C Major",
     "usage3": "Select a key and a quality to display a chord — e.g. {em7}",
     "em7": "E m7",
-    "shortcuts": "Keyboard shortcuts: {shortcutsVariant} select the side and direction; {shortcutsChordType} select Major, Minor and Septime chord; {shortcutsTonic} select the key; add {shortcutSharp} to select sharp key; {shortcutColors} toggles button colors.",
-    "keyboardLayout": "The keyboard layout is based on the Alfred Arnold 142 button Bandoneon (bisonoric, “Rheinische Tonlage”)."
+    "shortcuts": "Keyboard shortcuts: {shortcutsVariant} select the side and direction; {shortcutsChordType} select Major, Minor and Septime chord; {shortcutsTonic} select the key; add {shortcutSharp} to select sharp key; {shortcutColors} toggles button colors."
   },
   "es": {
     "howToUse": "Modo de utilización",
@@ -30,8 +28,7 @@
     "cMajor": "C mayor",
     "usage3": "Selecciona un acorde y su especie – por ejemplo, {em7}",
     "em7": "E m7",
-    "shortcuts": "Atajos de teclado: {shortcutsVariant} seleccionan la mano y la dirección; {shortcutsChordType} seleccionan el acorde mayor, menor o séptimo; {shortcutsTonic} selecciona la tonalidad; añade {shortcutSharp} para seleccionar la alteración; {shortcutColors} cambia los colores del teclado.",
-    "keyboardLayout": "La disposición del teclado se basa en el Bandoneón de botones Alfred Arnold 142 (bisonórico, «Rheinische Tonlage»)."
+    "shortcuts": "Atajos de teclado: {shortcutsVariant} seleccionan la mano y la dirección; {shortcutsChordType} seleccionan el acorde mayor, menor o séptimo; {shortcutsTonic} selecciona la tonalidad; añade {shortcutSharp} para seleccionar la alteración; {shortcutColors} cambia los colores del teclado."
   }
 }
 </i18n>
@@ -87,9 +84,6 @@
           </i18n>
         </li>
       </ul>
-      <p>
-        {{ $t('keyboardLayout') }}
-      </p>
     </div>
   </div>
 </template>
