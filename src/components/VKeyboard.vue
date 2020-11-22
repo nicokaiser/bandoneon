@@ -77,6 +77,7 @@
     },
 
     data: () => ({
+      enharmonic: false,
       modified: false,
       userSelected: {},
       octaveColors: ['#d7b171', '#71a8d7', '#e37e7b', '#85ca85', '#e6cb84', '#71a8d7'],
@@ -186,7 +187,7 @@
 
     methods: {
       format(tonal) {
-        const note = Note.get(tonal)
+        const note = Note.get(this.enharmonic ? Note.enharmonic(tonal) : tonal)
         if (note.empty) return ''
         return ((note.oct < 1) ? note.letter : note.letter.toLowerCase())
           + note.acc + ((note.oct > 0) ? '’'.repeat(note.oct - 1) : '')
