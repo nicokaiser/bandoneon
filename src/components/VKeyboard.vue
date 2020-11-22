@@ -172,11 +172,13 @@
 
     watch: {
       tonic() {
+        // On tonic change, remove user selection
         this.userSelected = {}
         this.modified = false
       },
 
       chordType() {
+        // On chord change, remove user selection
         this.userSelected = {}
         this.modified = false
       }
@@ -212,10 +214,11 @@
       downloadImage() {
         // https://mybyways.com/blog/convert-svg-to-png-using-your-browser
 
+        const margin = 30;
         const svg = this.$refs.svg
         const canvas = document.createElement('canvas')
-        canvas.width = svg.getBoundingClientRect().width * 2 + 60
-        canvas.height = svg.getBoundingClientRect().height * 2 + 60
+        canvas.width = (svg.getBoundingClientRect().width + margin) * 2
+        canvas.height = (svg.getBoundingClientRect().height + margin)* 2
         const data = new XMLSerializer().serializeToString(svg)
         const win = window.URL || window.webkitURL || window
         const img = new Image()
@@ -240,7 +243,7 @@
           const ctx = canvas.getContext('2d')
           ctx.fillStyle = 'white'
           ctx.fillRect(0, 0, canvas.width, canvas.height)
-          ctx.drawImage(img, 15, 15, canvas.width - 60, canvas.height - 60)
+          ctx.drawImage(img, margin, margin, canvas.width - 2 * margin, canvas.height - 2 * margin)
           win.revokeObjectURL(url)
           let uri = canvas.toDataURL('image/png').replace('image/png', 'octet/stream')
           let a = document.createElement('a')
