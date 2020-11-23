@@ -4,9 +4,9 @@ import { sync } from 'vuex-router-sync'
 import store from './store'
 import App from './components/App.vue'
 import VueI18n from 'vue-i18n'
-import de from './i18n/de.json';
-import en from './i18n/en.json';
-import es from './i18n/es.json';
+import de from './i18n/de.json'
+import en from './i18n/en.json'
+import es from './i18n/es.json'
 
 Vue.config.productionTip = false
 
@@ -28,14 +28,14 @@ const router = new VueRouter({
     {
       name:'chord',
       path: "/:variant/chord/:tonic/:chordType",
-    }
+    },
   ],
 })
 
 const i18n = new VueI18n({
   messages: { de, en, es },
   locale: store.state.language,
-  fallbackLocale: 'en'
+  fallbackLocale: 'en',
 })
 
 sync(store, router)

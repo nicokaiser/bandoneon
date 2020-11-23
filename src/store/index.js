@@ -19,7 +19,7 @@ export default new Vuex.Store({
     pitchNotation: 'helmholtz',
     variants: ['left-open', 'left-close', 'right-open', 'right-close'],
     scaleTypes: ['major', 'minor', 'chromatic'],
-    chordTypes: ['M', 'm', '7', 'dim', 'm7', 'M7']
+    chordTypes: ['M', 'm', '7', 'dim', 'm7', 'M7'],
   }),
 
   getters: {
@@ -56,6 +56,6 @@ export default new Vuex.Store({
     setPitchNotation(state, pitchNotation) {
       state.pitchNotation = pitchNotation
       // Vue.localStorage.set('picthNotation', pitchNotation)
-    }
-  }
+    },
+  },
 })

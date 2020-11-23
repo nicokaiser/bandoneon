@@ -261,14 +261,14 @@
         if (this.currentVariant === variant) return
         this.$router.push({
           name: this.$route.name,
-          params: { ...this.$route.params, ...{ variant } }
+          params: { ...this.$route.params, ...{ variant } },
         })
       },
 
       setTonic(tonic, force = false) {
         if (this.currentTonic === tonic) {
           if (!force) this.$router.push({ name: 'home', params: {
-            variant: this.currentVariant
+            variant: this.currentVariant,
           }})
           return
         }
@@ -285,7 +285,7 @@
         this.$router.push({ name: 'chord', params: {
           variant: this.currentVariant,
           tonic,
-          chordType: this.currentChordType || 'M'
+          chordType: this.currentChordType || 'M',
         }})
       },
 
@@ -337,7 +337,7 @@
 
       downloadImage() {
         this.$refs.keyboard.downloadImage()
-      }
+      },
     },
   }
 </script>

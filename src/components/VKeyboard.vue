@@ -58,7 +58,7 @@
 
   function helmholtz(name) {
     const note = Note.get(name)
-    if (note.empty) return '';
+    if (note.empty) return ''
     return ((note.oct < 3) ? note.letter : note.letter.toLowerCase())
       + note.acc + ((note.oct > 3) ? '’'.repeat(note.oct - 3) : '')
       + ((note.oct < 2) ? ','.repeat(-(note.oct - 2)) : '')
@@ -225,7 +225,7 @@
       downloadImage() {
         // https://mybyways.com/blog/convert-svg-to-png-using-your-browser
 
-        const margin = 30;
+        const margin = 30
         const svg = this.$refs.svg
         const canvas = document.createElement('canvas')
         canvas.width = (svg.getBoundingClientRect().width + margin) * 2

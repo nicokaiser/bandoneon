@@ -70,7 +70,7 @@
         this.$root.$i18n.locale = language
       }
     }
-  };
+  }
 </script>
 
 <style scoped>
