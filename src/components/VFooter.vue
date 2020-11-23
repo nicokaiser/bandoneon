@@ -1,38 +1,38 @@
 <template>
   <footer class="d-print-none">
-    <div class="container mt-4 mb-3">
-      <a
-        href="#"
-        class="px-1"
-        @click.prevent="setLanguage('de')"
-      >
-        <img
-          src="@/assets/images/de.svg"
-          class="flag"
+    <div class="container my-4">
+      <div class="float-right">
+        <a
+          href="#"
+          class="px-1"
+          @click.prevent="setLanguage('de')"
         >
-      </a>
-      <a
-        href="#"
-        class="px-1"
-        @click.prevent="setLanguage('en')"
-      >
-        <img
-          src="@/assets/images/en.svg"
-          class="flag"
+          <img
+            src="@/assets/images/de.svg"
+            class="flag"
+          >
+        </a>
+        <a
+          href="#"
+          class="px-1"
+          @click.prevent="setLanguage('en')"
         >
-      </a>
-      <a
-        href="#"
-        class="px-1"
-        @click.prevent="setLanguage('es')"
-      >
-        <img
-          src="@/assets/images/es.svg"
-          class="flag"
+          <img
+            src="@/assets/images/en.svg"
+            class="flag"
+          >
+        </a>
+        <a
+          href="#"
+          class="px-1"
+          @click.prevent="setLanguage('es')"
         >
-      </a>
-    </div>
-    <div class="container mt-2 mb-4">
+          <img
+            src="@/assets/images/es.svg"
+            class="flag"
+          >
+        </a>
+      </div>
       <p>
         <i18n path="license">
           <template #name>
@@ -75,9 +75,12 @@
 
 <style scoped>
   footer {
-    color: #777;
-    text-align: center;
+    color: #aaa;
     font-size: 80%;
+  }
+
+  footer a {
+    color: #aaa;
   }
 
   footer img.flag {

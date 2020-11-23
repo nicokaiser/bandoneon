@@ -207,7 +207,7 @@
       fill(tonal) {
         let octave = +tonal.slice(1)
         if (tonal[1] === '#') octave = +tonal.slice(2)
-        return this.colors ? this.octaveColors[octave - 1] : '#aaa'
+        return this.colors ? this.octaveColors[octave - 1] : '#bbb'
       },
 
       toggle(tonal) {

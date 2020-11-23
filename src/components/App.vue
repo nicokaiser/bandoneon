@@ -1,13 +1,16 @@
 <template>
   <div id="app">
     <nav class="navbar navbar-light bg-light mb-5">
-      <div class="container justify-content-center">
+      <div class="container">
         <router-link
           :to="{ name: 'home' }"
-          class="navbar-brand"
+          class="navbar-brand mr-auto"
         >
-          {{ $t('bandoneon') }}
+          Bandoneon.app
         </router-link>
+        <div class="nav-item">
+          <small>{{ $t(currentInstrument) }}</small>
+        </div>
       </div>
     </nav>
     <div class="container mb-5">
@@ -41,7 +44,7 @@
           <button
             v-for="tonic in tonics" 
             :key="tonic"
-            :class="['btn', (currentTonic === tonic) ? 'btn-primary' : 'btn-outline-secondary']"
+            :class="['btn', (currentTonic === tonic) ? 'btn-secondary' : 'btn-outline-secondary']"
             @click.stop="setTonic(tonic)"
           >
             {{ enharmonicNoteName(tonic) }}
@@ -61,7 +64,7 @@
           <button
             v-for="scaleType in scaleTypes" 
             :key="scaleType"
-            :class="['btn', (currentScaleType === scaleType) ? 'btn-primary' : 'btn-outline-secondary']"
+            :class="['btn', (currentScaleType === scaleType) ? 'btn-secondary' : 'btn-outline-secondary']"
             @click.stop="setScaleType(scaleType)"
           >
             {{ $t(scaleType) }}
@@ -71,7 +74,7 @@
           <button
             v-for="chordType in chordTypes" 
             :key="chordType"
-            :class="['btn', (currentChordType === chordType) ? 'btn-primary' : 'btn-outline-secondary']"
+            :class="['btn', (currentChordType === chordType) ? 'btn-secondary' : 'btn-outline-secondary']"
             @click.stop="setChordType(chordType)"
           >
             {{ chordType }}
@@ -344,6 +347,11 @@
 
 <style lang="scss">
   $enable-transitions: false;
+
+  $primary: #bcac76;
+  $secondary: #877f64;
+  $light: #f8f9fa;
+
   @import "~bootstrap/scss/bootstrap";
 
   body {

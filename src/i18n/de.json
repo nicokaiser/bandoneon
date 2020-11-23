@@ -1,5 +1,4 @@
 {
-  "bandoneon": "Bandoneon",
   "left-open": "Links Zug",
   "left-close": "Links Druck",
   "right-open": "Rechts Zug",
@@ -12,9 +11,9 @@
   "saveImage": "Bild speichern",
   "einheitsbandonion144": "144 Töne, Einheitsbandonion",
   "rheinische142": "142 Töne, Rheinische Tonlage",
-  "rheinische152": "152 Töne, Rheinische Tonlage, klassische Erweiterung",
-  "peguri146": "146 Töne, Peguri-System (chromatisch)",
-  "manouri148": "148 Töne, Manouri-System (chromatisch)",
+  "rheinische152": "152 Töne, Rheinische Tonlage",
+  "peguri146": "146 Töne, Peguri (chromatisch)",
+  "manouri148": "148 Töne, Manouri (chromatisch)",
   "license": "Copyright © {name}, MIT-Lizenz.",
   "built": "Gebaut mit {tonal}, {vuejs} und {bootstrap}.",
   "available": "Verfügbar auf {github}.",
