@@ -6,7 +6,7 @@
   "right-close": "Derecha cerrando",
   "major": "mayor",
   "minor": "menor",
-  "chromatic": "cromático",
+  "chromatic": "crom.",
   "colors": "colores",
   "settings": "Preferencias",
   "saveImage": "Guardar imagen",
@@ -17,5 +17,7 @@
   "manouri148": "148 tonos, Manouri system (cromatic)",
   "license": "Copyright © {name}, licencia MIT.",
   "built": "Creado con {tonal}, {vuejs} y {bootstrap}.",
-  "available": "Disponible en {github}."
+  "available": "Disponible en {github}.",
+  "helmholtz": "Notación musical de Helmholtz (c#’’)",
+  "scientific": "Notación musical cientifica (C#5)"
 }

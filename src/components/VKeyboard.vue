@@ -56,6 +56,14 @@
   import Note from '@tonaljs/note'
   import Scale from '@tonaljs/scale'
 
+  function helmholtz(name) {
+    const note = Note.get(name)
+    if (note.empty) return '';
+    return ((note.oct < 3) ? note.letter : note.letter.toLowerCase())
+      + note.acc + ((note.oct > 3) ? '’'.repeat(note.oct - 3) : '')
+      + ((note.oct < 2) ? ','.repeat(-(note.oct - 2)) : '')
+  }
+
   export default {
     props: {
       variant: {
@@ -77,7 +85,6 @@
     },
 
     data: () => ({
-      enharmonic: false,
       modified: false,
       userSelected: {},
       octaveColors: ['#d7b171', '#71a8d7', '#e37e7b', '#85ca85', '#e6cb84', '#71a8d7'],
@@ -85,8 +92,12 @@
     }),
 
     computed: {
-      buttonColors() {
-        return this.$store.state.buttonColors
+      colors() {
+        return this.$store.state.colors
+      },
+
+      enharmonic() {
+        return this.$store.state.enharmonic
       },
 
       positions() {
@@ -189,15 +200,14 @@
       format(tonal) {
         const note = Note.get(this.enharmonic ? Note.enharmonic(tonal) : tonal)
         if (note.empty) return ''
-        return ((note.oct < 1) ? note.letter : note.letter.toLowerCase())
-          + note.acc + ((note.oct > 0) ? '’'.repeat(note.oct - 1) : '')
-          + ((note.oct < 0) ? ','.repeat(-note.oct) : '')
+        if (this.$store.state.pitchNotation === 'scientific') return note.name
+        return helmholtz(note.name)
       },
 
       fill(tonal) {
         let octave = +tonal.slice(1)
         if (tonal[1] === '#') octave = +tonal.slice(2)
-        return this.buttonColors ? this.octaveColors[octave + 1] : '#aaa'
+        return this.colors ? this.octaveColors[octave - 1] : '#aaa'
       },
 
       toggle(tonal) {
@@ -219,7 +229,7 @@
         const svg = this.$refs.svg
         const canvas = document.createElement('canvas')
         canvas.width = (svg.getBoundingClientRect().width + margin) * 2
-        canvas.height = (svg.getBoundingClientRect().height + margin)* 2
+        canvas.height = (svg.getBoundingClientRect().height + margin) * 2
         const data = new XMLSerializer().serializeToString(svg)
         const win = window.URL || window.webkitURL || window
         const img = new Image()

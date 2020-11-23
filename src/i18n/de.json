@@ -6,7 +6,7 @@
   "right-close": "Rechts Druck",
   "major": "Dur",
   "minor": "Moll",
-  "chromatic": "chromatisch",
+  "chromatic": "chrom.",
   "colors": "Farben",
   "settings": "Einstellungen",
   "saveImage": "Bild speichern",
@@ -17,5 +17,7 @@
   "manouri148": "148 Töne, Manouri-System (chromatisch)",
   "license": "Copyright © {name}, MIT-Lizenz.",
   "built": "Gebaut mit {tonal}, {vuejs} und {bootstrap}.",
-  "available": "Verfügbar auf {github}."
+  "available": "Verfügbar auf {github}.",
+  "helmholtz": "Helmholtz-Tonsymbole (c#’’)",
+  "scientific": "Wissenschaftliche Tonsymbole (C#5)"
 }

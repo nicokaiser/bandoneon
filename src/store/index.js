@@ -11,10 +11,12 @@ Vue.use(VueLocalStorage)
 export default new Vuex.Store({
   state: () => ({
     language: Vue.localStorage.get('language') || navigator.language?.split('-')[0] || 'en',
-    buttonColors: false,
+    colors: false,
     chords,
+    enharmonic: false,
     instruments,
     instrument: Vue.localStorage.get('instrument') || 'rheinische142',
+    pitchNotation: 'helmholtz',
     variants: ['left-open', 'left-close', 'right-open', 'right-close'],
     scaleTypes: ['major', 'minor', 'chromatic'],
     chordTypes: ['M', 'm', '7', 'dim', 'm7', 'M7']
@@ -50,5 +52,10 @@ export default new Vuex.Store({
         Vue.localStorage.set('instrument', instrument)
       }
     },
+
+    setPitchNotation(state, pitchNotation) {
+      state.pitchNotation = pitchNotation
+      // Vue.localStorage.set('picthNotation', pitchNotation)
+    }
   }
 })

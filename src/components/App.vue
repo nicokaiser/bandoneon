@@ -69,9 +69,17 @@
             {{ chordType }}
           </button>
         </div>
+        <!--
         <button
-          :class="['btn', 'btn-outline-secondary', buttonColors ? 'active' : null]"
-          @click.stop="toggleButtonColors()"
+          :class="['btn', 'btn-outline-secondary', enharmonic ? 'active' : null]"
+          @click.stop="toggleEnharmonic()"
+        >
+          #
+        </button>
+        -->
+        <button
+          :class="['btn', 'btn-outline-secondary', colors ? 'active' : null]"
+          @click.stop="toggleColors()"
         >
           {{ $t('colors') }}
         </button>
@@ -129,7 +137,6 @@
         class="my-3 form-group"
       >
         <select
-          id="inputState"
           class="form-control d-print-none"
           @change="setInstrument($event)"
         >
@@ -143,6 +150,26 @@
           </option>
         </select>
       </div>
+      <!--
+      <div
+        v-if="showSettings"
+        class="my-3 form-group"
+      >
+        <select
+          class="form-control d-print-none"
+          @change="setPitchNotation($event)"
+        >
+          <option
+            v-for="item in ['helmholtz', 'scientific']"
+            :key="item"
+            :selected="pitchNotation === item"
+            :value="item"
+          >
+            {{ $t(item) }}
+          </option>
+        </select>
+      </div>
+      -->
     </div>
     <v-how-to />
     <v-footer />
@@ -175,8 +202,12 @@
         return this.$store.state.variants
       },
 
-      buttonColors() {
-        return this.$store.state.buttonColors
+      colors() {
+        return this.$store.state.colors
+      },
+
+      enharmonic() {
+        return this.$store.state.enharmonic
       },
 
       scaleTypes() {
@@ -193,6 +224,10 @@
 
       currentInstrument() {
         return this.$store.state.instrument
+      },
+
+      pitchNotation() {
+        return this.$store.state.pitchNotation
       },
 
       ...mapGetters(['currentVariant', 'currentScaleType', 'currentChordType', 'currentTonic'])
@@ -217,7 +252,7 @@
         if (key === 'm') return this.setChordType('m')
         if (key === '7') return this.setChordType('7')
 
-        if (key === 'C') return this.toggleButtonColors()
+        if (key === 'C') return this.toggleColors()
       })
     },
 
@@ -280,8 +315,16 @@
         }})
       },
 
-      toggleButtonColors() {
-        this.$store.state.buttonColors = !this.$store.state.buttonColors
+      setPitchNotation(event) {
+        this.$store.commit('setPitchNotation', event.target.value)
+      },
+
+      toggleEnharmonic() {
+        this.$store.state.enharmonic = !this.$store.state.enharmonic
+      },
+
+      toggleColors() {
+        this.$store.state.colors = !this.$store.state.colors
       },
 
       toggleSettings() {

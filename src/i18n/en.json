@@ -6,7 +6,7 @@
   "right-close": "Right close",
   "major": "major",
   "minor": "minor",
-  "chromatic": "chromatic",
+  "chromatic": "chrom.",
   "colors": "Colors",
   "settings": "Settings",
   "saveImage": "Save image",
@@ -17,5 +17,7 @@
   "manouri148": "148 tones, Manouri system (chromatic)",
   "license": "Copyright © {name}, MIT License.",
   "built": "Built with {tonal}, {vuejs}, and {bootstrap}.",
-  "available": "Available on {github}."
+  "available": "Available on {github}.",
+  "helmholtz": "Helmholtz pitch notation (c#’’)",
+  "scientific": "Scientific pitch notation (C#5)"
 }
