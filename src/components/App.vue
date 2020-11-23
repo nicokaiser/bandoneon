@@ -44,11 +44,19 @@
             :class="['btn', (currentTonic === tonic) ? 'btn-primary' : 'btn-outline-secondary']"
             @click.stop="setTonic(tonic)"
           >
-            {{ enharmonicNoteNames(tonic).join('/') }}
+            {{ enharmonicNoteName(tonic) }}
           </button>
         </div>
       </div>
       <div class="btn-toolbar justify-content-between d-print-none">
+        <!--
+        <button
+          :class="['btn', 'btn-outline-secondary', enharmonic ? 'active' : null]"
+          @click.stop="toggleEnharmonic()"
+        >
+          #
+        </button>
+        -->
         <div class="btn-group">
           <button
             v-for="scaleType in scaleTypes" 
@@ -69,14 +77,6 @@
             {{ chordType }}
           </button>
         </div>
-        <!--
-        <button
-          :class="['btn', 'btn-outline-secondary', enharmonic ? 'active' : null]"
-          @click.stop="toggleEnharmonic()"
-        >
-          #
-        </button>
-        -->
         <button
           :class="['btn', 'btn-outline-secondary', colors ? 'active' : null]"
           @click.stop="toggleColors()"
@@ -289,12 +289,12 @@
         }})
       },
 
-      enharmonicNoteNames(noteName) {
-        const names = [noteName]
-        if (noteName.length === 2 && noteName[1] === '#') {
-          names.push(Note.enharmonic(noteName))
+      enharmonicNoteName(name) {
+        if (!this.enharmonic) return name
+        if (name.length === 2 && name[1] === '#') {
+          return Note.enharmonic(name)
         }
-        return names
+        return name
       },
 
       setScaleType(scaleType) {
