@@ -88,7 +88,7 @@
       modified: false,
       userSelected: {},
       octaveColors: ['#d7b171', '#71a8d7', '#e37e7b', '#85ca85', '#e6cb84', '#71a8d7'],
-      scaleColors: ['orange', 'blue', 'red', 'green', 'orange', 'blue']
+      scaleColors: ['orange', 'blue', 'red', 'green', 'orange', 'blue', 'red', 'green']
     }),
 
     computed: {
@@ -141,7 +141,7 @@
           const { intervals, empty } = Scale.get(this.scaleType)
           if (empty) return []
           const paths = []
-          for (let o = -1; o < 5; o++) {
+          for (let o = -1; o < 7; o++) {
             const notes = intervals.map((i) => Note.transpose(`${this.tonic}${o}`, i))
             notes.push(`${this.tonic}${o + 1}`)
             let pathString = ''
