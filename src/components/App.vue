@@ -52,14 +52,12 @@
         </div>
       </div>
       <div class="btn-toolbar justify-content-between d-print-none">
-        <!--
         <button
           :class="['btn', 'btn-outline-secondary', enharmonic ? 'active' : null]"
           @click.stop="toggleEnharmonic()"
         >
           #
         </button>
-        -->
         <div class="btn-group">
           <button
             v-for="scaleType in scaleTypes" 
@@ -153,7 +151,6 @@
           </option>
         </select>
       </div>
-      <!--
       <div
         v-if="showSettings"
         class="my-3 form-group"
@@ -172,7 +169,6 @@
           </option>
         </select>
       </div>
-      -->
     </div>
     <v-how-to />
     <v-footer />
