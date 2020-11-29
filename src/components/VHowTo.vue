@@ -95,7 +95,7 @@
 
   h2 {
     text-align: center;
-    font-weight: 300;
+    font-weight: 400;
   }
 
   li {
