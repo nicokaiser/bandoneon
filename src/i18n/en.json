@@ -17,6 +17,6 @@
   "license": "Copyright © {name}, MIT License.",
   "built": "Built with {tonal}, {vuejs}, and {bootstrap}.",
   "available": "Available on {github}.",
-  "helmholtz": "Helmholtz pitch notation (c#’’)",
-  "scientific": "Scientific pitch notation (C#5)"
+  "helmholtz": "Helmholtz pitch notation (c♯’’)",
+  "scientific": "Scientific pitch notation (C♯5)"
 }

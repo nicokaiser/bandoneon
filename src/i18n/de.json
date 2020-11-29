@@ -17,6 +17,6 @@
   "license": "Copyright © {name}, MIT-Lizenz.",
   "built": "Gebaut mit {tonal}, {vuejs} und {bootstrap}.",
   "available": "Verfügbar auf {github}.",
-  "helmholtz": "Helmholtz-Tonsymbole (c#’’)",
-  "scientific": "Wissenschaftliche Tonsymbole (C#5)"
+  "helmholtz": "Helmholtz-Tonsymbole (c♯’’)",
+  "scientific": "Wissenschaftliche Tonsymbole (C♯5)"
 }

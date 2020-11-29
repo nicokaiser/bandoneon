@@ -17,6 +17,6 @@
   "license": "Copyright © {name}, licencia MIT.",
   "built": "Creado con {tonal}, {vuejs} y {bootstrap}.",
   "available": "Disponible en {github}.",
-  "helmholtz": "Notación musical de Helmholtz (c#’’)",
-  "scientific": "Notación musical cientifica (C#5)"
+  "helmholtz": "Notación musical de Helmholtz (c♯’’)",
+  "scientific": "Notación musical cientifica (C♯5)"
 }

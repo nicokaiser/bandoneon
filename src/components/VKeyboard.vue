@@ -25,14 +25,14 @@
         />
         <text
           :x="x + 29"
-          :y="y + 29"
+          :y="y + 36"
           fill="#222"
-          font-family="Georgia, serif"
-          font-size="21px"
-          font-style="italic"
+          font-size="20px"
           text-anchor="middle"
-        >
-          <tspan dy="7">{{ format(tonal) }}</tspan>
+        >{{ format(tonal)[0] }}<tspan
+          dx="2"
+          font-size="16px"
+        >{{ format(tonal)[1] }}</tspan>
         </text>
       </g>
       <path
@@ -60,7 +60,7 @@
     const note = Note.get(name)
     if (note.empty) return ''
     return ((note.oct < 3) ? note.letter : note.letter.toLowerCase())
-      + note.acc + ((note.oct > 3) ? '’'.repeat(note.oct - 3) : '')
+      + note.acc.replace('b', '♭').replace('#', '♯') + ((note.oct > 3) ? '’'.repeat(note.oct - 3) : '')
       + ((note.oct < 2) ? ','.repeat(-(note.oct - 2)) : '')
   }
 
@@ -98,6 +98,10 @@
 
       enharmonic() {
         return this.$store.state.enharmonic
+      },
+
+      pitchNotation() {
+        return this.$store.state.pitchNotation
       },
 
       positions() {
@@ -200,8 +204,10 @@
       format(tonal) {
         const note = Note.get(this.enharmonic ? Note.enharmonic(tonal) : tonal)
         if (note.empty) return ''
-        if (this.$store.state.pitchNotation === 'scientific') return note.name
-        return helmholtz(note.name)
+        if (this.$store.state.pitchNotation === 'scientific') {
+          return [note.pc.replace('b', '♭').replace('#', '♯'), note.oct]
+        }
+        return [helmholtz(note.name), '']
       },
 
       fill(tonal) {

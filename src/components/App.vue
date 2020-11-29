@@ -56,7 +56,7 @@
           :class="['btn', 'btn-outline-secondary', enharmonic ? 'active' : null]"
           @click.stop="toggleEnharmonic()"
         >
-          #
+          {{ enharmonic ? '♯' : '♭' }}
         </button>
         <div class="btn-group">
           <button
@@ -289,9 +289,9 @@
       },
 
       enharmonicNoteName(name) {
-        if (!this.enharmonic) return name
+        if (!this.enharmonic) return name.replace('#', '♯')
         if (name.length === 2 && name[1] === '#') {
-          return Note.enharmonic(name)
+          return Note.enharmonic(name).replace('b', '♭')
         }
         return name
       },
