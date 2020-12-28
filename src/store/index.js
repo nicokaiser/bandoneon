@@ -2,7 +2,7 @@ import Vue from "vue"
 import Vuex from "vuex"
 import VueLocalStorage from 'vue-localstorage'
 
-import chords from './chords.json'
+import originalChords from './chords.json'
 import instruments from './instruments'
 
 Vue.use(Vuex)
@@ -12,7 +12,8 @@ export default new Vuex.Store({
   state: () => ({
     language: Vue.localStorage.get('language') || navigator.language?.split('-')[0] || 'en',
     colors: false,
-    chords,
+    chords: (Vue.localStorage.get('chords') && JSON.parse(Vue.localStorage.get('chords'))) || JSON.parse(JSON.stringify(originalChords)),
+    originalChords,
     enharmonic: false,
     instruments,
     instrument: Vue.localStorage.get('instrument') || 'rheinische142',

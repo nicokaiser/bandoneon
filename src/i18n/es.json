@@ -18,5 +18,9 @@
   "built": "Creado con {tonal}, {vuejs} y {bootstrap}.",
   "available": "Disponible en {github}.",
   "helmholtz": "Notación musical de Helmholtz (c♯’’)",
-  "scientific": "Notación musical cientifica (C♯5)"
+  "scientific": "Notación musical cientifica (C♯5)",
+  "useVoicing": "Utilizar voces",
+  "useVoicing-short": "Utilizar",
+  "resetVoicing": "Resetear voces",
+  "resetVoicing-short": "Resetear"
 }

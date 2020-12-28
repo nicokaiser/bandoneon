@@ -18,5 +18,9 @@
   "built": "Gebaut mit {tonal}, {vuejs} und {bootstrap}.",
   "available": "Verfügbar auf {github}.",
   "helmholtz": "Helmholtz-Tonsymbole (c♯’’)",
-  "scientific": "Wissenschaftliche Tonsymbole (C♯5)"
+  "scientific": "Wissenschaftliche Tonsymbole (C♯5)",
+  "useVoicing": "Use voicing",
+  "useVoicing-short": "Use",
+  "resetVoicing": "Reset voicing",
+  "resetVoicing-short": "Reset"
 }

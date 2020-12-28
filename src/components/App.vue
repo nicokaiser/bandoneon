@@ -42,7 +42,7 @@
           style="width: 100%"
         >
           <button
-            v-for="tonic in tonics" 
+            v-for="tonic in tonics"
             :key="tonic"
             :class="['btn', (currentTonic === tonic) ? 'btn-secondary' : 'btn-outline-secondary']"
             @click.stop="setTonic(tonic)"
@@ -60,7 +60,7 @@
         </button>
         <div class="btn-group">
           <button
-            v-for="scaleType in scaleTypes" 
+            v-for="scaleType in scaleTypes"
             :key="scaleType"
             :class="['btn', (currentScaleType === scaleType) ? 'btn-secondary' : 'btn-outline-secondary']"
             @click.stop="setScaleType(scaleType)"
@@ -70,7 +70,7 @@
         </div>
         <div class="btn-group">
           <button
-            v-for="chordType in chordTypes" 
+            v-for="chordType in chordTypes"
             :key="chordType"
             :class="['btn', (currentChordType === chordType) ? 'btn-secondary' : 'btn-outline-secondary']"
             @click.stop="setChordType(chordType)"
@@ -87,26 +87,18 @@
         <button
           class="btn btn-outline-secondary"
           style="line-height: 1em;"
-          :title="$t('saveImage')"
-          @click.stop="downloadImage()"
+          :title="$t('useVoicing')"
+          @click.stop="useVoicing()"
         >
-          <svg
-            width="1em"
-            height="1em"
-            viewBox="0 0 16 16"
-            class="bi bi-download"
-            fill="currentColor"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"
-            />
-            <path
-              fill-rule="evenodd"
-              d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"
-            />
-          </svg>
+          {{ $t('useVoicing-short') }}
+        </button>
+        <button
+                class="btn btn-outline-secondary"
+                style="line-height: 1em;"
+                :title="$t('resetVoicing')"
+                @click.stop="resetVoicing()"
+        >
+          {{ $t('resetVoicing-short') }}
         </button>
         <button
           :class="['btn', 'btn-outline-secondary', showSettings ? 'active' : null]"
@@ -336,6 +328,35 @@
 
       downloadImage() {
         this.$refs.keyboard.downloadImage()
+      },
+
+      useVoicing() {
+          const selected = this.$refs.keyboard.fetchSelected();
+          const pitches = [];
+          for (let c in selected) {
+              if (selected[c]) pitches.push(c);
+          }
+
+          const chord = `${this.currentTonic}${this.currentChordType}`;
+
+          const left = [ "left-open", "left-close" ];
+          const right = [ "right-open", "left-close" ];
+          const variants = {
+              "left-open": left,
+              "left-close": left,
+              "right-open": right,
+              "right-close": right,
+          };
+
+          for (const variant of variants[this.currentVariant]) {
+              this.$store.state.chords[variant][chord] = pitches;
+          }
+
+          window.localStorage.setItem('chords', JSON.stringify(this.$store.state.chords));
+      },
+      resetVoicing() {
+        this.$store.state.chords = JSON.parse(JSON.stringify(this.$store.state.originalChords));
+        window.localStorage.removeItem('chords');
       },
     },
   }

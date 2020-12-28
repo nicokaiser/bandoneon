@@ -3,9 +3,9 @@
   "left-close": "Left close",
   "right-open": "Right open",
   "right-close": "Right close",
-  "major": "major",
-  "minor": "minor",
-  "chromatic": "chrom.",
+  "major": "maj",
+  "minor": "min",
+  "chromatic": "chrom",
   "colors": "Colors",
   "settings": "Settings",
   "saveImage": "Save image",
@@ -18,5 +18,9 @@
   "built": "Built with {tonal}, {vuejs}, and {bootstrap}.",
   "available": "Available on {github}.",
   "helmholtz": "Helmholtz pitch notation (c♯’’)",
-  "scientific": "Scientific pitch notation (C♯5)"
+  "scientific": "Scientific pitch notation (C♯5)",
+  "useVoicing": "Use voicing",
+  "useVoicing-short": "Use",
+  "resetVoicing": "Reset voicing",
+  "resetVoicing-short": "Reset"
 }

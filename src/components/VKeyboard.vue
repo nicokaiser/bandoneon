@@ -14,7 +14,7 @@
         :key="tonal"
         @click="toggle(tonal)"
       >
-        <circle 
+        <circle
           :cx="x + 29"
           :cy="y + 29"
           r="28"
@@ -228,6 +228,10 @@
         }
       },
 
+      fetchSelected() {
+        return this.userSelected
+      },
+
       downloadImage() {
         // https://mybyways.com/blog/convert-svg-to-png-using-your-browser
 
@@ -249,7 +253,7 @@
           if (this.scaleType) selected += '-' + this.scaleType
         }
 
-        const filename = 'bandoneon-' 
+        const filename = 'bandoneon-'
           + this.$store.state.instrument + '-'
           + this.currentVariant
           + selected
