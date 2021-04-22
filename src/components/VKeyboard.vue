@@ -27,6 +27,7 @@
           :x="x + 29"
           :y="y + 36"
           fill="#222"
+          font-family="-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif"
           font-size="20px"
           text-anchor="middle"
         >{{ format(tonal)[0] }}<tspan
