@@ -17,7 +17,7 @@ export default new Vuex.Store({
     enharmonic: false,
     instruments,
     instrument: Vue.localStorage.get('instrument') || 'rheinische142',
-    pitchNotation: Vue.localStorage.get('picthNotation') || 'helmholtz',
+    pitchNotation: Vue.localStorage.get('pitchNotation') || 'helmholtz',
     variants: ['left-open', 'left-close', 'right-open', 'right-close'],
     scaleTypes: ['major', 'minor', 'chromatic'],
     chordTypes: ['M', 'm', '7', 'dim', 'm7', 'M7'],
@@ -56,7 +56,7 @@ export default new Vuex.Store({
 
     setPitchNotation(state, pitchNotation) {
       state.pitchNotation = pitchNotation
-      Vue.localStorage.set('picthNotation', pitchNotation)
+      Vue.localStorage.set('pitchNotation', pitchNotation)
     },
   },
 })
