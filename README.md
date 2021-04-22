@@ -7,6 +7,10 @@ A little JavaScript application that wants to help learning the Alfred Arnold 14
     npm install
     npm run build
 
+## Start development server
+
+    npm run serve
+
 ## Running as Docker container
 
     docker run -d -p 80:80 nicokaiser/bandoneon
