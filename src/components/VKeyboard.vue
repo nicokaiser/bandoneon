@@ -233,6 +233,11 @@
         return this.userSelected
       },
 
+      resetSelected() {
+        this.userSelected = {};
+        this.modified = false;
+      },
+
       downloadImage() {
         // https://mybyways.com/blog/convert-svg-to-png-using-your-browser
 

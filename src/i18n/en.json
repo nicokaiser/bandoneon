@@ -19,8 +19,6 @@
   "available": "Available on {github}.",
   "helmholtz": "Helmholtz pitch notation (c♯’’)",
   "scientific": "Scientific pitch notation (C♯5)",
-  "useVoicing": "Use voicing",
-  "useVoicing-short": "Use",
-  "resetVoicing": "Reset voicing",
-  "resetVoicing-short": "Reset"
+  "saveVoicing": "Save voicing",
+  "resetVoicing": "Reset voicing"
 }

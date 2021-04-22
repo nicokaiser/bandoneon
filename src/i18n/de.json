@@ -19,8 +19,6 @@
   "available": "Verfügbar auf {github}.",
   "helmholtz": "Helmholtz-Tonsymbole (c♯’’)",
   "scientific": "Wissenschaftliche Tonsymbole (C♯5)",
-  "useVoicing": "Use voicing",
-  "useVoicing-short": "Use",
-  "resetVoicing": "Reset voicing",
-  "resetVoicing-short": "Reset"
+  "saveVoicing": "Voicing speichern",
+  "resetVoicing": "Voicing zurücksetzen"
 }

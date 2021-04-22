@@ -7,6 +7,7 @@
           class="navbar-brand mr-auto"
         >
           Bandoneon.app
+          <span class="text-black-50">Dev</span>
         </router-link>
         <div class="nav-item">
           <small>{{ $t(currentInstrument) }}</small>
@@ -82,24 +83,81 @@
           :class="['btn', 'btn-outline-secondary', colors ? 'active' : null]"
           @click.stop="toggleColors()"
         >
-          {{ $t('colors') }}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="1em"
+            height="1em"
+            fill="currentColor"
+            class="bi bi-palette-fill"
+            viewBox="0 0 16 16"
+          >
+            <path d="M12.433 10.07C14.133 10.585 16 11.15 16 8a8 8 0 1 0-8 8c1.996 0 1.826-1.504 1.649-3.08-.124-1.101-.252-2.237.351-2.92.465-.527 1.42-.237 2.433.07zM8 5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm4.5 3a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zM5 6.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm.5 6.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
+          </svg>
         </button>
         <button
           class="btn btn-outline-secondary"
           style="line-height: 1em;"
-          :title="$t('useVoicing')"
-          @click.stop="useVoicing()"
+          :title="$t('saveImage')"
+          @click.stop="downloadImage()"
         >
-          {{ $t('useVoicing-short') }}
+          <svg
+            width="1em"
+            height="1em"
+            viewBox="0 0 16 16"
+            class="bi bi-download"
+            fill="currentColor"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"
+            />
+            <path
+              fill-rule="evenodd"
+              d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"
+            />
+          </svg>
         </button>
-        <button
-                class="btn btn-outline-secondary"
-                style="line-height: 1em;"
-                :title="$t('resetVoicing')"
-                @click.stop="resetVoicing()"
-        >
-          {{ $t('resetVoicing-short') }}
-        </button>
+        <div class="btn-group">
+          <button
+            class="btn btn-outline-secondary"
+            style="line-height: 1em;"
+            :title="$t('saveVoicing')"
+            @click.stop="saveVoicing()"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="1em"
+              height="1em"
+              fill="currentColor"
+              class="bi bi-save-fill"
+              viewBox="0 0 16 16"
+            >
+              <path d="M8.5 1.5A1.5 1.5 0 0 1 10 0h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h6c-.314.418-.5.937-.5 1.5v7.793L4.854 6.646a.5.5 0 1 0-.708.708l3.5 3.5a.5.5 0 0 0 .708 0l3.5-3.5a.5.5 0 0 0-.708-.708L8.5 9.293V1.5z" />
+            </svg>
+          </button>
+          <button
+            class="btn btn-outline-secondary"
+            style="line-height: 1em;"
+            :title="$t('resetVoicing')"
+            @click.stop="resetVoicing()"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="1em"
+              height="1em"
+              fill="currentColor"
+              class="bi bi-arrow-counterclockwise"
+              viewBox="0 0 16 16"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2v1z"
+              />
+              <path d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466z" />
+            </svg>
+          </button>
+        </div>
         <button
           :class="['btn', 'btn-outline-secondary', showSettings ? 'active' : null]"
           style="line-height: 1em;"
@@ -162,7 +220,8 @@
         </select>
       </div>
     </div>
-    <v-how-to />
+    <hr class="my-5">
+    <!-- <v-how-to /> -->
     <v-footer />
   </div>
 </template>
@@ -170,7 +229,7 @@
 <script>
   import { mapGetters } from 'vuex'
   import Note from '@tonaljs/note'
-  import VHowTo from './VHowTo.vue'
+  // import VHowTo from './VHowTo.vue'
   import VFooter from './VFooter.vue'
   import VKeyboard from './VKeyboard.vue'
 
@@ -178,7 +237,7 @@
     name:'App',
 
     components: {
-      VHowTo, VFooter, VKeyboard
+      VFooter, VKeyboard
     },
 
     data() {
@@ -330,33 +389,35 @@
         this.$refs.keyboard.downloadImage()
       },
 
-      useVoicing() {
-          const selected = this.$refs.keyboard.fetchSelected();
-          const pitches = [];
-          for (let c in selected) {
-              if (selected[c]) pitches.push(c);
-          }
+      saveVoicing() {
+        const selected = this.$refs.keyboard.fetchSelected()
+        const pitches = [];
+        for (let c in selected) {
+          if (selected[c]) pitches.push(c)
+        }
 
-          const chord = `${this.currentTonic}${this.currentChordType}`;
+        const chord = `${this.currentTonic}${this.currentChordType}`
 
-          const left = [ "left-open", "left-close" ];
-          const right = [ "right-open", "left-close" ];
-          const variants = {
-              "left-open": left,
-              "left-close": left,
-              "right-open": right,
-              "right-close": right,
-          };
+        const left = [ "left-open", "left-close" ]
+        const right = [ "right-open", "left-close" ]
+        const variants = {
+          "left-open": left,
+          "left-close": left,
+          "right-open": right,
+          "right-close": right,
+        }
 
-          for (const variant of variants[this.currentVariant]) {
-              this.$store.state.chords[variant][chord] = pitches;
-          }
+        for (const variant of variants[this.currentVariant]) {
+          this.$store.state.chords[variant][chord] = pitches
+        }
 
-          window.localStorage.setItem('chords', JSON.stringify(this.$store.state.chords));
+        window.localStorage.setItem('chords', JSON.stringify(this.$store.state.chords))
       },
+
       resetVoicing() {
-        this.$store.state.chords = JSON.parse(JSON.stringify(this.$store.state.originalChords));
-        window.localStorage.removeItem('chords');
+        this.$store.state.chords = JSON.parse(JSON.stringify(this.$store.state.originalChords))
+        window.localStorage.removeItem('chords')
+        this.$refs.keyboard.resetSelected()
       },
     },
   }
