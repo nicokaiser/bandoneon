@@ -36,25 +36,48 @@
       <p>
         <i18n path="license">
           <template #name>
-            <a href="https://kaiser.me/">Nico Kaiser</a>
+            <a
+              href="https://kaiser.me/"
+              target="_blank"
+            >Nico Kaiser</a>
+          </template>
+          <template #mit>
+            <a
+              href="https://github.com/nicokaiser/bandoneon/blob/main/LICENSE"
+              target="_blank"
+            >{{
+              $t('mit-license')
+            }}</a>
           </template>
         </i18n>
         <br>
         <i18n path="built">
           <template #tonal>
-            <a href="https://github.com/tonaljs/tonal">tonal</a>
+            <a
+              href="https://github.com/tonaljs/tonal"
+              target="_blank"
+            >tonal</a>
           </template>
           <template #vuejs>
-            <a href="https://vuejs.org/">Vue.js</a>
+            <a
+              href="https://vuejs.org/"
+              target="_blank"
+            >Vue.js</a>
           </template>
           <template #bootstrap>
-            <a href="https://getbootstrap.com/">Bootstrap</a>
+            <a
+              href="https://getbootstrap.com/"
+              target="_blank"
+            >Bootstrap</a>
           </template>
         </i18n>
         &ensp;
         <i18n path="available">
           <template #github>
-            <a href="https://github.com/nicokaiser/bandoneon">GitHub</a>
+            <a
+              href="https://github.com/nicokaiser/bandoneon"
+              target="_blank"
+            >GitHub</a>
           </template>
         </i18n>
       </p>
