@@ -19,7 +19,7 @@
     "@tonaljs/chord": "^4.5.1",
     "@tonaljs/note": "^4.6.0",
     "@tonaljs/scale": "^4.6.0",
-    "bootstrap": "^4.6.0",
+    "bootstrap": "^5.0.0",
     "core-js": "^3.8.3",
     "vue": "^2.6.12",
     "vue-i18n": "^8.22.4",

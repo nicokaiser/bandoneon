@@ -46,6 +46,7 @@
             v-for="tonic in tonics"
             :key="tonic"
             :class="['btn', (currentTonic === tonic) ? 'btn-secondary' : 'btn-outline-secondary']"
+            style="width: 8.33%;"
             @click.stop="setTonic(tonic)"
           >
             {{ enharmonicNoteName(tonic) }}
@@ -55,6 +56,7 @@
       <div class="btn-toolbar justify-content-between d-print-none">
         <button
           :class="['btn', 'btn-outline-secondary', enharmonic ? 'active' : null]"
+          style="width: 2em;"
           @click.stop="toggleEnharmonic()"
         >
           {{ enharmonic ? '♯' : '♭' }}
@@ -185,10 +187,10 @@
       </div>
       <div
         v-if="showSettings"
-        class="my-3 form-group"
+        class="my-3"
       >
         <select
-          class="form-control d-print-none"
+          class="form-select d-print-none"
           @change="setInstrument($event)"
         >
           <option
@@ -203,10 +205,10 @@
       </div>
       <div
         v-if="showSettings"
-        class="my-3 form-group"
+        class="my-3"
       >
         <select
-          class="form-control d-print-none"
+          class="form-select d-print-none"
           @change="setPitchNotation($event)"
         >
           <option
@@ -427,7 +429,7 @@
   $enable-transitions: false;
 
   $primary: #bcac76;
-  $secondary: #877f64;
+  $secondary: #776f54;
   $light: #f8f9fa;
 
   @import "~bootstrap/scss/bootstrap";
@@ -438,10 +440,5 @@
 
   .container {
     max-width: 750px;
-  }
-
-  .container .row {
-    margin-right: 0;
-    margin-left: 0;
   }
 </style>

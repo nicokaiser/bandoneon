@@ -1,7 +1,7 @@
 <template>
   <footer class="d-print-none">
     <div class="container my-4">
-      <div class="float-right">
+      <div class="float-end">
         <a
           href="#"
           class="px-1"
