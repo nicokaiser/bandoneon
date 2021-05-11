@@ -7,7 +7,6 @@
           class="navbar-brand mr-auto"
         >
           Bandoneon.app
-          <span class="text-black-50">Dev</span>
         </router-link>
         <div class="nav-item">
           <small>{{ $t(currentInstrument) }}</small>
@@ -120,6 +119,7 @@
             />
           </svg>
         </button>
+        <!--
         <div class="btn-group">
           <button
             class="btn btn-outline-secondary"
@@ -160,6 +160,7 @@
             </svg>
           </button>
         </div>
+        -->
         <button
           :class="['btn', 'btn-outline-secondary', showSettings ? 'active' : null]"
           style="line-height: 1em;"
@@ -222,8 +223,7 @@
         </select>
       </div>
     </div>
-    <hr class="my-5">
-    <!-- <v-how-to /> -->
+    <v-how-to />
     <v-footer />
   </div>
 </template>
@@ -231,7 +231,7 @@
 <script>
   import { mapGetters } from 'vuex'
   import Note from '@tonaljs/note'
-  // import VHowTo from './VHowTo.vue'
+  import VHowTo from './VHowTo.vue'
   import VFooter from './VFooter.vue'
   import VKeyboard from './VKeyboard.vue'
 
@@ -239,7 +239,7 @@
     name:'App',
 
     components: {
-      VFooter, VKeyboard
+      VHowTo, VFooter, VKeyboard
     },
 
     data() {
