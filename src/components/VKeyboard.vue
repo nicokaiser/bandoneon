@@ -23,6 +23,7 @@
           :stroke-width="selected[tonal] ? 2 : 1"
           :fill-opacity="selected[tonal] ? 1 : 0.25"
         />
+
         <text
           :x="x + 29"
           :y="y + 36"
@@ -36,6 +37,7 @@
         >{{ format(tonal)[1] }}</tspan>
         </text>
       </g>
+
       <path
         v-for="(path, index) in scalePaths"
         :key="index"
@@ -71,14 +73,17 @@
         type: String,
         default: 'right-open',
       },
+
       tonic: {
         type: String,
         default: undefined,
       },
+
       scaleType: {
         type: String,
         default: undefined,
       },
+
       chordType: {
         type: String,
         default: undefined,
@@ -126,14 +131,17 @@
             const x = offsetX + col * 79 + 40 - (row % 2 * 40)
             const y = offsetY + row * 64
               + 30 * (1 - Math.sin(x / 320 * Math.PI / 2))
+
             if (name) {
               while (positions[name]) {
                 name += ' '
               }
+
               positions[name] = [x, y]
             }
           }
         }
+
         return positions
       },
 
@@ -146,22 +154,28 @@
           const { intervals, empty } = Scale.get(this.scaleType)
           if (empty) return []
           const paths = []
+
           for (let o = -1; o < 7; o++) {
             const notes = intervals.map((i) => Note.transpose(`${this.tonic}${o}`, i))
             notes.push(`${this.tonic}${o + 1}`)
             let pathString = ''
+
             notes.forEach((n) => {
               const no = Note.get(n)
               const idx = Object.keys(this.positions).find((v) => Note.get(v).height === no.height)
+
               if (idx) {
                 const [x, y] = this.positions[idx]
                 pathString += `${pathString === '' ? 'M' : 'L'}${x + 30},${y + 30}`
               }
             })
+
             paths.push(pathString)
           }
+
           return paths
         }
+
         return []
       },
 
@@ -169,14 +183,17 @@
         if (this.modified) return this.userSelected
 
         const selected = {}
+
         if (this.tonic && this.chordType) {
           const chord = this.chords[`${this.tonic}${this.chordType}`]
+
           if (chord) {
             for (let i = 0; i <= chord.length; i++) {
               if (chord[i]) selected[chord[i]] = true
             }
           }
         }
+
         return selected
       },
 
@@ -205,9 +222,11 @@
       format(tonal) {
         const note = Note.get(this.enharmonic ? Note.enharmonic(tonal) : tonal)
         if (note.empty) return ''
+
         if (this.$store.state.pitchNotation === 'scientific') {
           return [note.pc.replace('b', '♭').replace('#', '♯'), note.oct]
         }
+
         return [helmholtz(note.name), '']
       },
 
@@ -222,6 +241,7 @@
           this.userSelected = { ...this.selected }
           this.modified = true
         }
+
         if (this.userSelected[tonal]) {
           Vue.delete(this.userSelected, tonal)
         } else {
@@ -253,6 +273,7 @@
         const url = win.createObjectURL(blob)
 
         let selected = ''
+
         if (this.tonic) {
           selected = '-' + this.tonic.replace('#', 's')
           if (this.chordType) selected += this.chordType

@@ -12,6 +12,7 @@
             class="flag"
           >
         </a>
+
         <a
           href="#"
           class="px-1"
@@ -22,6 +23,7 @@
             class="flag"
           >
         </a>
+
         <a
           href="#"
           class="px-1"
@@ -33,6 +35,7 @@
           >
         </a>
       </div>
+
       <p>
         <i18n path="license">
           <template #name>
@@ -41,6 +44,7 @@
               target="_blank"
             >Nico Kaiser</a>
           </template>
+
           <template #mit>
             <a
               href="https://github.com/nicokaiser/bandoneon/blob/main/LICENSE"
@@ -50,7 +54,9 @@
             }}</a>
           </template>
         </i18n>
+
         <br>
+
         <i18n path="built">
           <template #tonal>
             <a
@@ -58,12 +64,14 @@
               target="_blank"
             >tonal</a>
           </template>
+
           <template #vuejs>
             <a
               href="https://vuejs.org/"
               target="_blank"
             >Vue.js</a>
           </template>
+
           <template #bootstrap>
             <a
               href="https://getbootstrap.com/"
@@ -71,7 +79,9 @@
             >Bootstrap</a>
           </template>
         </i18n>
+
         &ensp;
+
         <i18n path="available">
           <template #github>
             <a

@@ -13,6 +13,7 @@
         </div>
       </div>
     </nav>
+
     <div class="container mb-5">
       <ul class="nav nav-tabs nav-fill d-print-none">
         <li
@@ -29,6 +30,7 @@
           </a>
         </li>
       </ul>
+
       <v-keyboard
         ref="keyboard"
         :variant="currentVariant"
@@ -36,6 +38,7 @@
         :scale-type="currentScaleType"
         :chord-type="currentChordType"
       />
+
       <div class="btn-toolbar mb-3 d-print-none">
         <div
           class="btn-group"
@@ -52,6 +55,7 @@
           </button>
         </div>
       </div>
+
       <div class="btn-toolbar justify-content-between d-print-none">
         <button
           :class="['btn', 'btn-outline-secondary', enharmonic ? 'active' : null]"
@@ -60,6 +64,7 @@
         >
           {{ enharmonic ? '♯' : '♭' }}
         </button>
+
         <div class="btn-group">
           <button
             v-for="scaleType in scaleTypes"
@@ -70,6 +75,7 @@
             {{ $t(scaleType) }}
           </button>
         </div>
+
         <div class="btn-group">
           <button
             v-for="chordType in chordTypes"
@@ -80,6 +86,7 @@
             {{ chordType }}
           </button>
         </div>
+
         <button
           :class="['btn', 'btn-outline-secondary', colors ? 'active' : null]"
           @click.stop="toggleColors()"
@@ -95,6 +102,7 @@
             <path d="M12.433 10.07C14.133 10.585 16 11.15 16 8a8 8 0 1 0-8 8c1.996 0 1.826-1.504 1.649-3.08-.124-1.101-.252-2.237.351-2.92.465-.527 1.42-.237 2.433.07zM8 5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm4.5 3a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zM5 6.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm.5 6.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
           </svg>
         </button>
+
         <button
           class="btn btn-outline-secondary"
           style="line-height: 1em;"
@@ -119,7 +127,7 @@
             />
           </svg>
         </button>
-        <!--
+
         <div class="btn-group">
           <button
             class="btn btn-outline-secondary"
@@ -129,15 +137,16 @@
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="1em"
-              height="1em"
+              width="16"
+              height="16"
               fill="currentColor"
-              class="bi bi-save-fill"
+              class="bi bi-pin-fill"
               viewBox="0 0 16 16"
             >
-              <path d="M8.5 1.5A1.5 1.5 0 0 1 10 0h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h6c-.314.418-.5.937-.5 1.5v7.793L4.854 6.646a.5.5 0 1 0-.708.708l3.5 3.5a.5.5 0 0 0 .708 0l3.5-3.5a.5.5 0 0 0-.708-.708L8.5 9.293V1.5z" />
+              <path d="M4.146.146A.5.5 0 0 1 4.5 0h7a.5.5 0 0 1 .5.5c0 .68-.342 1.174-.646 1.479-.126.125-.25.224-.354.298v4.431l.078.048c.203.127.476.314.751.555C12.36 7.775 13 8.527 13 9.5a.5.5 0 0 1-.5.5h-4v4.5c0 .276-.224 1.5-.5 1.5s-.5-1.224-.5-1.5V10h-4a.5.5 0 0 1-.5-.5c0-.973.64-1.725 1.17-2.189A5.921 5.921 0 0 1 5 6.708V2.277a2.77 2.77 0 0 1-.354-.298C4.342 1.674 4 1.179 4 .5a.5.5 0 0 1 .146-.354z" />
             </svg>
           </button>
+
           <button
             class="btn btn-outline-secondary"
             style="line-height: 1em;"
@@ -160,7 +169,7 @@
             </svg>
           </button>
         </div>
-        -->
+
         <button
           :class="['btn', 'btn-outline-secondary', showSettings ? 'active' : null]"
           style="line-height: 1em;"
@@ -186,6 +195,7 @@
           </svg>
         </button>
       </div>
+
       <div
         v-if="showSettings"
         class="my-3"
@@ -204,6 +214,7 @@
           </option>
         </select>
       </div>
+
       <div
         v-if="showSettings"
         class="my-3"
@@ -223,6 +234,7 @@
         </select>
       </div>
     </div>
+
     <v-how-to />
     <v-footer />
   </div>
@@ -236,7 +248,7 @@
   import VKeyboard from './VKeyboard.vue'
 
   export default {
-    name:'App',
+    name: 'App',
 
     components: {
       VHowTo, VFooter, VKeyboard
@@ -311,6 +323,7 @@
     methods: {
       setVariant(variant) {
         if (this.currentVariant === variant) return
+
         this.$router.push({
           name: this.$route.name,
           params: { ...this.$route.params, ...{ variant } },
@@ -322,6 +335,7 @@
           if (!force) this.$router.push({ name: 'home', params: {
             variant: this.currentVariant,
           }})
+
           return
         }
 
@@ -331,6 +345,7 @@
             tonic,
             scaleType: this.currentScaleType,
           }})
+
           return
         }
 
@@ -343,14 +358,17 @@
 
       enharmonicNoteName(name) {
         if (!this.enharmonic) return name.replace('#', '♯')
+
         if (name.length === 2 && name[1] === '#') {
           return Note.enharmonic(name).replace('b', '♭')
         }
+
         return name
       },
 
       setScaleType(scaleType) {
         if (this.currentScaleType === scaleType) return
+
         this.$router.push({ name: 'scale', params: {
           variant: this.currentVariant,
           tonic: this.currentTonic || 'C',
@@ -360,6 +378,7 @@
 
       setChordType(chordType) {
         if (this.currentChordType === chordType) return
+
         this.$router.push({ name: 'chord', params: {
           variant: this.currentVariant,
           tonic: this.currentTonic || 'C',
@@ -392,8 +411,11 @@
       },
 
       saveVoicing() {
+        if (!this.$refs.keyboard.modified) return
+
         const selected = this.$refs.keyboard.fetchSelected()
         const pitches = [];
+
         for (let c in selected) {
           if (selected[c]) pitches.push(c)
         }
@@ -402,6 +424,7 @@
 
         const left = [ "left-open", "left-close" ]
         const right = [ "right-open", "left-close" ]
+
         const variants = {
           "left-open": left,
           "left-close": left,

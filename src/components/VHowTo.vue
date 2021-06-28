@@ -39,13 +39,16 @@
       <h2 class="mb-4">
         {{ $t('howToUse') }}
       </h2>
+
       <p>
         {{ $t('summary') }}
       </p>
+
       <ul>
         <li>
           {{ $t('usage1') }}
         </li>
+
         <li>
           <i18n path="usage2">
             <template #cMajor>
@@ -55,6 +58,7 @@
             </template>
           </i18n>
         </li>
+
         <li>
           <i18n path="usage3">
             <template #em7>
@@ -64,20 +68,25 @@
             </template>
           </i18n>
         </li>
+
         <li>
           <i18n path="shortcuts">
             <template #shortcutsVariant>
               <code>l</code>, <code>L</code>, <code>r</code>, <code>R</code>
             </template>
+
             <template #shortcutsChordType>
               <code>M</code>, <code>m</code>, <code>7</code>
             </template>
+
             <template #shortcutsTonic>
               <code>c</code>, <code>d</code>, <code>e</code>, <code>f</code>, <code>g</code>, <code>a</code>, <code>b</code>
             </template>
+
             <template #shortcutSharp>
               <code>#</code>
             </template>
+
             <template #shortcutColors>
               <code>C</code>
             </template>
