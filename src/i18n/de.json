@@ -14,12 +14,19 @@
   "rheinische152": "152 Töne, Rheinische Tonlage",
   "peguri146": "146 Töne, Peguri (chromatisch)",
   "manouri148": "148 Töne, Manouri (chromatisch)",
-  "license": "Copyright © {name}, {mit}.",
+  "license": "Copyright © {name}, {mit}",
   "mit-license": "MIT-Lizenz",
   "built": "Gebaut mit {tonal}, {vuejs} und {bootstrap}.",
-  "available": "Verfügbar auf {github}.",
+  "available": "Verfügbar auf {github}",
+  "pitchNotation": "Tonsymbole",
   "helmholtz": "Helmholtz-Tonsymbole (c♯’’)",
   "scientific": "Wissenschaftliche Tonsymbole (C♯5)",
   "saveVoicing": "Voicing speichern",
-  "resetVoicing": "Voicing zurücksetzen"
+  "resetVoicing": "Voicing zurücksetzen",
+  "language": "Sprache",
+  "language-de": "Deutsch",
+  "language-en": "English",
+  "language-es": "Español",
+  "keyboard": "Tastatur",
+  "info": "Info"
 }

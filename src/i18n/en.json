@@ -14,12 +14,19 @@
   "rheinische152": "152 tones, Rheinische Tonlage",
   "peguri146": "146 tones, Peguri (chromatic)",
   "manouri148": "148 tones, Manouri (chromatic)",
-  "license": "Copyright © {name}, {mit}.",
+  "license": "Copyright © {name}, {mit}",
   "mit-license": "MIT License",
   "built": "Built with {tonal}, {vuejs}, and {bootstrap}.",
-  "available": "Available on {github}.",
+  "available": "Available on {github}",
+  "pitchNotation": "Pitch notation",
   "helmholtz": "Helmholtz pitch notation (c♯’’)",
   "scientific": "Scientific pitch notation (C♯5)",
   "saveVoicing": "Save voicing",
-  "resetVoicing": "Reset voicing"
+  "resetVoicing": "Reset voicing",
+  "language": "Language",
+  "language-de": "Deutsch",
+  "language-en": "English",
+  "language-es": "Español",
+  "keyboard": "Keyboard",
+  "info": "Info"
 }
