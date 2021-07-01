@@ -104,6 +104,43 @@
     </div>
 
     <div class="container my-5">
+      <div class="row mb-5">
+        <div class="col-5">
+          <ul class="nav nav-pills nav-fill border p-1 bg-light">
+            <li 
+              v-for="side in ['left', 'right']"
+              :key="side"
+              class="nav-item"
+            >
+              <a
+                href="#"
+                :class="['nav-link', (currentSide === side) ? 'active' : null]"
+                @click.prevent="toggleSide()"
+              >{{ side }}</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="col-2" />
+
+        <div class="col-5">
+          <ul class="nav nav-pills nav-fill border p-1 bg-light">
+            <li 
+              v-for="direction in ['close', 'open']"
+              :key="direction"
+              class="nav-item"
+            >
+              <a
+                href="#"
+                :class="['nav-link', (currentDirection === direction) ? 'active' : null]"
+                @click.prevent="toggleDirection()"
+              >{{ direction }}</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!--
       <ul class="nav nav-tabs nav-fill d-print-none">
         <li
           v-for="variant in variants"
@@ -119,6 +156,7 @@
           </a>
         </li>
       </ul>
+      -->
 
       <v-keyboard
         ref="keyboard"
@@ -321,6 +359,14 @@
         return this.$store.state.pitchNotation
       },
 
+      currentSide() {
+        return this.currentVariant.split('-')[0];
+      },
+
+      currentDirection() {
+        return this.currentVariant.split('-')[1];
+      },
+
       ...mapGetters(['currentVariant', 'currentScaleType', 'currentChordType', 'currentTonic'])
     },
 
@@ -432,6 +478,16 @@
 
       toggleSettings() {
         this.showSettings = !this.showSettings
+      },
+
+      toggleSide() {
+        const side = this.currentSide === 'left' ? 'right' : 'left';
+        this.setVariant([side, this.currentDirection].join('-'));
+      },
+
+      toggleDirection() {
+        const direction = this.currentDirection === 'open' ? 'close' : 'open';
+        this.setVariant([this.currentSide, direction].join('-'));
       },
 
       setInstrument(event) {
