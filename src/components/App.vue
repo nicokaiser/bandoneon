@@ -106,37 +106,43 @@
     <div class="container my-5">
       <div class="row mb-5">
         <div class="col-5">
-          <ul class="nav nav-pills nav-fill border p-1 bg-light">
-            <li 
-              v-for="side in ['left', 'right']"
-              :key="side"
-              class="nav-item"
+          <div class="btn-toolbar mb-3">
+            <div
+              class="btn-group"
+              style="width: 100%"
             >
-              <a
-                href="#"
-                :class="['nav-link', (currentSide === side) ? 'active' : null]"
+              <button
+                v-for="side in ['left', 'right']"
+                :key="side"
+                :class="['btn', (currentSide === side) ? 'btn-secondary' : 'btn-outline-secondary']"
+                width="50%"
                 @click.prevent="toggleSide()"
-              >{{ side }}</a>
-            </li>
-          </ul>
+              >
+                {{ side }}
+              </button>
+            </div>
+          </div>
         </div>
 
         <div class="col-2" />
 
         <div class="col-5">
-          <ul class="nav nav-pills nav-fill border p-1 bg-light">
-            <li 
-              v-for="direction in ['close', 'open']"
-              :key="direction"
-              class="nav-item"
+          <div class="btn-toolbar mb-3">
+            <div
+              class="btn-group"
+              style="width: 100%"
             >
-              <a
-                href="#"
-                :class="['nav-link', (currentDirection === direction) ? 'active' : null]"
+              <button
+                v-for="direction in ['close', 'open']"
+                :key="direction"
+                :class="['btn', (currentDirection === direction) ? 'btn-secondary' : 'btn-outline-secondary']"
+                width="50%"
                 @click.prevent="toggleDirection()"
-              >{{ direction }}</a>
-            </li>
-          </ul>
+              >
+                {{ direction }}
+              </button>
+            </div>
+          </div>
         </div>
       </div>
 
