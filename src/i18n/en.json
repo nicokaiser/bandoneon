@@ -1,4 +1,8 @@
 {
+  "left": "left",
+  "right": "right",
+  "open": "open",
+  "close": "close",
   "left-open": "Left open",
   "left-close": "Left close",
   "right-open": "Right open",

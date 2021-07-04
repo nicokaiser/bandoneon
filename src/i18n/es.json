@@ -1,4 +1,8 @@
 {
+  "left": "izquierda",
+  "right": "derecha",
+  "open": "abriendo",
+  "close": "cerrando",
   "left-open": "Izquierda abriendo",
   "left-close": "Izquierda cerrando",
   "right-open": "Derecha abriendo",

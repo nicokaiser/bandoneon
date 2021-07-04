@@ -116,9 +116,9 @@
                 :key="side"
                 :class="['btn', (currentSide === side) ? 'btn-secondary' : 'btn-outline-secondary']"
                 width="50%"
-                @click.prevent="toggleSide()"
+                @click.prevent="toggleSide"
               >
-                {{ side }}
+                {{ $t(side) }}
               </button>
             </div>
           </div>
@@ -137,9 +137,9 @@
                 :key="direction"
                 :class="['btn', (currentDirection === direction) ? 'btn-secondary' : 'btn-outline-secondary']"
                 width="50%"
-                @click.prevent="toggleDirection()"
+                @click.prevent="toggleDirection"
               >
-                {{ direction }}
+                {{ $t(direction) }}
               </button>
             </div>
           </div>
