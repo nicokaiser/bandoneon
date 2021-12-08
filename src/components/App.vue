@@ -44,7 +44,9 @@
                                 @change="setInstrument($event)"
                             >
                                 <option
-                                    v-for="instrument in instruments"
+                                    v-for="instrument in Object.keys(
+                                        instruments
+                                    )"
                                     :key="instrument"
                                     v-t="instrument"
                                     :selected="currentInstrument === instrument"
@@ -152,12 +154,12 @@
                     :class="[
                         'btn',
                         'btn-outline-secondary',
-                        enharmonic ? 'active' : null,
+                        enharmonicSelected ? 'active' : null,
                     ]"
                     style="width: 2em"
                     @click.stop="toggleEnharmonic()"
                 >
-                    {{ enharmonic ? '♯' : '♭' }}
+                    {{ enharmonicSelected ? '♯' : '♭' }}
                 </button>
 
                 <div class="btn-group">
@@ -298,8 +300,8 @@ const { locale, t } = useI18n();
 
 <script>
 import 'bootstrap/dist/js/bootstrap.js';
-import { mapGetters } from 'vuex';
-import Note from '@tonaljs/note';
+import { mapGetters, mapState } from 'vuex';
+import { enharmonic } from '@tonaljs/note';
 import VInfo from './VInfo.vue';
 import VFooter from './VFooter.vue';
 import VKeyboard from './VKeyboard.vue';
@@ -332,37 +334,16 @@ export default {
     },
 
     computed: {
-        variants() {
-            return this.$store.state.variants;
-        },
-
-        colors() {
-            return this.$store.state.colors;
-        },
-
-        enharmonic() {
-            return this.$store.state.enharmonic;
-        },
-
-        scaleTypes() {
-            return this.$store.state.scaleTypes;
-        },
-
-        chordTypes() {
-            return this.$store.state.chordTypes;
-        },
-
-        instruments() {
-            return Object.keys(this.$store.state.instruments);
-        },
-
-        currentInstrument() {
-            return this.$store.state.instrument;
-        },
-
-        pitchNotation() {
-            return this.$store.state.pitchNotation;
-        },
+        ...mapState({
+            variants: 'variants',
+            scaleTypes: 'scaleTypes',
+            chordTypes: 'chordTypes',
+            colors: 'colors',
+            enharmonicSelected: 'enharmonic',
+            currentInstrument: 'instrument',
+            instruments: 'instruments',
+            pitchNotation: 'pitchNotation',
+        }),
 
         ...mapGetters([
             'currentVariant',
@@ -446,10 +427,10 @@ export default {
         },
 
         enharmonicNoteName(name) {
-            if (!this.enharmonic) return name.replace('#', '♯');
+            if (!this.enharmonicSelected) return name.replace('#', '♯');
 
             if (name.length === 2 && name[1] === '#') {
-                return Note.enharmonic(name).replace('b', '♭');
+                return enharmonic(name).replace('b', '♭');
             }
 
             return name;
