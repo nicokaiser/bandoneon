@@ -5,7 +5,7 @@ import instruments from './instruments'
 
 export const store = createStore({
   state: () => ({
-    language: window.localStorage.getItem('language') || navigator.language?.split('-')[0] || 'en',
+    locale: window.localStorage.getItem('locale') || navigator.language?.split('-')[0] || 'en',
     colors: false,
     chords: (window.localStorage.getItem('chords') && JSON.parse(window.localStorage.getItem('chords'))) || JSON.parse(JSON.stringify(originalChords)),
     originalChords,
@@ -37,9 +37,9 @@ export const store = createStore({
   },
 
   mutations: {
-    setLanguage(state, language) {
-      window.localStorage.setItem('language', language)
-      state.language = language
+    setLocale(state, locale) {
+      window.localStorage.setItem('locale', locale)
+      state.locale = locale
     },
 
     setInstrument(state, instrument) {

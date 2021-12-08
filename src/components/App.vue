@@ -89,9 +89,9 @@
           <div class="mb-3">
             <div class="form-floating">
               <select
-                id="floatingSelectLanguage"
+                id="floatingSelectLocale"
                 class="form-select"
-                @change="setLanguage($event)"
+                @change="setLocale($event)"
               >
                 <option
                   v-for="item in ['de', 'en', 'es']"
@@ -103,7 +103,7 @@
               </select>
               <label
                 v-t="'language'"
-                for="floatingSelectLanguage"
+                for="floatingSelectLocale"
               />
             </div>
           </div>
@@ -427,8 +427,8 @@
         this.$store.commit('setPitchNotation', event.target.value)
       },
 
-      setLanguage(event) {
-        this.$store.commit('setLanguage', event.target.value)
+      setLocale(event) {
+        this.$store.commit('setLocale', event.target.value)
         this.locale = event.target.value
       },
 
