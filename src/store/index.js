@@ -5,14 +5,14 @@ import instruments from './instruments'
 
 export const store = createStore({
   state: () => ({
-    language: /* Vue.localStorage.get('language') || */ navigator.language?.split('-')[0] || 'en',
+    language: window.localStorage.getItem('language') || navigator.language?.split('-')[0] || 'en',
     colors: false,
-    chords: /* (Vue.localStorage.get('chords') && JSON.parse(Vue.localStorage.get('chords'))) || */ JSON.parse(JSON.stringify(originalChords)),
+    chords: (window.localStorage.getItem('chords') && JSON.parse(window.localStorage.getItem('chords'))) || JSON.parse(JSON.stringify(originalChords)),
     originalChords,
     enharmonic: false,
     instruments,
-    instrument: /* Vue.localStorage.get('instrument') || */ 'rheinische142',
-    pitchNotation: /* Vue.localStorage.get('pitchNotation') || */ 'helmholtz',
+    instrument: window.localStorage.getItem('instrument') || 'rheinische142',
+    pitchNotation: window.localStorage.getItem('pitchNotation') || 'helmholtz',
     variants: ['left-open', 'left-close', 'right-open', 'right-close'],
     scaleTypes: ['major', 'minor', 'chromatic'],
     chordTypes: ['M', 'm', '7', 'dim', 'm7', 'M7'],
@@ -38,20 +38,20 @@ export const store = createStore({
 
   mutations: {
     setLanguage(state, language) {
-      // Vue.localStorage.set('language', language)
+      window.localStorage.setItem('language', language)
       state.language = language
     },
 
     setInstrument(state, instrument) {
       if (instrument in instruments) {
         state.instrument = instrument
-        // Vue.localStorage.set('instrument', instrument)
+        window.localStorage.setItem('instrument', instrument)
       }
     },
 
     setPitchNotation(state, pitchNotation) {
       state.pitchNotation = pitchNotation
-      // Vue.localStorage.set('pitchNotation', pitchNotation)
+      window.localStorage.setItem('pitchNotation', pitchNotation)
     },
   },
 })
