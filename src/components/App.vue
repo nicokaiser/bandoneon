@@ -290,12 +290,16 @@
     </div>
 </template>
 
+<script setup>
+import { useI18n } from 'vue-i18n';
+
+const { locale, t } = useI18n();
+</script>
+
 <script>
 import 'bootstrap/dist/js/bootstrap.js';
-
 import { mapGetters } from 'vuex';
 import Note from '@tonaljs/note';
-import { useI18n } from 'vue-i18n';
 import VInfo from './VInfo.vue';
 import VFooter from './VFooter.vue';
 import VKeyboard from './VKeyboard.vue';
@@ -305,11 +309,6 @@ export default {
         VInfo,
         VFooter,
         VKeyboard,
-    },
-
-    setup() {
-        const { locale, t } = useI18n();
-        return { locale, t };
     },
 
     data() {

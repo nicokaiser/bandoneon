@@ -4,5 +4,7 @@
       "plugin:vue/vue3-recommended",
       "plugin:prettier/recommended"
     ],
-    "rules": {}
+    "rules": {
+      "vue/script-setup-uses-vars": "error"
+    }
 }
