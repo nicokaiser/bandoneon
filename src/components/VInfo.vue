@@ -50,27 +50,27 @@
         </li>
 
         <li>
-          <i18n path="usage2">
+          <i18n-t keypath="usage2">
             <template #cMajor>
               <router-link :to="{ name: 'scale', params: { variant: 'right-open', tonic: 'C', scaleType: 'major' } }">
                 {{ $t('cMajor') }}
               </router-link>
             </template>
-          </i18n>
+          </i18n-t>
         </li>
 
         <li>
-          <i18n path="usage3">
+          <i18n-t keypath="usage3">
             <template #em7>
               <router-link :to="{ name: 'chord', params: { variant: 'left-open', tonic: 'E', chordType: 'm7' } }">
                 {{ $t('em7') }}
               </router-link>
             </template>
-          </i18n>
+          </i18n-t>
         </li>
 
         <li>
-          <i18n path="shortcuts">
+          <i18n-t keypath="shortcuts">
             <template #shortcutsVariant>
               <code>l</code>, <code>L</code>, <code>r</code>, <code>R</code>
             </template>
@@ -90,7 +90,7 @@
             <template #shortcutColors>
               <code>C</code>
             </template>
-          </i18n>
+          </i18n-t>
         </li>
       </ul>
     </div>

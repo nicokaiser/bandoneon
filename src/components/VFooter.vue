@@ -5,7 +5,7 @@
 
       <div class="d-flex justify-content-between">
         <span>
-          <i18n path="license">
+          <i18n-t keypath="license">
             <template #name>
               <a
                 href="https://kaiser.me/"
@@ -21,18 +21,18 @@
                 $t('mit-license')
               }}</a>
             </template>
-          </i18n>
+          </i18n-t>
         </span>
 
         <span>
-          <i18n path="available">
+          <i18n-t keypath="available">
             <template #github>
               <a
                 href="https://github.com/nicokaiser/bandoneon"
                 target="_blank"
               >GitHub</a>
             </template>
-          </i18n>
+          </i18n-t>
         </span>
       </div>
     </div>

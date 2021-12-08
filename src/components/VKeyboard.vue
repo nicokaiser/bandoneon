@@ -54,7 +54,6 @@
 </template>
 
 <script>
-  import Vue from "vue"
   import { mapGetters } from 'vuex'
   import Note from '@tonaljs/note'
   import Scale from '@tonaljs/scale'
@@ -243,9 +242,9 @@
         }
 
         if (this.userSelected[tonal]) {
-          Vue.delete(this.userSelected, tonal)
+          delete this.userSelected[tonal];
         } else {
-          Vue.set(this.userSelected, tonal, true)
+          this.userSelected[tonal] = true;
         }
       },
 
