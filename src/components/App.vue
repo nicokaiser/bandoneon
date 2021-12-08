@@ -11,17 +11,19 @@
         <ul class="nav">
           <li class="nav-item">
             <a
+              v-t="'info'"
               class="nav-link link-dark"
               data-bs-toggle="collapse"
               href="#collapseInfo"
-            >{{ $t('info') }}</a>
+            />
           </li>
           <li class="nav-item">
             <a
+              v-t="'settings'"
               class="nav-link link-dark"
               data-bs-toggle="collapse"
               href="#collapseSettings"
-            >{{ $t('settings') }}</a>
+            />
           </li>
         </ul>
       </div>
@@ -50,13 +52,15 @@
                 <option
                   v-for="instrument in instruments"
                   :key="instrument"
+                  v-t="instrument"
                   :selected="currentInstrument === instrument"
                   :value="instrument"
-                >
-                  {{ $t(instrument) }}
-                </option>
+                />
               </select>
-              <label for="floatingSelectInstrument">{{ $t('keyboard') }}</label>
+              <label
+                v-t="'keyboard'"
+                for="floatingSelectInstrument"
+              />
             </div>
           </div>
 
@@ -70,13 +74,15 @@
                 <option
                   v-for="item in ['helmholtz', 'scientific']"
                   :key="item"
+                  v-t="item"
                   :selected="pitchNotation === item"
                   :value="item"
-                >
-                  {{ $t(item) }}
-                </option>
+                />
               </select>
-              <label for="floatingSelectPitchNotation">{{ $t('pitchNotation') }}</label>
+              <label
+                v-t="'pitchNotation'"
+                for="floatingSelectPitchNotation"
+              />
             </div>
           </div>
 
@@ -90,13 +96,15 @@
                 <option
                   v-for="item in ['de', 'en', 'es']"
                   :key="item"
-                  :selected="$root.$i18n.locale === item"
+                  v-t="'language-' + item"
+                  :selected="locale === item"
                   :value="item"
-                >
-                  {{ $t('language-' + item) }}
-                </option>
+                />
               </select>
-              <label for="floatingSelectLanguage">{{ $t('language') }}</label>
+              <label
+                v-t="'language'"
+                for="floatingSelectLanguage"
+              />
             </div>
           </div>
         </div>
@@ -111,12 +119,11 @@
           class="nav-item"
         >
           <a
+            v-t="variant"
             :class="['nav-link', (currentVariant === variant) ? 'active' : null]"
             href="#"
             @click.prevent="setVariant(variant)"
-          >
-            {{ $t(variant) }}
-          </a>
+          />
         </li>
       </ul>
 
@@ -158,11 +165,10 @@
           <button
             v-for="scaleType in scaleTypes"
             :key="scaleType"
+            v-t="scaleType"
             :class="['btn', (currentScaleType === scaleType) ? 'btn-secondary' : 'btn-outline-secondary']"
             @click.stop="setScaleType(scaleType)"
-          >
-            {{ $t(scaleType) }}
-          </button>
+          />
         </div>
 
         <div class="btn-group">
@@ -195,7 +201,7 @@
         <button
           class="btn btn-outline-secondary"
           style="line-height: 1em;"
-          :title="$t('saveImage')"
+          :title="t('saveImage')"
           @click.stop="downloadImage()"
         >
           <svg
@@ -221,7 +227,7 @@
           <button
             class="btn btn-outline-secondary"
             style="line-height: 1em;"
-            :title="$t('saveVoicing')"
+            :title="t('saveVoicing')"
             @click.stop="saveVoicing()"
           >
             <svg
@@ -239,7 +245,7 @@
           <button
             class="btn btn-outline-secondary"
             style="line-height: 1em;"
-            :title="$t('resetVoicing')"
+            :title="t('resetVoicing')"
             @click.stop="resetVoicing()"
           >
             <svg
@@ -270,15 +276,19 @@
 
   import { mapGetters } from 'vuex'
   import Note from '@tonaljs/note'
+  import { useI18n } from 'vue-i18n'
   import VInfo from './VInfo.vue'
   import VFooter from './VFooter.vue'
   import VKeyboard from './VKeyboard.vue'
 
   export default {
-    name: 'App',
-
     components: {
       VInfo, VFooter, VKeyboard
+    },
+
+    setup() {
+      const { locale, t } = useI18n()
+      return { locale, t }
     },
 
     data() {
@@ -419,7 +429,7 @@
 
       setLanguage(event) {
         this.$store.commit('setLanguage', event.target.value)
-        this.$root.$i18n.locale = event.target.value
+        this.locale = event.target.value
       },
 
       toggleEnharmonic() {
@@ -489,7 +499,7 @@
   $secondary: #776f54;
   $light: #f8f9fa;
 
-  @import "~bootstrap/scss/bootstrap";
+  @import "bootstrap/scss/bootstrap";
 
   body {
     min-width: 750px;

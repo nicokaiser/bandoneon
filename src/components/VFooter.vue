@@ -15,11 +15,10 @@
 
             <template #mit>
               <a
+                v-t="'mit-license'"
                 href="https://github.com/nicokaiser/bandoneon/blob/main/LICENSE"
                 target="_blank"
-              >{{
-                $t('mit-license')
-              }}</a>
+              />
             </template>
           </i18n-t>
         </span>

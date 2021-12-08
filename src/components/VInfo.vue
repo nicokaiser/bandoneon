@@ -36,25 +36,23 @@
 <template>
   <div class="border-top bg-light d-print-none">
     <div class="container py-4">
-      <h2 class="mb-4">
-        {{ $t('howToUse') }}
-      </h2>
+      <h2
+        v-t="'howToUse'"
+        class="mb-4"
+      />
 
-      <p>
-        {{ $t('summary') }}
-      </p>
+      <p v-t="'summary'" />
 
       <ul>
-        <li>
-          {{ $t('usage1') }}
-        </li>
+        <li v-t="'usage1'" />
 
         <li>
           <i18n-t keypath="usage2">
             <template #cMajor>
-              <router-link :to="{ name: 'scale', params: { variant: 'right-open', tonic: 'C', scaleType: 'major' } }">
-                {{ $t('cMajor') }}
-              </router-link>
+              <router-link 
+                v-t="'cMajor'" 
+                :to="{ name: 'scale', params: { variant: 'right-open', tonic: 'C', scaleType: 'major' } }"
+              />
             </template>
           </i18n-t>
         </li>
@@ -62,9 +60,10 @@
         <li>
           <i18n-t keypath="usage3">
             <template #em7>
-              <router-link :to="{ name: 'chord', params: { variant: 'left-open', tonic: 'E', chordType: 'm7' } }">
-                {{ $t('em7') }}
-              </router-link>
+              <router-link
+                v-t="'em7'"
+                :to="{ name: 'chord', params: { variant: 'left-open', tonic: 'E', chordType: 'm7' } }"
+              />
             </template>
           </i18n-t>
         </li>
@@ -96,6 +95,20 @@
     </div>
   </div>
 </template>
+
+<script>
+  import { useI18n } from 'vue-i18n'
+
+  export default {
+    setup() {
+      const { locale, t } = useI18n({
+        inheritLocale: true
+      })
+
+      return { locale, t }
+    }
+  }
+</script>
 
 <style scoped>
   .container {
