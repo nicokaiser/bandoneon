@@ -32,7 +32,7 @@
                     font-size="20px"
                     text-anchor="middle"
                 >
-                    {{ format(tonal)[0] }}
+                    <tspan>{{ format(tonal)[0] }}</tspan>
                     <tspan dx="2" font-size="16px">
                         {{ format(tonal)[1] }}
                     </tspan>
