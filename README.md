@@ -9,7 +9,7 @@ A little JavaScript application that wants to help learning the Alfred Arnold 14
 
 ## Start development server
 
-    npm run serve
+    npm run dev
 
 ## Running as Docker container
 
