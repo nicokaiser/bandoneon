@@ -299,7 +299,7 @@ const { locale, t } = useI18n();
 </script>
 
 <script>
-import 'bootstrap/dist/js/bootstrap.js';
+import 'bootstrap/js/src/collapse';
 import { mapGetters, mapState } from 'vuex';
 import { enharmonic } from '@tonaljs/note';
 import VInfo from './VInfo.vue';
