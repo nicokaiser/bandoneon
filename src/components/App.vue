@@ -201,18 +201,7 @@
                     ]"
                     @click.stop="toggleColors()"
                 >
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="1em"
-                        height="1em"
-                        fill="currentColor"
-                        class="bi bi-palette-fill"
-                        viewBox="0 0 16 16"
-                    >
-                        <path
-                            d="M12.433 10.07C14.133 10.585 16 11.15 16 8a8 8 0 1 0-8 8c1.996 0 1.826-1.504 1.649-3.08-.124-1.101-.252-2.237.351-2.92.465-.527 1.42-.237 2.433.07zM8 5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm4.5 3a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zM5 6.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm.5 6.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"
-                        />
-                    </svg>
+                    <b-icon-palette-fill />
                 </button>
 
                 <button
@@ -221,23 +210,7 @@
                     :title="t('saveImage')"
                     @click.stop="downloadImage()"
                 >
-                    <svg
-                        width="1em"
-                        height="1em"
-                        viewBox="0 0 16 16"
-                        class="bi bi-download"
-                        fill="currentColor"
-                        xmlns="http://www.w3.org/2000/svg"
-                    >
-                        <path
-                            fill-rule="evenodd"
-                            d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"
-                        />
-                        <path
-                            fill-rule="evenodd"
-                            d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"
-                        />
-                    </svg>
+                    <b-icon-download />
                 </button>
 
                 <div class="btn-group">
@@ -247,18 +220,7 @@
                         :title="t('saveVoicing')"
                         @click.stop="saveVoicing()"
                     >
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="16"
-                            height="16"
-                            fill="currentColor"
-                            class="bi bi-pin-fill"
-                            viewBox="0 0 16 16"
-                        >
-                            <path
-                                d="M4.146.146A.5.5 0 0 1 4.5 0h7a.5.5 0 0 1 .5.5c0 .68-.342 1.174-.646 1.479-.126.125-.25.224-.354.298v4.431l.078.048c.203.127.476.314.751.555C12.36 7.775 13 8.527 13 9.5a.5.5 0 0 1-.5.5h-4v4.5c0 .276-.224 1.5-.5 1.5s-.5-1.224-.5-1.5V10h-4a.5.5 0 0 1-.5-.5c0-.973.64-1.725 1.17-2.189A5.921 5.921 0 0 1 5 6.708V2.277a2.77 2.77 0 0 1-.354-.298C4.342 1.674 4 1.179 4 .5a.5.5 0 0 1 .146-.354z"
-                            />
-                        </svg>
+                        <b-icon-pin-fill />
                     </button>
 
                     <button
@@ -267,22 +229,7 @@
                         :title="t('resetVoicing')"
                         @click.stop="resetVoicing()"
                     >
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="1em"
-                            height="1em"
-                            fill="currentColor"
-                            class="bi bi-arrow-counterclockwise"
-                            viewBox="0 0 16 16"
-                        >
-                            <path
-                                fill-rule="evenodd"
-                                d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2v1z"
-                            />
-                            <path
-                                d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466z"
-                            />
-                        </svg>
+                        <b-icon-arrow-counterclockwise />
                     </button>
                 </div>
             </div>
@@ -302,12 +249,20 @@ const { locale, t } = useI18n();
 import 'bootstrap/js/src/collapse';
 import { mapGetters, mapState } from 'vuex';
 import { enharmonic } from '@tonaljs/note';
+import BIconArrowCounterclockwise from './BIconArrowCounterclockwise.vue';
+import BIconDownload from './BIconDownload.vue';
+import BIconPaletteFill from './BIconPaletteFill.vue';
+import BIconPinFill from './BIconPinFill.vue';
 import VInfo from './VInfo.vue';
 import VFooter from './VFooter.vue';
 import VKeyboard from './VKeyboard.vue';
 
 export default {
     components: {
+        BIconArrowCounterclockwise,
+        BIconDownload,
+        BIconPaletteFill,
+        BIconPinFill,
         VInfo,
         VFooter,
         VKeyboard,
