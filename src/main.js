@@ -1,12 +1,12 @@
 import { createApp } from 'vue';
-import { sync } from 'vuex-router-sync';
-import { store } from './store';
-import { router } from './router';
 import { createI18n } from 'vue-i18n';
+import { router } from './router';
+import { store } from './store';
+import { sync } from 'vuex-router-sync';
 import messages from '@intlify/vite-plugin-vue-i18n/messages';
 import App from './components/App.vue';
 
-const app = createApp(App);
+sync(store, router);
 
 const i18n = createI18n({
     messages,
@@ -14,10 +14,8 @@ const i18n = createI18n({
     fallbackLocale: 'en',
 });
 
+const app = createApp(App);
 app.use(router);
 app.use(store);
 app.use(i18n);
-
-sync(store, router);
-
 app.mount('#app');

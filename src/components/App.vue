@@ -41,7 +41,12 @@
                             <select
                                 id="floatingSelectInstrument"
                                 class="form-select"
-                                @change="setInstrument($event)"
+                                @change="
+                                    $store.commit(
+                                        'setInstrument',
+                                        $event.target.value
+                                    )
+                                "
                             >
                                 <option
                                     v-for="instrument in Object.keys(
@@ -65,7 +70,12 @@
                             <select
                                 id="floatingSelectPitchNotation"
                                 class="form-select"
-                                @change="setPitchNotation($event)"
+                                @change="
+                                    $store.commit(
+                                        'setPitchNotation',
+                                        $event.target.value
+                                    )
+                                "
                             >
                                 <option
                                     v-for="item in ['helmholtz', 'scientific']"
@@ -157,7 +167,9 @@
                         enharmonicSelected ? 'active' : null,
                     ]"
                     style="width: 2em"
-                    @click.stop="toggleEnharmonic()"
+                    @click.stop="
+                        $store.state.enharmonic = !$store.state.enharmonic
+                    "
                 >
                     {{ enharmonicSelected ? '♯' : '♭' }}
                 </button>
@@ -199,7 +211,7 @@
                         'btn-outline-secondary',
                         colors ? 'active' : null,
                     ]"
-                    @click.stop="toggleColors()"
+                    @click.stop="$store.state.colors = !$store.state.colors"
                 >
                     <b-icon-palette-fill />
                 </button>
@@ -331,7 +343,9 @@ export default {
             if (key === 'm') return this.setChordType('m');
             if (key === '7') return this.setChordType('7');
 
-            if (key === 'C') return this.toggleColors();
+            if (key === 'C') {
+                this.$store.state.colors = !this.$store.state.colors;
+            }
         });
     },
 
@@ -417,29 +431,9 @@ export default {
             });
         },
 
-        setPitchNotation(event) {
-            this.$store.commit('setPitchNotation', event.target.value);
-        },
-
         setLocale(event) {
             this.$store.commit('setLocale', event.target.value);
             this.locale = event.target.value;
-        },
-
-        toggleEnharmonic() {
-            this.$store.state.enharmonic = !this.$store.state.enharmonic;
-        },
-
-        toggleColors() {
-            this.$store.state.colors = !this.$store.state.colors;
-        },
-
-        toggleSettings() {
-            this.showSettings = !this.showSettings;
-        },
-
-        setInstrument(event) {
-            this.$store.commit('setInstrument', event.target.value);
         },
 
         downloadImage() {
