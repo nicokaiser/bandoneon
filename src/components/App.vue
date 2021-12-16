@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-        <nav class="navbar navbar-light bg-light">
+        <nav class="navbar navbar-light">
             <div class="container">
                 <router-link
                     :to="{ name: 'home' }"
@@ -34,7 +34,7 @@
         </div>
 
         <div id="collapseSettings" class="collapse">
-            <div class="border-top bg-light">
+            <div class="bg-light">
                 <div class="container py-4">
                     <div class="mb-3">
                         <div class="form-floating">
@@ -487,10 +487,6 @@ export default {
 $enable-transitions: true;
 $btn-transition: none;
 $nav-link-transition: none;
-
-$primary: #bcac76;
-$secondary: #776f54;
-$light: #f8f9fa;
 
 @import 'bootstrap/scss/bootstrap';
 

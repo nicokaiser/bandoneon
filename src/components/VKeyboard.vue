@@ -19,7 +19,7 @@
                     :cy="y + 29"
                     r="28"
                     :fill="fill(tonal)"
-                    :stroke="selected[tonal] ? '#222' : '#999'"
+                    :stroke="selected[tonal] ? '#212529' : '#adb5bd'"
                     :stroke-width="selected[tonal] ? 2 : 1"
                     :fill-opacity="selected[tonal] ? 1 : 0.25"
                 />
@@ -27,7 +27,7 @@
                 <text
                     :x="x + 29"
                     :y="y + 36"
-                    fill="#222"
+                    fill="#212529"
                     font-family="-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif"
                     font-size="20px"
                     text-anchor="middle"
@@ -265,7 +265,7 @@ export default {
         fill(tonal) {
             let octave = +tonal.slice(1);
             if (tonal[1] === '#') octave = +tonal.slice(2);
-            return this.colors ? this.octaveColors[octave - 1] : '#bbb';
+            return this.colors ? this.octaveColors[octave - 1] : '#ced4da'; // gray-500
         },
 
         toggle(tonal) {

@@ -1,8 +1,6 @@
 <template>
-    <footer class="d-print-none">
-        <div class="container my-4">
-            <hr class="my-4" />
-
+    <div class="container">
+        <footer class="d-print-none border-top my-4 py-4 text-muted small">
             <div class="d-flex justify-content-between">
                 <span>
                     <i18n-t keypath="license">
@@ -34,17 +32,12 @@
                     </i18n-t>
                 </span>
             </div>
-        </div>
-    </footer>
+        </footer>
+    </div>
 </template>
 
 <style scoped>
-footer {
-    color: #aaa;
-    font-size: 80%;
-}
-
 footer a {
-    color: #aaa;
+    color: inherit;
 }
 </style>

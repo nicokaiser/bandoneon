@@ -34,7 +34,7 @@
 </i18n>
 
 <template>
-    <div class="border-top bg-light d-print-none">
+    <div class="bg-light d-print-none">
         <div class="container py-4">
             <h2 v-t="'howToUse'" class="mb-4" />
 
