@@ -34,103 +34,11 @@
         </div>
 
         <div id="collapseSettings" class="collapse">
-            <div class="bg-light">
-                <div class="container py-4">
-                    <div class="mb-3">
-                        <div class="form-floating">
-                            <select
-                                id="floatingSelectInstrument"
-                                class="form-select"
-                                @change="
-                                    $store.commit(
-                                        'setInstrument',
-                                        $event.target.value
-                                    )
-                                "
-                            >
-                                <option
-                                    v-for="instrument in Object.keys(
-                                        instruments
-                                    )"
-                                    :key="instrument"
-                                    v-t="instrument"
-                                    :selected="currentInstrument === instrument"
-                                    :value="instrument"
-                                />
-                            </select>
-                            <label
-                                v-t="'keyboard'"
-                                for="floatingSelectInstrument"
-                            />
-                        </div>
-                    </div>
-
-                    <div class="mb-3">
-                        <div class="form-floating">
-                            <select
-                                id="floatingSelectPitchNotation"
-                                class="form-select"
-                                @change="
-                                    $store.commit(
-                                        'setPitchNotation',
-                                        $event.target.value
-                                    )
-                                "
-                            >
-                                <option
-                                    v-for="item in ['helmholtz', 'scientific']"
-                                    :key="item"
-                                    v-t="item"
-                                    :selected="pitchNotation === item"
-                                    :value="item"
-                                />
-                            </select>
-                            <label
-                                v-t="'pitchNotation'"
-                                for="floatingSelectPitchNotation"
-                            />
-                        </div>
-                    </div>
-
-                    <div class="mb-3">
-                        <div class="form-floating">
-                            <select
-                                id="floatingSelectLocale"
-                                class="form-select"
-                                @change="setLocale($event)"
-                            >
-                                <option
-                                    v-for="item in ['de', 'en', 'es']"
-                                    :key="item"
-                                    v-t="'language-' + item"
-                                    :selected="locale === item"
-                                    :value="item"
-                                />
-                            </select>
-                            <label
-                                v-t="'language'"
-                                for="floatingSelectLocale"
-                            />
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <v-settings />
         </div>
 
         <div class="container my-5">
-            <ul class="nav nav-tabs nav-fill d-print-none">
-                <li v-for="variant in variants" :key="variant" class="nav-item">
-                    <a
-                        v-t="variant"
-                        :class="[
-                            'nav-link',
-                            currentVariant === variant ? 'active' : null,
-                        ]"
-                        href="#"
-                        @click.prevent="setVariant(variant)"
-                    />
-                </li>
-            </ul>
+            <v-variants />
 
             <v-keyboard
                 ref="keyboard"
@@ -254,7 +162,7 @@
 <script setup>
 import { useI18n } from 'vue-i18n';
 
-const { locale, t } = useI18n();
+const { t } = useI18n();
 </script>
 
 <script>
@@ -268,6 +176,8 @@ import BIconPinFill from './BIconPinFill.vue';
 import VInfo from './VInfo.vue';
 import VFooter from './VFooter.vue';
 import VKeyboard from './VKeyboard.vue';
+import VSettings from './VSettings.vue';
+import VVariants from './VVariants.vue';
 
 export default {
     components: {
@@ -278,6 +188,8 @@ export default {
         VInfo,
         VFooter,
         VKeyboard,
+        VSettings,
+        VVariants,
     },
 
     data() {
@@ -429,11 +341,6 @@ export default {
                     chordType,
                 },
             });
-        },
-
-        setLocale(event) {
-            this.$store.commit('setLocale', event.target.value);
-            this.locale = event.target.value;
         },
 
         downloadImage() {
