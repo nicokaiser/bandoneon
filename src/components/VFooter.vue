@@ -1,6 +1,6 @@
 <template>
     <div class="container px-3">
-        <footer class="d-print-none border-top pt-4 text-muted small">
+        <footer class="d-print-none border-top py-4 text-muted small">
             <div class="d-flex justify-content-center">
                 <span class="mx-2">
                     <i18n-t keypath="license">
