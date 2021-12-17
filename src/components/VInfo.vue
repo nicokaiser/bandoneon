@@ -35,7 +35,7 @@
 
 <template>
     <div class="bg-light d-print-none">
-        <div class="container py-4">
+        <div class="container px-4 py-4">
             <h2 v-t="'howToUse'" class="mb-4" />
 
             <p v-t="'summary'" />

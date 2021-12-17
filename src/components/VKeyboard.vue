@@ -355,7 +355,7 @@ export default {
 <style scoped>
 div {
     width: 100%;
-    margin: 30px 0;
+    margin: 2.5rem 0;
     text-align: center;
 }
 

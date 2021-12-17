@@ -4,7 +4,7 @@
             <div class="container">
                 <router-link
                     :to="{ name: 'home' }"
-                    class="navbar-brand me-auto"
+                    class="navbar-brand me-auto mb-0 h1"
                 >
                     Bandoneon.app
                 </router-link>

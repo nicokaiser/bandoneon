@@ -1,11 +1,11 @@
 <template>
-    <ul class="nav nav-tabs nav-fill d-print-none">
+    <ul class="nav nav-fill d-print-none">
         <li v-for="variant in variants" :key="variant" class="nav-item">
             <a
                 v-t="variant"
                 :class="[
                     'nav-link',
-                    currentVariant === variant ? 'active' : null,
+                    currentVariant === variant ? 'active' : 'link-secondary',
                 ]"
                 href="#"
                 @click.prevent="setVariant(variant)"
@@ -38,3 +38,19 @@ export default {
     },
 };
 </script>
+
+<style scoped>
+.nav {
+    border-bottom: 1px solid #dee2e6;
+}
+
+.nav .nav-link {
+    border-bottom: 1px solid transparent;
+    margin-bottom: -1px;
+}
+
+.nav .nav-link.active {
+    border-bottom: 3px solid #0d6efd;
+    margin-bottom: -1px;
+}
+</style>

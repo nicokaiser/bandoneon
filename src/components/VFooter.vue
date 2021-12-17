@@ -1,8 +1,8 @@
 <template>
     <div class="container">
-        <footer class="d-print-none border-top my-4 py-4 text-muted small">
-            <div class="d-flex justify-content-between">
-                <span>
+        <footer class="d-print-none border-top pt-4 text-muted small">
+            <div class="d-flex justify-content-center">
+                <span class="mx-2">
                     <i18n-t keypath="license">
                         <template #name>
                             <a href="https://kaiser.me/" target="_blank"
@@ -20,7 +20,7 @@
                     </i18n-t>
                 </span>
 
-                <span>
+                <span class="mx-2">
                     <i18n-t keypath="available">
                         <template #github>
                             <a
