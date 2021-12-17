@@ -2,17 +2,24 @@
     <ul class="nav nav-fill d-print-none">
         <li v-for="variant in variants" :key="variant" class="nav-item">
             <a
-                v-t="variant"
                 :class="[
                     'nav-link',
                     currentVariant === variant ? 'active' : 'link-secondary',
                 ]"
                 href="#"
                 @click.prevent="setVariant(variant)"
-            />
+            >
+                {{ t(variant) }}
+            </a>
         </li>
     </ul>
 </template>
+
+<script setup>
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n();
+</script>
 
 <script>
 import { mapGetters, mapState } from 'vuex';
