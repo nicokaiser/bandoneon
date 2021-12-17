@@ -19,7 +19,7 @@
                     :cy="y + 29"
                     r="28"
                     :fill="fill(tonal)"
-                    :stroke="selected[tonal] ? '#212529' : '#adb5bd'"
+                    :stroke="selected[tonal] ? '#495057' : '#adb5bd'"
                     :stroke-width="selected[tonal] ? 2 : 1"
                     :fill-opacity="selected[tonal] ? 1 : 0.25"
                 />
@@ -362,5 +362,9 @@ div {
 svg text {
     user-select: none;
     cursor: default;
+}
+
+svg circle {
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
 }
 </style>

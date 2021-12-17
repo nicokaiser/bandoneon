@@ -35,7 +35,7 @@
 
 <template>
     <div class="bg-light d-print-none">
-        <div class="container px-4 py-4">
+        <div class="container px-3 py-4">
             <h2 v-t="'howToUse'" class="mb-4" />
 
             <p v-t="'summary'" />
@@ -48,6 +48,7 @@
                         <template #cMajor>
                             <router-link
                                 v-t="'cMajor'"
+                                class="text-nowrap"
                                 :to="{
                                     name: 'scale',
                                     params: {
@@ -66,6 +67,7 @@
                         <template #em7>
                             <router-link
                                 v-t="'em7'"
+                                class="text-nowrap"
                                 :to="{
                                     name: 'chord',
                                     params: {

@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container px-3">
         <footer class="d-print-none border-top pt-4 text-muted small">
             <div class="d-flex justify-content-center">
                 <span class="mx-2">

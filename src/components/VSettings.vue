@@ -1,6 +1,6 @@
 <template>
     <div class="bg-light">
-        <div class="container py-4">
+        <div class="container px-3 py-4">
             <div class="mb-3">
                 <div class="form-floating">
                     <select
