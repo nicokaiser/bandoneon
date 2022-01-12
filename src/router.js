@@ -6,17 +6,7 @@ export const router = new createRouter({
     routes: [
         {
             name: 'home',
-            path: '/:variant?',
-            component: App,
-        },
-        {
-            name: 'scale',
-            path: '/:variant/scale/:tonic/:scaleType',
-            component: App,
-        },
-        {
-            name: 'chord',
-            path: '/:variant/chord/:tonic/:chordType',
+            path: '/',
             component: App,
         },
     ],

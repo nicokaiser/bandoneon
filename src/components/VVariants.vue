@@ -1,15 +1,15 @@
 <template>
     <ul class="nav nav-fill d-print-none">
-        <li v-for="variant in variants" :key="variant" class="nav-item">
+        <li v-for="item in variants" :key="item" class="nav-item">
             <a
                 :class="[
                     'nav-link',
-                    currentVariant === variant ? 'active' : 'link-secondary',
+                    variant === item ? 'active' : 'link-secondary',
                 ]"
                 href="#"
-                @click.prevent="setVariant(variant)"
+                @click.prevent="$store.commit('setVariant', item)"
             >
-                {{ t(variant) }}
+                {{ t(item) }}
             </a>
         </li>
     </ul>
@@ -22,26 +22,14 @@ const { t } = useI18n();
 </script>
 
 <script>
-import { mapGetters, mapState } from 'vuex';
+import { mapState } from 'vuex';
 
 export default {
     computed: {
         ...mapState({
+            variant: 'variant',
             variants: 'variants',
         }),
-
-        ...mapGetters(['currentVariant']),
-    },
-
-    methods: {
-        setVariant(variant) {
-            if (this.currentVariant === variant) return;
-
-            this.$router.push({
-                name: this.$route.name,
-                params: { ...this.$route.params, ...{ variant } },
-            });
-        },
     },
 };
 </script>

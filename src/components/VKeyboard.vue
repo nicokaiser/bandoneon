@@ -55,44 +55,12 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapState } from 'vuex';
 import Note from '@tonaljs/note';
 import Scale from '@tonaljs/scale';
-
-function helmholtz(name) {
-    const note = Note.get(name);
-    if (note.empty) return '';
-    return (
-        (note.oct < 3 ? note.letter : note.letter.toLowerCase()) +
-        note.acc.replace('b', '♭').replace('#', '♯') +
-        (note.oct > 3 ? '’'.repeat(note.oct - 3) : '') +
-        (note.oct < 2 ? ','.repeat(-(note.oct - 2)) : '')
-    );
-}
+import helmholtz from '../helpers/helmholtz.js';
 
 export default {
-    props: {
-        variant: {
-            type: String,
-            default: 'right-open',
-        },
-
-        tonic: {
-            type: String,
-            default: undefined,
-        },
-
-        scaleType: {
-            type: String,
-            default: undefined,
-        },
-
-        chordType: {
-            type: String,
-            default: undefined,
-        },
-    },
-
     data: () => ({
         modified: false,
         userSelected: {},
@@ -117,39 +85,27 @@ export default {
     }),
 
     computed: {
-        colors() {
-            return this.$store.state.colors;
-        },
-
-        enharmonic() {
-            return this.$store.state.enharmonic;
-        },
-
-        pitchNotation() {
-            return this.$store.state.pitchNotation;
-        },
-
         positions() {
-            if (!this.currentInstrument) return {};
-            const instrument = this.currentInstrument[this.variant];
-            if (!instrument) return {};
+            if (!this.instrument) return {};
+            const keys = this.instruments[this.instrument][this.variant];
+            if (!keys) return {};
 
             const positions = {};
             let offsetX = 0;
             let offsetY = 0;
 
             // Center
-            const cols = Math.max(...instrument.map((row) => row.length));
-            const rows = instrument.reduce(
+            const cols = Math.max(...keys.map((row) => row.length));
+            const rows = keys.reduce(
                 (acc, row) => acc + (row.length > 0 ? 1 : 0),
                 0
             );
             if (cols < 9) offsetX += 39 * (9 - cols);
             if (rows < 6) offsetY -= 32 * (6 - rows);
 
-            for (let row = 0; row < instrument.length; row++) {
-                for (let col = 0; col < instrument[row].length; col++) {
-                    let name = instrument[row][col];
+            for (let row = 0; row < keys.length; row++) {
+                for (let col = 0; col < keys[row].length; col++) {
+                    let name = keys[row][col];
                     const x = offsetX + col * 79 + 40 - (row % 2) * 40;
                     const y =
                         offsetY +
@@ -167,10 +123,6 @@ export default {
             }
 
             return positions;
-        },
-
-        chords() {
-            return this.$store.state.chords[this.variant];
         },
 
         scalePaths() {
@@ -215,7 +167,8 @@ export default {
             const selected = {};
 
             if (this.tonic && this.chordType) {
-                const chord = this.chords[`${this.tonic}${this.chordType}`];
+                const chord =
+                    this.chords[this.variant][`${this.tonic}${this.chordType}`];
 
                 if (chord) {
                     for (let i = 0; i <= chord.length; i++) {
@@ -227,22 +180,27 @@ export default {
             return selected;
         },
 
-        currentInstrument() {
-            return this.$store.state.instruments[this.$store.state.instrument];
-        },
-
-        ...mapGetters(['currentVariant']),
+        ...mapState([
+            'instrument',
+            'instruments',
+            'showEnharmonics',
+            'showColors',
+            'chords',
+            'tonic',
+            'variant',
+            'scaleType',
+            'chordType',
+            'pitchNotation',
+        ]),
     },
 
     watch: {
         tonic() {
-            // On tonic change, remove user selection
             this.userSelected = {};
             this.modified = false;
         },
 
         chordType() {
-            // On chord change, remove user selection
             this.userSelected = {};
             this.modified = false;
         },
@@ -251,11 +209,11 @@ export default {
     methods: {
         format(tonal) {
             const note = Note.get(
-                this.enharmonic ? Note.enharmonic(tonal) : tonal
+                this.showEnharmonics ? Note.enharmonic(tonal) : tonal
             );
             if (note.empty) return '';
 
-            if (this.$store.state.pitchNotation === 'scientific') {
+            if (this.pitchNotation === 'scientific') {
                 return [note.pc.replace('b', '♭').replace('#', '♯'), note.oct];
             }
 
@@ -265,7 +223,7 @@ export default {
         fill(tonal) {
             let octave = +tonal.slice(1);
             if (tonal[1] === '#') octave = +tonal.slice(2);
-            return this.colors ? this.octaveColors[octave - 1] : '#ced4da'; // gray-500
+            return this.showColors ? this.octaveColors[octave - 1] : '#ced4da'; // gray-500
         },
 
         toggle(tonal) {
@@ -314,9 +272,9 @@ export default {
 
             const filename =
                 'bandoneon-' +
-                this.$store.state.instrument +
+                this.instrument +
                 '-' +
-                this.currentVariant +
+                this.variant +
                 selected +
                 (this.modified ? '-custom' : '') +
                 '.png';
@@ -356,7 +314,6 @@ export default {
 div {
     width: 100%;
     margin: 2.5rem 0;
-    text-align: center;
 }
 
 svg text {

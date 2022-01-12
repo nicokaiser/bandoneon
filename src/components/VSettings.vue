@@ -6,16 +6,14 @@
                     <select
                         id="floatingSelectInstrument"
                         class="form-select"
-                        @change="
-                            $store.commit('setInstrument', $event.target.value)
-                        "
+                        @change="setInstrument($event.target.value)"
                     >
                         <option
-                            v-for="instrument in Object.keys(instruments)"
-                            :key="instrument"
-                            v-t="instrument"
-                            :selected="currentInstrument === instrument"
-                            :value="instrument"
+                            v-for="item in Object.keys(instruments)"
+                            :key="item"
+                            v-t="item"
+                            :selected="item === instrument"
+                            :value="item"
                         />
                     </select>
                     <label v-t="'keyboard'" for="floatingSelectInstrument" />
@@ -27,18 +25,13 @@
                     <select
                         id="floatingSelectPitchNotation"
                         class="form-select"
-                        @change="
-                            $store.commit(
-                                'setPitchNotation',
-                                $event.target.value
-                            )
-                        "
+                        @change="setPitchNotation($event.target.value)"
                     >
                         <option
                             v-for="item in ['helmholtz', 'scientific']"
                             :key="item"
                             v-t="item"
-                            :selected="pitchNotation === item"
+                            :selected="item === pitchNotation"
                             :value="item"
                         />
                     </select>
@@ -78,15 +71,16 @@ const { locale } = useI18n();
 </script>
 
 <script>
-import { mapState } from 'vuex';
+import { mapMutations, mapState } from 'vuex';
 
 export default {
     computed: {
-        ...mapState({
-            currentInstrument: 'instrument',
-            instruments: 'instruments',
-            pitchNotation: 'pitchNotation',
-        }),
+        ...mapState([
+            'instrument',
+            'instruments',
+            'pitchNotation',
+            'showColors',
+        ]),
     },
 
     methods: {
@@ -94,6 +88,8 @@ export default {
             this.$store.commit('setLocale', event.target.value);
             this.locale = event.target.value;
         },
+
+        ...mapMutations(['setInstrument', 'setPitchNotation', 'setShowColors']),
     },
 };
 </script>
