@@ -20,7 +20,7 @@ export const store = createStore({
         instrument:
             window.localStorage.getItem('instrument') || 'rheinische142',
         pitchNotation:
-            window.localStorage.getItem('pitchNotation') || 'helmholtz',
+            window.localStorage.getItem('pitchNotation') || 'scientific',
         variants: ['left-open', 'left-close', 'right-open', 'right-close'],
         scaleTypes: ['major', 'minor', 'chromatic'],
         chordTypes: ['M', 'm', '7', 'dim', 'm7', 'M7'],

@@ -8,24 +8,15 @@
                 >
                     Bandoneon.app
                 </router-link>
-                <ul class="nav">
-                    <li class="nav-item">
-                        <a
-                            v-t="'info'"
-                            class="nav-link link-dark"
-                            data-bs-toggle="collapse"
-                            href="#collapseInfo"
-                        />
-                    </li>
-                    <li class="nav-item">
-                        <a
-                            v-t="'settings'"
-                            class="nav-link link-dark"
-                            data-bs-toggle="collapse"
-                            href="#collapseSettings"
-                        />
-                    </li>
-                </ul>
+
+                <button
+                    class="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapseSettings"
+                >
+                    <span class="navbar-toggler-icon"></span>
+                </button>
             </div>
         </nav>
 
@@ -37,7 +28,7 @@
             <v-settings />
         </div>
 
-        <div class="container px-3 my-5">
+        <div class="container px-3 my-4" style="widxth: 600px">
             <v-variants />
 
             <v-keyboard
@@ -48,64 +39,43 @@
                 :chord-type="currentChordType"
             />
 
-            <div class="btn-toolbar mb-3 d-print-none">
-                <div class="btn-group" style="width: 100%">
-                    <button
-                        v-for="tonic in tonics"
-                        :key="tonic"
-                        :class="[
-                            'btn',
-                            currentTonic === tonic
-                                ? 'btn-secondary'
-                                : 'btn-outline-secondary',
-                        ]"
-                        style="width: 8.33%"
-                        @click.stop="setTonic(tonic)"
-                    >
-                        {{ enharmonicNoteName(tonic) }}
-                    </button>
-                </div>
+            <!-- TODO wrap at 6 --->
+            <div class="mb-2 text-center d-print-none">
+                <button
+                    v-for="tonic in tonics"
+                    :key="tonic"
+                    :class="[
+                        'btn btn-outline-secondary mx-1 my-1',
+                        currentTonic === tonic ? 'active' : null,
+                    ]"
+                    style="width: 3.2em"
+                    @click.stop="setTonic(tonic)"
+                >
+                    {{ enharmonicNoteName(tonic) }}
+                </button>
             </div>
 
-            <div class="btn-toolbar justify-content-between d-print-none">
-                <button
-                    :class="[
-                        'btn',
-                        'btn-outline-secondary',
-                        enharmonicSelected ? 'active' : null,
-                    ]"
-                    style="width: 2em"
-                    @click.stop="
-                        $store.state.enharmonic = !$store.state.enharmonic
-                    "
-                >
-                    {{ enharmonicSelected ? '♯' : '♭' }}
-                </button>
-
-                <div class="btn-group">
+            <div class="mb-2 text-center d-print-none">
+                <div class="btn-group mx-2">
                     <button
                         v-for="scaleType in scaleTypes"
                         :key="scaleType"
                         v-t="scaleType"
                         :class="[
-                            'btn',
-                            currentScaleType === scaleType
-                                ? 'btn-secondary'
-                                : 'btn-outline-secondary',
+                            'btn btn-outline-secondary my-2',
+                            currentScaleType === scaleType ? 'active' : null,
                         ]"
                         @click.stop="setScaleType(scaleType)"
                     />
                 </div>
 
-                <div class="btn-group">
+                <div class="btn-group mx-2">
                     <button
                         v-for="chordType in chordTypes"
                         :key="chordType"
                         :class="[
-                            'btn',
-                            currentChordType === chordType
-                                ? 'btn-secondary'
-                                : 'btn-outline-secondary',
+                            'btn btn-outline-secondary my-2',
+                            currentChordType === chordType ? 'active' : null,
                         ]"
                         @click.stop="setChordType(chordType)"
                     >
@@ -113,30 +83,40 @@
                     </button>
                 </div>
 
-                <button
-                    :class="[
-                        'btn',
-                        'btn-outline-secondary',
-                        colors ? 'active' : null,
-                    ]"
-                    @click.stop="$store.state.colors = !$store.state.colors"
-                >
-                    <b-icon-palette-fill />
-                </button>
-
-                <button
-                    class="btn btn-outline-secondary"
-                    style="line-height: 1em"
-                    :title="t('saveImage')"
-                    @click.stop="downloadImage()"
-                >
-                    <b-icon-download />
-                </button>
-
-                <div class="btn-group">
+                <div class="btn-group mx-2">
                     <button
-                        class="btn btn-outline-secondary"
-                        style="line-height: 1em"
+                        :class="[
+                            'btn btn-outline-secondary my-2',
+                            enharmonicSelected ? 'active' : null,
+                        ]"
+                        style="width: 2em"
+                        @click.stop="
+                            $store.state.enharmonic = !$store.state.enharmonic
+                        "
+                    >
+                        {{ enharmonicSelected ? '♯' : '♭' }}
+                    </button>
+
+                    <button
+                        :class="[
+                            'btn btn-outline-secondary my-2',
+                            colors ? 'active' : null,
+                        ]"
+                        @click.stop="$store.state.colors = !$store.state.colors"
+                    >
+                        <b-icon-palette-fill />
+                    </button>
+
+                    <button
+                        class="btn btn-outline-secondary my-2"
+                        :title="t('saveImage')"
+                        @click.stop="downloadImage()"
+                    >
+                        <b-icon-download />
+                    </button>
+
+                    <button
+                        class="btn btn-outline-secondary my-2"
                         :title="t('saveVoicing')"
                         @click.stop="saveVoicing()"
                     >
@@ -144,8 +124,7 @@
                     </button>
 
                     <button
-                        class="btn btn-outline-secondary"
-                        style="line-height: 1em"
+                        class="btn btn-outline-secondary my-2"
                         :title="t('resetVoicing')"
                         @click.stop="resetVoicing()"
                     >
@@ -403,5 +382,11 @@ body {
 
 .container {
     max-width: 750px;
+}
+
+.navbar-toggler {
+    border: 0;
+    padding: 0;
+    margin: 0.25em 0;
 }
 </style>
