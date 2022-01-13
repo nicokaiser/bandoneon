@@ -18,7 +18,7 @@
     "prettier": "prettier src --write"
   },
   "dependencies": {
-    "@popperjs/core": "^2.11.0",
+    "@popperjs/core": "^2.11.2",
     "@tonaljs/chord": "^4.6.5",
     "@tonaljs/note": "^4.6.5",
     "@tonaljs/scale": "^4.6.5",
@@ -32,13 +32,13 @@
   "devDependencies": {
     "@intlify/vite-plugin-vue-i18n": "^3.2.1",
     "@vitejs/plugin-vue": "^2.0.1",
-    "autoprefixer": "^10.4.0",
-    "eslint": "^8.5.0",
+    "autoprefixer": "^10.4.2",
+    "eslint": "^8.6.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
-    "eslint-plugin-vue": "^8.2.0",
+    "eslint-plugin-vue": "^8.3.0",
     "prettier": "^2.5.1",
-    "sass": "^1.45.1",
-    "vite": "^2.7.9"
+    "sass": "^1.48.0",
+    "vite": "^2.7.11"
   }
 }
