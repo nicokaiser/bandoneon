@@ -4,7 +4,10 @@
             <div class="col-12 col-sm-6 text-center text-nowrap mb-2">
                 <span
                     v-t="'left'"
-                    class="label text-end pe-2"
+                    :class="[
+                        'label text-end pe-2',
+                        !sideChecked ? 'fw-bold' : 'text-muted',
+                    ]"
                     @click.prevent="toggleSide"
                 />
 
@@ -18,7 +21,10 @@
 
                 <span
                     v-t="'right'"
-                    class="label text-start ps-2"
+                    :class="[
+                        'label text-start ps-2',
+                        sideChecked ? 'fw-bold' : 'text-muted',
+                    ]"
                     @click.prevent="toggleSide"
                 />
             </div>
@@ -26,7 +32,10 @@
             <div class="col-12 col-sm-6 text-center text-nowrap mb-2">
                 <span
                     v-t="'close'"
-                    class="label text-end pe-2"
+                    :class="[
+                        'label text-end pe-2',
+                        !directionChecked ? 'fw-bold' : 'text-muted',
+                    ]"
                     @click.prevent="toggleDirection"
                 />
 
@@ -40,7 +49,10 @@
 
                 <span
                     v-t="'open'"
-                    class="label text-start ps-2"
+                    :class="[
+                        'label text-start ps-2',
+                        directionChecked ? 'fw-bold' : 'text-muted',
+                    ]"
                     @click.prevent="toggleDirection"
                 />
             </div>
