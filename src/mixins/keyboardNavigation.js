@@ -1,5 +1,5 @@
 export default {
-    dxata: () => ({
+    data: () => ({
         keydownListener: null,
     }),
 

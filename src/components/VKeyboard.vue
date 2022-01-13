@@ -10,7 +10,7 @@
             height="428"
         >
             <g
-                v-for="([x, y], tonal) in positions"
+                v-for="([x, y], tonal) in keyPositions"
                 :key="tonal"
                 @click="toggle(tonal)"
             >
@@ -55,7 +55,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapGetters } from 'vuex';
 import Note from '@tonaljs/note';
 import Scale from '@tonaljs/scale';
 import download from '@/helpers/download';
@@ -86,46 +86,6 @@ export default {
     }),
 
     computed: {
-        positions() {
-            if (!this.instrument) return {};
-            const keys = this.instruments[this.instrument][this.variant];
-            if (!keys) return {};
-
-            const positions = {};
-            let offsetX = 0;
-            let offsetY = 0;
-
-            // Center
-            const cols = Math.max(...keys.map((row) => row.length));
-            const rows = keys.reduce(
-                (acc, row) => acc + (row.length > 0 ? 1 : 0),
-                0
-            );
-            if (cols < 9) offsetX += 39 * (9 - cols);
-            if (rows < 6) offsetY -= 32 * (6 - rows);
-
-            for (let row = 0; row < keys.length; row++) {
-                for (let col = 0; col < keys[row].length; col++) {
-                    let name = keys[row][col];
-                    const x = offsetX + col * 79 + 40 - (row % 2) * 40;
-                    const y =
-                        offsetY +
-                        row * 64 +
-                        30 * (1 - Math.sin(((x / 320) * Math.PI) / 2));
-
-                    if (name) {
-                        while (positions[name]) {
-                            name += ' ';
-                        }
-
-                        positions[name] = [x, y];
-                    }
-                }
-            }
-
-            return positions;
-        },
-
         scalePaths() {
             if (this.tonic && this.scaleType) {
                 const { intervals, empty } = Scale.get(this.scaleType);
@@ -141,12 +101,12 @@ export default {
 
                     notes.forEach((n) => {
                         const no = Note.get(n);
-                        const idx = Object.keys(this.positions).find(
+                        const idx = Object.keys(this.keyPositions).find(
                             (v) => Note.get(v).height === no.height
                         );
 
                         if (idx) {
-                            const [x, y] = this.positions[idx];
+                            const [x, y] = this.keyPositions[idx];
                             pathString += `${pathString === '' ? 'M' : 'L'}${
                                 x + 30
                             },${y + 30}`;
@@ -193,6 +153,8 @@ export default {
             'chordType',
             'pitchNotation',
         ]),
+
+        ...mapGetters(['keyPositions']),
     },
 
     watch: {

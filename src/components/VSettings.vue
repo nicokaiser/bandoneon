@@ -50,7 +50,7 @@
                         @change="setLocale($event)"
                     >
                         <option
-                            v-for="item in ['de', 'en', 'es']"
+                            v-for="item in availableLocales"
                             :key="item"
                             v-t="'language-' + item"
                             :selected="locale === item"
@@ -63,7 +63,7 @@
 
             <p class="mb-0 text-end text-muted small">
                 <a
-                    href="mailto:nico@kaiser.me?subject=Bandoneon.app Feedback"
+                    href="mailto:nico@kaiser.me?subject=Bandoneon.app%20Feedback"
                     class="link-secondary"
                     >Feedback</a
                 >
@@ -75,7 +75,7 @@
 <script setup>
 import { useI18n } from 'vue-i18n';
 
-const { locale } = useI18n();
+const { locale, availableLocales } = useI18n();
 </script>
 
 <script>
@@ -83,12 +83,7 @@ import { mapMutations, mapState } from 'vuex';
 
 export default {
     computed: {
-        ...mapState([
-            'instrument',
-            'instruments',
-            'pitchNotation',
-            'showColors',
-        ]),
+        ...mapState(['instrument', 'instruments', 'pitchNotation']),
     },
 
     methods: {
@@ -97,7 +92,7 @@ export default {
             this.locale = event.target.value;
         },
 
-        ...mapMutations(['setInstrument', 'setPitchNotation', 'setShowColors']),
+        ...mapMutations(['setInstrument', 'setPitchNotation']),
     },
 };
 </script>

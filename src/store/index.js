@@ -41,6 +41,48 @@ export default createStore({
         ],
     }),
 
+    getters: {
+        keyPositions(state) {
+            if (!state.instrument || !state.variant) return {};
+            const keys = state.instruments[state.instrument][state.variant];
+            if (!keys) return {};
+
+            const positions = {};
+            let offsetX = 0;
+            let offsetY = 0;
+
+            // Center
+            const cols = Math.max(...keys.map((row) => row.length));
+            const rows = keys.reduce(
+                (acc, row) => acc + (row.length > 0 ? 1 : 0),
+                0
+            );
+            if (cols < 9) offsetX += 39 * (9 - cols);
+            if (rows < 6) offsetY -= 32 * (6 - rows);
+
+            for (let row = 0; row < keys.length; row++) {
+                for (let col = 0; col < keys[row].length; col++) {
+                    let name = keys[row][col];
+                    const x = offsetX + col * 79 + 40 - (row % 2) * 40;
+                    const y =
+                        offsetY +
+                        row * 64 +
+                        30 * (1 - Math.sin(((x / 320) * Math.PI) / 2));
+
+                    if (name) {
+                        while (positions[name]) {
+                            name += ' ';
+                        }
+
+                        positions[name] = [x, y];
+                    }
+                }
+            }
+
+            return positions;
+        },
+    },
+
     mutations: {
         setLocale(state, locale) {
             window.localStorage.setItem('locale', locale);
