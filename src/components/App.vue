@@ -1,7 +1,7 @@
 <template>
     <div id="app">
         <nav class="navbar navbar-light">
-            <div class="container px-3 py-1">
+            <div class="container px-3 py-2">
                 <router-link
                     :to="{ name: 'home' }"
                     class="navbar-brand me-auto mb-0 h1"
@@ -24,10 +24,10 @@
             <v-settings />
         </div>
 
-        <div class="container px-3 my-4" style="widxth: 600px">
-            <v-variants />
-
+        <div class="container px-3 my-4">
             <v-keyboard ref="keyboard" />
+
+            <v-variants />
 
             <v-nav-tonic />
 

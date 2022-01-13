@@ -1,4 +1,8 @@
 {
+    "left": "Links",
+    "right": "Rechts",
+    "open": "öffnen",
+    "close": "schließen",
     "left-open": "Links Zug",
     "left-close": "Links Druck",
     "right-open": "Rechts Zug",

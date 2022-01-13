@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="my-4">
         <svg
             ref="svg"
             version="1.1"
@@ -313,7 +313,6 @@ export default {
 <style scoped>
 div {
     width: 100%;
-    margin: 2.5rem 0;
 }
 
 svg text {

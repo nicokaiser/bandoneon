@@ -1,17 +1,34 @@
 <template>
     <div class="mb-2 text-center d-print-none">
-        <button
-            v-for="item in notes"
-            :key="item"
-            :class="[
-                'btn btn-outline-secondary mx-1 my-1',
-                item === tonic ? 'active' : null,
-            ]"
-            style="width: 3.2em"
-            @click.stop="toggleTonic(item)"
-        >
-            {{ noteName(item) }}
-        </button>
+        <span class="text-nowrap">
+            <button
+                v-for="item in notes.slice(0, 6)"
+                :key="item"
+                :class="[
+                    'btn btn-outline-secondary mx-1 my-1',
+                    item === tonic ? 'active' : null,
+                ]"
+                style="width: 3.2em"
+                @click.stop="toggleTonic(item)"
+            >
+                {{ noteName(item) }}
+            </button>
+        </span>
+
+        <span class="text-nowrap">
+            <button
+                v-for="item in notes.slice(6)"
+                :key="item"
+                :class="[
+                    'btn btn-outline-secondary mx-1 my-1',
+                    item === tonic ? 'active' : null,
+                ]"
+                style="width: 3.2em"
+                @click.stop="toggleTonic(item)"
+            >
+                {{ noteName(item) }}
+            </button>
+        </span>
     </div>
 </template>
 

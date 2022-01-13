@@ -1,7 +1,7 @@
 <template>
     <div class="bg-light">
         <div class="container px-3 py-4">
-            <div class="mb-3">
+            <div class="my-3">
                 <div class="form-floating">
                     <select
                         id="floatingSelectInstrument"
@@ -20,7 +20,7 @@
                 </div>
             </div>
 
-            <div class="mb-3">
+            <div class="my-3">
                 <div class="form-floating">
                     <select
                         id="floatingSelectPitchNotation"
@@ -42,7 +42,7 @@
                 </div>
             </div>
 
-            <div class="mb-3">
+            <div class="my-3">
                 <div class="form-floating">
                     <select
                         id="floatingSelectLocale"
