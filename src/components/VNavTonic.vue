@@ -1,6 +1,6 @@
 <template>
     <div class="mb-2 text-center d-print-none">
-        <span class="text-nowrap">
+        <span class="d-inline-block text-nowrap">
             <button
                 v-for="item in notes.slice(0, 6)"
                 :key="item"
@@ -8,14 +8,14 @@
                     'btn btn-outline-secondary mx-1 my-1',
                     item === tonic ? 'active' : null,
                 ]"
-                style="width: 3.2em"
+                style="width: 3em"
                 @click.stop="toggleTonic(item)"
             >
                 {{ noteName(item) }}
             </button>
         </span>
 
-        <span class="text-nowrap">
+        <span class="d-inline-block text-nowrap">
             <button
                 v-for="item in notes.slice(6)"
                 :key="item"
@@ -23,7 +23,7 @@
                     'btn btn-outline-secondary mx-1 my-1',
                     item === tonic ? 'active' : null,
                 ]"
-                style="width: 3.2em"
+                style="width: 3em"
                 @click.stop="toggleTonic(item)"
             >
                 {{ noteName(item) }}

@@ -311,8 +311,10 @@ export default {
 </script>
 
 <style scoped>
-div {
+svg {
     width: 100%;
+    height: calc(100% / 720 * 428);
+    max-height: calc(90vh - 5em);
 }
 
 svg text {

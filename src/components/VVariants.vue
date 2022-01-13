@@ -1,13 +1,13 @@
 <template>
-    <div class="d-print-none container mb-5">
+    <div class="d-print-none container mb-4">
         <div class="row">
             <div class="col-12 col-sm-6 text-center text-nowrap mb-2">
                 <span
                     v-t="'left'"
-                    class="label text-end"
+                    class="label text-end pe-2"
                     @click.prevent="toggleSide"
                 />
-                <div class="form-check-inline form-switch mx-3">
+                <div class="form-check-inline form-switch mx-0">
                     <input
                         v-model="sideChecked"
                         class="form-check-input"
@@ -16,7 +16,7 @@
                 </div>
                 <span
                     v-t="'right'"
-                    class="label text-start"
+                    class="label text-start ps-2"
                     @click.prevent="toggleSide"
                 />
             </div>
@@ -24,10 +24,10 @@
             <div class="col-12 col-sm-6 text-center text-nowrap mb-2">
                 <span
                     v-t="'close'"
-                    class="label text-end"
+                    class="label text-end pe-2"
                     @click.prevent="toggleDirection"
                 />
-                <div class="form-check-inline form-switch mx-3">
+                <div class="form-check-inline form-switch mx-0">
                     <input
                         v-model="directionChecked"
                         class="form-check-input"
@@ -36,7 +36,7 @@
                 </div>
                 <span
                     v-t="'open'"
-                    class="label text-start"
+                    class="label text-start ps-2"
                     @click.prevent="toggleDirection"
                 />
             </div>
@@ -109,17 +109,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$primary: #6c757d; //  #0d6efd;
+$primary: #6c757d;
 
-.col {
-    border: 1px solid green;
-}
 .label {
-    width: 4em;
+    width: 6em;
     display: inline-block;
     line-height: 2em;
     cursor: default;
-    vertical-align: bottom;
+    vertical-align: top;
     user-select: none;
 }
 
@@ -153,23 +150,5 @@ $primary: #6c757d; //  #0d6efd;
         border-color: $primary;
         background-color: transparent;
     }
-}
-
-.nav {
-    border-bottom: 1px solid #dee2e6;
-}
-
-.nav .nav-link {
-    border-bottom: 1px solid transparent;
-    margin-bottom: -1px;
-}
-
-.btn-outline-secondary:not(.active):hover {
-    background-color: transparent;
-    color: #6c757d;
-}
-
-button:focus {
-    box-shadow: none !important;
 }
 </style>

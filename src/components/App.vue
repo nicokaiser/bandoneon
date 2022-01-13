@@ -104,8 +104,6 @@
                 </div>
             </div>
         </div>
-
-        <v-footer />
     </div>
 </template>
 
@@ -123,7 +121,6 @@ import BIconArrowCounterclockwise from './BIconArrowCounterclockwise.vue';
 import BIconDownload from './BIconDownload.vue';
 import BIconPaletteFill from './BIconPaletteFill.vue';
 import BIconPinFill from './BIconPinFill.vue';
-import VFooter from './VFooter.vue';
 import VKeyboard from './VKeyboard.vue';
 import VSettings from './VSettings.vue';
 import VVariants from './VVariants.vue';
@@ -135,7 +132,6 @@ export default {
         BIconDownload,
         BIconPaletteFill,
         BIconPinFill,
-        VFooter,
         VKeyboard,
         VSettings,
         VVariants,
@@ -204,10 +200,6 @@ $btn-transition: none;
 $nav-link-transition: none;
 
 @import 'bootstrap/scss/bootstrap';
-
-body {
-    min-width: 750px;
-}
 
 .container {
     max-width: 750px;

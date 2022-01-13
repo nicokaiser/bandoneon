@@ -60,6 +60,14 @@
                     <label v-t="'language'" for="floatingSelectLocale" />
                 </div>
             </div>
+
+            <p class="mb-0 text-end text-muted small">
+                <a
+                    href="mailto:nico@kaiser.me?subject=Bandoneon.app Feedback"
+                    class="link-secondary"
+                    >Feedback</a
+                >
+            </p>
         </div>
     </div>
 </template>
