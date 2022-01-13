@@ -58,8 +58,8 @@
 import { mapState } from 'vuex';
 import Note from '@tonaljs/note';
 import Scale from '@tonaljs/scale';
-import download from '../helpers/download.js';
-import helmholtz from '../helpers/helmholtz.js';
+import download from '@/helpers/download';
+import helmholtz from '@/helpers/helmholtz';
 
 export default {
     data: () => ({

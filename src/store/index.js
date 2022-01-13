@@ -2,7 +2,7 @@ import { createStore } from 'vuex';
 import originalChords from './chords.json';
 import instruments from './instruments';
 
-export const store = createStore({
+export default createStore({
     state: () => ({
         locale:
             window.localStorage.getItem('locale') ||

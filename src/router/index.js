@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import App from './components/App.vue';
+import App from '@/components/App.vue';
 
-export const router = new createRouter({
+export default new createRouter({
     history: createWebHistory(),
     routes: [
         {

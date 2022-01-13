@@ -7,6 +7,7 @@
                     class="label text-end pe-2"
                     @click.prevent="toggleSide"
                 />
+
                 <div class="form-check-inline form-switch mx-0">
                     <input
                         v-model="sideChecked"
@@ -14,6 +15,7 @@
                         type="checkbox"
                     />
                 </div>
+
                 <span
                     v-t="'right'"
                     class="label text-start ps-2"
@@ -27,6 +29,7 @@
                     class="label text-end pe-2"
                     @click.prevent="toggleDirection"
                 />
+
                 <div class="form-check-inline form-switch mx-0">
                     <input
                         v-model="directionChecked"
@@ -34,6 +37,7 @@
                         type="checkbox"
                     />
                 </div>
+
                 <span
                     v-t="'open'"
                     class="label text-start ps-2"

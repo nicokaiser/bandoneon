@@ -21,15 +21,13 @@
         </nav>
 
         <div id="collapseSettings" class="collapse">
-            <v-settings />
+            <VSettings />
         </div>
 
         <div class="container px-3 my-4">
-            <v-keyboard ref="keyboard" />
-
-            <v-variants />
-
-            <v-nav-tonic />
+            <VKeyboard ref="keyboard" />
+            <VVariantNav />
+            <VTonicNav />
 
             <div class="mb-2 text-center d-print-none">
                 <div class="btn-group mx-2">
@@ -75,7 +73,7 @@
                         ]"
                         @click.stop="toggleColors()"
                     >
-                        <b-icon-palette-fill />
+                        <BIconPaletteFill />
                     </button>
 
                     <button
@@ -83,7 +81,7 @@
                         :title="t('saveImage')"
                         @click.stop="downloadImage()"
                     >
-                        <b-icon-download />
+                        <BIconDownload />
                     </button>
 
                     <button
@@ -91,7 +89,7 @@
                         :title="t('saveVoicing')"
                         @click.stop="saveVoicing()"
                     >
-                        <b-icon-pin-fill />
+                        <BIconPinFill />
                     </button>
 
                     <button
@@ -99,7 +97,7 @@
                         :title="t('resetVoicing')"
                         @click.stop="resetVoicings()"
                     >
-                        <b-icon-arrow-counterclockwise />
+                        <BIconArrowCounterclockwise />
                     </button>
                 </div>
             </div>
@@ -109,7 +107,7 @@
 
 <script setup>
 import { useI18n } from 'vue-i18n';
-import keyboard from '../mixins/keyboard.js';
+import keyboard from '@/mixins/keyboard';
 
 const { t } = useI18n();
 </script>
@@ -117,14 +115,14 @@ const { t } = useI18n();
 <script>
 import 'bootstrap/js/src/collapse';
 import { mapMutations, mapState } from 'vuex';
-import BIconArrowCounterclockwise from './BIconArrowCounterclockwise.vue';
-import BIconDownload from './BIconDownload.vue';
-import BIconPaletteFill from './BIconPaletteFill.vue';
-import BIconPinFill from './BIconPinFill.vue';
-import VKeyboard from './VKeyboard.vue';
-import VSettings from './VSettings.vue';
-import VVariants from './VVariants.vue';
-import VNavTonic from './VNavTonic.vue';
+import BIconArrowCounterclockwise from '@/components/BIconArrowCounterclockwise.vue';
+import BIconDownload from '@/components/BIconDownload.vue';
+import BIconPaletteFill from '@/components/BIconPaletteFill.vue';
+import BIconPinFill from '@/components/BIconPinFill.vue';
+import VKeyboard from '@/components/VKeyboard.vue';
+import VSettings from '@/components/VSettings.vue';
+import VVariantNav from '@/components/VVariantNav.vue';
+import VTonicNav from '@/components/VTonicNav.vue';
 
 export default {
     components: {
@@ -134,8 +132,8 @@ export default {
         BIconPinFill,
         VKeyboard,
         VSettings,
-        VVariants,
-        VNavTonic,
+        VVariantNav,
+        VTonicNav,
     },
 
     mixins: [keyboard],

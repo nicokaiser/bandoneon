@@ -1,10 +1,10 @@
 import { createApp } from 'vue';
 import { createI18n } from 'vue-i18n';
-import { router } from './router';
-import { store } from './store';
+import router from './router';
+import store from './store';
 import { sync } from 'vuex-router-sync';
 import messages from '@intlify/vite-plugin-vue-i18n/messages';
-import App from './components/App.vue';
+import App from '@/components/App.vue';
 
 sync(store, router);
 
