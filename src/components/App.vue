@@ -107,7 +107,7 @@
 
 <script setup>
 import { useI18n } from 'vue-i18n';
-import keyboard from '@/mixins/keyboard';
+import keyboardNavigation from '@/mixins/keyboardNavigation';
 
 const { t } = useI18n();
 </script>
@@ -136,7 +136,7 @@ export default {
         VTonicNav,
     },
 
-    mixins: [keyboard],
+    mixins: [keyboardNavigation],
 
     computed: {
         modified() {
