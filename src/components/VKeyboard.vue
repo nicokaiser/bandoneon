@@ -58,6 +58,7 @@
 import { mapState } from 'vuex';
 import Note from '@tonaljs/note';
 import Scale from '@tonaljs/scale';
+import download from '../helpers/download.js';
 import helmholtz from '../helpers/helmholtz.js';
 
 export default {
@@ -249,62 +250,18 @@ export default {
         },
 
         downloadImage() {
-            // https://mybyways.com/blog/convert-svg-to-png-using-your-browser
-
-            const margin = 30;
-            const svg = this.$refs.svg;
-            const canvas = document.createElement('canvas');
-            canvas.width = (svg.getBoundingClientRect().width + margin) * 2;
-            canvas.height = (svg.getBoundingClientRect().height + margin) * 2;
-            const data = new XMLSerializer().serializeToString(svg);
-            const win = window.URL || window.webkitURL || window;
-            const img = new Image();
-            const blob = new Blob([data], { type: 'image/svg+xml' });
-            const url = win.createObjectURL(blob);
-
-            let selected = '';
-
+            let filename = `bandoneon-${this.instrument}-${this.variant}`;
             if (this.tonic) {
-                selected = '-' + this.tonic.replace('#', 's');
-                if (this.chordType) selected += this.chordType;
-                if (this.scaleType) selected += '-' + this.scaleType;
+                filename += '-' + this.tonic.replace('#', 's');
+                if (this.chordType) filename += this.chordType;
+                if (this.scaleType) filename += '-' + this.scaleType;
             }
+            if (this.modified) {
+                filename += '-custom';
+            }
+            filename += '.png';
 
-            const filename =
-                'bandoneon-' +
-                this.instrument +
-                '-' +
-                this.variant +
-                selected +
-                (this.modified ? '-custom' : '') +
-                '.png';
-
-            img.onload = () => {
-                const ctx = canvas.getContext('2d');
-                ctx.fillStyle = 'white';
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
-                ctx.drawImage(
-                    img,
-                    margin,
-                    margin,
-                    canvas.width - 2 * margin,
-                    canvas.height - 2 * margin
-                );
-                win.revokeObjectURL(url);
-                let uri = canvas
-                    .toDataURL('image/png')
-                    .replace('image/png', 'octet/stream');
-                let a = document.createElement('a');
-                document.body.appendChild(a);
-                a.style = 'display: none';
-                a.href = uri;
-                a.download = filename;
-                a.click();
-                window.URL.revokeObjectURL(uri);
-                document.body.removeChild(a);
-            };
-
-            img.src = url;
+            download(this.$refs.svg, filename);
         },
     },
 };
