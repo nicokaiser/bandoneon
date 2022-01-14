@@ -143,7 +143,6 @@ export default {
 
         ...mapState([
             'instrument',
-            'instruments',
             'showEnharmonics',
             'showColors',
             'chords',

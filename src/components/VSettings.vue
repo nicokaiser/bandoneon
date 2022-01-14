@@ -9,7 +9,7 @@
                         @change="setInstrument($event.target.value)"
                     >
                         <option
-                            v-for="item in Object.keys(instruments)"
+                            v-for="item in availableInstruments"
                             :key="item"
                             v-t="item"
                             :selected="item === instrument"
@@ -28,7 +28,7 @@
                         @change="setPitchNotation($event.target.value)"
                     >
                         <option
-                            v-for="item in ['helmholtz', 'scientific']"
+                            v-for="item in availablePitchNotations"
                             :key="item"
                             v-t="item"
                             :selected="item === pitchNotation"
@@ -73,26 +73,35 @@
 </template>
 
 <script>
-import { mapMutations, mapState } from 'vuex';
+import { computed } from 'vue';
+import { useStore } from 'vuex';
 import { useI18n } from 'vue-i18n';
 
 export default {
     setup() {
         const { locale, availableLocales } = useI18n({ useScope: 'global' });
-        return { locale, availableLocales };
-    },
+        const store = useStore();
 
-    computed: {
-        ...mapState(['instrument', 'instruments', 'pitchNotation']),
-    },
+        return {
+            instrument: computed(() => store.state.instrument),
+            availableInstruments: computed(() => {
+                return Object.keys(store.state.instruments);
+            }),
+            setInstrument: (value) => store.commit('setInstrument', value),
 
-    methods: {
-        setLocale(event) {
-            this.$store.commit('setLocale', event.target.value);
-            this.locale = event.target.value;
-        },
+            pitchNotation: computed(() => store.state.pitchNotation),
+            availablePitchNotations: ['helmholtz', 'scientific'],
+            setPitchNotation: (value) => {
+                store.commit('setPitchNotation', value);
+            },
 
-        ...mapMutations(['setInstrument', 'setPitchNotation']),
+            locale,
+            availableLocales,
+            setLocale: (event) => {
+                store.commit('setLocale', event.target.value);
+                locale.value = event.target.value;
+            },
+        };
     },
 };
 </script>

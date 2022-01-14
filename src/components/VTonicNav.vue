@@ -33,37 +33,37 @@
 </template>
 
 <script>
+import { computed } from 'vue';
+import { useStore } from 'vuex';
 import { enharmonic } from '@tonaljs/note';
-import { mapState, useStore } from 'vuex';
 
 export default {
     setup() {
         const store = useStore();
-        return { store };
-    },
 
-    computed: {
-        ...mapState(['notes', 'showEnharmonics', 'tonic']),
-    },
+        return {
+            notes: computed(() => store.state.notes),
+            showEnharmonics: computed(() => store.state.showEnharmonics),
+            tonic: computed(() => store.state.tonic),
 
-    methods: {
-        noteName(name) {
-            if (!this.showEnharmonics) return name.replace('#', '♯');
+            noteName: (name) => {
+                if (!store.state.showEnharmonics) return name.replace('#', '♯');
 
-            if (name.length === 2 && name[1] === '#') {
-                return enharmonic(name).replace('b', '♭');
-            }
+                if (name.length === 2 && name[1] === '#') {
+                    return enharmonic(name).replace('b', '♭');
+                }
 
-            return name;
-        },
+                return name;
+            },
 
-        toggleTonic(value) {
-            if (value === this.tonic) {
-                this.store.commit('setTonic', null);
-            } else {
-                this.store.commit('setTonic', value);
-            }
-        },
+            toggleTonic: (value) => {
+                if (value === store.state.tonic) {
+                    store.commit('setTonic', null);
+                } else {
+                    store.commit('setTonic', value);
+                }
+            },
+        };
     },
 };
 </script>

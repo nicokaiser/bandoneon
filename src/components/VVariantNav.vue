@@ -67,41 +67,41 @@
 </template>
 
 <script>
-import { mapMutations, mapState } from 'vuex';
+import { computed } from 'vue';
+import { useStore } from 'vuex';
 import { useI18n } from 'vue-i18n';
 
 export default {
     setup() {
+        const store = useStore();
         const { t } = useI18n();
-        return { t };
-    },
 
-    computed: {
-        sideChecked() {
-            return this.variant.split('-')[0] === 'right';
-        },
+        return {
+            variant: computed(() => store.state.variant),
 
-        directionChecked() {
-            return this.variant.split('-')[1] === 'open';
-        },
+            sideChecked: computed(() => {
+                return store.state.variant.split('-')[0] === 'right';
+            }),
 
-        ...mapState(['variant']),
-    },
+            directionChecked: computed(() => {
+                return store.state.variant.split('-')[1] === 'open';
+            }),
 
-    methods: {
-        setDirectionChecked(checked) {
-            this.setVariant(
-                `${this.variant.split('-')[0]}-${checked ? 'open' : 'close'}`
-            );
-        },
+            setDirectionChecked: (checked) => {
+                const variant = `${store.state.variant.split('-')[0]}-${
+                    checked ? 'open' : 'close'
+                }`;
+                store.commit('setVariant', variant);
+            },
 
-        setSideChecked(checked) {
-            this.setVariant(
-                `${checked ? 'right' : 'left'}-${this.variant.split('-')[1]}`
-            );
-        },
-
-        ...mapMutations(['setVariant']),
+            setSideChecked(checked) {
+                const variant = `${checked ? 'right' : 'left'}-${
+                    store.state.variant.split('-')[1]
+                }`;
+                store.commit('setVariant', variant);
+            },
+            t,
+        };
     },
 };
 </script>
