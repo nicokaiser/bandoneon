@@ -12,17 +12,16 @@
                 <button
                     class="navbar-toggler"
                     type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#collapseSettings"
+                    @click.stop="toggleSettings"
                 >
                     <span class="navbar-toggler-icon"></span>
                 </button>
             </div>
         </nav>
 
-        <div id="collapseSettings" class="collapse">
+        <VCollapse ref="settingsCollapse">
             <VSettings />
-        </div>
+        </VCollapse>
 
         <div class="container px-3 my-4">
             <VKeyboard ref="keyboard" />
@@ -107,7 +106,6 @@
 </template>
 
 <script>
-import 'bootstrap/js/src/collapse';
 import { mapMutations, mapState } from 'vuex';
 import { useI18n } from 'vue-i18n';
 import keyboardNavigation from '@/mixins/keyboardNavigation';
@@ -119,6 +117,7 @@ import VKeyboard from '@/components/VKeyboard.vue';
 import VSettings from '@/components/VSettings.vue';
 import VVariantNav from '@/components/VVariantNav.vue';
 import VTonicNav from '@/components/VTonicNav.vue';
+import VCollapse from '@/components/VCollapse.vue';
 
 export default {
     components: {
@@ -130,6 +129,7 @@ export default {
         VSettings,
         VVariantNav,
         VTonicNav,
+        VCollapse,
     },
 
     mixins: [keyboardNavigation],
@@ -179,6 +179,10 @@ export default {
         resetVoicings() {
             this.$refs.keyboard.resetSelected();
             this.$store.commit('resetUserChords');
+        },
+
+        toggleSettings() {
+            this.$refs.settingsCollapse.toggle();
         },
 
         ...mapMutations([
