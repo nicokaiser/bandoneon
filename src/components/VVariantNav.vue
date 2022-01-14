@@ -8,14 +8,15 @@
                         'label text-end pe-2',
                         !sideChecked ? 'fw-bold' : 'text-muted',
                     ]"
-                    @click.prevent="toggleSide"
+                    @click.prevent="setSideChecked(!sideChecked)"
                 />
 
                 <div class="form-check-inline form-switch mx-0">
                     <input
-                        v-model="sideChecked"
+                        :checked="sideChecked"
                         class="form-check-input"
                         type="checkbox"
+                        @change="setSideChecked($event.target.checked)"
                     />
                 </div>
 
@@ -25,7 +26,7 @@
                         'label text-start ps-2',
                         sideChecked ? 'fw-bold' : 'text-muted',
                     ]"
-                    @click.prevent="toggleSide"
+                    @click.prevent="setSideChecked(!sideChecked)"
                 />
             </div>
 
@@ -36,14 +37,15 @@
                         'label text-end pe-2',
                         !directionChecked ? 'fw-bold' : 'text-muted',
                     ]"
-                    @click.prevent="toggleDirection"
+                    @click.prevent="setDirectionChecked(!directionChecked)"
                 />
 
                 <div class="form-check-inline form-switch mx-0">
                     <input
-                        v-model="directionChecked"
+                        :checked="directionChecked"
                         class="form-check-input"
                         type="checkbox"
+                        @change="setDirectionChecked($event.target.checked)"
                     />
                 </div>
 
@@ -53,7 +55,7 @@
                         'label text-start ps-2',
                         directionChecked ? 'fw-bold' : 'text-muted',
                     ]"
-                    @click.prevent="toggleDirection"
+                    @click.prevent="setDirectionChecked(!directionChecked)"
                 />
             </div>
         </div>
@@ -71,46 +73,28 @@ import { mapMutations, mapState } from 'vuex';
 
 export default {
     computed: {
-        direction() {
-            return this.variant.split('-')[1] || 'open';
+        sideChecked() {
+            return this.variant.split('-')[0] === 'right';
         },
 
-        side() {
-            return this.variant.split('-')[0] || 'right';
-        },
-
-        sideChecked: {
-            get() {
-                return this.side === 'right';
-            },
-
-            set(value) {
-                this.setVariant(
-                    `${value ? 'right' : 'left'}-${this.direction}`
-                );
-            },
-        },
-
-        directionChecked: {
-            get() {
-                return this.direction === 'open';
-            },
-
-            set(value) {
-                this.setVariant(`${this.side}-${value ? 'open' : 'close'}`);
-            },
+        directionChecked() {
+            return this.variant.split('-')[1] === 'open';
         },
 
         ...mapState(['variant']),
     },
 
     methods: {
-        toggleDirection() {
-            this.directionChecked = this.direction === 'close';
+        setDirectionChecked(checked) {
+            this.setVariant(
+                `${this.variant.split('-')[0]}-${checked ? 'open' : 'close'}`
+            );
         },
 
-        toggleSide() {
-            this.sideChecked = this.side === 'left';
+        setSideChecked(checked) {
+            this.setVariant(
+                `${checked ? 'right' : 'left'}-${this.variant.split('-')[1]}`
+            );
         },
 
         ...mapMutations(['setVariant']),
