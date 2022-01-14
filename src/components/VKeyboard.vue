@@ -10,8 +10,8 @@
             height="428"
         >
             <g
-                v-for="([x, y], tonal) in keyPositions"
-                :key="tonal"
+                v-for="([x, y, tonal], idx) in keyPositions"
+                :key="idx"
                 @click="toggle(tonal)"
             >
                 <circle
@@ -101,15 +101,15 @@ export default {
 
                     notes.forEach((n) => {
                         const no = Note.get(n);
-                        const idx = Object.keys(this.keyPositions).find(
-                            (v) => Note.get(v).height === no.height
+
+                        const pos = this.keyPositions.find(
+                            (v) => Note.get(v[2]).height === no.height
                         );
 
-                        if (idx) {
-                            const [x, y] = this.keyPositions[idx];
+                        if (pos) {
                             pathString += `${pathString === '' ? 'M' : 'L'}${
-                                x + 30
-                            },${y + 30}`;
+                                pos[0] + 30
+                            },${pos[1] + 30}`;
                         }
                     });
 

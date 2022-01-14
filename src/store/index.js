@@ -43,11 +43,11 @@ export default createStore({
 
     getters: {
         keyPositions(state) {
-            if (!state.instrument || !state.variant) return {};
+            if (!state.instrument || !state.variant) return [];
             const keys = state.instruments[state.instrument][state.variant];
-            if (!keys) return {};
+            if (!keys) return [];
 
-            const positions = {};
+            const positions = [];
             let offsetX = 0;
             let offsetY = 0;
 
@@ -62,19 +62,14 @@ export default createStore({
 
             for (let row = 0; row < keys.length; row++) {
                 for (let col = 0; col < keys[row].length; col++) {
-                    let name = keys[row][col];
-                    const x = offsetX + col * 79 + 40 - (row % 2) * 40;
-                    const y =
-                        offsetY +
-                        row * 64 +
-                        30 * (1 - Math.sin(((x / 320) * Math.PI) / 2));
-
-                    if (name) {
-                        while (positions[name]) {
-                            name += ' ';
-                        }
-
-                        positions[name] = [x, y];
+                    let tonal = keys[row][col];
+                    if (tonal) {
+                        const x = offsetX + col * 79 + 40 - (row % 2) * 40;
+                        const y =
+                            offsetY +
+                            row * 64 +
+                            30 * (1 - Math.sin(((x / 320) * Math.PI) / 2));
+                        positions.push([x, y, tonal]);
                     }
                 }
             }
