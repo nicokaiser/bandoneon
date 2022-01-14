@@ -3,13 +3,14 @@
         <div class="row">
             <div class="col-12 col-sm-6 text-center text-nowrap mb-2">
                 <span
-                    v-t="'left'"
                     :class="[
                         'label text-end pe-2',
                         !sideChecked ? 'fw-bold' : 'text-muted',
                     ]"
                     @click.prevent="setSideChecked(!sideChecked)"
-                />
+                >
+                    {{ t('left') }}
+                </span>
 
                 <div class="form-check-inline form-switch mx-0">
                     <input
@@ -21,24 +22,26 @@
                 </div>
 
                 <span
-                    v-t="'right'"
                     :class="[
                         'label text-start ps-2',
                         sideChecked ? 'fw-bold' : 'text-muted',
                     ]"
                     @click.prevent="setSideChecked(!sideChecked)"
-                />
+                >
+                    {{ t('right') }}
+                </span>
             </div>
 
             <div class="col-12 col-sm-6 text-center text-nowrap mb-2">
                 <span
-                    v-t="'close'"
                     :class="[
                         'label text-end pe-2',
                         !directionChecked ? 'fw-bold' : 'text-muted',
                     ]"
                     @click.prevent="setDirectionChecked(!directionChecked)"
-                />
+                >
+                    {{ t('close') }}
+                </span>
 
                 <div class="form-check-inline form-switch mx-0">
                     <input
@@ -50,16 +53,18 @@
                 </div>
 
                 <span
-                    v-t="'open'"
                     :class="[
                         'label text-start ps-2',
                         directionChecked ? 'fw-bold' : 'text-muted',
                     ]"
                     @click.prevent="setDirectionChecked(!directionChecked)"
-                />
+                >
+                    {{ t('open') }}
+                </span>
             </div>
         </div>
     </div>
+    {{ locale }}
 </template>
 
 <script>

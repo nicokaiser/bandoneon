@@ -34,13 +34,14 @@
                     <button
                         v-for="item in scaleTypes"
                         :key="item"
-                        v-t="item"
                         :class="[
                             'btn btn-outline-secondary my-2',
                             item === scaleType ? 'active' : null,
                         ]"
                         @click.stop="setScaleType(item)"
-                    />
+                    >
+                        {{ t('item') }}
+                    </button>
                 </div>
 
                 <div class="btn-group mx-2">
