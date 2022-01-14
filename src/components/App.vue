@@ -1,32 +1,11 @@
 <template>
     <div id="app">
-        <nav class="navbar navbar-light">
-            <div class="container px-3 py-2">
-                <router-link
-                    :to="{ name: 'home' }"
-                    class="navbar-brand me-auto mb-0 h1"
-                >
-                    Bandoneon.app
-                </router-link>
-
-                <button
-                    class="navbar-toggler"
-                    type="button"
-                    @click.stop="toggleSettings"
-                >
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-            </div>
-        </nav>
-
-        <VCollapse ref="settingsCollapse">
-            <VSettings />
-        </VCollapse>
+        <TheHeader />
 
         <div class="container px-3 my-4">
-            <VKeyboard ref="keyboard" />
-            <VVariantNav />
-            <VTonicNav />
+            <TheKeyboard ref="keyboard" />
+            <VNavVariant />
+            <VNavTonic />
 
             <div class="mb-2 text-center d-print-none">
                 <div class="btn-group mx-2">
@@ -113,11 +92,10 @@ import BIconArrowCounterclockwise from '@/components/BIconArrowCounterclockwise.
 import BIconDownload from '@/components/BIconDownload.vue';
 import BIconPaletteFill from '@/components/BIconPaletteFill.vue';
 import BIconPinFill from '@/components/BIconPinFill.vue';
-import VKeyboard from '@/components/VKeyboard.vue';
-import VSettings from '@/components/VSettings.vue';
-import VVariantNav from '@/components/VVariantNav.vue';
-import VTonicNav from '@/components/VTonicNav.vue';
-import VCollapse from '@/components/VCollapse.vue';
+import TheKeyboard from '@/components/TheKeyboard.vue';
+import VNavVariant from '@/components/VNavVariant.vue';
+import VNavTonic from '@/components/VNavTonic.vue';
+import TheHeader from '@/components/TheHeader.vue';
 
 export default {
     components: {
@@ -125,11 +103,10 @@ export default {
         BIconDownload,
         BIconPaletteFill,
         BIconPinFill,
-        VKeyboard,
-        VSettings,
-        VVariantNav,
-        VTonicNav,
-        VCollapse,
+        TheKeyboard,
+        VNavVariant,
+        VNavTonic,
+        TheHeader,
     },
 
     mixins: [keyboardNavigation],
@@ -179,10 +156,6 @@ export default {
         resetVoicings() {
             this.$refs.keyboard.resetSelected();
             this.$store.commit('resetUserChords');
-        },
-
-        toggleSettings() {
-            this.$refs.settingsCollapse.toggle();
         },
 
         ...mapMutations([
