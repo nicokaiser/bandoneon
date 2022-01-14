@@ -70,11 +70,6 @@ const { t } = useI18n();
 import { mapMutations, mapState } from 'vuex';
 
 export default {
-    data: () => ({
-        sideChecked: true,
-        directionChecked: true,
-    }),
-
     computed: {
         direction() {
             return this.variant.split('-')[1] || 'open';
@@ -84,30 +79,29 @@ export default {
             return this.variant.split('-')[0] || 'right';
         },
 
+        sideChecked: {
+            get() {
+                return this.side === 'right';
+            },
+
+            set(value) {
+                this.setVariant(
+                    `${value ? 'right' : 'left'}-${this.direction}`
+                );
+            },
+        },
+
+        directionChecked: {
+            get() {
+                return this.direction === 'open';
+            },
+
+            set(value) {
+                this.setVariant(`${this.side}-${value ? 'open' : 'close'}`);
+            },
+        },
+
         ...mapState(['variant']),
-    },
-
-    watch: {
-        directionChecked(open) {
-            this.setVariant(`${this.side}-${open ? 'open' : 'close'}`);
-        },
-
-        sideChecked(right) {
-            this.setVariant(`${right ? 'right' : 'left'}-${this.direction}`);
-        },
-
-        direction() {
-            this.directionChecked = this.direction === 'open';
-        },
-
-        side() {
-            this.sideChecked = this.side == 'right';
-        },
-    },
-
-    mounted() {
-        this.sideChecked = this.side == 'right';
-        this.directionChecked = this.direction === 'open';
     },
 
     methods: {

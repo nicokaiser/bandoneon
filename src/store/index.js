@@ -134,11 +134,6 @@ export default createStore({
 
         toggleColors(state) {
             state.showColors = !state.showColors;
-            // TODO: save to localStorage
-        },
-
-        setShowColors(state, showColors) {
-            state.showColors = showColors;
         },
 
         toggleEnharmonics(state) {
