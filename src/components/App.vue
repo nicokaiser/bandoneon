@@ -105,16 +105,11 @@
     </div>
 </template>
 
-<script setup>
-import { useI18n } from 'vue-i18n';
-import keyboardNavigation from '@/mixins/keyboardNavigation';
-
-const { t } = useI18n();
-</script>
-
 <script>
 import 'bootstrap/js/src/collapse';
 import { mapMutations, mapState } from 'vuex';
+import { useI18n } from 'vue-i18n';
+import keyboardNavigation from '@/mixins/keyboardNavigation';
 import BIconArrowCounterclockwise from '@/components/BIconArrowCounterclockwise.vue';
 import BIconDownload from '@/components/BIconDownload.vue';
 import BIconPaletteFill from '@/components/BIconPaletteFill.vue';
@@ -137,6 +132,11 @@ export default {
     },
 
     mixins: [keyboardNavigation],
+
+    setup() {
+        const { t } = useI18n();
+        return { t };
+    },
 
     computed: {
         modified() {

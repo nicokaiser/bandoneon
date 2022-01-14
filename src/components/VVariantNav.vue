@@ -62,16 +62,16 @@
     </div>
 </template>
 
-<script setup>
-import { useI18n } from 'vue-i18n';
-
-const { t } = useI18n();
-</script>
-
 <script>
 import { mapMutations, mapState } from 'vuex';
+import { useI18n } from 'vue-i18n';
 
 export default {
+    setup() {
+        const { t } = useI18n();
+        return { t };
+    },
+
     computed: {
         sideChecked() {
             return this.variant.split('-')[0] === 'right';

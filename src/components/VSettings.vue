@@ -72,16 +72,16 @@
     </div>
 </template>
 
-<script setup>
-import { useI18n } from 'vue-i18n';
-
-const { locale, availableLocales } = useI18n();
-</script>
-
 <script>
 import { mapMutations, mapState } from 'vuex';
+import { useI18n } from 'vue-i18n';
 
 export default {
+    setup() {
+        const { locale, availableLocales } = useI18n({ useScope: 'global' });
+        return { locale, availableLocales };
+    },
+
     computed: {
         ...mapState(['instrument', 'instruments', 'pitchNotation']),
     },
