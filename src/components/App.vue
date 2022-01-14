@@ -40,7 +40,7 @@
                         ]"
                         @click.stop="setScaleType(item)"
                     >
-                        {{ t('item') }}
+                        {{ t(item) }}
                     </button>
                 </div>
 

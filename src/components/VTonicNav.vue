@@ -34,9 +34,14 @@
 
 <script>
 import { enharmonic } from '@tonaljs/note';
-import { mapState } from 'vuex';
+import { mapState, useStore } from 'vuex';
 
 export default {
+    setup() {
+        const store = useStore();
+        return { store };
+    },
+
     computed: {
         ...mapState(['notes', 'showEnharmonics', 'tonic']),
     },
@@ -54,9 +59,9 @@ export default {
 
         toggleTonic(value) {
             if (value === this.tonic) {
-                this.$store.commit('setTonic', null);
+                this.store.commit('setTonic', null);
             } else {
-                this.$store.commit('setTonic', value);
+                this.store.commit('setTonic', value);
             }
         },
     },

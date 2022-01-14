@@ -64,7 +64,6 @@
             </div>
         </div>
     </div>
-    {{ locale }}
 </template>
 
 <script>
