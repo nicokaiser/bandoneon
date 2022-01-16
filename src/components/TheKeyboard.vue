@@ -42,7 +42,7 @@
             <path
                 v-for="(path, index) in scalePaths"
                 :key="index"
-                :stroke="colorsScale[index % colorsScale.length]"
+                :stroke="getScaleColor(index)"
                 :d="path"
                 stroke-linecap="round"
                 stroke-linejoin="round"
@@ -54,7 +54,7 @@
     </div>
 </template>
 
-<script>
+<script setup>
 import { computed, ref, watch } from 'vue';
 import { useStore } from 'vuex';
 import Note from '@tonaljs/note';
@@ -62,189 +62,151 @@ import Scale from '@tonaljs/scale';
 import download from '@/helpers/download';
 import helmholtz from '@/helpers/helmholtz';
 
-export default {
-    setup(props, { expose }) {
-        const svg = ref(null);
+const svg = ref(null);
 
-        const colorsOctave = [
-            '#d7b171',
-            '#71a8d7',
-            '#e37e7b',
-            '#85ca85',
-            '#e6cb84',
-            '#71a8d7',
-        ];
+const colorsOctave = [
+    '#d7b171',
+    '#71a8d7',
+    '#e37e7b',
+    '#85ca85',
+    '#e6cb84',
+    '#71a8d7',
+];
 
-        const colorsScale = [
-            'orange',
-            'blue',
-            'red',
-            'green',
-            'orange',
-            'blue',
-            'red',
-            'green',
-        ];
+const colorsScale = [
+    'orange',
+    'blue',
+    'red',
+    'green',
+    'orange',
+    'blue',
+    'red',
+    'green',
+];
 
-        const store = useStore();
+const store = useStore();
 
-        const modified = ref(false);
-        const userSelected = ref({});
+const modified = ref(false);
+const userSelected = ref({});
 
-        const format = (tonal) => {
-            const note = Note.get(
-                store.state.showEnharmonics ? Note.enharmonic(tonal) : tonal
-            );
-            if (note.empty) return '';
+const format = (tonal) => {
+    const note = Note.get(
+        store.state.showEnharmonics ? Note.enharmonic(tonal) : tonal
+    );
+    if (note.empty) return '';
 
-            if (store.state.pitchNotation === 'scientific') {
-                return [note.pc.replace('b', '♭').replace('#', '♯'), note.oct];
-            }
+    if (store.state.pitchNotation === 'scientific') {
+        return [note.pc.replace('b', '♭').replace('#', '♯'), note.oct];
+    }
 
-            return [helmholtz(note.name), ''];
-        };
-
-        const instrument = computed(() => store.state.instrument);
-        const chords = computed(() => store.state.chords);
-        const tonic = computed(() => store.state.tonic);
-        const variant = computed(
-            () => store.state.side + '-' + store.state.direction
-        );
-        const scaleType = computed(() => store.state.scaleType);
-        const chordType = computed(() => store.state.chordType);
-
-        const keyPositions = computed(() => store.getters.getKeyPositions);
-
-        const scalePaths = computed(() => {
-            if (store.state.tonic && store.state.scaleType) {
-                const { intervals, empty } = Scale.get(store.state.scaleType);
-                if (empty) return [];
-                const paths = [];
-
-                for (let o = -1; o < 7; o++) {
-                    const notes = intervals.map((i) =>
-                        Note.transpose(`${store.state.tonic}${o}`, i)
-                    );
-                    notes.push(`${store.state.tonic}${o + 1}`);
-                    let pathString = '';
-
-                    notes.forEach((n) => {
-                        const no = Note.get(n);
-
-                        const pos = keyPositions.value.find(
-                            (v) => Note.get(v[2]).height === no.height
-                        );
-
-                        if (pos) {
-                            pathString += `${pathString === '' ? 'M' : 'L'}${
-                                pos[0] + 30
-                            },${pos[1] + 30}`;
-                        }
-                    });
-
-                    paths.push(pathString);
-                }
-
-                return paths;
-            }
-
-            return [];
-        });
-
-        const fill = (tonal) => {
-            let octave = +tonal.slice(1);
-            if (tonal[1] === '#') octave = +tonal.slice(2);
-            return store.state.showColors
-                ? colorsOctave[octave - 1]
-                : '#ced4da'; // gray-500
-        };
-
-        const resetSelected = () => {
-            userSelected.value = {};
-            modified.value = false;
-        };
-
-        watch(tonic, resetSelected);
-
-        watch(chordType, resetSelected);
-
-        const downloadImage = () => {
-            let filename = `bandoneon-${store.state.instrument}-${store.state.side}-${store.state.direction}`;
-            if (store.state.tonic) {
-                filename += '-' + store.state.tonic.replace('#', 's');
-                if (store.state.chordType) filename += store.state.chordType;
-                if (store.state.scaleType)
-                    filename += '-' + store.state.scaleType;
-            }
-            if (modified.value) {
-                filename += '-custom';
-            }
-            filename += '.png';
-
-            download(svg.value, filename);
-        };
-
-        const selectedNotes = computed(() =>
-            Object.keys(userSelected.value).filter(
-                (item) => !!userSelected.value[item]
-            )
-        );
-
-        expose({ modified, resetSelected, downloadImage, selectedNotes });
-
-        return {
-            svg,
-            modified,
-            userSelected,
-            colorsScale,
-
-            format,
-            fill,
-            scalePaths,
-            keyPositions,
-
-            instrument,
-            chords,
-            tonic,
-            variant,
-            scaleType,
-            chordType,
-            downloadImage,
-            selectedNotes,
-        };
-    },
-
-    computed: {
-        selected() {
-            if (this.modified) return this.userSelected;
-            const selected = {};
-            if (this.tonic && this.chordType) {
-                const chord =
-                    this.chords[this.variant][`${this.tonic}${this.chordType}`];
-                if (chord) {
-                    for (let i = 0; i <= chord.length; i++) {
-                        if (chord[i]) selected[chord[i]] = true;
-                    }
-                }
-            }
-            return selected;
-        },
-    },
-
-    methods: {
-        toggle(tonal) {
-            if (!this.modified) {
-                this.userSelected = { ...this.selected };
-                this.modified = true;
-            }
-            if (this.userSelected[tonal]) {
-                delete this.userSelected[tonal];
-            } else {
-                this.userSelected[tonal] = true;
-            }
-        },
-    },
+    return [helmholtz(note.name), ''];
 };
+
+const tonic = computed(() => store.state.tonic);
+const chordType = computed(() => store.state.chordType);
+
+const keyPositions = computed(() => store.getters.getKeyPositions);
+
+const scalePaths = computed(() => {
+    if (store.state.tonic && store.state.scaleType) {
+        const { intervals, empty } = Scale.get(store.state.scaleType);
+        if (empty) return [];
+        const paths = [];
+
+        for (let o = -1; o < 7; o++) {
+            const notes = intervals.map((i) =>
+                Note.transpose(`${store.state.tonic}${o}`, i)
+            );
+            notes.push(`${store.state.tonic}${o + 1}`);
+            let pathString = '';
+
+            notes.forEach((n) => {
+                const no = Note.get(n);
+
+                const pos = keyPositions.value.find(
+                    (v) => Note.get(v[2]).height === no.height
+                );
+
+                if (pos) {
+                    pathString += `${pathString === '' ? 'M' : 'L'}${
+                        pos[0] + 30
+                    },${pos[1] + 30}`;
+                }
+            });
+
+            paths.push(pathString);
+        }
+
+        return paths;
+    }
+
+    return [];
+});
+
+const fill = (tonal) => {
+    let octave = +tonal.slice(1);
+    if (tonal[1] === '#') octave = +tonal.slice(2);
+    return store.state.showColors ? colorsOctave[octave - 1] : '#ced4da'; // gray-500
+};
+
+const resetSelected = () => {
+    userSelected.value = {};
+    modified.value = false;
+};
+
+watch(tonic, resetSelected);
+
+watch(chordType, resetSelected);
+
+const downloadImage = () => {
+    let filename = `bandoneon-${store.state.instrument}-${store.state.side}-${store.state.direction}`;
+    if (store.state.tonic) {
+        filename += '-' + store.state.tonic.replace('#', 's');
+        if (store.state.chordType) filename += store.state.chordType;
+        if (store.state.scaleType) filename += '-' + store.state.scaleType;
+    }
+    if (modified.value) {
+        filename += '-custom';
+    }
+    filename += '.png';
+
+    download(svg.value, filename);
+};
+
+const selectedNotes = computed(() =>
+    Object.keys(userSelected.value).filter((item) => !!userSelected.value[item])
+);
+
+const selected = computed(() => {
+    if (modified.value) return userSelected.value;
+
+    const result = {};
+    const chord = store.getters.getChord;
+    if (chord) {
+        for (let i = 0; i <= chord.length; i++) {
+            if (chord[i]) result[chord[i]] = true;
+        }
+    }
+    return result;
+});
+
+const toggle = (tonal) => {
+    if (!modified.value) {
+        userSelected.value = { ...selected.value };
+        modified.value = true;
+    }
+    if (userSelected.value[tonal]) {
+        delete userSelected.value[tonal];
+    } else {
+        userSelected.value[tonal] = true;
+    }
+};
+
+const getScaleColor = (octave) => {
+    return colorsScale[octave % colorsScale.length];
+};
+
+defineExpose({ modified, resetSelected, downloadImage, selectedNotes });
 </script>
 
 <style scoped>
