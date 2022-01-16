@@ -80,12 +80,14 @@ import { useI18n } from 'vue-i18n';
 const store = useStore();
 
 const instrument = computed(() => store.state.instrument);
-const availableInstruments = computed(() => store.getters.availableInstruments);
+const availableInstruments = computed(
+    () => store.getters.getAvailableInstruments
+);
 const setInstrument = (value) => store.commit('setInstrument', value);
 
 const pitchNotation = computed(() => store.state.pitchNotation);
 const availablePitchNotations = computed(
-    () => store.getters.availablePitchNotations
+    () => store.getters.getAvailablePitchNotations
 );
 const setPitchNotation = (value) => store.commit('setPitchNotation', value);
 

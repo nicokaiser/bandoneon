@@ -107,11 +107,13 @@ export default {
         const instrument = computed(() => store.state.instrument);
         const chords = computed(() => store.state.chords);
         const tonic = computed(() => store.state.tonic);
-        const variant = computed(() => store.state.variant);
+        const variant = computed(
+            () => store.state.side + '-' + store.state.direction
+        );
         const scaleType = computed(() => store.state.scaleType);
         const chordType = computed(() => store.state.chordType);
 
-        const keyPositions = computed(() => store.getters.keyPositions);
+        const keyPositions = computed(() => store.getters.getKeyPositions);
 
         const scalePaths = computed(() => {
             if (store.state.tonic && store.state.scaleType) {
@@ -167,7 +169,7 @@ export default {
         watch(chordType, resetSelected);
 
         const downloadImage = () => {
-            let filename = `bandoneon-${store.state.instrument}-${store.state.variant}`;
+            let filename = `bandoneon-${store.state.instrument}-${store.state.side}-${store.state.direction}`;
             if (store.state.tonic) {
                 filename += '-' + store.state.tonic.replace('#', 's');
                 if (store.state.chordType) filename += store.state.chordType;

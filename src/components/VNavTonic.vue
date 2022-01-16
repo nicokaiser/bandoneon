@@ -39,7 +39,7 @@ import { enharmonic } from '@tonaljs/note';
 
 const store = useStore();
 
-const notes = computed(() => store.state.notes);
+const notes = computed(() => store.getters.getAllNotes);
 
 const tonic = computed(() => store.state.tonic);
 

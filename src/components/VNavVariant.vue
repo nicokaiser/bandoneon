@@ -80,20 +80,14 @@ import { useI18n } from 'vue-i18n';
 const store = useStore();
 const { t } = useI18n();
 
-const side = computed(() => store.state.variant.split('-')[0]);
-
-const setSide = (value) => {
-    store.commit('setVariant', value + '-' + direction.value);
+const side = computed(() => store.state.side);
+const setSide = (value) => store.commit('setSide', value);
+const toggleSide = () => {
+    setSide(side.value === 'right' ? 'left' : 'right');
 };
 
-const toggleSide = () => setSide(side.value === 'right' ? 'left' : 'right');
-
-const direction = computed(() => store.state.variant.split('-')[1]);
-
-const setDirection = (value) => {
-    store.commit('setVariant', side.value + '-' + value);
-};
-
+const direction = computed(() => store.state.direction);
+const setDirection = (value) => store.commit('setDirection', value);
 const toggleDirection = () => {
     setDirection(direction.value === 'open' ? 'close' : 'open');
 };

@@ -14,7 +14,7 @@
                         :key="item"
                         :class="[
                             'btn btn-outline-secondary my-2',
-                            item === scaleType ? 'active' : null,
+                            item === currentScaleType ? 'active' : null,
                         ]"
                         @click.stop="setScaleType(item)"
                     >
@@ -28,7 +28,7 @@
                         :key="item"
                         :class="[
                             'btn btn-outline-secondary my-2',
-                            item === chordType ? 'active' : null,
+                            item === currentChordType ? 'active' : null,
                         ]"
                         @click.stop="setChordType(item)"
                     >
@@ -118,12 +118,12 @@ const resetVoicings = () => {
     store.commit('resetUserChords');
 };
 
-const scaleTypes = computed(() => store.state.scaleTypes);
-const scaleType = computed(() => store.state.scaleType);
+const scaleTypes = computed(() => store.getters.getAvailableScaleTypes);
+const currentScaleType = computed(() => store.state.currentScaleType);
 const setScaleType = (value) => store.commit('setScaleType', value);
 
-const chordTypes = computed(() => store.state.chordTypes);
-const chordType = computed(() => store.state.chordType);
+const chordTypes = computed(() => store.getters.getAvailableChordTypes);
+const currentChordType = computed(() => store.state.currentChordType);
 const setChordType = (value) => store.commit('setChordType', value);
 
 const showColors = computed(() => store.state.showColors);

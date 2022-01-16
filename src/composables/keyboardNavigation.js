@@ -4,11 +4,16 @@ import { useStore } from 'vuex';
 export function useKeyboardNavigation() {
     const store = useStore();
 
+    function setSideAndDirection(side, direction) {
+        store.commit('setSide', side);
+        store.commit('setDirection', direction);
+    }
+
     function listener({ key }) {
-        if (key === 'l') return store.commit('setVariant', 'left-open');
-        if (key === 'L') return store.commit('setVariant', 'left-close');
-        if (key === 'r') return store.commit('setVariant', 'right-open');
-        if (key === 'R') return store.commit('setVariant', 'right-close');
+        if (key === 'l') return setSideAndDirection('left', 'open');
+        if (key === 'L') return setSideAndDirection('left', 'close');
+        if (key === 'r') return setSideAndDirection('right', 'open');
+        if (key === 'R') return setSideAndDirection('right', 'close');
 
         if (['c', 'd', 'e', 'f', 'g', 'a', 'b'].includes(key)) {
             return store.commit('setTonic', key.toUpperCase());
@@ -17,7 +22,7 @@ export function useKeyboardNavigation() {
         if (key === '#') {
             const tonic = store.state.tonic;
             if (tonic && tonic.length === 1) {
-                store.commit('setTonic', tonic + '#');
+                return store.commit('setTonic', tonic + '#');
             }
         }
 

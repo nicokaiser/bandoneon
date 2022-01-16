@@ -1,6 +1,8 @@
 import { createStore } from 'vuex';
-import originalChords from './chords.json';
-import instruments from './instruments';
+import CHORDS from './chords.json';
+import INSTRUMENTS from './instruments';
+
+const NOTES = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
 
 export default createStore({
     state: () => ({
@@ -12,43 +14,35 @@ export default createStore({
         chords:
             (window.localStorage.getItem('chords') &&
                 JSON.parse(window.localStorage.getItem('chords'))) ||
-            JSON.parse(JSON.stringify(originalChords)),
-        originalChords,
+            JSON.parse(JSON.stringify(CHORDS)),
         showEnharmonics: false,
-        instruments,
         instrument:
             window.localStorage.getItem('instrument') || 'rheinische142',
         pitchNotation:
             window.localStorage.getItem('pitchNotation') || 'scientific',
-        variants: ['left-open', 'left-close', 'right-open', 'right-close'],
-        variant: 'right-open',
-        scaleTypes: ['major', 'minor', 'chromatic'],
-        chordTypes: ['M', 'm', '7', 'dim', 'm7', 'M7'],
+        side: 'right',
+        direction: 'open',
         tonic: null,
-        notes: [
-            'C',
-            'C#',
-            'D',
-            'D#',
-            'E',
-            'F',
-            'F#',
-            'G',
-            'G#',
-            'A',
-            'A#',
-            'B',
-        ],
+        notes: NOTES,
     }),
 
     getters: {
-        availableInstruments: (state) => Object.keys(state.instruments),
+        getAllNotes: () => NOTES,
 
-        availablePitchNotations: () => ['helmholtz', 'scientific'],
+        getAvailableInstruments: () => Object.keys(INSTRUMENTS),
 
-        keyPositions(state) {
-            if (!state.instrument || !state.variant) return [];
-            const keys = state.instruments[state.instrument][state.variant];
+        getAvailablePitchNotations: () => ['helmholtz', 'scientific'],
+
+        getAvailableChordTypes: () => ['M', 'm', '7', 'dim', 'm7', 'M7'],
+
+        getAvailableScaleTypes: () => ['major', 'minor', 'chromatic'],
+
+        getKeyPositions(state) {
+            if (!state.instrument) return [];
+            const keys =
+                INSTRUMENTS[state.instrument][
+                    state.side + '-' + state.direction
+                ];
             if (!keys) return [];
 
             const positions = [];
@@ -89,7 +83,7 @@ export default createStore({
         },
 
         setInstrument(state, instrument) {
-            if (instrument in state.instruments) {
+            if (instrument in INSTRUMENTS) {
                 state.instrument = instrument;
                 window.localStorage.setItem('instrument', instrument);
             }
@@ -100,10 +94,17 @@ export default createStore({
             window.localStorage.setItem('pitchNotation', pitchNotation);
         },
 
-        setVariant(state, variant) {
-            if (state.variants.includes(variant)) {
-                state.variant = variant;
-            }
+        setSide(state, side) {
+            state.side = side;
+        },
+
+        setDirection(state, direction) {
+            state.direction = direction;
+        },
+
+        setSideAndDirection(state, side, direction) {
+            state.side = side;
+            state.direction = direction;
         },
 
         setTonic(state, tonic) {
@@ -111,7 +112,7 @@ export default createStore({
                 state.tonic = null;
                 state.chordType = null;
                 state.scaleType = null;
-            } else if (state.notes.includes(tonic)) {
+            } else if (NOTES.includes(tonic)) {
                 state.tonic = tonic;
                 if (!state.scaleType && !state.chordType) {
                     state.chordType = 'M';
@@ -140,14 +141,14 @@ export default createStore({
         },
 
         saveUserChord(state, notes) {
-            if (!state.tonic || !state.chordType || !state.variant) return;
+            if (!state.tonic || !state.chordType) return;
 
             const chordName = `${state.tonic}${state.chordType}`;
 
-            if (['left-open', 'left-close'].includes(state.variant)) {
+            if (state.side === 'left') {
                 state.chords['left-open'][chordName] = notes;
                 state.chords['left-close'][chordName] = notes;
-            } else if (['right-open', 'right-close'].includes(state.variant)) {
+            } else {
                 state.chords['right-open'][chordName] = notes;
                 state.chords['right-close'][chordName] = notes;
             }
@@ -156,7 +157,7 @@ export default createStore({
         },
 
         resetUserChords(state) {
-            state.chords = JSON.parse(JSON.stringify(originalChords));
+            state.chords = JSON.parse(JSON.stringify(CHORDS));
             window.localStorage.removeItem('chords');
         },
     },
