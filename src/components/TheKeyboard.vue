@@ -184,7 +184,13 @@ export default {
             download(svg.value, filename);
         };
 
-        expose({ modified, resetSelected, downloadImage });
+        const selectedNotes = computed(() =>
+            Object.keys(userSelected.value).filter(
+                (item) => !!userSelected.value[item]
+            )
+        );
+
+        expose({ modified, resetSelected, downloadImage, selectedNotes });
 
         return {
             svg,
@@ -204,6 +210,7 @@ export default {
             scaleType,
             chordType,
             downloadImage,
+            selectedNotes,
         };
     },
 

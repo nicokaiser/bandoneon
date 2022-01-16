@@ -14,7 +14,7 @@
                         :key="item"
                         :class="[
                             'btn btn-outline-secondary my-2',
-                            item === currentScaleType ? 'active' : null,
+                            item === scaleType ? 'active' : null,
                         ]"
                         @click.stop="setScaleType(item)"
                     >
@@ -28,7 +28,7 @@
                         :key="item"
                         :class="[
                             'btn btn-outline-secondary my-2',
-                            item === currentChordType ? 'active' : null,
+                            item === chordType ? 'active' : null,
                         ]"
                         @click.stop="setChordType(item)"
                     >
@@ -107,9 +107,8 @@ const { t } = useI18n();
 const downloadImage = () => keyboard.value.downloadImage();
 const saveVoicing = () => {
     if (keyboard.value.modified) {
-        const selected = keyboard.value.fetchSelected();
-        const notes = Object.keys(selected).filter((item) => !!selected[item]);
-        store.commit('saveUserChord', notes);
+        const selectedNotes = keyboard.value.selectedNotes;
+        store.commit('saveUserChord', selectedNotes);
     }
 };
 
@@ -119,11 +118,11 @@ const resetVoicings = () => {
 };
 
 const scaleTypes = computed(() => store.getters.getAvailableScaleTypes);
-const currentScaleType = computed(() => store.state.currentScaleType);
+const scaleType = computed(() => store.state.scaleType);
 const setScaleType = (value) => store.commit('setScaleType', value);
 
 const chordTypes = computed(() => store.getters.getAvailableChordTypes);
-const currentChordType = computed(() => store.state.currentChordType);
+const chordType = computed(() => store.state.chordType);
 const setChordType = (value) => store.commit('setChordType', value);
 
 const showColors = computed(() => store.state.showColors);

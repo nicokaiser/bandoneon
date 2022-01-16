@@ -74,6 +74,20 @@ export default createStore({
 
             return positions;
         },
+
+        getChord(state) {
+            if (
+                state.side &&
+                state.direction &&
+                state.tonic &&
+                state.chordType
+            ) {
+                return state.chords[`${state.side}-${state.direction}`][
+                    state.tonic + state.chordType
+                ];
+            }
+            return [];
+        },
     },
 
     mutations: {
