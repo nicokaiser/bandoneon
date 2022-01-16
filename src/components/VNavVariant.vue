@@ -66,43 +66,34 @@
     </div>
 </template>
 
-<script>
+<script setup>
 import { computed } from 'vue';
 import { useStore } from 'vuex';
 import { useI18n } from 'vue-i18n';
 
-export default {
-    setup() {
-        const store = useStore();
-        const { t } = useI18n();
+const store = useStore();
+const { t } = useI18n();
 
-        return {
-            variant: computed(() => store.state.variant),
+const sideChecked = computed(() => {
+    return store.state.variant.split('-')[0] === 'right';
+});
 
-            sideChecked: computed(() => {
-                return store.state.variant.split('-')[0] === 'right';
-            }),
+const setSideChecked = (checked) => {
+    const variant = `${checked ? 'right' : 'left'}-${
+        store.state.variant.split('-')[1]
+    }`;
+    store.commit('setVariant', variant);
+};
 
-            directionChecked: computed(() => {
-                return store.state.variant.split('-')[1] === 'open';
-            }),
+const directionChecked = computed(() => {
+    return store.state.variant.split('-')[1] === 'open';
+});
 
-            setDirectionChecked: (checked) => {
-                const variant = `${store.state.variant.split('-')[0]}-${
-                    checked ? 'open' : 'close'
-                }`;
-                store.commit('setVariant', variant);
-            },
-
-            setSideChecked(checked) {
-                const variant = `${checked ? 'right' : 'left'}-${
-                    store.state.variant.split('-')[1]
-                }`;
-                store.commit('setVariant', variant);
-            },
-            t,
-        };
-    },
+const setDirectionChecked = (checked) => {
+    const variant = `${store.state.variant.split('-')[0]}-${
+        checked ? 'open' : 'close'
+    }`;
+    store.commit('setVariant', variant);
 };
 </script>
 

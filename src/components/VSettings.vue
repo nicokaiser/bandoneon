@@ -72,36 +72,33 @@
     </div>
 </template>
 
-<script>
+<script setup>
 import { computed } from 'vue';
 import { useStore } from 'vuex';
 import { useI18n } from 'vue-i18n';
 
-export default {
-    setup() {
-        const { locale, availableLocales } = useI18n({ useScope: 'global' });
-        const store = useStore();
+const store = useStore();
 
-        return {
-            instrument: computed(() => store.state.instrument),
-            availableInstruments: computed(() => {
-                return Object.keys(store.state.instruments);
-            }),
-            setInstrument: (value) => store.commit('setInstrument', value),
+const instrument = computed(() => store.state.instrument);
 
-            pitchNotation: computed(() => store.state.pitchNotation),
-            availablePitchNotations: ['helmholtz', 'scientific'],
-            setPitchNotation: (value) => {
-                store.commit('setPitchNotation', value);
-            },
+const availableInstruments = computed(() => {
+    return Object.keys(store.state.instruments);
+});
 
-            locale,
-            availableLocales,
-            setLocale: (event) => {
-                store.commit('setLocale', event.target.value);
-                locale.value = event.target.value;
-            },
-        };
-    },
+const setInstrument = (value) => store.commit('setInstrument', value);
+
+const pitchNotation = computed(() => store.state.pitchNotation);
+
+const availablePitchNotations = ['helmholtz', 'scientific'];
+
+const setPitchNotation = (value) => {
+    store.commit('setPitchNotation', value);
+};
+
+const { locale, availableLocales } = useI18n({ useScope: 'global' });
+
+const setLocale = (event) => {
+    store.commit('setLocale', event.target.value);
+    locale.value = event.target.value;
 };
 </script>

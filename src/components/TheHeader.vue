@@ -25,24 +25,12 @@
     </div>
 </template>
 
-<script>
+<script setup>
 import { ref } from 'vue';
 import VCollapse from '@/components/VCollapse.vue';
 import VSettings from '@/components/VSettings.vue';
 
-export default {
-    components: {
-        VSettings,
-        VCollapse,
-    },
+const settingsCollapse = ref(null);
 
-    setup() {
-        const settingsCollapse = ref(null);
-
-        return {
-            settingsCollapse,
-            toggleSettings: () => settingsCollapse.value.toggle(),
-        };
-    },
-};
+const toggleSettings = () => settingsCollapse.value.toggle();
 </script>

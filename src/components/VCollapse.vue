@@ -4,39 +4,22 @@
     </div>
 </template>
 
-<script>
+<script setup>
 import { onMounted, onUnmounted, ref } from 'vue';
 import Collapse from 'bootstrap/js/src/collapse';
 
-export default {
-    props: {
-        visible: {
-            type: Boolean,
-            default: false,
-        },
-    },
+const collapse = ref(null);
+let bsCollapse;
 
-    setup(props) {
-        const collapse = ref(null);
-        let bsCollapse;
+onMounted(() => {
+    bsCollapse = new Collapse(collapse.value, { toggle: false });
+});
 
-        onMounted(() => {
-            bsCollapse = new Collapse(collapse.value, {
-                toggle: props.visible,
-            });
-        });
+onUnmounted(() => {
+    bsCollapse.dispose();
+});
 
-        onUnmounted(() => {
-            bsCollapse.dispose();
-        });
+const toggle = () => bsCollapse.toggle();
 
-        return {
-            collapse,
-
-            show: () => bsCollapse.show(),
-            hide: () => bsCollapse.hide(),
-            toggle: () => bsCollapse.toggle(),
-        };
-    },
-};
+defineExpose({ toggle });
 </script>

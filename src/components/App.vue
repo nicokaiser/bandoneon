@@ -84,10 +84,11 @@
     </div>
 </template>
 
-<script>
-import { mapMutations, mapState } from 'vuex';
+<script setup>
+import { computed, ref } from 'vue';
+import { useStore } from 'vuex';
 import { useI18n } from 'vue-i18n';
-import keyboardNavigation from '@/mixins/keyboardNavigation';
+import { useKeyboardNavigation } from '@/composables/keyboardNavigation';
 import BIconArrowCounterclockwise from '@/components/BIconArrowCounterclockwise.vue';
 import BIconDownload from '@/components/BIconDownload.vue';
 import BIconPaletteFill from '@/components/BIconPaletteFill.vue';
@@ -97,75 +98,38 @@ import VNavVariant from '@/components/VNavVariant.vue';
 import VNavTonic from '@/components/VNavTonic.vue';
 import TheHeader from '@/components/TheHeader.vue';
 
-export default {
-    components: {
-        BIconArrowCounterclockwise,
-        BIconDownload,
-        BIconPaletteFill,
-        BIconPinFill,
-        TheKeyboard,
-        VNavVariant,
-        VNavTonic,
-        TheHeader,
-    },
+useKeyboardNavigation();
 
-    mixins: [keyboardNavigation],
+const keyboard = ref(null);
+const store = useStore();
+const { t } = useI18n();
 
-    setup() {
-        const { t } = useI18n();
-        return { t };
-    },
-
-    computed: {
-        modified() {
-            return this.$refs.keyboard.modified;
-        },
-
-        ...mapState([
-            'variants',
-            'variant',
-            'tonic',
-            'scaleType',
-            'scaleTypes',
-            'chordType',
-            'chordTypes',
-            'showColors',
-            'showEnharmonics',
-            'instrument',
-            'instruments',
-        ]),
-    },
-
-    methods: {
-        downloadImage() {
-            this.$refs.keyboard.downloadImage();
-        },
-
-        saveVoicing() {
-            if (!this.$refs.keyboard.modified) return;
-
-            const selected = this.$refs.keyboard.fetchSelected();
-
-            const notes = Object.keys(selected).filter(
-                (item) => !!selected[item]
-            );
-
-            this.$store.commit('saveUserChord', notes);
-        },
-
-        resetVoicings() {
-            this.$refs.keyboard.resetSelected();
-            this.$store.commit('resetUserChords');
-        },
-
-        ...mapMutations([
-            'setScaleType',
-            'setChordType',
-            'toggleEnharmonics',
-            'toggleColors',
-        ]),
-    },
+const downloadImage = () => keyboard.value.downloadImage();
+const saveVoicing = () => {
+    if (keyboard.value.modified) {
+        const selected = keyboard.value.fetchSelected();
+        const notes = Object.keys(selected).filter((item) => !!selected[item]);
+        store.commit('saveUserChord', notes);
+    }
 };
+
+const resetVoicings = () => {
+    keyboard.value.resetSelected();
+    store.commit('resetUserChords');
+};
+
+const scaleTypes = computed(() => store.state.scaleTypes);
+const scaleType = computed(() => store.state.scaleType);
+const setScaleType = (value) => store.commit('setScaleType', value);
+
+const chordTypes = computed(() => store.state.chordTypes);
+const chordType = computed(() => store.state.chordType);
+const setChordType = (value) => store.commit('setChordType', value);
+
+const showColors = computed(() => store.state.showColors);
+const toggleColors = () => store.commit('toggleColors');
+const showEnharmonics = computed(() => store.state.showEnharmonics);
+const toggleEnharmonics = () => store.commit('toggleEnharmonics');
 </script>
 
 <style lang="scss">

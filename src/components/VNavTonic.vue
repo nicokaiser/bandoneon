@@ -11,7 +11,7 @@
                 style="width: 3em"
                 @click.stop="toggleTonic(item)"
             >
-                {{ noteName(item) }}
+                {{ formatNote(item) }}
             </button>
         </span>
 
@@ -26,44 +26,36 @@
                 style="width: 3em"
                 @click.stop="toggleTonic(item)"
             >
-                {{ noteName(item) }}
+                {{ formatNote(item) }}
             </button>
         </span>
     </div>
 </template>
 
-<script>
+<script setup>
 import { computed } from 'vue';
 import { useStore } from 'vuex';
 import { enharmonic } from '@tonaljs/note';
 
-export default {
-    setup() {
-        const store = useStore();
+const store = useStore();
 
-        return {
-            notes: computed(() => store.state.notes),
-            showEnharmonics: computed(() => store.state.showEnharmonics),
-            tonic: computed(() => store.state.tonic),
+const notes = computed(() => store.state.notes);
 
-            noteName: (name) => {
-                if (!store.state.showEnharmonics) return name.replace('#', '♯');
+const tonic = computed(() => store.state.tonic);
 
-                if (name.length === 2 && name[1] === '#') {
-                    return enharmonic(name).replace('b', '♭');
-                }
+const formatNote = (name) => {
+    if (!store.state.showEnharmonics) return name.replace('#', '♯');
+    if (name.length === 2 && name[1] === '#') {
+        return enharmonic(name).replace('b', '♭');
+    }
+    return name;
+};
 
-                return name;
-            },
-
-            toggleTonic: (value) => {
-                if (value === store.state.tonic) {
-                    store.commit('setTonic', null);
-                } else {
-                    store.commit('setTonic', value);
-                }
-            },
-        };
-    },
+const toggleTonic = (value) => {
+    if (value === store.state.tonic) {
+        store.commit('setTonic', null);
+    } else {
+        store.commit('setTonic', value);
+    }
 };
 </script>
