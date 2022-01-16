@@ -55,63 +55,81 @@
 </template>
 
 <script>
-import { ref } from 'vue';
-import { useStore, mapState, mapGetters } from 'vuex';
+import { computed, ref, watch } from 'vue';
+import { useStore } from 'vuex';
 import Note from '@tonaljs/note';
 import Scale from '@tonaljs/scale';
 import download from '@/helpers/download';
 import helmholtz from '@/helpers/helmholtz';
 
 export default {
-    setup() {
-        const modified = ref(false);
-        const userSelected = ref({});
+    setup(props, { expose }) {
+        const svg = ref(null);
+
+        const colorsOctave = [
+            '#d7b171',
+            '#71a8d7',
+            '#e37e7b',
+            '#85ca85',
+            '#e6cb84',
+            '#71a8d7',
+        ];
+
+        const colorsScale = [
+            'orange',
+            'blue',
+            'red',
+            'green',
+            'orange',
+            'blue',
+            'red',
+            'green',
+        ];
+
         const store = useStore();
 
-        return {
-            modified,
-            userSelected,
+        const modified = ref(false);
+        const userSelected = ref({});
 
-            colorsOctave: [
-                '#d7b171',
-                '#71a8d7',
-                '#e37e7b',
-                '#85ca85',
-                '#e6cb84',
-                '#71a8d7',
-            ],
+        const format = (tonal) => {
+            const note = Note.get(
+                store.state.showEnharmonics ? Note.enharmonic(tonal) : tonal
+            );
+            if (note.empty) return '';
 
-            colorsScale: [
-                'orange',
-                'blue',
-                'red',
-                'green',
-                'orange',
-                'blue',
-                'red',
-                'green',
-            ],
+            if (store.state.pitchNotation === 'scientific') {
+                return [note.pc.replace('b', '♭').replace('#', '♯'), note.oct];
+            }
+
+            return [helmholtz(note.name), ''];
         };
-    },
 
-    computed: {
-        scalePaths() {
-            if (this.tonic && this.scaleType) {
-                const { intervals, empty } = Scale.get(this.scaleType);
+        const instrument = computed(() => store.state.instrument);
+        const chords = computed(() => store.state.chords);
+        const tonic = computed(() => store.state.tonic);
+        const variant = computed(() => store.state.variant);
+        const scaleType = computed(() => store.state.scaleType);
+        const chordType = computed(() => store.state.chordType);
+
+        const keyPositions = computed(() => store.getters.keyPositions);
+
+        const scalePaths = computed(() => {
+            if (store.state.tonic && store.state.scaleType) {
+                const { intervals, empty } = Scale.get(store.state.scaleType);
                 if (empty) return [];
                 const paths = [];
 
                 for (let o = -1; o < 7; o++) {
                     const notes = intervals.map((i) =>
-                        Note.transpose(`${this.tonic}${o}`, i)
+                        Note.transpose(`${store.state.tonic}${o}`, i)
                     );
-                    notes.push(`${this.tonic}${o + 1}`);
+                    notes.push(`${store.state.tonic}${o + 1}`);
                     let pathString = '';
 
                     notes.forEach((n) => {
                         const no = Note.get(n);
 
-                        const pos = this.keyPositions.find(
+                        const pos = keyPositions.value.find(
                             (v) => Note.get(v[2]).height === no.height
                         );
 
@@ -129,109 +147,92 @@ export default {
             }
 
             return [];
-        },
+        });
 
+        const fill = (tonal) => {
+            let octave = +tonal.slice(1);
+            if (tonal[1] === '#') octave = +tonal.slice(2);
+            return store.state.showColors
+                ? colorsOctave[octave - 1]
+                : '#ced4da'; // gray-500
+        };
+
+        const resetSelected = () => {
+            userSelected.value = {};
+            modified.value = false;
+        };
+
+        watch(tonic, resetSelected);
+
+        watch(chordType, resetSelected);
+
+        const downloadImage = () => {
+            let filename = `bandoneon-${store.state.instrument}-${store.state.variant}`;
+            if (store.state.tonic) {
+                filename += '-' + store.state.tonic.replace('#', 's');
+                if (store.state.chordType) filename += store.state.chordType;
+                if (store.state.scaleType)
+                    filename += '-' + store.state.scaleType;
+            }
+            if (modified.value) {
+                filename += '-custom';
+            }
+            filename += '.png';
+
+            download(svg.value, filename);
+        };
+
+        expose({ modified, resetSelected, downloadImage });
+
+        return {
+            svg,
+            modified,
+            userSelected,
+            colorsScale,
+
+            format,
+            fill,
+            scalePaths,
+            keyPositions,
+
+            instrument,
+            chords,
+            tonic,
+            variant,
+            scaleType,
+            chordType,
+            downloadImage,
+        };
+    },
+
+    computed: {
         selected() {
             if (this.modified) return this.userSelected;
-
             const selected = {};
-
             if (this.tonic && this.chordType) {
                 const chord =
                     this.chords[this.variant][`${this.tonic}${this.chordType}`];
-
                 if (chord) {
                     for (let i = 0; i <= chord.length; i++) {
                         if (chord[i]) selected[chord[i]] = true;
                     }
                 }
             }
-
             return selected;
-        },
-
-        ...mapState([
-            'instrument',
-            'showEnharmonics',
-            'showColors',
-            'chords',
-            'tonic',
-            'variant',
-            'scaleType',
-            'chordType',
-            'pitchNotation',
-        ]),
-
-        ...mapGetters(['keyPositions']),
-    },
-
-    watch: {
-        tonic() {
-            this.userSelected = {};
-            this.modified = false;
-        },
-
-        chordType() {
-            this.userSelected = {};
-            this.modified = false;
         },
     },
 
     methods: {
-        format(tonal) {
-            const note = Note.get(
-                this.showEnharmonics ? Note.enharmonic(tonal) : tonal
-            );
-            if (note.empty) return '';
-
-            if (this.pitchNotation === 'scientific') {
-                return [note.pc.replace('b', '♭').replace('#', '♯'), note.oct];
-            }
-
-            return [helmholtz(note.name), ''];
-        },
-
-        fill(tonal) {
-            let octave = +tonal.slice(1);
-            if (tonal[1] === '#') octave = +tonal.slice(2);
-            return this.showColors ? this.colorsOctave[octave - 1] : '#ced4da'; // gray-500
-        },
-
         toggle(tonal) {
             if (!this.modified) {
                 this.userSelected = { ...this.selected };
                 this.modified = true;
             }
-
             if (this.userSelected[tonal]) {
                 delete this.userSelected[tonal];
             } else {
                 this.userSelected[tonal] = true;
             }
-        },
-
-        fetchSelected() {
-            return this.userSelected;
-        },
-
-        resetSelected() {
-            this.userSelected = {};
-            this.modified = false;
-        },
-
-        downloadImage() {
-            let filename = `bandoneon-${this.instrument}-${this.variant}`;
-            if (this.tonic) {
-                filename += '-' + this.tonic.replace('#', 's');
-                if (this.chordType) filename += this.chordType;
-                if (this.scaleType) filename += '-' + this.scaleType;
-            }
-            if (this.modified) {
-                filename += '-custom';
-            }
-            filename += '.png';
-
-            download(this.$refs.svg, filename);
         },
     },
 };
