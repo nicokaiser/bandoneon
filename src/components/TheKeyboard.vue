@@ -42,7 +42,7 @@
             <path
                 v-for="(path, index) in scalePaths"
                 :key="index"
-                :stroke="scaleColors[index % scaleColors.length]"
+                :stroke="colorsScale[index % colorsScale.length]"
                 :d="path"
                 stroke-linecap="round"
                 stroke-linejoin="round"
@@ -55,35 +55,44 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from 'vuex';
+import { ref } from 'vue';
+import { useStore, mapState, mapGetters } from 'vuex';
 import Note from '@tonaljs/note';
 import Scale from '@tonaljs/scale';
 import download from '@/helpers/download';
 import helmholtz from '@/helpers/helmholtz';
 
 export default {
-    data: () => ({
-        modified: false,
-        userSelected: {},
-        octaveColors: [
-            '#d7b171',
-            '#71a8d7',
-            '#e37e7b',
-            '#85ca85',
-            '#e6cb84',
-            '#71a8d7',
-        ],
-        scaleColors: [
-            'orange',
-            'blue',
-            'red',
-            'green',
-            'orange',
-            'blue',
-            'red',
-            'green',
-        ],
-    }),
+    setup() {
+        const modified = ref(false);
+        const userSelected = ref({});
+        const store = useStore();
+
+        return {
+            modified,
+            userSelected,
+
+            colorsOctave: [
+                '#d7b171',
+                '#71a8d7',
+                '#e37e7b',
+                '#85ca85',
+                '#e6cb84',
+                '#71a8d7',
+            ],
+
+            colorsScale: [
+                'orange',
+                'blue',
+                'red',
+                'green',
+                'orange',
+                'blue',
+                'red',
+                'green',
+            ],
+        };
+    },
 
     computed: {
         scalePaths() {
@@ -185,7 +194,7 @@ export default {
         fill(tonal) {
             let octave = +tonal.slice(1);
             if (tonal[1] === '#') octave = +tonal.slice(2);
-            return this.showColors ? this.octaveColors[octave - 1] : '#ced4da'; // gray-500
+            return this.showColors ? this.colorsOctave[octave - 1] : '#ced4da'; // gray-500
         },
 
         toggle(tonal) {
