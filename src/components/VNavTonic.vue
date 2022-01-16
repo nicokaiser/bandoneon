@@ -11,7 +11,7 @@
                 style="width: 3em"
                 @click.stop="toggleTonic(item)"
             >
-                {{ formatNote(item) }}
+                {{ format(item) }}
             </button>
         </span>
 
@@ -26,7 +26,7 @@
                 style="width: 3em"
                 @click.stop="toggleTonic(item)"
             >
-                {{ formatNote(item) }}
+                {{ format(item) }}
             </button>
         </span>
     </div>
@@ -43,19 +43,19 @@ const notes = computed(() => store.state.notes);
 
 const tonic = computed(() => store.state.tonic);
 
-const formatNote = (name) => {
-    if (!store.state.showEnharmonics) return name.replace('#', '♯');
-    if (name.length === 2 && name[1] === '#') {
-        return enharmonic(name).replace('b', '♭');
+const format = (noteName) => {
+    if (!store.state.showEnharmonics) {
+        return noteName.replace('#', '♯');
     }
-    return name;
+
+    if (noteName.length === 2 && noteName[1] === '#') {
+        return enharmonic(noteName).replace('b', '♭');
+    }
+
+    return noteName;
 };
 
 const toggleTonic = (value) => {
-    if (value === store.state.tonic) {
-        store.commit('setTonic', null);
-    } else {
-        store.commit('setTonic', value);
-    }
+    store.commit('setTonic', value === store.state.tonic ? null : value);
 };
 </script>

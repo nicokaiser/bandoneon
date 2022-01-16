@@ -42,6 +42,10 @@ export default createStore({
     }),
 
     getters: {
+        availableInstruments: (state) => Object.keys(state.instruments),
+
+        availablePitchNotations: () => ['helmholtz', 'scientific'],
+
         keyPositions(state) {
             if (!state.instrument || !state.variant) return [];
             const keys = state.instruments[state.instrument][state.variant];

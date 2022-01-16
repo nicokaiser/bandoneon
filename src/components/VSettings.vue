@@ -47,7 +47,7 @@
                     <select
                         id="floatingSelectLocale"
                         class="form-select"
-                        @change="setLocale($event)"
+                        @change="setLocale($event.target.value)"
                     >
                         <option
                             v-for="item in availableLocales"
@@ -80,25 +80,19 @@ import { useI18n } from 'vue-i18n';
 const store = useStore();
 
 const instrument = computed(() => store.state.instrument);
-
-const availableInstruments = computed(() => {
-    return Object.keys(store.state.instruments);
-});
-
+const availableInstruments = computed(() => store.getters.availableInstruments);
 const setInstrument = (value) => store.commit('setInstrument', value);
 
 const pitchNotation = computed(() => store.state.pitchNotation);
-
-const availablePitchNotations = ['helmholtz', 'scientific'];
-
-const setPitchNotation = (value) => {
-    store.commit('setPitchNotation', value);
-};
+const availablePitchNotations = computed(
+    () => store.getters.availablePitchNotations
+);
+const setPitchNotation = (value) => store.commit('setPitchNotation', value);
 
 const { locale, availableLocales } = useI18n({ useScope: 'global' });
 
-const setLocale = (event) => {
-    store.commit('setLocale', event.target.value);
-    locale.value = event.target.value;
+const setLocale = (value) => {
+    store.commit('setLocale', value);
+    locale.value = value;
 };
 </script>

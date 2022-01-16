@@ -5,28 +5,30 @@
                 <span
                     :class="[
                         'label text-end pe-2',
-                        !sideChecked ? 'fw-bold' : 'text-muted',
+                        side === 'left' ? 'fw-bold' : 'text-muted',
                     ]"
-                    @click.prevent="setSideChecked(!sideChecked)"
+                    @click.prevent="toggleSide"
                 >
                     {{ t('left') }}
                 </span>
 
                 <div class="form-check-inline form-switch mx-0">
                     <input
-                        :checked="sideChecked"
+                        :checked="side === 'right'"
                         class="form-check-input"
                         type="checkbox"
-                        @change="setSideChecked($event.target.checked)"
+                        @change="
+                            setSide($event.target.checked ? 'right' : 'left')
+                        "
                     />
                 </div>
 
                 <span
                     :class="[
                         'label text-start ps-2',
-                        sideChecked ? 'fw-bold' : 'text-muted',
+                        side === 'right' ? 'fw-bold' : 'text-muted',
                     ]"
-                    @click.prevent="setSideChecked(!sideChecked)"
+                    @click.prevent="toggleSide"
                 >
                     {{ t('right') }}
                 </span>
@@ -36,28 +38,32 @@
                 <span
                     :class="[
                         'label text-end pe-2',
-                        !directionChecked ? 'fw-bold' : 'text-muted',
+                        direction === 'close' ? 'fw-bold' : 'text-muted',
                     ]"
-                    @click.prevent="setDirectionChecked(!directionChecked)"
+                    @click.prevent="toggleDirection"
                 >
                     {{ t('close') }}
                 </span>
 
                 <div class="form-check-inline form-switch mx-0">
                     <input
-                        :checked="directionChecked"
+                        :checked="direction === 'open'"
                         class="form-check-input"
                         type="checkbox"
-                        @change="setDirectionChecked($event.target.checked)"
+                        @change="
+                            setDirection(
+                                $event.target.checked ? 'open' : 'close'
+                            )
+                        "
                     />
                 </div>
 
                 <span
                     :class="[
                         'label text-start ps-2',
-                        directionChecked ? 'fw-bold' : 'text-muted',
+                        direction === 'open' ? 'fw-bold' : 'text-muted',
                     ]"
-                    @click.prevent="setDirectionChecked(!directionChecked)"
+                    @click.prevent="toggleDirection"
                 >
                     {{ t('open') }}
                 </span>
@@ -74,26 +80,22 @@ import { useI18n } from 'vue-i18n';
 const store = useStore();
 const { t } = useI18n();
 
-const sideChecked = computed(() => {
-    return store.state.variant.split('-')[0] === 'right';
-});
+const side = computed(() => store.state.variant.split('-')[0]);
 
-const setSideChecked = (checked) => {
-    const variant = `${checked ? 'right' : 'left'}-${
-        store.state.variant.split('-')[1]
-    }`;
-    store.commit('setVariant', variant);
+const setSide = (value) => {
+    store.commit('setVariant', value + '-' + direction.value);
 };
 
-const directionChecked = computed(() => {
-    return store.state.variant.split('-')[1] === 'open';
-});
+const toggleSide = () => setSide(side.value === 'right' ? 'left' : 'right');
 
-const setDirectionChecked = (checked) => {
-    const variant = `${store.state.variant.split('-')[0]}-${
-        checked ? 'open' : 'close'
-    }`;
-    store.commit('setVariant', variant);
+const direction = computed(() => store.state.variant.split('-')[1]);
+
+const setDirection = (value) => {
+    store.commit('setVariant', side.value + '-' + value);
+};
+
+const toggleDirection = () => {
+    setDirection(direction.value === 'open' ? 'close' : 'open');
 };
 </script>
 
