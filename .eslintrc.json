@@ -4,7 +4,7 @@
       "plugin:vue/vue3-recommended",
       "plugin:prettier/recommended"
     ],
-    "rules": {
-      "vue/script-setup-uses-vars": "error"
+    "globals": {
+      "defineExpose": true
     }
 }

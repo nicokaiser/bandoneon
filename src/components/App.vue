@@ -132,7 +132,8 @@ const setChordType = (value) => store.setChordType(value);
 const showColors = computed(() => store.showColors);
 const toggleColors = () => (store.showColors = !store.showColors);
 const showEnharmonics = computed(() => store.showEnharmonics);
-const toggleEnharmonics = () => (store.showEnharmonics = !store.showEnharmonics);
+const toggleEnharmonics = () =>
+    (store.showEnharmonics = !store.showEnharmonics);
 </script>
 
 <style lang="scss">
