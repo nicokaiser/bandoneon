@@ -64,7 +64,7 @@ import helmholtz from '@/helpers/helmholtz';
 
 const svg = ref(null);
 
-const colorsOctave = [
+const COLORS_OCTAVE = [
     '#d7b171',
     '#71a8d7',
     '#e37e7b',
@@ -73,7 +73,7 @@ const colorsOctave = [
     '#71a8d7',
 ];
 
-const colorsScale = [
+const COLORS_SCALE = [
     'orange',
     'blue',
     'red',
@@ -102,10 +102,11 @@ const format = (tonal) => {
     return [helmholtz(note.name), ''];
 };
 
-const tonic = computed(() => store.state.tonic);
-const chordType = computed(() => store.state.chordType);
-
 const keyPositions = computed(() => store.getters.getKeyPositions);
+
+const getScaleColor = (octave) => {
+    return COLORS_SCALE[octave % COLORS_SCALE.length];
+};
 
 const scalePaths = computed(() => {
     if (store.state.tonic && store.state.scaleType) {
@@ -146,17 +147,8 @@ const scalePaths = computed(() => {
 const fill = (tonal) => {
     let octave = +tonal.slice(1);
     if (tonal[1] === '#') octave = +tonal.slice(2);
-    return store.state.showColors ? colorsOctave[octave - 1] : '#ced4da'; // gray-500
+    return store.state.showColors ? COLORS_OCTAVE[octave - 1] : '#ced4da'; // gray-500
 };
-
-const resetSelected = () => {
-    userSelected.value = {};
-    modified.value = false;
-};
-
-watch(tonic, resetSelected);
-
-watch(chordType, resetSelected);
 
 const downloadImage = () => {
     let filename = `bandoneon-${store.state.instrument}-${store.state.side}-${store.state.direction}`;
@@ -172,6 +164,15 @@ const downloadImage = () => {
 
     download(svg.value, filename);
 };
+
+const resetSelected = () => {
+    userSelected.value = {};
+    modified.value = false;
+};
+
+const tonic = computed(() => store.state.tonic);
+const chordType = computed(() => store.state.chordType);
+watch([tonic, chordType], resetSelected);
 
 const selectedNotes = computed(() =>
     Object.keys(userSelected.value).filter((item) => !!userSelected.value[item])
@@ -200,10 +201,6 @@ const toggle = (tonal) => {
     } else {
         userSelected.value[tonal] = true;
     }
-};
-
-const getScaleColor = (octave) => {
-    return colorsScale[octave % colorsScale.length];
 };
 
 defineExpose({ modified, resetSelected, downloadImage, selectedNotes });

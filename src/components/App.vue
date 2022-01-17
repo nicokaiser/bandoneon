@@ -52,7 +52,7 @@
                         ]"
                         @click.stop="toggleColors()"
                     >
-                        <BIconPaletteFill />
+                        <ColorsIcon />
                     </button>
 
                     <button
@@ -60,7 +60,7 @@
                         :title="t('saveImage')"
                         @click.stop="downloadImage()"
                     >
-                        <BIconDownload />
+                        <DownloadIcon />
                     </button>
 
                     <button
@@ -68,7 +68,7 @@
                         :title="t('saveVoicing')"
                         @click.stop="saveVoicing()"
                     >
-                        <BIconPinFill />
+                        <PinIcon />
                     </button>
 
                     <button
@@ -76,7 +76,7 @@
                         :title="t('resetVoicing')"
                         @click.stop="resetVoicings()"
                     >
-                        <BIconArrowCounterclockwise />
+                        <ResetIcon />
                     </button>
                 </div>
             </div>
@@ -89,10 +89,12 @@ import { computed, ref } from 'vue';
 import { useStore } from 'vuex';
 import { useI18n } from 'vue-i18n';
 import { useKeyboardNavigation } from '@/composables/keyboardNavigation';
-import BIconArrowCounterclockwise from '@/components/BIconArrowCounterclockwise.vue';
-import BIconDownload from '@/components/BIconDownload.vue';
-import BIconPaletteFill from '@/components/BIconPaletteFill.vue';
-import BIconPinFill from '@/components/BIconPinFill.vue';
+
+import ResetIcon from '@/components/icon/ResetIcon.vue';
+import DownloadIcon from '@/components/icon/DownloadIcon.vue';
+import ColorsIcon from '@/components/icon/ColorsIcon.vue';
+import PinIcon from '@/components/icon/PinIcon.vue';
+
 import TheKeyboard from '@/components/TheKeyboard.vue';
 import VNavVariant from '@/components/VNavVariant.vue';
 import VNavTonic from '@/components/VNavTonic.vue';
