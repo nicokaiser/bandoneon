@@ -34,17 +34,17 @@
 
 <script setup>
 import { computed } from 'vue';
-import { useStore } from 'vuex';
+import { useStore } from '@/stores/main';
 import { enharmonic } from '@tonaljs/note';
 
 const store = useStore();
 
-const notes = computed(() => store.getters.getAllNotes);
+const notes = computed(() => store.allNotes);
 
-const tonic = computed(() => store.state.tonic);
+const tonic = computed(() => store.tonic);
 
 const format = (noteName) => {
-    if (!store.state.showEnharmonics) {
+    if (!store.showEnharmonics) {
         return noteName.replace('#', '♯');
     }
 
@@ -56,6 +56,6 @@ const format = (noteName) => {
 };
 
 const toggleTonic = (value) => {
-    store.commit('setTonic', value === store.state.tonic ? null : value);
+    store.setTonic(value === store.tonic ? null : value);
 };
 </script>

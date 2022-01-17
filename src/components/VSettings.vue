@@ -74,27 +74,23 @@
 
 <script setup>
 import { computed } from 'vue';
-import { useStore } from 'vuex';
 import { useI18n } from 'vue-i18n';
+import { useStore } from '@/stores/main';
 
 const store = useStore();
 
-const instrument = computed(() => store.state.instrument);
-const availableInstruments = computed(
-    () => store.getters.getAvailableInstruments
-);
-const setInstrument = (value) => store.commit('setInstrument', value);
+const instrument = computed(() => store.instrument);
+const availableInstruments = computed(() => store.availableInstruments);
+const setInstrument = (value) => store.setInstrument(value);
 
-const pitchNotation = computed(() => store.state.pitchNotation);
-const availablePitchNotations = computed(
-    () => store.getters.getAvailablePitchNotations
-);
-const setPitchNotation = (value) => store.commit('setPitchNotation', value);
+const pitchNotation = computed(() => store.pitchNotation);
+const availablePitchNotations = computed(() => store.availablePitchNotations);
+const setPitchNotation = (value) => store.setPitchNotation(value);
 
 const { locale, availableLocales } = useI18n({ useScope: 'global' });
 
 const setLocale = (value) => {
-    store.commit('setLocale', value);
+    store.setLocale(value);
     locale.value = value;
 };
 </script>

@@ -74,20 +74,20 @@
 
 <script setup>
 import { computed } from 'vue';
-import { useStore } from 'vuex';
+import { useStore } from '@/stores/main';
 import { useI18n } from 'vue-i18n';
 
 const store = useStore();
 const { t } = useI18n();
 
-const side = computed(() => store.state.side);
-const setSide = (value) => store.commit('setSide', value);
+const side = computed(() => store.side);
+const setSide = (value) => (store.side = value);
 const toggleSide = () => {
     setSide(side.value === 'right' ? 'left' : 'right');
 };
 
-const direction = computed(() => store.state.direction);
-const setDirection = (value) => store.commit('setDirection', value);
+const direction = computed(() => store.direction);
+const setDirection = (value) => (store.direction = value);
 const toggleDirection = () => {
     setDirection(direction.value === 'open' ? 'close' : 'open');
 };

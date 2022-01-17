@@ -86,7 +86,7 @@
 
 <script setup>
 import { computed, ref } from 'vue';
-import { useStore } from 'vuex';
+import { useStore } from '@/stores/main';
 import { useI18n } from 'vue-i18n';
 import { useKeyboardNavigation } from '@/composables/keyboardNavigation';
 
@@ -104,33 +104,35 @@ useKeyboardNavigation();
 
 const keyboard = ref(null);
 const store = useStore();
-const { t } = useI18n();
+const { t, locale } = useI18n();
+
+locale.value = store.locale;
 
 const downloadImage = () => keyboard.value.downloadImage();
 const saveVoicing = () => {
     if (keyboard.value.modified) {
         const selectedNotes = keyboard.value.selectedNotes;
-        store.commit('saveUserChord', selectedNotes);
+        store.saveUserChord(selectedNotes);
     }
 };
 
 const resetVoicings = () => {
     keyboard.value.resetSelected();
-    store.commit('resetUserChords');
+    store.resetUserChords();
 };
 
-const scaleTypes = computed(() => store.getters.getAvailableScaleTypes);
-const scaleType = computed(() => store.state.scaleType);
-const setScaleType = (value) => store.commit('setScaleType', value);
+const scaleTypes = computed(() => store.availableScaleTypes);
+const scaleType = computed(() => store.scaleType);
+const setScaleType = (value) => store.setScaleType(value);
 
-const chordTypes = computed(() => store.getters.getAvailableChordTypes);
-const chordType = computed(() => store.state.chordType);
-const setChordType = (value) => store.commit('setChordType', value);
+const chordTypes = computed(() => store.availableChordTypes);
+const chordType = computed(() => store.chordType);
+const setChordType = (value) => store.setChordType(value);
 
-const showColors = computed(() => store.state.showColors);
-const toggleColors = () => store.commit('toggleColors');
-const showEnharmonics = computed(() => store.state.showEnharmonics);
-const toggleEnharmonics = () => store.commit('toggleEnharmonics');
+const showColors = computed(() => store.showColors);
+const toggleColors = () => (store.showColors = !store.showColors);
+const showEnharmonics = computed(() => store.showEnharmonics);
+const toggleEnharmonics = () => (store.showEnharmonics = !store.showEnharmonics);
 </script>
 
 <style lang="scss">

@@ -56,7 +56,7 @@
 
 <script setup>
 import { computed, ref, watch } from 'vue';
-import { useStore } from 'vuex';
+import { useStore } from '@/stores/main';
 import Note from '@tonaljs/note';
 import Scale from '@tonaljs/scale';
 import download from '@/helpers/download';
@@ -91,34 +91,34 @@ const userSelected = ref({});
 
 const format = (tonal) => {
     const note = Note.get(
-        store.state.showEnharmonics ? Note.enharmonic(tonal) : tonal
+        store.showEnharmonics ? Note.enharmonic(tonal) : tonal
     );
     if (note.empty) return '';
 
-    if (store.state.pitchNotation === 'scientific') {
+    if (store.pitchNotation === 'scientific') {
         return [note.pc.replace('b', '♭').replace('#', '♯'), note.oct];
     }
 
     return [helmholtz(note.name), ''];
 };
 
-const keyPositions = computed(() => store.getters.getKeyPositions);
+const keyPositions = computed(() => store.keyPositions);
 
 const getScaleColor = (octave) => {
     return COLORS_SCALE[octave % COLORS_SCALE.length];
 };
 
 const scalePaths = computed(() => {
-    if (store.state.tonic && store.state.scaleType) {
-        const { intervals, empty } = Scale.get(store.state.scaleType);
+    if (store.tonic && store.scaleType) {
+        const { intervals, empty } = Scale.get(store.scaleType);
         if (empty) return [];
         const paths = [];
 
         for (let o = -1; o < 7; o++) {
             const notes = intervals.map((i) =>
-                Note.transpose(`${store.state.tonic}${o}`, i)
+                Note.transpose(`${store.tonic}${o}`, i)
             );
-            notes.push(`${store.state.tonic}${o + 1}`);
+            notes.push(`${store.tonic}${o + 1}`);
             let pathString = '';
 
             notes.forEach((n) => {
@@ -147,15 +147,15 @@ const scalePaths = computed(() => {
 const fill = (tonal) => {
     let octave = +tonal.slice(1);
     if (tonal[1] === '#') octave = +tonal.slice(2);
-    return store.state.showColors ? COLORS_OCTAVE[octave - 1] : '#ced4da'; // gray-500
+    return store.showColors ? COLORS_OCTAVE[octave - 1] : '#ced4da'; // gray-500
 };
 
 const downloadImage = () => {
-    let filename = `bandoneon-${store.state.instrument}-${store.state.side}-${store.state.direction}`;
-    if (store.state.tonic) {
-        filename += '-' + store.state.tonic.replace('#', 's');
-        if (store.state.chordType) filename += store.state.chordType;
-        if (store.state.scaleType) filename += '-' + store.state.scaleType;
+    let filename = `bandoneon-${store.instrument}-${store.side}-${store.direction}`;
+    if (store.tonic) {
+        filename += '-' + store.tonic.replace('#', 's');
+        if (store.chordType) filename += store.chordType;
+        if (store.scaleType) filename += '-' + store.scaleType;
     }
     if (modified.value) {
         filename += '-custom';
@@ -170,8 +170,8 @@ const resetSelected = () => {
     modified.value = false;
 };
 
-const tonic = computed(() => store.state.tonic);
-const chordType = computed(() => store.state.chordType);
+const tonic = computed(() => store.tonic);
+const chordType = computed(() => store.chordType);
 watch([tonic, chordType], resetSelected);
 
 const selectedNotes = computed(() =>
@@ -182,7 +182,7 @@ const selected = computed(() => {
     if (modified.value) return userSelected.value;
 
     const result = {};
-    const chord = store.getters.getChord;
+    const chord = store.chordNotes;
     if (chord) {
         for (let i = 0; i <= chord.length; i++) {
             if (chord[i]) result[chord[i]] = true;

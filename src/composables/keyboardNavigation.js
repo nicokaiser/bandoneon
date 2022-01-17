@@ -1,12 +1,12 @@
 import { onMounted, onUnmounted } from 'vue';
-import { useStore } from 'vuex';
+import { useStore } from '@/stores/main';
 
 export function useKeyboardNavigation() {
     const store = useStore();
 
     function setSideAndDirection(side, direction) {
-        store.commit('setSide', side);
-        store.commit('setDirection', direction);
+        store.side = side;
+        store.direction = direction;
     }
 
     function listener({ key }) {
@@ -16,19 +16,19 @@ export function useKeyboardNavigation() {
         if (key === 'R') return setSideAndDirection('right', 'close');
 
         if (['c', 'd', 'e', 'f', 'g', 'a', 'b'].includes(key)) {
-            return store.commit('setTonic', key.toUpperCase());
+            return store.setTonic(key.toUpperCase());
         }
 
         if (key === '#') {
-            const tonic = store.state.tonic;
+            const tonic = store.tonic;
             if (tonic && tonic.length === 1) {
-                return store.commit('setTonic', tonic + '#');
+                return store.setTonic(tonic + '#');
             }
         }
 
-        if (key === 'M') return store.commit('setChordType', 'M');
-        if (key === 'm') return store.commit('setChordType', 'm');
-        if (key === '7') return store.commit('setChordType', '7');
+        if (key === 'M') return store.setChordType('M');
+        if (key === 'm') return store.setChordType('m');
+        if (key === '7') return store.setChordType('7');
     }
 
     onMounted(() => document.addEventListener('keydown', listener));
