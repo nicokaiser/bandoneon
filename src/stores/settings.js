@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import INSTRUMENTS from './instruments';
+import INSTRUMENTS from '@/constants/instruments';
 
 export const useSettingsStore = defineStore('settings', {
     state: () => ({

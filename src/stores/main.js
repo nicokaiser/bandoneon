@@ -1,8 +1,8 @@
 import { defineStore } from 'pinia';
 import { useSettingsStore } from './settings';
 
-import CHORDS from './chords.json';
-import INSTRUMENTS from './instruments';
+import CHORDS from '@/constants/chords.json';
+import INSTRUMENTS from '@/constants/instruments';
 
 const NOTES = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
 
