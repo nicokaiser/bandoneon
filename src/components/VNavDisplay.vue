@@ -58,7 +58,7 @@
             <button
                 class="btn btn-outline-secondary my-2"
                 :title="t('saveVoicing')"
-                @click.stop="saveVoicing()"
+                @click.stop="saveUserChord()"
             >
                 <PinIcon />
             </button>
@@ -66,7 +66,7 @@
             <button
                 class="btn btn-outline-secondary my-2"
                 :title="t('resetVoicing')"
-                @click.stop="resetVoicings()"
+                @click.stop="resetUserChord()"
             >
                 <ResetIcon />
             </button>
@@ -78,6 +78,7 @@
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useStore } from '@/stores/main';
+import { useSettingsStore } from '../stores/settings';
 import ResetIcon from '@/components/icon/ResetIcon.vue';
 import DownloadIcon from '@/components/icon/DownloadIcon.vue';
 import ColorsIcon from '@/components/icon/ColorsIcon.vue';
@@ -91,6 +92,8 @@ const props = defineProps({
 });
 
 const store = useStore();
+const settings = useSettingsStore();
+
 const { t } = useI18n();
 
 const scaleTypes = computed(() => store.availableScaleTypes);
@@ -108,15 +111,15 @@ const toggleEnharmonics = () =>
     (store.showEnharmonics = !store.showEnharmonics);
 
 const downloadImage = () => props.keyboardRef.downloadImage();
-const saveVoicing = () => {
+const saveUserChord = () => {
     if (props.keyboardRef.modified) {
         const selectedNotes = props.keyboardRef.selectedNotes;
-        store.saveUserChord(selectedNotes);
+        settings.saveUserChord(store.side, store.chordName, selectedNotes);
     }
 };
 
-const resetVoicings = () => {
+const resetUserChord = () => {
     props.keyboardRef.resetSelected();
-    store.resetUserChords();
+    settings.resetUserChord(store.side, store.chordName);
 };
 </script>

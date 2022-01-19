@@ -173,9 +173,10 @@ const resetSelected = () => {
     modified.value = false;
 };
 
+const side = computed(() => store.side);
 const tonic = computed(() => store.tonic);
 const chordType = computed(() => store.chordType);
-watch([tonic, chordType], resetSelected);
+watch([side, tonic, chordType], resetSelected);
 
 const selectedNotes = computed(() =>
     Object.keys(userSelected.value).filter((item) => !!userSelected.value[item])
@@ -185,6 +186,7 @@ const selected = computed(() => {
     if (modified.value) return userSelected.value;
 
     const result = {};
+
     const chord = store.chordNotes;
     if (chord) {
         for (let i = 0; i <= chord.length; i++) {

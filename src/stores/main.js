@@ -9,10 +9,6 @@ const NOTES = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
 export const useStore = defineStore('main', {
     state: () => ({
         showColors: false,
-        chords:
-            (window.localStorage.getItem('chords') &&
-                JSON.parse(window.localStorage.getItem('chords'))) ||
-            JSON.parse(JSON.stringify(CHORDS)),
         showEnharmonics: false,
         side: 'right',
         direction: 'open',
@@ -28,16 +24,27 @@ export const useStore = defineStore('main', {
 
         availableChordTypes: () => ['M', 'm', '7', 'dim', 'm7', 'M7'],
 
+        chordName(state) {
+            if (state.tonic && state.chordType) {
+                return `${this.tonic}${this.chordType}`;
+            }
+            return null;
+        },
+
         chordNotes(state) {
-            if (
-                state.side &&
-                state.direction &&
-                state.tonic &&
-                state.chordType
-            ) {
-                return state.chords[`${state.side}-${state.direction}`][
-                    state.tonic + state.chordType
-                ];
+            const settings = useSettingsStore();
+
+            if (state.side && state.direction && state.chordName) {
+                const variant = `${state.side}-${state.direction}`;
+
+                if (
+                    settings.userChords[state.side] &&
+                    settings.userChords[state.side][state.chordName]
+                ) {
+                    return settings.userChords[state.side][state.chordName];
+                }
+
+                return CHORDS[variant][state.chordName];
             }
             return [];
         },
@@ -107,27 +114,6 @@ export const useStore = defineStore('main', {
             if (this.scaleType) this.scaleType = null;
             if (!this.tonic) this.tonic = 'C';
             this.chordType = chordType;
-        },
-
-        saveUserChord(notes) {
-            if (!this.tonic || !this.chordType) return;
-
-            const chordName = `${this.tonic}${this.chordType}`;
-
-            if (this.side === 'left') {
-                this.chords['left-open'][chordName] = notes;
-                this.chords['left-close'][chordName] = notes;
-            } else {
-                this.chords['right-open'][chordName] = notes;
-                this.chords['right-close'][chordName] = notes;
-            }
-
-            window.localStorage.setItem('chords', JSON.stringify(this.chords));
-        },
-
-        resetUserChords() {
-            this.chords = JSON.parse(JSON.stringify(CHORDS));
-            window.localStorage.removeItem('chords');
         },
     },
 });
