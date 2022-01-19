@@ -57,6 +57,7 @@
 <script setup>
 import { computed, ref, watch } from 'vue';
 import { useStore } from '@/stores/main';
+import { useSettingsStore } from '@/stores/settings';
 import Note from '@tonaljs/note';
 import Scale from '@tonaljs/scale';
 import download from '@/helpers/download';
@@ -85,6 +86,7 @@ const COLORS_SCALE = [
 ];
 
 const store = useStore();
+const settings = useSettingsStore();
 
 const modified = ref(false);
 const userSelected = ref({});
@@ -95,11 +97,11 @@ const format = (tonal) => {
     );
     if (note.empty) return '';
 
-    if (store.pitchNotation === 'scientific') {
-        return [note.pc.replace('b', '♭').replace('#', '♯'), note.oct];
+    if (settings.pitchNotation === 'helmholtz') {
+        return [helmholtz(note.name), ''];
     }
 
-    return [helmholtz(note.name), ''];
+    return [note.pc.replace('b', '♭').replace('#', '♯'), note.oct];
 };
 
 const keyPositions = computed(() => store.keyPositions);
@@ -151,7 +153,7 @@ const fill = (tonal) => {
 };
 
 const downloadImage = () => {
-    let filename = `bandoneon-${store.instrument}-${store.side}-${store.direction}`;
+    let filename = `bandoneon-${settings.instrument}-${store.side}-${store.direction}`;
     if (store.tonic) {
         filename += '-' + store.tonic.replace('#', 's');
         if (store.chordType) filename += store.chordType;

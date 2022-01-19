@@ -11,8 +11,20 @@ const i18n = createI18n({
     fallbackLocale: 'en',
 });
 
+const pinia = createPinia();
+pinia.use(({ options, store }) => {
+    if (!options.persist) return;
+
+    const fromStorage = localStorage.getItem(store.$id);
+    if (fromStorage) store.$patch(JSON.parse(fromStorage));
+
+    store.$subscribe((mutation, state) => {
+        localStorage.setItem(store.$id, JSON.stringify(state));
+    });
+});
+
 const app = createApp(App);
-app.use(createPinia());
+app.use(pinia);
 app.use(router);
 app.use(i18n);
 app.mount('#app');

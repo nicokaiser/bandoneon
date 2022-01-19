@@ -1,4 +1,6 @@
 import { defineStore } from 'pinia';
+import { useSettingsStore } from './settings';
+
 import CHORDS from './chords.json';
 import INSTRUMENTS from './instruments';
 
@@ -6,34 +8,21 @@ const NOTES = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
 
 export const useStore = defineStore('main', {
     state: () => ({
-        locale:
-            window.localStorage.getItem('locale') ||
-            navigator.language?.split('-')[0] ||
-            'en',
         showColors: false,
         chords:
             (window.localStorage.getItem('chords') &&
                 JSON.parse(window.localStorage.getItem('chords'))) ||
             JSON.parse(JSON.stringify(CHORDS)),
         showEnharmonics: false,
-        instrument:
-            window.localStorage.getItem('instrument') || 'rheinische142',
-        pitchNotation:
-            window.localStorage.getItem('pitchNotation') || 'scientific',
         side: 'right',
         direction: 'open',
         tonic: null,
-        notes: NOTES,
         chordType: null,
         scaleType: null,
     }),
 
     getters: {
         allNotes: () => NOTES,
-
-        availableInstruments: () => Object.keys(INSTRUMENTS),
-
-        availablePitchNotations: () => ['helmholtz', 'scientific'],
 
         availableScaleTypes: () => ['major', 'minor', 'chromatic'],
 
@@ -54,9 +43,11 @@ export const useStore = defineStore('main', {
         },
 
         keyPositions(state) {
-            if (!state.instrument) return [];
+            const settings = useSettingsStore();
+
+            if (!settings.instrument) return [];
             const keys =
-                INSTRUMENTS[state.instrument][
+                INSTRUMENTS[settings.instrument][
                     state.side + '-' + state.direction
                 ];
             if (!keys) return [];
@@ -93,23 +84,6 @@ export const useStore = defineStore('main', {
     },
 
     actions: {
-        setLocale(locale) {
-            window.localStorage.setItem('locale', locale);
-            this.locale = locale;
-        },
-
-        setInstrument(instrument) {
-            if (instrument in INSTRUMENTS) {
-                this.instrument = instrument;
-                window.localStorage.setItem('instrument', instrument);
-            }
-        },
-
-        setPitchNotation(pitchNotation) {
-            this.pitchNotation = pitchNotation;
-            window.localStorage.setItem('pitchNotation', pitchNotation);
-        },
-
         setTonic(tonic) {
             if (!tonic) {
                 this.tonic = null;

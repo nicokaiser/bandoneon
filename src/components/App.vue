@@ -99,14 +99,16 @@ import TheKeyboard from '@/components/TheKeyboard.vue';
 import VNavVariant from '@/components/VNavVariant.vue';
 import VNavTonic from '@/components/VNavTonic.vue';
 import TheHeader from '@/components/TheHeader.vue';
+import { useSettingsStore } from '../stores/settings';
 
 useKeyboardNavigation();
 
 const keyboard = ref(null);
 const store = useStore();
+const settings = useSettingsStore();
 const { t, locale } = useI18n();
 
-locale.value = store.locale;
+locale.value = settings.locale;
 
 const downloadImage = () => keyboard.value.downloadImage();
 const saveVoicing = () => {
