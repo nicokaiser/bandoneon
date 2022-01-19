@@ -35,8 +35,6 @@ export const useStore = defineStore('main', {
             const settings = useSettingsStore();
 
             if (state.side && state.direction && state.chordName) {
-                const variant = `${state.side}-${state.direction}`;
-
                 if (
                     settings.userChords[state.side] &&
                     settings.userChords[state.side][state.chordName]
@@ -44,9 +42,24 @@ export const useStore = defineStore('main', {
                     return settings.userChords[state.side][state.chordName];
                 }
 
-                return CHORDS[variant][state.chordName];
+                return CHORDS[`${state.side}-${state.direction}`][
+                    state.chordName
+                ];
             }
             return [];
+        },
+
+        isUserChord(state) {
+            const settings = useSettingsStore();
+
+            if (state.side && state.direction && state.chordName) {
+                if (
+                    settings.userChords[state.side] &&
+                    settings.userChords[state.side][state.chordName]
+                )
+                    return true;
+            }
+            return false;
         },
 
         keyPositions(state) {
@@ -96,7 +109,7 @@ export const useStore = defineStore('main', {
                 this.tonic = null;
                 this.chordType = null;
                 this.scaleType = null;
-            } else if (NOTES.includes(tonic)) {
+            } else {
                 this.tonic = tonic;
                 if (!this.scaleType && !this.chordType) {
                     this.chordType = 'M';

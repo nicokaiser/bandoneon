@@ -58,6 +58,7 @@
             <button
                 class="btn btn-outline-secondary my-2"
                 :title="t('saveVoicing')"
+                :disabled="!isModified"
                 @click.stop="saveUserChord()"
             >
                 <PinIcon />
@@ -66,6 +67,7 @@
             <button
                 class="btn btn-outline-secondary my-2"
                 :title="t('resetVoicing')"
+                :disabled="!isUserChord"
                 @click.stop="resetUserChord()"
             >
                 <ResetIcon />
@@ -111,11 +113,14 @@ const toggleEnharmonics = () =>
     (store.showEnharmonics = !store.showEnharmonics);
 
 const downloadImage = () => props.keyboardRef.downloadImage();
+const isModified = computed(() => props.keyboardRef?.modified);
+const isUserChord = computed(() => store.isUserChord);
 const saveUserChord = () => {
     if (props.keyboardRef.modified) {
         const selectedNotes = props.keyboardRef.selectedNotes;
         settings.saveUserChord(store.side, store.chordName, selectedNotes);
     }
+    props.keyboardRef.resetSelected();
 };
 
 const resetUserChord = () => {
