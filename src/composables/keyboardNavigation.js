@@ -5,8 +5,7 @@ export function useKeyboardNavigation() {
     const store = useStore();
 
     function setSideAndDirection(side, direction) {
-        store.side = side;
-        store.direction = direction;
+        store.$patch({ side, direction });
     }
 
     function listener({ key }) {
