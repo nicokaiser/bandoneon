@@ -150,10 +150,4 @@ $nav-link-transition: none;
 .container {
     max-width: 750px;
 }
-
-.navbar-toggler {
-    border: 0;
-    padding: 0;
-    margin: 0.25em 0;
-}
 </style>

@@ -12,14 +12,14 @@
                 <button
                     class="navbar-toggler"
                     type="button"
-                    @click.stop="toggleSettings"
+                    @click.prevent="toggle"
                 >
                     <span class="navbar-toggler-icon"></span>
                 </button>
             </div>
         </nav>
 
-        <VCollapse ref="settingsCollapse">
+        <VCollapse ref="collapse">
             <VSettings />
         </VCollapse>
     </div>
@@ -30,7 +30,14 @@ import { ref } from 'vue';
 import VCollapse from '@/components/VCollapse.vue';
 import VSettings from '@/components/VSettings.vue';
 
-const settingsCollapse = ref(null);
-
-const toggleSettings = () => settingsCollapse.value.toggle();
+const collapse = ref(null);
+const toggle = () => collapse.value.toggle();
 </script>
+
+<style scoped>
+.navbar-toggler {
+    border: 0;
+    padding: 0;
+    margin: 0.25em 0;
+}
+</style>
