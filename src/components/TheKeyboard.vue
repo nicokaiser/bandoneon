@@ -2,6 +2,7 @@
     <div class="my-4">
         <svg
             ref="svg"
+            class="keyboard"
             version="1.1"
             xmlns="http://www.w3.org/2000/svg"
             xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -209,13 +210,13 @@ defineExpose({ modified, resetSelected, downloadImage, selectedNotes });
 </script>
 
 <style scoped>
-svg {
+svg.keyboard {
     width: 100%;
     height: calc(100% / 720 * 428);
     max-height: calc(90vh - 5em);
 }
 
-svg text {
+svg.keyboard text {
     user-select: none;
     cursor: default;
 }

@@ -5,6 +5,7 @@
       "plugin:prettier/recommended"
     ],
     "globals": {
-      "defineExpose": true
+      "defineExpose": true,
+      "defineProps": true
     }
 }
