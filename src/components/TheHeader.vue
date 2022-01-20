@@ -11,11 +11,7 @@
                 </span>
             </router-link>
 
-            <button
-                class="navbar-toggler"
-                type="button"
-                @click.prevent="toggle"
-            >
+            <button class="navbar-toggler" type="button" @click="toggle">
                 <span class="navbar-toggler-icon"></span>
             </button>
         </div>

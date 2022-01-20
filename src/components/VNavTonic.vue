@@ -9,7 +9,7 @@
                     item === tonic ? 'active' : null,
                 ]"
                 style="width: 3em"
-                @click.stop="toggleTonic(item)"
+                @click="toggleTonic(item)"
             >
                 {{ format(item) }}
             </button>
@@ -24,7 +24,7 @@
                     item === tonic ? 'active' : null,
                 ]"
                 style="width: 3em"
-                @click.stop="toggleTonic(item)"
+                @click="toggleTonic(item)"
             >
                 {{ format(item) }}
             </button>

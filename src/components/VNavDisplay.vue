@@ -8,7 +8,7 @@
                     'btn btn-outline-secondary my-2',
                     item === scaleType ? 'active' : null,
                 ]"
-                @click.stop="setScaleType(item)"
+                @click="setScaleType(item)"
             >
                 {{ t(item) }}
             </button>
@@ -22,7 +22,7 @@
                     'btn btn-outline-secondary my-2',
                     item === chordType ? 'active' : null,
                 ]"
-                @click.stop="setChordType(item)"
+                @click="setChordType(item)"
             >
                 {{ item }}
             </button>
@@ -32,7 +32,7 @@
             <button
                 class="btn btn-outline-secondary my-2"
                 style="width: 2em"
-                @click.stop="toggleEnharmonics()"
+                @click="toggleEnharmonics()"
             >
                 {{ showEnharmonics ? '♯' : '♭' }}
             </button>
@@ -42,7 +42,7 @@
                     'btn btn-outline-secondary my-2',
                     showColors ? 'active' : null,
                 ]"
-                @click.stop="toggleColors()"
+                @click="toggleColors()"
             >
                 <ColorsIcon />
             </button>
@@ -50,7 +50,7 @@
             <button
                 class="btn btn-outline-secondary my-2"
                 :title="t('saveImage')"
-                @click.stop="downloadImage()"
+                @click="downloadImage()"
             >
                 <DownloadIcon />
             </button>
@@ -59,7 +59,7 @@
                 class="btn btn-outline-secondary my-2"
                 :title="t('saveVoicing')"
                 :disabled="!isModified"
-                @click.stop="saveUserChord()"
+                @click="saveUserChord()"
             >
                 <PinIcon />
             </button>
@@ -68,7 +68,7 @@
                 class="btn btn-outline-secondary my-2"
                 :title="t('resetVoicing')"
                 :disabled="!isUserChord"
-                @click.stop="resetUserChord()"
+                @click="resetUserChord()"
             >
                 <ResetIcon />
             </button>
