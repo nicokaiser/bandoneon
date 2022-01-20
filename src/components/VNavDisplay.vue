@@ -58,7 +58,7 @@
             <button
                 class="btn btn-outline-secondary my-2"
                 :title="t('saveVoicing')"
-                :disabled="!isModified"
+                :disabled="!isModified || !chordType"
                 @click="saveUserChord()"
             >
                 <PinIcon />
