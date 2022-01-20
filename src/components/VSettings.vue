@@ -36,7 +36,7 @@
                         />
                     </select>
                     <label
-                        v-t="'pitchNotation'"
+                        v-t="'pitch_notation'"
                         for="floatingSelectPitchNotation"
                     />
                 </div>

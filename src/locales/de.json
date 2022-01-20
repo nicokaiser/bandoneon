@@ -7,17 +7,17 @@
     "minor": "Moll",
     "chromatic": "chrom.",
     "colors": "Farben",
-    "saveImage": "Bild speichern",
+    "save_image": "Bild speichern",
     "einheitsbandonion144": "144 Töne, Einheitsbandonion",
     "rheinische142": "142 Töne, Rheinische Tonlage",
     "rheinische152": "152 Töne, Rheinische Tonlage",
     "peguri146": "146 Töne, Peguri (chromatisch)",
     "manouri148": "148 Töne, Manouri (chromatisch)",
-    "pitchNotation": "Tonsymbole",
+    "pitch_notation": "Tonsymbole",
     "helmholtz": "Helmholtz-Tonsymbole (c♯’’)",
     "scientific": "Wissenschaftliche Tonsymbole (C♯5)",
-    "saveVoicing": "Voicing speichern",
-    "resetVoicing": "Voicing zurücksetzen",
+    "save_voicing": "Voicing speichern",
+    "reset_voicing": "Voicing zurücksetzen",
     "language": "Sprache",
     "language-de": "Deutsch",
     "language-en": "English",
@@ -27,5 +27,5 @@
     "difficulty-easy": "einfach (nur Töne)",
     "difficulty-medium": "mittel (Töne und Oktav)",
     "correct": "richtig",
-    "tryAgain": "Nochmal versuchen"
+    "try_again": "Nochmal versuchen"
 }

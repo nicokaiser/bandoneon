@@ -49,7 +49,7 @@
 
             <button
                 class="btn btn-outline-secondary my-2"
-                :title="t('saveImage')"
+                :title="t('save_image')"
                 @click="downloadImage()"
             >
                 <DownloadIcon />
@@ -57,7 +57,7 @@
 
             <button
                 class="btn btn-outline-secondary my-2"
-                :title="t('saveVoicing')"
+                :title="t('save_voicing')"
                 :disabled="!isModified || !chordType"
                 @click="saveUserChord()"
             >
@@ -66,7 +66,7 @@
 
             <button
                 class="btn btn-outline-secondary my-2"
-                :title="t('resetVoicing')"
+                :title="t('reset_voicing')"
                 :disabled="!isUserChord"
                 @click="resetUserChord()"
             >

@@ -100,7 +100,7 @@
                     newGame();
                 "
             >
-                {{ t('tryAgain') }}
+                {{ t('try_again') }}
             </button>
         </div>
     </VModal>
