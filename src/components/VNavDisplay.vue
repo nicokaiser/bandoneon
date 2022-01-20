@@ -80,22 +80,18 @@
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useStore } from '@/stores/main';
-import { useSettingsStore } from '../stores/settings';
 import ResetIcon from '@/components/icon/ResetIcon.vue';
 import DownloadIcon from '@/components/icon/DownloadIcon.vue';
 import ColorsIcon from '@/components/icon/ColorsIcon.vue';
 import PinIcon from '@/components/icon/PinIcon.vue';
 
 const props = defineProps({
-    keyboardRef: {
-        type: Object,
-        default: null,
-    },
+    modified: Boolean,
 });
 
-const store = useStore();
-const settings = useSettingsStore();
+const emit = defineEmits(['download', 'save', 'reset']);
 
+const store = useStore();
 const { t } = useI18n();
 
 const scaleTypes = computed(() => store.availableScaleTypes);
@@ -112,19 +108,9 @@ const showEnharmonics = computed(() => store.showEnharmonics);
 const toggleEnharmonics = () =>
     (store.showEnharmonics = !store.showEnharmonics);
 
-const downloadImage = () => props.keyboardRef.downloadImage();
-const isModified = computed(() => props.keyboardRef?.modified);
+const downloadImage = () => emit('download');
+const isModified = computed(() => props.modified);
 const isUserChord = computed(() => store.isUserChord);
-const saveUserChord = () => {
-    if (props.keyboardRef.modified) {
-        const selectedNotes = props.keyboardRef.selectedNotes;
-        settings.saveUserChord(store.side, store.chordName, selectedNotes);
-    }
-    props.keyboardRef.resetSelected();
-};
-
-const resetUserChord = () => {
-    props.keyboardRef.resetSelected();
-    settings.resetUserChord(store.side, store.chordName);
-};
+const saveUserChord = () => emit('save');
+const resetUserChord = () => emit('reset');
 </script>

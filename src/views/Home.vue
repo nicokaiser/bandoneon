@@ -1,62 +1,74 @@
 <template>
-    <div class="my-4">
-        <svg
-            ref="svg"
-            class="keyboard"
-            version="1.1"
-            xmlns="http://www.w3.org/2000/svg"
-            xmlns:xlink="http://www.w3.org/1999/xlink"
-            viewBox="0 0 690 410"
-            width="720"
-            height="428"
-        >
-            <g
-                v-for="([x, y, tonal], idx) in keyPositions"
-                :key="idx"
-                @click="toggle(tonal)"
+    <div class="container px-3 my-4">
+        <div class="my-4">
+            <svg
+                ref="svg"
+                class="keyboard"
+                viewBox="0 0 690 410"
+                width="720"
+                height="428"
             >
-                <circle
-                    :cx="x + 29"
-                    :cy="y + 29"
-                    r="28"
-                    :fill="fill(tonal)"
-                    :stroke="selected[tonal] ? '#495057' : '#adb5bd'"
-                    :stroke-width="selected[tonal] ? 2 : 1"
-                    :fill-opacity="selected[tonal] ? 1 : 0.25"
-                />
-
-                <text
-                    :x="x + 29"
-                    :y="y + 36"
-                    fill="#212529"
-                    font-family="-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif"
-                    font-size="20px"
-                    text-anchor="middle"
+                <g
+                    v-for="([x, y, tonal], idx) in keyPositions"
+                    :key="idx"
+                    @click="toggle(tonal)"
                 >
-                    <tspan>{{ format(tonal)[0] }}</tspan>
-                    <tspan dx="2" font-size="16px">
-                        {{ format(tonal)[1] }}
-                    </tspan>
-                </text>
-            </g>
+                    <circle
+                        :cx="x + 29"
+                        :cy="y + 29"
+                        r="28"
+                        :fill="fill(tonal)"
+                        :stroke="selected[tonal] ? '#343a40' : '#adb5bd'"
+                        :stroke-width="selected[tonal] ? 2 : 1"
+                        :fill-opacity="selected[tonal] ? 0.7 : 0.2"
+                    />
 
-            <path
-                v-for="(path, index) in scalePaths"
-                :key="index"
-                :stroke="getScaleColor(index)"
-                :d="path"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-opacity="0.66"
-                stroke-width="3px"
-                fill="none"
-            />
-        </svg>
+                    <text
+                        :x="x + 29"
+                        :y="y + 36"
+                        fill="#212529"
+                        font-family="-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif"
+                        font-size="20px"
+                        text-anchor="middle"
+                    >
+                        <tspan>{{ format(tonal)[0] }}</tspan>
+                        <tspan dx="2" font-size="16px">
+                            {{ format(tonal)[1] }}
+                        </tspan>
+                    </text>
+                </g>
+
+                <path
+                    v-for="(path, index) in scalePaths"
+                    :key="index"
+                    :stroke="getScaleColor(index)"
+                    :d="path"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-opacity="0.7"
+                    stroke-width="3px"
+                    fill="none"
+                />
+            </svg>
+        </div>
+
+        <VNavVariant />
+        <VNavTonic />
+        <VNavDisplay
+            :modified="modified"
+            @reset="resetUserChord()"
+            @download="downloadImage()"
+            @save="saveUserChord()"
+        />
     </div>
 </template>
 
 <script setup>
 import { computed, ref, watch } from 'vue';
+import { useKeyboardNavigation } from '@/composables/useKeyboardNavigation';
+import VNavVariant from '@/components/VNavVariant.vue';
+import VNavTonic from '@/components/VNavTonic.vue';
+import VNavDisplay from '@/components/VNavDisplay.vue';
 import { useStore } from '@/stores/main';
 import { useSettingsStore } from '@/stores/settings';
 import Note from '@tonaljs/note';
@@ -64,26 +76,22 @@ import Scale from '@tonaljs/scale';
 import download from '@/helpers/download';
 import helmholtz from '@/helpers/helmholtz';
 
+useKeyboardNavigation();
+
 const svg = ref(null);
 
 const COLORS_OCTAVE = [
-    '#d7b171',
-    '#71a8d7',
-    '#e37e7b',
-    '#85ca85',
-    '#e6cb84',
-    '#71a8d7',
+    '#198754', // green
+    '#ffc107', // yellow
+    '#0dcaf0', // cyan
+    '#dc3545', // red
 ];
 
 const COLORS_SCALE = [
-    'orange',
-    'blue',
-    'red',
-    'green',
-    'orange',
-    'blue',
-    'red',
-    'green',
+    '#ffc107', // yellow
+    '#0d6efd', // blue
+    '#dc3545', // red
+    '#198754', // green
 ];
 
 const store = useStore();
@@ -150,7 +158,9 @@ const scalePaths = computed(() => {
 const fill = (tonal) => {
     let octave = +tonal.slice(1);
     if (tonal[1] === '#') octave = +tonal.slice(2);
-    return store.showColors ? COLORS_OCTAVE[octave - 1] : '#ced4da'; // gray-500
+    return store.showColors
+        ? COLORS_OCTAVE[octave % COLORS_OCTAVE.length]
+        : '#adb5bd'; // gray-500
 };
 
 const downloadImage = () => {
@@ -178,10 +188,6 @@ const tonic = computed(() => store.tonic);
 const chordType = computed(() => store.chordType);
 watch([side, tonic, chordType], resetSelected);
 
-const selectedNotes = computed(() =>
-    Object.keys(userSelected.value).filter((item) => !!userSelected.value[item])
-);
-
 const selected = computed(() => {
     if (modified.value) return userSelected.value;
 
@@ -208,7 +214,23 @@ const toggle = (tonal) => {
     }
 };
 
-defineExpose({ modified, resetSelected, downloadImage, selectedNotes });
+const saveUserChord = () => {
+    if (modified.value) {
+        settings.saveUserChord(
+            store.side,
+            store.chordName,
+            Object.keys(userSelected.value).filter(
+                (item) => !!userSelected.value[item]
+            )
+        );
+    }
+    resetSelected();
+};
+
+const resetUserChord = () => {
+    resetSelected();
+    settings.resetUserChord(store.side, store.chordName);
+};
 </script>
 
 <style scoped>

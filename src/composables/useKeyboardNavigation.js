@@ -28,6 +28,8 @@ export function useKeyboardNavigation() {
         if (key === 'M') return store.setChordType('M');
         if (key === 'm') return store.setChordType('m');
         if (key === '7') return store.setChordType('7');
+
+        if (key === 'Escape') return store.setTonic(null);
     }
 
     onMounted(() => document.addEventListener('keydown', listener));
