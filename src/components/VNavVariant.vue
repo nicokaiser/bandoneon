@@ -17,6 +17,7 @@
                         :checked="side === 'right'"
                         class="form-check-input"
                         type="checkbox"
+                        :disabled="readonly"
                         @change="
                             setSide($event.target.checked ? 'right' : 'left')
                         "
@@ -50,6 +51,7 @@
                         :checked="direction === 'open'"
                         class="form-check-input"
                         type="checkbox"
+                        :disabled="readonly"
                         @change="
                             setDirection(
                                 $event.target.checked ? 'open' : 'close'
@@ -77,17 +79,25 @@ import { computed } from 'vue';
 import { useStore } from '@/stores/main';
 import { useI18n } from 'vue-i18n';
 
+const props = defineProps({
+    readonly: Boolean,
+});
+
 const store = useStore();
 const { t } = useI18n();
 
 const side = computed(() => store.side);
-const setSide = (value) => (store.side = value);
+const setSide = (value) => {
+    if (!props.readonly) store.side = value;
+};
 const toggleSide = () => {
     setSide(side.value === 'right' ? 'left' : 'right');
 };
 
 const direction = computed(() => store.direction);
-const setDirection = (value) => (store.direction = value);
+const setDirection = (value) => {
+    if (!props.readonly) store.direction = value;
+};
 const toggleDirection = () => {
     setDirection(direction.value === 'open' ? 'close' : 'open');
 };

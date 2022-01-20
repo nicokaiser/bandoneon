@@ -22,5 +22,10 @@
     "language-de": "Deutsch",
     "language-en": "English",
     "language-es": "Español",
-    "keyboard": "Keyboard"
+    "keyboard": "Keyboard",
+    "difficulty": "Difficulty",
+    "difficulty-masy": "easy (only notes)",
+    "difficulty-medium": "medium (notes and octaves)",
+    "correct": "correct",
+    "tryAgain": "Try again"
 }

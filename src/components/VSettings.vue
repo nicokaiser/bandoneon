@@ -61,6 +61,25 @@
                 </div>
             </div>
 
+            <div v-if="route.name === 'game'" class="my-3">
+                <div class="form-floating">
+                    <select
+                        id="floatingSelectDifficulty"
+                        class="form-select"
+                        @change="setDifficulty($event.target.value)"
+                    >
+                        <option
+                            v-for="item in ['easy', 'medium']"
+                            :key="item"
+                            v-t="'difficulty-' + item"
+                            :selected="difficulty === item"
+                            :value="item"
+                        />
+                    </select>
+                    <label v-t="'difficulty'" for="floatingSelectDifficulty" />
+                </div>
+            </div>
+
             <p class="mb-0 text-end text-muted small">
                 <a
                     href="mailto:nico@kaiser.me?subject=Bandoneon.app%20Feedback"
@@ -76,6 +95,7 @@
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useSettingsStore } from '@/stores/settings';
+import { useRoute } from 'vue-router';
 
 const settings = useSettingsStore();
 
@@ -95,4 +115,9 @@ const setLocale = (value) => {
     settings.locale = value;
     locale.value = value;
 };
+
+const difficulty = computed(() => settings.difficulty);
+const setDifficulty = (value) => (settings.difficulty = value);
+
+const route = useRoute();
 </script>

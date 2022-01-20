@@ -22,5 +22,10 @@
     "language-de": "Deutsch",
     "language-en": "English",
     "language-es": "Español",
-    "keyboard": "Tastatur"
+    "keyboard": "Tastatur",
+    "difficulty": "Schwierigkeitsgrad",
+    "difficulty-easy": "einfach (nur Töne)",
+    "difficulty-medium": "mittel (Töne und Oktav)",
+    "correct": "richtig",
+    "tryAgain": "Nochmal versuchen"
 }

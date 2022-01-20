@@ -7,6 +7,7 @@ export const useSettingsStore = defineStore('settings', {
         locale: navigator.language?.split('-')[0] || 'en',
         pitchNotation: 'scientific',
         userChords: {},
+        difficulty: 'medium',
     }),
 
     getters: {

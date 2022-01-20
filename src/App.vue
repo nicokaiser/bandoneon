@@ -1,6 +1,7 @@
 <template>
-    <div id="app">
-        <TheHeader />
+    <TheHeader />
+
+    <div class="container px-3 my-4">
         <router-view />
     </div>
 </template>
