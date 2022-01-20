@@ -60,7 +60,7 @@
                 oct === octave ? 'active' : null,
             ]"
             style="width: 3.2em"
-            @click.stop="setOctave(octave)"
+            @click="toggleOctave(octave)"
         >
             {{ formatOctave(octave) }}
         </button>
@@ -97,7 +97,7 @@
                 class="btn btn-primary"
                 @click="
                     $refs.modal.hide();
-                    initialize();
+                    newGame();
                 "
             >
                 {{ t('tryAgain') }}
@@ -192,14 +192,11 @@ const octaves = computed(() => {
 
 const tonic = computed(() => store.tonic);
 
-const setOctave = (value) => {
+const toggleOctave = (value) => {
     oct.value = oct.value === value ? null : value;
 };
 
-function initialize() {
-    store.side = Math.random() < 0.5 ? 'right' : 'left';
-    store.direction = Math.random() < 0.5 ? 'open' : 'close';
-
+function resetGame() {
     currentPosition.value = 0;
     oct.value = null;
     guessed.value = [];
@@ -211,14 +208,17 @@ function initialize() {
     positions.value = array;
 }
 
-onMounted(() => initialize());
+function newGame() {
+    store.$patch({
+        side: Math.random() < 0.5 ? 'right' : 'left',
+        direction: Math.random() < 0.5 ? 'open' : 'close',
+    });
 
-watch(keyPositions, () => initialize());
+    resetGame();
+}
 
-watch(positions, () => {
-    currentPosition.value = 0;
-    guessed.value = [];
-});
+onMounted(() => newGame());
+watch(keyPositions, () => resetGame());
 
 function check() {
     if (positions.value.length <= currentPosition.value) return;
