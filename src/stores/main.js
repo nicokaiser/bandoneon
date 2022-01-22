@@ -26,7 +26,7 @@ export const useStore = defineStore('main', {
 
         chordName(state) {
             if (state.tonic && state.chordType) {
-                return `${this.tonic}${this.chordType}`;
+                return `${state.tonic}${state.chordType}`;
             }
             return null;
         },

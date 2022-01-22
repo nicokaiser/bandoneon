@@ -13,6 +13,8 @@ export default function download(svgElement, filename) {
 
     img.onload = () => {
         const ctx = canvas.getContext('2d');
+        if (!ctx) return;
+
         ctx.fillStyle = 'white';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         ctx.drawImage(
@@ -28,7 +30,7 @@ export default function download(svgElement, filename) {
             .replace('image/png', 'octet/stream');
         let a = document.createElement('a');
         document.body.appendChild(a);
-        a.style = 'display: none';
+        a.style.display = 'none';
         a.href = uri;
         a.download = filename;
         a.click();

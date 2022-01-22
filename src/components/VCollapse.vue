@@ -6,7 +6,7 @@
 
 <script setup>
 import { onMounted, onUnmounted, ref } from 'vue';
-import Collapse from 'bootstrap/js/src/collapse';
+import { Collapse } from 'bootstrap';
 
 const collapse = ref(null);
 let bsCollapse;
