@@ -80,13 +80,22 @@
                 </div>
             </div>
 
-            <p class="mb-0 text-end text-muted small">
+            <div class="mb-0 d-flex justify-content-between text-muted small">
+                <div>
+                    <router-link
+                        v-if="route.name !== 'game'"
+                        :to="{ name: 'game' }"
+                        class="link-secondary me-1"
+                    >
+                        Play a game!
+                    </router-link>
+                </div>
                 <a
                     href="mailto:nico@kaiser.me?subject=Bandoneon.app%20Feedback"
                     class="link-secondary"
                     >Feedback</a
                 >
-            </p>
+            </div>
         </div>
     </div>
 </template>
