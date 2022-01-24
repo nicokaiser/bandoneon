@@ -49,9 +49,9 @@
         />
     </svg>
 
-    <VNavVariant />
-    <VNavTonic />
-    <VNavDisplay
+    <NavVariant />
+    <NavTonic />
+    <NavDisplay
         :modified="modified"
         @reset="resetUserChord()"
         @download="downloadImage()"
@@ -62,9 +62,9 @@
 <script setup>
 import { computed, ref, watch } from 'vue';
 import { useKeyboardNavigation } from '@/composables/useKeyboardNavigation';
-import VNavVariant from '@/components/VNavVariant.vue';
-import VNavTonic from '@/components/VNavTonic.vue';
-import VNavDisplay from '@/components/VNavDisplay.vue';
+import NavVariant from '@/components/NavVariant.vue';
+import NavTonic from '@/components/NavTonic.vue';
+import NavDisplay from '@/components/NavDisplay.vue';
 import { useStore } from '@/stores/main';
 import { useSettingsStore } from '@/stores/settings';
 import Note from '@tonaljs/note';

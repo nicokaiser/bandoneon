@@ -47,8 +47,8 @@
         </g>
     </svg>
 
-    <VNavVariant :readonly="true" />
-    <VNavTonic />
+    <NavVariant :readonly="true" />
+    <NavTonic />
 
     <div v-if="!easyMode" class="mb-2 text-center">
         <button
@@ -86,7 +86,7 @@
         ></div>
     </div>
 
-    <VModal ref="modal">
+    <BaseModal ref="modal">
         <p class="text-center m-4 fs-5">
             <strong>{{ correctPercentage }}%</strong>
             {{ t('correct') }}
@@ -103,7 +103,7 @@
                 {{ t('try_again') }}
             </button>
         </div>
-    </VModal>
+    </BaseModal>
 </template>
 
 <script setup>
@@ -113,9 +113,9 @@ import { useSettingsStore } from '@/stores/settings';
 import { useI18n } from 'vue-i18n';
 import Note from '@tonaljs/note';
 import helmholtz from '@/helpers/helmholtz';
-import VNavVariant from '@/components/VNavVariant.vue';
-import VNavTonic from '@/components/VNavTonic.vue';
-import VModal from '@/components/VModal.vue';
+import NavVariant from '@/components/NavVariant.vue';
+import NavTonic from '@/components/NavTonic.vue';
+import BaseModal from '@/components/BaseModal.vue';
 
 const svg = ref(null);
 const modal = ref(null);

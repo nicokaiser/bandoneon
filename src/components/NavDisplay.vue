@@ -44,7 +44,7 @@
                 ]"
                 @click="toggleColors()"
             >
-                <ColorsIcon />
+                <IconColors />
             </button>
 
             <button
@@ -52,7 +52,7 @@
                 :title="t('save_image')"
                 @click="downloadImage()"
             >
-                <DownloadIcon />
+                <IconDownload />
             </button>
 
             <button
@@ -61,7 +61,7 @@
                 :disabled="!isModified || !chordType"
                 @click="saveUserChord()"
             >
-                <PinIcon />
+                <IconPin />
             </button>
 
             <button
@@ -70,7 +70,7 @@
                 :disabled="!isUserChord"
                 @click="resetUserChord()"
             >
-                <ResetIcon />
+                <IconReset />
             </button>
         </div>
     </div>
@@ -80,10 +80,10 @@
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useStore } from '@/stores/main';
-import ResetIcon from '@/components/icon/ResetIcon.vue';
-import DownloadIcon from '@/components/icon/DownloadIcon.vue';
-import ColorsIcon from '@/components/icon/ColorsIcon.vue';
-import PinIcon from '@/components/icon/PinIcon.vue';
+import IconReset from '@/components/icon/IconReset.vue';
+import IconDownload from '@/components/icon/IconDownload.vue';
+import IconColors from '@/components/icon/IconColors.vue';
+import IconPin from '@/components/icon/IconPin.vue';
 
 const props = defineProps({
     modified: Boolean,

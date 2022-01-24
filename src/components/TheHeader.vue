@@ -17,16 +17,16 @@
         </div>
     </nav>
 
-    <VCollapse ref="collapse">
-        <VSettings />
-    </VCollapse>
+    <BaseCollapse ref="collapse">
+        <TheSettings />
+    </BaseCollapse>
 </template>
 
 <script setup>
 import { ref } from 'vue';
 import { useRoute } from 'vue-router';
-import VCollapse from '@/components/VCollapse.vue';
-import VSettings from '@/components/VSettings.vue';
+import BaseCollapse from '@/components/BaseCollapse.vue';
+import TheSettings from '@/components/TheSettings.vue';
 
 const route = useRoute();
 const collapse = ref(null);
