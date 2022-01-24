@@ -47,7 +47,7 @@
         </g>
     </svg>
 
-    <NavVariant :readonly="true" />
+    <NavVariant :readonly="currentPosition > 0" />
     <NavTonic />
 
     <div v-if="!easyMode" class="mb-2 text-center">
