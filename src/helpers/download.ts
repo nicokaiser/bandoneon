@@ -1,4 +1,4 @@
-export default function download(svgElement, filename) {
+export default function download(svgElement: HTMLElement, filename: string) {
     // https://mybyways.com/blog/convert-svg-to-png-using-your-browser
 
     const margin = 30;

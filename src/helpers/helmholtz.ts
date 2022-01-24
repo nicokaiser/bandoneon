@@ -1,6 +1,6 @@
 import Note from '@tonaljs/note';
 
-export default function helmholtz(input) {
+export default function helmholtz(input: string): string {
     const note = Note.get(input);
     if (note.empty || !note.oct) return '';
     return (
