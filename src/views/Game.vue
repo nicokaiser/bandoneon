@@ -48,7 +48,7 @@
     </svg>
 
     <NavVariant :readonly="currentPosition > 0" />
-    <NavTonic />
+    <NavTonic :disabled="isFinished" />
 
     <div v-if="!easyMode" class="mb-2 text-center">
         <button
@@ -84,6 +84,29 @@
             role="progressbar"
             :style="`width: ${progress[0]}%`"
         ></div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-4 align-self-center align-middle">
+            {{ currentPosition }} / {{ positions.length }}
+        </div>
+        <div class="col-4 align-self-center text-center fw-bold">
+            {{ progress[2] }}% {{ t('correct') }}
+        </div>
+        <div class="col-4 align-self-center text-end">
+            <!--
+            <button
+                v-if="isFinished"
+                class="btn btn-sm btn-outline-secondary mx-2"
+            >
+                Download
+            </button>
+            -->
+
+            <button class="btn btn-sm btn-outline-danger" @click="newGame">
+                Neues Spiel
+            </button>
+        </div>
     </div>
 
     <BaseModal ref="modal">
@@ -196,6 +219,10 @@ const toggleOctave = (value) => {
     oct.value = oct.value === value ? null : value;
 };
 
+const isFinished = computed(
+    () => currentPosition.value >= positions.value.length
+);
+
 function resetGame() {
     currentPosition.value = 0;
     oct.value = null;
@@ -237,9 +264,11 @@ function check() {
     store.setTonic(null);
     oct.value = null;
 
+    /*
     if (currentPosition.value >= positions.value.length) {
         modal.value.show();
     }
+    */
 }
 
 watch([tonic, oct], () => {

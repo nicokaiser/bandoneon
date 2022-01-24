@@ -8,6 +8,7 @@
                     'btn btn-outline-secondary mx-1 my-1',
                     item === tonic ? 'active' : null,
                 ]"
+                :disabled="disabled"
                 style="width: 3em"
                 @click="toggleTonic(item)"
             >
@@ -23,6 +24,7 @@
                     'btn btn-outline-secondary mx-1 my-1',
                     item === tonic ? 'active' : null,
                 ]"
+                :disabled="disabled"
                 style="width: 3em"
                 @click="toggleTonic(item)"
             >
@@ -36,6 +38,10 @@
 import { computed } from 'vue';
 import { useStore } from '@/stores/main';
 import { enharmonic } from '@tonaljs/note';
+
+const props = defineProps({
+    disabled: Boolean,
+});
 
 const store = useStore();
 
