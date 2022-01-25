@@ -6,7 +6,7 @@ const collapse = ref();
 let bsCollapse: Collapse;
 
 onMounted(() => {
-    bsCollapse = new Collapse(collapse.value, { toggle: false });
+  bsCollapse = new Collapse(collapse.value, { toggle: false });
 });
 
 onUnmounted(() => bsCollapse.dispose());
@@ -19,7 +19,7 @@ defineExpose({ show, hide, toggle });
 </script>
 
 <template>
-    <div ref="collapse" class="collapse">
-        <slot />
-    </div>
+  <div ref="collapse" class="collapse">
+    <slot />
+  </div>
 </template>

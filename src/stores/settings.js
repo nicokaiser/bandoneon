@@ -2,29 +2,29 @@ import { defineStore } from 'pinia';
 import INSTRUMENTS from '@/constants/instruments';
 
 export const useSettingsStore = defineStore('settings', {
-    state: () => ({
-        instrument: 'rheinische142',
-        locale: navigator.language?.split('-')[0] || 'en',
-        pitchNotation: 'scientific',
-        userChords: {},
-        difficulty: 'medium',
-    }),
+  state: () => ({
+    instrument: 'rheinische142',
+    locale: navigator.language?.split('-')[0] || 'en',
+    pitchNotation: 'scientific',
+    userChords: {},
+    difficulty: 'medium',
+  }),
 
-    getters: {
-        allInstruments: () => Object.keys(INSTRUMENTS),
-        allPitchNotations: () => ['helmholtz', 'scientific'],
+  getters: {
+    allInstruments: () => Object.keys(INSTRUMENTS),
+    allPitchNotations: () => ['helmholtz', 'scientific'],
+  },
+
+  actions: {
+    saveUserChord(side, chordName, notes) {
+      if (!this.userChords[side]) this.userChords[side] = {};
+      this.userChords[side][chordName] = [...notes];
     },
 
-    actions: {
-        saveUserChord(side, chordName, notes) {
-            if (!this.userChords[side]) this.userChords[side] = {};
-            this.userChords[side][chordName] = [...notes];
-        },
-
-        resetUserChord(side, chordName) {
-            if (this.userChords[side]) delete this.userChords[side][chordName];
-        },
+    resetUserChord(side, chordName) {
+      if (this.userChords[side]) delete this.userChords[side][chordName];
     },
+  },
 
-    persist: true,
+  persist: true,
 });

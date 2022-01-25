@@ -5,9 +5,9 @@ import peguri146 from './peguri146.json';
 import manouri148 from './manouri148.json';
 
 export default {
-    rheinische142,
-    rheinische152,
-    einheitsbandonion144,
-    peguri146,
-    manouri148,
+  rheinische142,
+  rheinische152,
+  einheitsbandonion144,
+  peguri146,
+  manouri148,
 };

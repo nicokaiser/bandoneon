@@ -5,27 +5,27 @@ import vueI18n from '@intlify/vite-plugin-vue-i18n';
 import autoprefixer from 'autoprefixer';
 
 export default defineConfig({
-    resolve: {
-        alias: {
-            '@': path.resolve(__dirname, './src'),
-        },
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src'),
     },
+  },
 
-    plugins: [
-        vue(),
-        vueI18n({
-            include: path.resolve(__dirname, './src/locales/**'),
-        }),
-    ],
+  plugins: [
+    vue(),
+    vueI18n({
+      include: path.resolve(__dirname, './src/locales/**'),
+    }),
+  ],
 
-    css: {
-        postcss: {
-            plugins: [autoprefixer],
-        },
-        preprocessorOptions: {
-            scss: {
-                charset: false,
-            },
-        },
+  css: {
+    postcss: {
+      plugins: [autoprefixer],
     },
+    preprocessorOptions: {
+      scss: {
+        charset: false,
+      },
+    },
+  },
 });

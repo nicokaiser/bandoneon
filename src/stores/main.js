@@ -7,126 +7,119 @@ import INSTRUMENTS from '@/constants/instruments';
 const NOTES = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
 
 export const useStore = defineStore('main', {
-    state: () => ({
-        showColors: false,
-        showEnharmonics: false,
-        side: 'right',
-        direction: 'open',
-        tonic: null,
-        chordType: null,
-        scaleType: null,
-    }),
+  state: () => ({
+    showColors: false,
+    showEnharmonics: false,
+    side: 'right',
+    direction: 'open',
+    tonic: null,
+    chordType: null,
+    scaleType: null,
+  }),
 
-    getters: {
-        allNotes: () => NOTES,
+  getters: {
+    allNotes: () => NOTES,
 
-        allScaleTypes: () => ['major', 'minor', 'chromatic'],
+    allScaleTypes: () => ['major', 'minor', 'chromatic'],
 
-        allChordTypes: () => ['M', 'm', '7', 'dim', 'm7', 'M7'],
+    allChordTypes: () => ['M', 'm', '7', 'dim', 'm7', 'M7'],
 
-        chordName(state) {
-            if (state.tonic && state.chordType) {
-                return `${state.tonic}${state.chordType}`;
-            }
-            return null;
-        },
-
-        chordNotes(state) {
-            const settings = useSettingsStore();
-
-            if (state.side && state.direction && state.chordName) {
-                if (
-                    settings.userChords[state.side] &&
-                    settings.userChords[state.side][state.chordName]
-                ) {
-                    return settings.userChords[state.side][state.chordName];
-                }
-
-                return CHORDS[`${state.side}-${state.direction}`][
-                    state.chordName
-                ];
-            }
-            return [];
-        },
-
-        isUserChord(state) {
-            const settings = useSettingsStore();
-
-            if (state.side && state.direction && state.chordName) {
-                if (
-                    settings.userChords[state.side] &&
-                    settings.userChords[state.side][state.chordName]
-                )
-                    return true;
-            }
-            return false;
-        },
-
-        keyPositions(state) {
-            const settings = useSettingsStore();
-
-            if (!settings.instrument) return [];
-            const keys =
-                INSTRUMENTS[settings.instrument][
-                    state.side + '-' + state.direction
-                ];
-            if (!keys) return [];
-
-            const positions = [];
-            let offsetX = 0;
-            let offsetY = 0;
-
-            // Center
-            const cols = Math.max(...keys.map((row) => row.length));
-            const rows = keys.reduce(
-                (acc, row) => acc + (row.length > 0 ? 1 : 0),
-                0
-            );
-            if (cols < 9) offsetX += 39 * (9 - cols);
-            if (rows < 6) offsetY -= 32 * (6 - rows);
-
-            for (let row = 0; row < keys.length; row++) {
-                for (let col = 0; col < keys[row].length; col++) {
-                    let tonal = keys[row][col];
-                    if (tonal) {
-                        const x = offsetX + col * 79 + 40 - (row % 2) * 40;
-                        const y =
-                            offsetY +
-                            row * 64 +
-                            30 * (1 - Math.sin(((x / 320) * Math.PI) / 2));
-                        positions.push([x, y, tonal]);
-                    }
-                }
-            }
-
-            return positions;
-        },
+    chordName(state) {
+      if (state.tonic && state.chordType) {
+        return `${state.tonic}${state.chordType}`;
+      }
+      return null;
     },
 
-    actions: {
-        setTonic(tonic) {
-            if (!tonic) {
-                this.tonic = null;
-                this.chordType = null;
-                this.scaleType = null;
-            } else {
-                this.tonic = tonic;
-                if (!this.scaleType && !this.chordType) {
-                    this.chordType = 'M';
-                }
-            }
-        },
+    chordNotes(state) {
+      const settings = useSettingsStore();
 
-        setScaleType(scaleType) {
-            if (this.chordType) this.chordType = null;
-            if (!this.tonic) this.tonic = 'C';
-            this.scaleType = scaleType;
-        },
+      if (state.side && state.direction && state.chordName) {
+        if (
+          settings.userChords[state.side] &&
+          settings.userChords[state.side][state.chordName]
+        ) {
+          return settings.userChords[state.side][state.chordName];
+        }
 
-        setChordType(chordType) {
-            if (this.scaleType) this.scaleType = null;
-            if (!this.tonic) this.tonic = 'C';
-            this.chordType = chordType;
-        },
+        return CHORDS[`${state.side}-${state.direction}`][state.chordName];
+      }
+      return [];
     },
+
+    isUserChord(state) {
+      const settings = useSettingsStore();
+
+      if (state.side && state.direction && state.chordName) {
+        if (
+          settings.userChords[state.side] &&
+          settings.userChords[state.side][state.chordName]
+        )
+          return true;
+      }
+      return false;
+    },
+
+    keyPositions(state) {
+      const settings = useSettingsStore();
+
+      if (!settings.instrument) return [];
+      const keys =
+        INSTRUMENTS[settings.instrument][state.side + '-' + state.direction];
+      if (!keys) return [];
+
+      const positions = [];
+      let offsetX = 0;
+      let offsetY = 0;
+
+      // Center
+      const cols = Math.max(...keys.map((row) => row.length));
+      const rows = keys.reduce((acc, row) => acc + (row.length > 0 ? 1 : 0), 0);
+      if (cols < 9) offsetX += 39 * (9 - cols);
+      if (rows < 6) offsetY -= 32 * (6 - rows);
+
+      for (let row = 0; row < keys.length; row++) {
+        for (let col = 0; col < keys[row].length; col++) {
+          let tonal = keys[row][col];
+          if (tonal) {
+            const x = offsetX + col * 79 + 40 - (row % 2) * 40;
+            const y =
+              offsetY +
+              row * 64 +
+              30 * (1 - Math.sin(((x / 320) * Math.PI) / 2));
+            positions.push([x, y, tonal]);
+          }
+        }
+      }
+
+      return positions;
+    },
+  },
+
+  actions: {
+    setTonic(tonic) {
+      if (!tonic) {
+        this.tonic = null;
+        this.chordType = null;
+        this.scaleType = null;
+      } else {
+        this.tonic = tonic;
+        if (!this.scaleType && !this.chordType) {
+          this.chordType = 'M';
+        }
+      }
+    },
+
+    setScaleType(scaleType) {
+      if (this.chordType) this.chordType = null;
+      if (!this.tonic) this.tonic = 'C';
+      this.scaleType = scaleType;
+    },
+
+    setChordType(chordType) {
+      if (this.scaleType) this.scaleType = null;
+      if (!this.tonic) this.tonic = 'C';
+      this.chordType = chordType;
+    },
+  },
 });

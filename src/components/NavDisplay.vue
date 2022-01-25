@@ -8,7 +8,7 @@ import IconColors from '@/components/icon/IconColors.vue';
 import IconPin from '@/components/icon/IconPin.vue';
 
 const props = defineProps({
-    modified: Boolean,
+  modified: Boolean,
 });
 
 const emit = defineEmits(['download', 'save', 'reset']);
@@ -28,7 +28,7 @@ const showColors = computed(() => store.showColors);
 const toggleColors = () => (store.showColors = !store.showColors);
 const showEnharmonics = computed(() => store.showEnharmonics);
 const toggleEnharmonics = () =>
-    (store.showEnharmonics = !store.showEnharmonics);
+  (store.showEnharmonics = !store.showEnharmonics);
 
 const downloadImage = () => emit('download');
 const isModified = computed(() => props.modified);
@@ -38,79 +38,79 @@ const resetUserChord = () => emit('reset');
 </script>
 
 <template>
-    <div class="mb-2 text-center d-print-none">
-        <div class="btn-group mx-2">
-            <button
-                v-for="item in scaleTypes"
-                :key="item"
-                :class="[
-                    'btn btn-outline-secondary my-2',
-                    item === scaleType ? 'active' : null,
-                ]"
-                @click="setScaleType(item)"
-            >
-                {{ t(item) }}
-            </button>
-        </div>
-
-        <div class="btn-group mx-2">
-            <button
-                v-for="item in chordTypes"
-                :key="item"
-                :class="[
-                    'btn btn-outline-secondary my-2',
-                    item === chordType ? 'active' : null,
-                ]"
-                @click="setChordType(item)"
-            >
-                {{ item }}
-            </button>
-        </div>
-
-        <div class="btn-group mx-2">
-            <button
-                class="btn btn-outline-secondary my-2"
-                style="width: 2em"
-                @click="toggleEnharmonics()"
-            >
-                {{ showEnharmonics ? '♯' : '♭' }}
-            </button>
-
-            <button
-                :class="[
-                    'btn btn-outline-secondary my-2',
-                    showColors ? 'active' : null,
-                ]"
-                @click="toggleColors()"
-            >
-                <IconColors />
-            </button>
-
-            <button
-                class="btn btn-outline-secondary my-2"
-                :title="t('save_image')"
-                @click="downloadImage()"
-            >
-                <IconDownload />
-            </button>
-
-            <button
-                class="btn btn-outline-secondary my-2"
-                :title="t('save_voicing')"
-                :disabled="!isModified || !chordType"
-                @click="saveUserChord()"
-            >
-                <IconPin />
-            </button>
-
-            <button
-                class="btn btn-outline-secondary my-2"
-                :title="t('reset_voicing')"
-                :disabled="!isUserChord"
-                @click="resetUserChord()"
-            >
-                <IconReset />
-            </button>
-        </div>
+  <div class="mb-2 text-center d-print-none">
+    <div class="btn-group mx-2">
+      <button
+        v-for="item in scaleTypes"
+        :key="item"
+        :class="[
+          'btn btn-outline-secondary my-2',
+          item === scaleType ? 'active' : null,
+        ]"
+        @click="setScaleType(item)"
+      >
+        {{ t(item) }}
+      </button>
     </div>
+
+    <div class="btn-group mx-2">
+      <button
+        v-for="item in chordTypes"
+        :key="item"
+        :class="[
+          'btn btn-outline-secondary my-2',
+          item === chordType ? 'active' : null,
+        ]"
+        @click="setChordType(item)"
+      >
+        {{ item }}
+      </button>
+    </div>
+
+    <div class="btn-group mx-2">
+      <button
+        class="btn btn-outline-secondary my-2"
+        style="width: 2em"
+        @click="toggleEnharmonics()"
+      >
+        {{ showEnharmonics ? '♯' : '♭' }}
+      </button>
+
+      <button
+        :class="[
+          'btn btn-outline-secondary my-2',
+          showColors ? 'active' : null,
+        ]"
+        @click="toggleColors()"
+      >
+        <IconColors />
+      </button>
+
+      <button
+        class="btn btn-outline-secondary my-2"
+        :title="t('save_image')"
+        @click="downloadImage()"
+      >
+        <IconDownload />
+      </button>
+
+      <button
+        class="btn btn-outline-secondary my-2"
+        :title="t('save_voicing')"
+        :disabled="!isModified || !chordType"
+        @click="saveUserChord()"
+      >
+        <IconPin />
+      </button>
+
+      <button
+        class="btn btn-outline-secondary my-2"
+        :title="t('reset_voicing')"
+        :disabled="!isUserChord"
+        @click="resetUserChord()"
+      >
+        <IconReset />
+      </button>
+    </div>
+  </div>
 </template>

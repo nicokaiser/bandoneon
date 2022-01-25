@@ -9,11 +9,11 @@ locale.value = settings.locale;
 </script>
 
 <template>
-    <TheHeader />
+  <TheHeader />
 
-    <div class="container px-3 my-4">
-        <router-view />
-    </div>
+  <div class="container px-3 my-4">
+    <router-view />
+  </div>
 </template>
 
 <style lang="scss">
@@ -26,6 +26,6 @@ $nav-link-transition: none;
 @import 'bootstrap/scss/bootstrap';
 
 .container {
-    max-width: 750px;
+  max-width: 750px;
 }
 </style>

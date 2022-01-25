@@ -1,12 +1,13 @@
 {
-    "extends": [
-      "eslint:recommended",
-      "plugin:vue/vue3-recommended",
-      "plugin:prettier/recommended"
-    ],
-    "globals": {
-      "defineEmits": true,
-      "defineExpose": true,
-      "defineProps": true
-    }
+  "extends": [
+    "eslint:recommended",
+    "plugin:vue/vue3-recommended",
+    "plugin:prettier/recommended",
+    "@vue/eslint-config-typescript"
+  ],
+  "globals": {
+    "defineEmits": true,
+    "defineExpose": true,
+    "defineProps": true
+  }
 }

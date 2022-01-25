@@ -6,27 +6,27 @@ import messages from '@intlify/vite-plugin-vue-i18n/messages';
 import App from './App.vue';
 
 const i18n = createI18n({
-    messages,
-    locale: 'en',
-    fallbackLocale: 'en',
+  messages,
+  locale: 'en',
+  fallbackLocale: 'en',
 });
 
 declare module 'pinia' {
-    export interface DefineStoreOptionsBase<S, Store> {
-        persist?: boolean;
-    }
+  export interface DefineStoreOptionsBase<S, Store> {
+    persist?: boolean;
+  }
 }
 
 const pinia = createPinia();
 pinia.use(({ options, store }) => {
-    if (!options.persist) return;
+  if (!options.persist) return;
 
-    const fromStorage = localStorage.getItem(store.$id);
-    if (fromStorage) store.$patch(JSON.parse(fromStorage));
+  const fromStorage = localStorage.getItem(store.$id);
+  if (fromStorage) store.$patch(JSON.parse(fromStorage));
 
-    store.$subscribe((mutation, state) => {
-        localStorage.setItem(store.$id, JSON.stringify(state));
-    });
+  store.$subscribe((mutation, state) => {
+    localStorage.setItem(store.$id, JSON.stringify(state));
+  });
 });
 
 const app = createApp(App);
