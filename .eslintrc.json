@@ -3,7 +3,8 @@
     "eslint:recommended",
     "plugin:vue/vue3-recommended",
     "plugin:prettier/recommended",
-    "@vue/eslint-config-typescript"
+    "@vue/eslint-config-typescript",
+    "prettier"
   ],
   "globals": {
     "defineEmits": true,

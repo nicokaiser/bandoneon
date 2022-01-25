@@ -1,64 +1,3 @@
-<template>
-  <svg
-    ref="svg"
-    class="keyboard mb-4"
-    viewBox="0 0 690 410"
-    width="720"
-    height="428"
-  >
-    <g
-      v-for="([x, y, tonal], idx) in keyPositions"
-      :key="idx"
-      @click="toggle(tonal)"
-    >
-      <circle
-        :cx="x + 29"
-        :cy="y + 29"
-        r="28"
-        :fill="fill(tonal)"
-        :stroke="selected[tonal] ? '#343a40' : '#adb5bd'"
-        :stroke-width="selected[tonal] ? 2 : 1"
-        :fill-opacity="selected[tonal] ? 0.7 : 0.2"
-      />
-
-      <text
-        :x="x + 29"
-        :y="y + 36"
-        fill="#212529"
-        font-family="-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif"
-        font-size="20px"
-        text-anchor="middle"
-      >
-        <tspan>{{ format(tonal)[0] }}</tspan>
-        <tspan dx="2" font-size="16px">
-          {{ format(tonal)[1] }}
-        </tspan>
-      </text>
-    </g>
-
-    <path
-      v-for="(path, index) in scalePaths"
-      :key="index"
-      :stroke="getScaleColor(index)"
-      :d="path"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      stroke-opacity="0.7"
-      stroke-width="3px"
-      fill="none"
-    />
-  </svg>
-
-  <NavVariant />
-  <NavTonic />
-  <NavDisplay
-    :modified="modified"
-    @reset="resetUserChord()"
-    @download="downloadImage()"
-    @save="saveUserChord()"
-  />
-</template>
-
 <script setup>
 import { computed, ref, watch } from 'vue';
 import { useKeyboardNavigation } from '@/composables/useKeyboardNavigation';
@@ -157,7 +96,7 @@ const fill = (tonal) => {
     : '#adb5bd'; // gray-500
 };
 
-const downloadImage = () => {
+const onDownload = () => {
   let filename = `bandoneon-${settings.instrument}-${store.side}-${store.direction}`;
   if (store.tonic) {
     filename += '-' + store.tonic.replace('#', 's');
@@ -208,7 +147,7 @@ const toggle = (tonal) => {
   }
 };
 
-const saveUserChord = () => {
+const onSave = () => {
   if (modified.value) {
     settings.saveUserChord(
       store.side,
@@ -221,20 +160,81 @@ const saveUserChord = () => {
   resetSelected();
 };
 
-const resetUserChord = () => {
+const onReset = () => {
   resetSelected();
   settings.resetUserChord(store.side, store.chordName);
 };
 </script>
 
+<template>
+  <svg
+    ref="svg"
+    class="keyboard mb-4"
+    viewBox="0 0 690 410"
+    width="720"
+    height="428"
+  >
+    <g
+      v-for="([x, y, tonal], idx) in keyPositions"
+      :key="idx"
+      @click="toggle(tonal)"
+    >
+      <circle
+        :cx="x + 29"
+        :cy="y + 29"
+        r="28"
+        :fill="fill(tonal)"
+        :stroke="selected[tonal] ? '#343a40' : '#adb5bd'"
+        :stroke-width="selected[tonal] ? 2 : 1"
+        :fill-opacity="selected[tonal] ? 0.7 : 0.2"
+      />
+
+      <text
+        :x="x + 29"
+        :y="y + 36"
+        fill="#212529"
+        font-family="-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif"
+        font-size="20px"
+        text-anchor="middle"
+      >
+        <tspan>{{ format(tonal)[0] }}</tspan>
+        <tspan dx="2" font-size="16px">
+          {{ format(tonal)[1] }}
+        </tspan>
+      </text>
+    </g>
+
+    <path
+      v-for="(path, index) in scalePaths"
+      :key="index"
+      :stroke="getScaleColor(index)"
+      :d="path"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-opacity="0.7"
+      stroke-width="3px"
+      fill="none"
+    />
+  </svg>
+
+  <NavVariant />
+  <NavTonic />
+  <NavDisplay
+    :modified="modified"
+    @reset="onReset"
+    @download="onDownload"
+    @save="onSave"
+  />
+</template>
+
 <style scoped>
-svg.keyboard {
+.keyboard {
   width: 100%;
   height: calc(100% / 720 * 428);
   max-height: calc(90vh - 5em);
 }
 
-svg.keyboard text {
+.keyboard text {
   user-select: none;
   cursor: default;
 }
