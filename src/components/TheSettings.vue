@@ -1,3 +1,34 @@
+<script setup>
+import { computed } from 'vue';
+import { useI18n } from 'vue-i18n';
+import { useSettingsStore } from '@/stores/settings';
+import { useRoute } from 'vue-router';
+
+const settings = useSettingsStore();
+
+const instrument = computed(() => settings.instrument);
+const availableInstruments = computed(() => settings.availableInstruments);
+const setInstrument = (value) => (settings.instrument = value);
+
+const pitchNotation = computed(() => settings.pitchNotation);
+const availablePitchNotations = computed(
+    () => settings.availablePitchNotations
+);
+const setPitchNotation = (value) => (settings.pitchNotation = value);
+
+const { locale, availableLocales } = useI18n({ useScope: 'global' });
+
+const setLocale = (value) => {
+    settings.locale = value;
+    locale.value = value;
+};
+
+const difficulty = computed(() => settings.difficulty);
+const setDifficulty = (value) => (settings.difficulty = value);
+
+const route = useRoute();
+</script>
+
 <template>
     <div class="bg-light">
         <div class="container px-3 py-4">
@@ -99,34 +130,3 @@
         </div>
     </div>
 </template>
-
-<script setup>
-import { computed } from 'vue';
-import { useI18n } from 'vue-i18n';
-import { useSettingsStore } from '@/stores/settings';
-import { useRoute } from 'vue-router';
-
-const settings = useSettingsStore();
-
-const instrument = computed(() => settings.instrument);
-const availableInstruments = computed(() => settings.availableInstruments);
-const setInstrument = (value) => (settings.instrument = value);
-
-const pitchNotation = computed(() => settings.pitchNotation);
-const availablePitchNotations = computed(
-    () => settings.availablePitchNotations
-);
-const setPitchNotation = (value) => (settings.pitchNotation = value);
-
-const { locale, availableLocales } = useI18n({ useScope: 'global' });
-
-const setLocale = (value) => {
-    settings.locale = value;
-    locale.value = value;
-};
-
-const difficulty = computed(() => settings.difficulty);
-const setDifficulty = (value) => (settings.difficulty = value);
-
-const route = useRoute();
-</script>

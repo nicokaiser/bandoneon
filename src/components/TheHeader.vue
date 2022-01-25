@@ -1,3 +1,19 @@
+<script setup>
+import { ref, watch } from 'vue';
+import { useRoute } from 'vue-router';
+import BaseCollapse from '@/components/BaseCollapse.vue';
+import TheSettings from '@/components/TheSettings.vue';
+
+const route = useRoute();
+const collapse = ref(null);
+const toggle = () => collapse.value.toggle();
+
+watch(
+    () => route.path,
+    () => collapse.value.hide()
+);
+</script>
+
 <template>
     <nav class="navbar navbar-light">
         <div class="container px-3 py-2">
@@ -21,24 +37,6 @@
         <TheSettings />
     </BaseCollapse>
 </template>
-
-<script setup>
-import { ref, watch } from 'vue';
-import { useRoute } from 'vue-router';
-import BaseCollapse from '@/components/BaseCollapse.vue';
-import TheSettings from '@/components/TheSettings.vue';
-
-const route = useRoute();
-const collapse = ref(null);
-const toggle = () => collapse.value.toggle();
-
-watch(
-    () => route.path,
-    () => {
-        collapse.value.hide();
-    }
-);
-</script>
 
 <style scoped>
 .navbar-toggler {

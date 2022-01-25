@@ -1,3 +1,42 @@
+<script setup>
+import { computed } from 'vue';
+import { useI18n } from 'vue-i18n';
+import { useStore } from '@/stores/main';
+import IconReset from '@/components/icon/IconReset.vue';
+import IconDownload from '@/components/icon/IconDownload.vue';
+import IconColors from '@/components/icon/IconColors.vue';
+import IconPin from '@/components/icon/IconPin.vue';
+
+const props = defineProps({
+    modified: Boolean,
+});
+
+const emit = defineEmits(['download', 'save', 'reset']);
+
+const store = useStore();
+const { t } = useI18n();
+
+const scaleTypes = computed(() => store.availableScaleTypes);
+const scaleType = computed(() => store.scaleType);
+const setScaleType = (value) => store.setScaleType(value);
+
+const chordTypes = computed(() => store.availableChordTypes);
+const chordType = computed(() => store.chordType);
+const setChordType = (value) => store.setChordType(value);
+
+const showColors = computed(() => store.showColors);
+const toggleColors = () => (store.showColors = !store.showColors);
+const showEnharmonics = computed(() => store.showEnharmonics);
+const toggleEnharmonics = () =>
+    (store.showEnharmonics = !store.showEnharmonics);
+
+const downloadImage = () => emit('download');
+const isModified = computed(() => props.modified);
+const isUserChord = computed(() => store.isUserChord);
+const saveUserChord = () => emit('save');
+const resetUserChord = () => emit('reset');
+</script>
+
 <template>
     <div class="mb-2 text-center d-print-none">
         <div class="btn-group mx-2">
@@ -75,42 +114,3 @@
         </div>
     </div>
 </template>
-
-<script setup>
-import { computed } from 'vue';
-import { useI18n } from 'vue-i18n';
-import { useStore } from '@/stores/main';
-import IconReset from '@/components/icon/IconReset.vue';
-import IconDownload from '@/components/icon/IconDownload.vue';
-import IconColors from '@/components/icon/IconColors.vue';
-import IconPin from '@/components/icon/IconPin.vue';
-
-const props = defineProps({
-    modified: Boolean,
-});
-
-const emit = defineEmits(['download', 'save', 'reset']);
-
-const store = useStore();
-const { t } = useI18n();
-
-const scaleTypes = computed(() => store.availableScaleTypes);
-const scaleType = computed(() => store.scaleType);
-const setScaleType = (value) => store.setScaleType(value);
-
-const chordTypes = computed(() => store.availableChordTypes);
-const chordType = computed(() => store.chordType);
-const setChordType = (value) => store.setChordType(value);
-
-const showColors = computed(() => store.showColors);
-const toggleColors = () => (store.showColors = !store.showColors);
-const showEnharmonics = computed(() => store.showEnharmonics);
-const toggleEnharmonics = () =>
-    (store.showEnharmonics = !store.showEnharmonics);
-
-const downloadImage = () => emit('download');
-const isModified = computed(() => props.modified);
-const isUserChord = computed(() => store.isUserChord);
-const saveUserChord = () => emit('save');
-const resetUserChord = () => emit('reset');
-</script>

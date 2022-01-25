@@ -11,6 +11,12 @@ const i18n = createI18n({
     fallbackLocale: 'en',
 });
 
+declare module 'pinia' {
+    export interface DefineStoreOptionsBase<S, Store> {
+        persist?: boolean;
+    }
+}
+
 const pinia = createPinia();
 pinia.use(({ options, store }) => {
     if (!options.persist) return;

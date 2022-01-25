@@ -1,3 +1,29 @@
+<script setup>
+import { computed } from 'vue';
+import { useStore } from '@/stores/main';
+import { enharmonic } from '@tonaljs/note';
+
+const store = useStore();
+const notes = computed(() => store.allNotes);
+const tonic = computed(() => store.tonic);
+
+const format = (noteName) => {
+    if (!store.showEnharmonics) {
+        return noteName.replace('#', '♯');
+    }
+
+    if (noteName.length === 2 && noteName[1] === '#') {
+        return enharmonic(noteName).replace('b', '♭');
+    }
+
+    return noteName;
+};
+
+const toggleTonic = (value) => {
+    store.setTonic(value === store.tonic ? null : value);
+};
+</script>
+
 <template>
     <div class="mb-2 text-center d-print-none">
         <span class="d-inline-block text-nowrap">
@@ -31,31 +57,3 @@
         </span>
     </div>
 </template>
-
-<script setup>
-import { computed } from 'vue';
-import { useStore } from '@/stores/main';
-import { enharmonic } from '@tonaljs/note';
-
-const store = useStore();
-
-const notes = computed(() => store.allNotes);
-
-const tonic = computed(() => store.tonic);
-
-const format = (noteName) => {
-    if (!store.showEnharmonics) {
-        return noteName.replace('#', '♯');
-    }
-
-    if (noteName.length === 2 && noteName[1] === '#') {
-        return enharmonic(noteName).replace('b', '♭');
-    }
-
-    return noteName;
-};
-
-const toggleTonic = (value) => {
-    store.setTonic(value === store.tonic ? null : value);
-};
-</script>

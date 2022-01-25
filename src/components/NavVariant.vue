@@ -1,3 +1,32 @@
+<script setup>
+import { computed } from 'vue';
+import { useStore } from '@/stores/main';
+import { useI18n } from 'vue-i18n';
+
+const props = defineProps({
+    readonly: Boolean,
+});
+
+const store = useStore();
+const { t } = useI18n();
+
+const side = computed(() => store.side);
+const setSide = (value) => {
+    if (!props.readonly) store.side = value;
+};
+const toggleSide = () => {
+    setSide(side.value === 'right' ? 'left' : 'right');
+};
+
+const direction = computed(() => store.direction);
+const setDirection = (value) => {
+    if (!props.readonly) store.direction = value;
+};
+const toggleDirection = () => {
+    setDirection(direction.value === 'open' ? 'close' : 'open');
+};
+</script>
+
 <template>
     <div class="d-print-none container mb-4">
         <div class="row">
@@ -73,35 +102,6 @@
         </div>
     </div>
 </template>
-
-<script setup>
-import { computed } from 'vue';
-import { useStore } from '@/stores/main';
-import { useI18n } from 'vue-i18n';
-
-const props = defineProps({
-    readonly: Boolean,
-});
-
-const store = useStore();
-const { t } = useI18n();
-
-const side = computed(() => store.side);
-const setSide = (value) => {
-    if (!props.readonly) store.side = value;
-};
-const toggleSide = () => {
-    setSide(side.value === 'right' ? 'left' : 'right');
-};
-
-const direction = computed(() => store.direction);
-const setDirection = (value) => {
-    if (!props.readonly) store.direction = value;
-};
-const toggleDirection = () => {
-    setDirection(direction.value === 'open' ? 'close' : 'open');
-};
-</script>
 
 <style lang="scss" scoped>
 $primary: #6c757d;
