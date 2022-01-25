@@ -16,7 +16,7 @@ export default createRouter({
             component: Game,
         },
         {
-            name: '404',
+            name: 'NotFound',
             path: '/:pathMatch(.*)*',
             redirect: () => ({ name: 'home' }),
         },

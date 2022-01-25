@@ -1,9 +1,14 @@
 <template>
-    <router-view />
+    <TheHeader />
+
+    <div class="container px-3 my-4">
+        <router-view />
+    </div>
 </template>
 
 <script setup>
-import { useI18n } from 'vue-i18n'
+import { useI18n } from 'vue-i18n';
+import TheHeader from '@/components/TheHeader.vue';
 import { useSettingsStore } from '@/stores/settings';
 
 const settings = useSettingsStore();

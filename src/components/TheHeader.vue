@@ -23,7 +23,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import BaseCollapse from '@/components/BaseCollapse.vue';
 import TheSettings from '@/components/TheSettings.vue';
@@ -31,6 +31,13 @@ import TheSettings from '@/components/TheSettings.vue';
 const route = useRoute();
 const collapse = ref(null);
 const toggle = () => collapse.value.toggle();
+
+watch(
+    () => route.path,
+    () => {
+        collapse.value.hide();
+    }
+);
 </script>
 
 <style scoped>

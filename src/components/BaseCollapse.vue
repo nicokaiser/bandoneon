@@ -19,7 +19,9 @@ onUnmounted(() => {
     bsCollapse.dispose();
 });
 
+const show = () => bsCollapse.sho();
+const hide = () => bsCollapse.hide();
 const toggle = () => bsCollapse.toggle();
 
-defineExpose({ toggle });
+defineExpose({ show, hide, toggle });
 </script>
