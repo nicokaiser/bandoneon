@@ -16,11 +16,11 @@ const emit = defineEmits(['download', 'save', 'reset']);
 const store = useStore();
 const { t } = useI18n();
 
-const scaleTypes = computed(() => store.availableScaleTypes);
+const scaleTypes = computed(() => store.allScaleTypes);
 const scaleType = computed(() => store.scaleType);
 const setScaleType = (value) => store.setScaleType(value);
 
-const chordTypes = computed(() => store.availableChordTypes);
+const chordTypes = computed(() => store.allChordTypes);
 const chordType = computed(() => store.chordType);
 const setChordType = (value) => store.setChordType(value);
 

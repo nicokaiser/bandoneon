@@ -11,8 +11,8 @@ export const useSettingsStore = defineStore('settings', {
     }),
 
     getters: {
-        availableInstruments: () => Object.keys(INSTRUMENTS),
-        availablePitchNotations: () => ['helmholtz', 'scientific'],
+        allInstruments: () => Object.keys(INSTRUMENTS),
+        allPitchNotations: () => ['helmholtz', 'scientific'],
     },
 
     actions: {

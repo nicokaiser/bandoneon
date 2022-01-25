@@ -7,13 +7,11 @@ import { useRoute } from 'vue-router';
 const settings = useSettingsStore();
 
 const instrument = computed(() => settings.instrument);
-const availableInstruments = computed(() => settings.availableInstruments);
+const allInstruments = computed(() => settings.allInstruments);
 const setInstrument = (value) => (settings.instrument = value);
 
 const pitchNotation = computed(() => settings.pitchNotation);
-const availablePitchNotations = computed(
-    () => settings.availablePitchNotations
-);
+const allPitchNotations = computed(() => settings.allPitchNotations);
 const setPitchNotation = (value) => (settings.pitchNotation = value);
 
 const { locale, availableLocales } = useI18n({ useScope: 'global' });
@@ -40,7 +38,7 @@ const route = useRoute();
                         @change="setInstrument($event.target.value)"
                     >
                         <option
-                            v-for="item in availableInstruments"
+                            v-for="item in allInstruments"
                             :key="item"
                             v-t="item"
                             :selected="item === instrument"
@@ -59,7 +57,7 @@ const route = useRoute();
                         @change="setPitchNotation($event.target.value)"
                     >
                         <option
-                            v-for="item in availablePitchNotations"
+                            v-for="item in allPitchNotations"
                             :key="item"
                             v-t="item"
                             :selected="item === pitchNotation"

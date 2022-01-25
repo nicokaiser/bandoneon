@@ -20,9 +20,9 @@ export const useStore = defineStore('main', {
     getters: {
         allNotes: () => NOTES,
 
-        availableScaleTypes: () => ['major', 'minor', 'chromatic'],
+        allScaleTypes: () => ['major', 'minor', 'chromatic'],
 
-        availableChordTypes: () => ['M', 'm', '7', 'dim', 'm7', 'M7'],
+        allChordTypes: () => ['M', 'm', '7', 'dim', 'm7', 'M7'],
 
         chordName(state) {
             if (state.tonic && state.chordType) {
