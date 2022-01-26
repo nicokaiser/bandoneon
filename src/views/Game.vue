@@ -9,8 +9,8 @@ import NavVariant from '@/components/NavVariant.vue';
 import NavTonic from '@/components/NavTonic.vue';
 import BaseModal from '@/components/BaseModal.vue';
 
-const svg = ref(null);
-const modal = ref(null);
+const svg = ref();
+const modal = ref();
 
 const currentPosition = ref(0);
 const guessed = ref([]);

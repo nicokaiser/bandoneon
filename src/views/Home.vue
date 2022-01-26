@@ -13,7 +13,7 @@ import helmholtz from '@/helpers/helmholtz';
 
 useKeyboardNavigation();
 
-const svg = ref(null);
+const svg = ref();
 
 const COLORS_OCTAVE = [
   '#198754', // green
