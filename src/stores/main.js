@@ -1,8 +1,8 @@
 import { defineStore } from 'pinia';
 import { useSettingsStore } from './settings';
 
-import CHORDS from '@/constants/chords.json';
-import INSTRUMENTS from '@/constants/instruments';
+import CHORDS from '../constants/chords.json';
+import INSTRUMENTS from '../constants/instruments';
 
 const NOTES = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
 
@@ -31,29 +31,29 @@ export const useStore = defineStore('main', {
       return null;
     },
 
-    chordNotes(state) {
+    chordNotes() {
       const settings = useSettingsStore();
 
-      if (state.side && state.direction && state.chordName) {
+      if (this.side && this.direction && this.chordName) {
         if (
-          settings.userChords[state.side] &&
-          settings.userChords[state.side][state.chordName]
+          settings.userChords[this.side] &&
+          settings.userChords[this.side][this.chordName]
         ) {
-          return settings.userChords[state.side][state.chordName];
+          return settings.userChords[this.side][this.chordName];
         }
 
-        return CHORDS[`${state.side}-${state.direction}`][state.chordName];
+        return CHORDS[`${this.side}-${this.direction}`][this.chordName];
       }
       return [];
     },
 
-    isUserChord(state) {
+    isUserChord() {
       const settings = useSettingsStore();
 
-      if (state.side && state.direction && state.chordName) {
+      if (this.side && this.direction && this.chordName) {
         if (
-          settings.userChords[state.side] &&
-          settings.userChords[state.side][state.chordName]
+          settings.userChords[this.side] &&
+          settings.userChords[this.side][this.chordName]
         )
           return true;
       }
@@ -80,7 +80,7 @@ export const useStore = defineStore('main', {
 
       for (let row = 0; row < keys.length; row++) {
         for (let col = 0; col < keys[row].length; col++) {
-          let tonal = keys[row][col];
+          const tonal = keys[row][col];
           if (tonal) {
             const x = offsetX + col * 79 + 40 - (row % 2) * 40;
             const y =
