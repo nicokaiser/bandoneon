@@ -24,7 +24,7 @@
   "language-es": "Español",
   "keyboard": "Keyboard",
   "difficulty": "Difficulty",
-  "difficulty-masy": "easy (only notes)",
+  "difficulty-easy": "easy (only notes)",
   "difficulty-medium": "medium (notes and octaves)",
   "correct": "correct",
   "try_again": "Try again"
