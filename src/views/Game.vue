@@ -1,10 +1,10 @@
-<script setup>
+<script setup lang="ts">
 import { computed, ref, watch, onMounted } from 'vue';
-import { useStore } from '@/stores/main';
-import { useSettingsStore } from '@/stores/settings';
+import { useStore } from '../stores/main';
+import { useSettingsStore } from '../stores/settings';
 import { useI18n } from 'vue-i18n';
 import Note from '@tonaljs/note';
-import helmholtz from '@/helpers/helmholtz';
+import helmholtz from '../helpers/helmholtz';
 import NavVariant from '@/components/NavVariant.vue';
 import NavTonic from '@/components/NavTonic.vue';
 import BaseModal from '@/components/BaseModal.vue';
@@ -13,27 +13,28 @@ const svg = ref();
 const modal = ref();
 
 const currentPosition = ref(0);
-const guessed = ref([]);
-const oct = ref(null);
-const positions = ref([]);
+const guessed = ref<number[]>([]);
+const oct = ref<number | null>(null);
+const positions = ref<[number, number, string][]>([]);
 
 const store = useStore();
 const settings = useSettingsStore();
 const { t } = useI18n();
 
-const format = (tonal) => {
+const format = (tonal: string): string[] => {
   const note = Note.get(store.showEnharmonics ? Note.enharmonic(tonal) : tonal);
-  if (note.empty) return '';
+  if (note.empty) return ['', ''];
 
   if (settings.pitchNotation === 'helmholtz') {
     return [helmholtz(note.name), ''];
   }
-  return [note.pc.replace('b', '♭').replace('#', '♯'), note.oct];
+
+  return [note.pc.replace('b', '♭').replace('#', '♯'), '' + note.oct];
 };
 
-const formatOctave = (octave) => {
+const formatOctave = (octave: number) => {
   if (settings.pitchNotation === 'scientific') {
-    return octave;
+    return '' + octave;
   }
   const noteName = tonic.value || 'X';
   return (
@@ -45,7 +46,7 @@ const formatOctave = (octave) => {
 
 const keyPositions = computed(() => store.keyPositions);
 
-const fillColor = (idx) => {
+const fillColor = (idx: number) => {
   if (guessed.value[idx] === 2 || (easyMode.value && guessed.value[idx] === 1))
     return '#a3cfbb'; // green-200
   if (guessed.value[idx] === 1) return '#ffe69c'; // yellow-200
@@ -53,7 +54,7 @@ const fillColor = (idx) => {
   return '#f8f9fa'; // gray-100
 };
 
-const strokeColor = (idx) => {
+const strokeColor = (idx: number) => {
   if (guessed.value[idx] === 2 || (easyMode.value && guessed.value[idx] === 1))
     return '#146c43'; // green-500
   if (guessed.value[idx] === 1) return '#cc9a06'; // yellow-600
@@ -76,7 +77,7 @@ const octaves = computed(() => {
 
 const tonic = computed(() => store.tonic);
 
-const toggleOctave = (value) => {
+const toggleOctave = (value: number) => {
   oct.value = oct.value === value ? null : value;
 };
 
@@ -109,7 +110,11 @@ function check() {
 
   const solution = positions.value[currentPosition.value][2];
 
-  if (tonic.value + oct.value === solution) {
+  if (
+    tonic.value !== null &&
+    oct.value !== null &&
+    tonic.value + oct.value === solution
+  ) {
     guessed.value[currentPosition.value] = 2;
   } else if (tonic.value === solution.substr(0, solution.length - 1)) {
     guessed.value[currentPosition.value] = 1;
@@ -249,7 +254,7 @@ const correctPercentage = computed(() => progress.value[2]);
       <button
         class="btn btn-primary"
         @click="
-          $refs.modal.hide();
+          modal.hide();
           newGame();
         "
       >

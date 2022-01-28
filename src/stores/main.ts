@@ -63,7 +63,7 @@ export const useStore = defineStore('main', {
       return false;
     },
 
-    keyPositions(state) {
+    keyPositions(state): [number, number, string][] {
       const settings = useSettingsStore();
 
       if (!settings.instrument) return [];
@@ -72,7 +72,7 @@ export const useStore = defineStore('main', {
         instruments[settings.instrument][state.side + '-' + state.direction];
       if (!keys) return [];
 
-      const positions = [];
+      const positions: [number, number, string][] = [];
       let offsetX = 0;
       let offsetY = 0;
 
