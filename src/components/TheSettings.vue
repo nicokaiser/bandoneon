@@ -1,30 +1,12 @@
 <script setup>
-import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useSettingsStore } from '@/stores/settings';
 import { useRoute } from 'vue-router';
 
 const settings = useSettingsStore();
-
-const instrument = computed(() => settings.instrument);
-const allInstruments = computed(() => settings.allInstruments);
-const setInstrument = (value) => (settings.instrument = value);
-
-const pitchNotation = computed(() => settings.pitchNotation);
-const allPitchNotations = computed(() => settings.allPitchNotations);
-const setPitchNotation = (value) => (settings.pitchNotation = value);
-
-const { locale, availableLocales } = useI18n({ useScope: 'global' });
-
-const setLocale = (value) => {
-  settings.locale = value;
-  locale.value = value;
-};
-
-const difficulty = computed(() => settings.difficulty);
-const setDifficulty = (value) => (settings.difficulty = value);
-
 const route = useRoute();
+
+const { availableLocales } = useI18n({ useScope: 'global' });
 </script>
 
 <template>
@@ -34,14 +16,13 @@ const route = useRoute();
         <div class="form-floating">
           <select
             id="floatingSelectInstrument"
+            v-model="settings.instrument"
             class="form-select"
-            @change="setInstrument($event.target.value)"
           >
             <option
-              v-for="item in allInstruments"
+              v-for="item in settings.allInstruments"
               :key="item"
               v-t="item"
-              :selected="item === instrument"
               :value="item"
             />
           </select>
@@ -53,14 +34,13 @@ const route = useRoute();
         <div class="form-floating">
           <select
             id="floatingSelectPitchNotation"
+            v-model="settings.pitchNotation"
             class="form-select"
-            @change="setPitchNotation($event.target.value)"
           >
             <option
-              v-for="item in allPitchNotations"
+              v-for="item in settings.allPitchNotations"
               :key="item"
               v-t="item"
-              :selected="item === pitchNotation"
               :value="item"
             />
           </select>
@@ -72,14 +52,13 @@ const route = useRoute();
         <div class="form-floating">
           <select
             id="floatingSelectLocale"
+            v-model="settings.locale"
             class="form-select"
-            @change="setLocale($event.target.value)"
           >
             <option
               v-for="item in availableLocales"
               :key="item"
               v-t="'language-' + item"
-              :selected="locale === item"
               :value="item"
             />
           </select>
@@ -91,14 +70,13 @@ const route = useRoute();
         <div class="form-floating">
           <select
             id="floatingSelectDifficulty"
+            v-model="settings.difficulty"
             class="form-select"
-            @change="setDifficulty($event.target.value)"
           >
             <option
               v-for="item in ['easy', 'medium']"
               :key="item"
               v-t="'difficulty-' + item"
-              :selected="difficulty === item"
               :value="item"
             />
           </select>
