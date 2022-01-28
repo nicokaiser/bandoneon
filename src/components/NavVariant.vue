@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { useStore } from '../stores/main';
 import { useI18n } from 'vue-i18n';
 
@@ -9,18 +9,26 @@ const props = defineProps({
 const store = useStore();
 const { t } = useI18n();
 
-const setSide = (value) => {
-  if (!props.readonly) store.side = value;
-};
 const toggleSide = () => {
-  setSide(store.side === 'right' ? 'left' : 'right');
+  if (props.readonly) return;
+  store.side = store.side === 'right' ? 'left' : 'right';
 };
 
-const setDirection = (value) => {
-  if (!props.readonly) store.direction = value;
+const onSideChange = (event: Event) => {
+  if (props.readonly) return;
+  const checked = (event.target as HTMLInputElement).checked;
+  store.side = checked ? 'right' : 'left';
 };
+
 const toggleDirection = () => {
-  setDirection(store.direction === 'open' ? 'close' : 'open');
+  if (props.readonly) return;
+  store.direction = store.direction === 'open' ? 'close' : 'open';
+};
+
+const onDirectionChange = (event: Event) => {
+  if (props.readonly) return;
+  const checked = (event.target as HTMLInputElement).checked;
+  store.direction = checked ? 'open' : 'close';
 };
 </script>
 
@@ -33,7 +41,7 @@ const toggleDirection = () => {
             'label text-end pe-2',
             store.side === 'left' ? 'fw-bold' : 'text-muted',
           ]"
-          @click.prevent="toggleSide"
+          @click="toggleSide"
         >
           {{ t('left') }}
         </span>
@@ -44,7 +52,7 @@ const toggleDirection = () => {
             class="form-check-input"
             type="checkbox"
             :disabled="readonly"
-            @change="setSide($event.target.checked ? 'right' : 'left')"
+            @change="onSideChange"
           />
         </div>
 
@@ -53,7 +61,7 @@ const toggleDirection = () => {
             'label text-start ps-2',
             store.side === 'right' ? 'fw-bold' : 'text-muted',
           ]"
-          @click.prevent="toggleSide"
+          @click="toggleSide"
         >
           {{ t('right') }}
         </span>
@@ -65,7 +73,7 @@ const toggleDirection = () => {
             'label text-end pe-2',
             store.direction === 'close' ? 'fw-bold' : 'text-muted',
           ]"
-          @click.prevent="toggleDirection"
+          @click="toggleDirection"
         >
           {{ t('close') }}
         </span>
@@ -76,7 +84,7 @@ const toggleDirection = () => {
             class="form-check-input"
             type="checkbox"
             :disabled="readonly"
-            @change="setDirection($event.target.checked ? 'open' : 'close')"
+            @change="onDirectionChange"
           />
         </div>
 
@@ -85,7 +93,7 @@ const toggleDirection = () => {
             'label text-start ps-2',
             store.direction === 'open' ? 'fw-bold' : 'text-muted',
           ]"
-          @click.prevent="toggleDirection"
+          @click="toggleDirection"
         >
           {{ t('open') }}
         </span>
