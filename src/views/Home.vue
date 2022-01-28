@@ -46,8 +46,6 @@ const format = (tonal) => {
   return [note.pc.replace('b', '♭').replace('#', '♯'), note.oct];
 };
 
-const keyPositions = computed(() => store.keyPositions);
-
 const getScaleColor = (octave) => {
   return COLORS_SCALE[octave % COLORS_SCALE.length];
 };
@@ -68,7 +66,7 @@ const scalePaths = computed(() => {
       notes.forEach((n) => {
         const no = Note.get(n);
 
-        const pos = keyPositions.value.find(
+        const pos = store.keyPositions.find(
           (v) => Note.get(v[2]).height === no.height
         );
 
@@ -175,7 +173,7 @@ const onReset = () => {
     height="428"
   >
     <g
-      v-for="([x, y, tonal], idx) in keyPositions"
+      v-for="([x, y, tonal], idx) in store.keyPositions"
       :key="idx"
       @click="toggle(tonal)"
     >

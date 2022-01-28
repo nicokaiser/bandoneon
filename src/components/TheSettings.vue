@@ -1,6 +1,6 @@
-<script setup>
+<script setup lang="ts">
 import { useI18n } from 'vue-i18n';
-import { useSettingsStore } from '@/stores/settings';
+import { useSettingsStore } from '../stores/settings';
 import { useRoute } from 'vue-router';
 
 const settings = useSettingsStore();

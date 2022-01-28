@@ -1,5 +1,4 @@
 <script setup>
-import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useStore } from '@/stores/main';
 import IconReset from '@/components/icon/IconReset.vue';
@@ -7,7 +6,7 @@ import IconDownload from '@/components/icon/IconDownload.vue';
 import IconColors from '@/components/icon/IconColors.vue';
 import IconPin from '@/components/icon/IconPin.vue';
 
-const props = defineProps({
+defineProps({
   modified: Boolean,
 });
 
@@ -15,39 +14,19 @@ const emit = defineEmits(['download', 'save', 'reset']);
 
 const store = useStore();
 const { t } = useI18n();
-
-const scaleTypes = computed(() => store.allScaleTypes);
-const scaleType = computed(() => store.scaleType);
-const setScaleType = (value) => store.setScaleType(value);
-
-const chordTypes = computed(() => store.allChordTypes);
-const chordType = computed(() => store.chordType);
-const setChordType = (value) => store.setChordType(value);
-
-const showColors = computed(() => store.showColors);
-const toggleColors = () => (store.showColors = !store.showColors);
-const showEnharmonics = computed(() => store.showEnharmonics);
-const toggleEnharmonics = () =>
-  (store.showEnharmonics = !store.showEnharmonics);
-
-const downloadImage = () => emit('download');
-const isModified = computed(() => props.modified);
-const isUserChord = computed(() => store.isUserChord);
-const saveUserChord = () => emit('save');
-const resetUserChord = () => emit('reset');
 </script>
 
 <template>
   <div class="mb-2 text-center d-print-none">
     <div class="btn-group mx-2">
       <button
-        v-for="item in scaleTypes"
+        v-for="item in store.allScaleTypes"
         :key="item"
         :class="[
           'btn btn-outline-secondary my-2',
-          item === scaleType ? 'active' : null,
+          item === store.scaleType ? 'active' : null,
         ]"
-        @click="setScaleType(item)"
+        @click="store.setScaleType(item)"
       >
         {{ t(item) }}
       </button>
@@ -55,13 +34,13 @@ const resetUserChord = () => emit('reset');
 
     <div class="btn-group mx-2">
       <button
-        v-for="item in chordTypes"
+        v-for="item in store.allChordTypes"
         :key="item"
         :class="[
           'btn btn-outline-secondary my-2',
-          item === chordType ? 'active' : null,
+          item === store.chordType ? 'active' : null,
         ]"
-        @click="setChordType(item)"
+        @click="store.setChordType(item)"
       >
         {{ item }}
       </button>
@@ -71,17 +50,17 @@ const resetUserChord = () => emit('reset');
       <button
         class="btn btn-outline-secondary my-2"
         style="width: 2em"
-        @click="toggleEnharmonics()"
+        @click="store.showEnharmonics = !store.showEnharmonics"
       >
-        {{ showEnharmonics ? '♯' : '♭' }}
+        {{ store.showEnharmonics ? '♯' : '♭' }}
       </button>
 
       <button
         :class="[
           'btn btn-outline-secondary my-2',
-          showColors ? 'active' : null,
+          store.showColors ? 'active' : null,
         ]"
-        @click="toggleColors()"
+        @click="store.showColors = !store.showColors"
       >
         <IconColors />
       </button>
@@ -89,7 +68,7 @@ const resetUserChord = () => emit('reset');
       <button
         class="btn btn-outline-secondary my-2"
         :title="t('save_image')"
-        @click="downloadImage()"
+        @click="emit('download')"
       >
         <IconDownload />
       </button>
@@ -97,8 +76,8 @@ const resetUserChord = () => emit('reset');
       <button
         class="btn btn-outline-secondary my-2"
         :title="t('save_voicing')"
-        :disabled="!isModified || !chordType"
-        @click="saveUserChord()"
+        :disabled="!modified || !store.chordType"
+        @click="emit('save')"
       >
         <IconPin />
       </button>
@@ -106,8 +85,8 @@ const resetUserChord = () => emit('reset');
       <button
         class="btn btn-outline-secondary my-2"
         :title="t('reset_voicing')"
-        :disabled="!isUserChord"
-        @click="resetUserChord()"
+        :disabled="!store.isUserChord"
+        @click="emit('reset')"
       >
         <IconReset />
       </button>

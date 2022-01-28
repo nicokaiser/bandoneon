@@ -1,5 +1,4 @@
 <script setup>
-import { computed } from 'vue';
 import { useStore } from '@/stores/main';
 import { useI18n } from 'vue-i18n';
 
@@ -10,20 +9,18 @@ const props = defineProps({
 const store = useStore();
 const { t } = useI18n();
 
-const side = computed(() => store.side);
 const setSide = (value) => {
   if (!props.readonly) store.side = value;
 };
 const toggleSide = () => {
-  setSide(side.value === 'right' ? 'left' : 'right');
+  setSide(store.side === 'right' ? 'left' : 'right');
 };
 
-const direction = computed(() => store.direction);
 const setDirection = (value) => {
   if (!props.readonly) store.direction = value;
 };
 const toggleDirection = () => {
-  setDirection(direction.value === 'open' ? 'close' : 'open');
+  setDirection(store.direction === 'open' ? 'close' : 'open');
 };
 </script>
 
@@ -34,7 +31,7 @@ const toggleDirection = () => {
         <span
           :class="[
             'label text-end pe-2',
-            side === 'left' ? 'fw-bold' : 'text-muted',
+            store.side === 'left' ? 'fw-bold' : 'text-muted',
           ]"
           @click.prevent="toggleSide"
         >
@@ -43,7 +40,7 @@ const toggleDirection = () => {
 
         <div class="form-check-inline form-switch mx-0">
           <input
-            :checked="side === 'right'"
+            :checked="store.side === 'right'"
             class="form-check-input"
             type="checkbox"
             :disabled="readonly"
@@ -54,7 +51,7 @@ const toggleDirection = () => {
         <span
           :class="[
             'label text-start ps-2',
-            side === 'right' ? 'fw-bold' : 'text-muted',
+            store.side === 'right' ? 'fw-bold' : 'text-muted',
           ]"
           @click.prevent="toggleSide"
         >
@@ -66,7 +63,7 @@ const toggleDirection = () => {
         <span
           :class="[
             'label text-end pe-2',
-            direction === 'close' ? 'fw-bold' : 'text-muted',
+            store.direction === 'close' ? 'fw-bold' : 'text-muted',
           ]"
           @click.prevent="toggleDirection"
         >
@@ -75,7 +72,7 @@ const toggleDirection = () => {
 
         <div class="form-check-inline form-switch mx-0">
           <input
-            :checked="direction === 'open'"
+            :checked="store.direction === 'open'"
             class="form-check-input"
             type="checkbox"
             :disabled="readonly"
@@ -86,7 +83,7 @@ const toggleDirection = () => {
         <span
           :class="[
             'label text-start ps-2',
-            direction === 'open' ? 'fw-bold' : 'text-muted',
+            store.direction === 'open' ? 'fw-bold' : 'text-muted',
           ]"
           @click.prevent="toggleDirection"
         >
