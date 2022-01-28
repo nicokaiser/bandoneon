@@ -1,15 +1,15 @@
-<script setup>
+<script setup lang="ts">
 import { computed, ref, watch } from 'vue';
-import { useKeyboardNavigation } from '@/composables/useKeyboardNavigation';
+import { useKeyboardNavigation } from '../composables/useKeyboardNavigation';
 import NavVariant from '@/components/NavVariant.vue';
 import NavTonic from '@/components/NavTonic.vue';
 import NavDisplay from '@/components/NavDisplay.vue';
-import { useStore } from '@/stores/main';
-import { useSettingsStore } from '@/stores/settings';
+import { useStore } from '../stores/main';
+import { useSettingsStore } from '../stores/settings';
 import Note from '@tonaljs/note';
 import Scale from '@tonaljs/scale';
-import download from '@/helpers/download';
-import helmholtz from '@/helpers/helmholtz';
+import download from '../helpers/download';
+import helmholtz from '../helpers/helmholtz';
 
 useKeyboardNavigation();
 
@@ -33,20 +33,20 @@ const store = useStore();
 const settings = useSettingsStore();
 
 const modified = ref(false);
-const userSelected = ref({});
+const userSelected = ref<Record<string, boolean>>({});
 
-const format = (tonal) => {
+const format = (tonal: string): string[] => {
   const note = Note.get(store.showEnharmonics ? Note.enharmonic(tonal) : tonal);
-  if (note.empty) return '';
+  if (note.empty) return ['', ''];
 
   if (settings.pitchNotation === 'helmholtz') {
     return [helmholtz(note.name), ''];
   }
 
-  return [note.pc.replace('b', '♭').replace('#', '♯'), note.oct];
+  return [note.pc.replace('b', '♭').replace('#', '♯'), '' + note.oct];
 };
 
-const getScaleColor = (octave) => {
+const getScaleColor = (octave: number) => {
   return COLORS_SCALE[octave % COLORS_SCALE.length];
 };
 
@@ -86,7 +86,7 @@ const scalePaths = computed(() => {
   return [];
 });
 
-const fill = (tonal) => {
+const fill = (tonal: string) => {
   let octave = +tonal.slice(1);
   if (tonal[1] === '#') octave = +tonal.slice(2);
   return store.showColors
@@ -122,7 +122,7 @@ watch([side, tonic, chordType], resetSelected);
 const selected = computed(() => {
   if (modified.value) return userSelected.value;
 
-  const result = {};
+  const result: Record<string, boolean> = {};
 
   const chord = store.chordNotes;
   if (chord) {
@@ -133,7 +133,7 @@ const selected = computed(() => {
   return result;
 });
 
-const toggle = (tonal) => {
+const toggle = (tonal: string) => {
   if (!modified.value) {
     userSelected.value = { ...selected.value };
     modified.value = true;
@@ -146,7 +146,7 @@ const toggle = (tonal) => {
 };
 
 const onSave = () => {
-  if (modified.value) {
+  if (modified.value && store.chordName) {
     settings.saveUserChord(
       store.side,
       store.chordName,
@@ -160,7 +160,7 @@ const onSave = () => {
 
 const onReset = () => {
   resetSelected();
-  settings.resetUserChord(store.side, store.chordName);
+  if (store.chordName) settings.resetUserChord(store.side, store.chordName);
 };
 </script>
 

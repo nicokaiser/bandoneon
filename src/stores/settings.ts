@@ -16,7 +16,7 @@ export const useSettingsStore = defineStore('settings', {
   },
 
   actions: {
-    saveUserChord(side: string, chordName: string, notes: Array<string>) {
+    saveUserChord(side: string, chordName: string, notes: string[]) {
       if (!this.userChords[side]) this.userChords[side] = {};
       this.userChords[side][chordName] = [...notes];
     },

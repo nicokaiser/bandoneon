@@ -1,10 +1,10 @@
-<script setup>
-import { useStore } from '@/stores/main';
+<script setup lang="ts">
+import { useStore } from '../stores/main';
 import { enharmonic } from '@tonaljs/note';
 
 const store = useStore();
 
-const format = (noteName) => {
+const format = (noteName: string): string => {
   if (!store.showEnharmonics) {
     return noteName.replace('#', '♯');
   }

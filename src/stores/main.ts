@@ -6,15 +6,18 @@ import INSTRUMENTS from '../constants/instruments';
 
 const NOTES = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
 
+const chords = <any>CHORDS;
+const instruments = <any>INSTRUMENTS;
+
 export const useStore = defineStore('main', {
   state: () => ({
     showColors: false,
     showEnharmonics: false,
     side: 'right',
     direction: 'open',
-    tonic: null,
-    chordType: null,
-    scaleType: null,
+    tonic: null as null | string,
+    chordType: null as null | string,
+    scaleType: null as null | string,
   }),
 
   getters: {
@@ -31,7 +34,7 @@ export const useStore = defineStore('main', {
       return null;
     },
 
-    chordNotes() {
+    chordNotes(): string[] {
       const settings = useSettingsStore();
 
       if (this.side && this.direction && this.chordName) {
@@ -42,7 +45,7 @@ export const useStore = defineStore('main', {
           return settings.userChords[this.side][this.chordName];
         }
 
-        return CHORDS[`${this.side}-${this.direction}`][this.chordName];
+        return chords[`${this.side}-${this.direction}`][this.chordName];
       }
       return [];
     },
@@ -64,8 +67,9 @@ export const useStore = defineStore('main', {
       const settings = useSettingsStore();
 
       if (!settings.instrument) return [];
+
       const keys =
-        INSTRUMENTS[settings.instrument][state.side + '-' + state.direction];
+        instruments[settings.instrument][state.side + '-' + state.direction];
       if (!keys) return [];
 
       const positions = [];
@@ -73,8 +77,11 @@ export const useStore = defineStore('main', {
       let offsetY = 0;
 
       // Center
-      const cols = Math.max(...keys.map((row) => row.length));
-      const rows = keys.reduce((acc, row) => acc + (row.length > 0 ? 1 : 0), 0);
+      const cols = Math.max(...keys.map((row: Array<any>) => row.length));
+      const rows = keys.reduce(
+        (acc: number, row: Array<any>) => acc + (row.length > 0 ? 1 : 0),
+        0
+      );
       if (cols < 9) offsetX += 39 * (9 - cols);
       if (rows < 6) offsetY -= 32 * (6 - rows);
 
@@ -97,7 +104,7 @@ export const useStore = defineStore('main', {
   },
 
   actions: {
-    setTonic(tonic) {
+    setTonic(tonic: string | null) {
       if (!tonic) {
         this.tonic = null;
         this.chordType = null;
@@ -110,13 +117,13 @@ export const useStore = defineStore('main', {
       }
     },
 
-    setScaleType(scaleType) {
+    setScaleType(scaleType: string | null) {
       if (this.chordType) this.chordType = null;
       if (!this.tonic) this.tonic = 'C';
       this.scaleType = scaleType;
     },
 
-    setChordType(chordType) {
+    setChordType(chordType: string | null) {
       if (this.scaleType) this.scaleType = null;
       if (!this.tonic) this.tonic = 'C';
       this.chordType = chordType;

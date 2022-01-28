@@ -1,5 +1,5 @@
 <script setup>
-import { useStore } from '@/stores/main';
+import { useStore } from '../stores/main';
 import { useI18n } from 'vue-i18n';
 
 const props = defineProps({

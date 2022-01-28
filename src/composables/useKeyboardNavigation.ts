@@ -1,14 +1,14 @@
 import { onMounted, onUnmounted } from 'vue';
-import { useStore } from '@/stores/main';
+import { useStore } from '../stores/main';
 
 export function useKeyboardNavigation() {
   const store = useStore();
 
-  function setSideAndDirection(side, direction) {
+  function setSideAndDirection(side: string, direction: string) {
     store.$patch({ side, direction });
   }
 
-  function listener({ key }) {
+  function listener({ key }: { key: string }) {
     if (key === 'l') return setSideAndDirection('left', 'open');
     if (key === 'L') return setSideAndDirection('left', 'close');
     if (key === 'r') return setSideAndDirection('right', 'open');
