@@ -2,6 +2,10 @@
 import { useStore } from '../stores/main';
 import { enharmonic } from '@tonaljs/note';
 
+defineProps({
+  disabled: Boolean,
+});
+
 const store = useStore();
 
 const format = (noteName: string): string => {
@@ -27,6 +31,7 @@ const format = (noteName: string): string => {
           'btn btn-outline-secondary mx-1 my-1',
           item === store.tonic ? 'active' : null,
         ]"
+        :disabled="disabled"
         style="width: 3em"
         @click="store.setTonic(item === store.tonic ? null : item)"
       >
@@ -42,6 +47,7 @@ const format = (noteName: string): string => {
           'btn btn-outline-secondary mx-1 my-1',
           item === store.tonic ? 'active' : null,
         ]"
+        :disabled="disabled"
         style="width: 3em"
         @click="store.setTonic(item === store.tonic ? null : item)"
       >
