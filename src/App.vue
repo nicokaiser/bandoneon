@@ -34,4 +34,9 @@ $nav-link-transition: none;
 .container {
   max-width: 750px;
 }
+
+.bi {
+  display: inline-block;
+  vertical-align: -0.125em;
+}
 </style>
