@@ -68,8 +68,10 @@ export const useStore = defineStore('main', {
 
       if (!settings.instrument) return [];
 
-      const keys =
-        instruments[settings.instrument][state.side + '-' + state.direction];
+      const keys = Array.isArray(instruments[settings.instrument][state.side])
+        ? instruments[settings.instrument][state.side]
+        : instruments[settings.instrument][state.side][state.direction];
+
       if (!keys) return [];
 
       const positions: [number, number, string][] = [];
