@@ -19,9 +19,9 @@ A little JavaScript application that wants to help learning the bandoneon.
 
 ### Nico Kaiser
 
-+ https://twitter.com/nicokaiser
-+ https://kaiser.me
-+ https://github/nicokaiser
+- https://twitter.com/nicokaiser
+- https://kaiser.me
+- https://github/nicokaiser
 
 ## License
 

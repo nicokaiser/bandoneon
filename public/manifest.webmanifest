@@ -1,14 +1,14 @@
 {
-    "name": "Bandoneon",
-    "start_url": "/",
-    "display": "standalone",
-    "theme_color": "white",
-    "background_color": "white",
-    "icons": [
-        {
-            "src": "/icons-256.png",
-            "sizes": "256x256",
-            "type": "image/png"
-        }
-    ]
+  "name": "Bandoneon",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "white",
+  "background_color": "white",
+  "icons": [
+    {
+      "src": "/icons-256.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    }
+  ]
 }
