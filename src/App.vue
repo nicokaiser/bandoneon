@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { watch } from 'vue';
 import { useI18n } from 'vue-i18n';
-import TheHeader from '@/components/TheHeader.vue';
 import { useSettingsStore } from './stores/settings';
+import TheHeader from './components/TheHeader.vue';
 
 const settings = useSettingsStore();
 const { locale } = useI18n();

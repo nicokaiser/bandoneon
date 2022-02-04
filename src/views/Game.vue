@@ -5,9 +5,9 @@ import { useSettingsStore } from '../stores/settings';
 import { useI18n } from 'vue-i18n';
 import Note from '@tonaljs/note';
 import helmholtz from '../helpers/helmholtz';
-import NavVariant from '@/components/NavVariant.vue';
-import NavTonic from '@/components/NavTonic.vue';
-import BaseModal from '@/components/BaseModal.vue';
+import NavVariant from '../components/NavVariant.vue';
+import NavTonic from '../components/NavTonic.vue';
+import BaseModal from '../components/BaseModal.vue';
 
 const svg = ref();
 const modal = ref();

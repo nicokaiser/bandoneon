@@ -10,10 +10,7 @@
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "lib": ["esnext", "dom"],
-    "types": ["@intlify/vite-plugin-vue-i18n/client", "@types/bootstrap"],
-    "paths": {
-      "@/*": ["./src"]
-    }
+    "types": ["@intlify/vite-plugin-vue-i18n/client", "@types/bootstrap"]
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
   "references": [{ "path": "./tsconfig.node.json" }]
