@@ -41,5 +41,22 @@
     "typescript": "^4.5.5",
     "vite": "^2.7.13",
     "vue-tsc": "^0.31.1"
+  },
+  "prettier": {
+    "singleQuote": true
+  },
+  "eslintConfig": {
+    "extends": [
+      "eslint:recommended",
+      "plugin:vue/vue3-recommended",
+      "plugin:prettier/recommended",
+      "@vue/eslint-config-typescript",
+      "prettier"
+    ],
+    "globals": {
+      "defineEmits": true,
+      "defineExpose": true,
+      "defineProps": true
+    }
   }
 }
