@@ -29,7 +29,6 @@ const { availableLocales } = useI18n({ useScope: 'global' });
           <label v-t="'keyboard'" for="floatingSelectInstrument" />
         </div>
       </div>
-
       <div class="my-3">
         <div class="form-floating">
           <select
@@ -47,7 +46,6 @@ const { availableLocales } = useI18n({ useScope: 'global' });
           <label v-t="'pitch_notation'" for="floatingSelectPitchNotation" />
         </div>
       </div>
-
       <div class="my-3">
         <div class="form-floating">
           <select
@@ -65,7 +63,6 @@ const { availableLocales } = useI18n({ useScope: 'global' });
           <label v-t="'language'" for="floatingSelectLocale" />
         </div>
       </div>
-
       <div v-if="route.name === 'game'" class="my-3">
         <div class="form-floating">
           <select
@@ -83,7 +80,6 @@ const { availableLocales } = useI18n({ useScope: 'global' });
           <label v-t="'difficulty'" for="floatingSelectDifficulty" />
         </div>
       </div>
-
       <div class="mb-0 d-flex justify-content-between text-muted small">
         <div>
           <router-link

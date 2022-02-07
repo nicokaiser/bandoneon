@@ -45,7 +45,6 @@ const onDirectionChange = (event: Event) => {
         >
           {{ t('left') }}
         </span>
-
         <div class="form-check-inline form-switch mx-0">
           <input
             :checked="store.side === 'right'"
@@ -55,7 +54,6 @@ const onDirectionChange = (event: Event) => {
             @change="onSideChange"
           />
         </div>
-
         <span
           :class="[
             'label text-start ps-3',
@@ -66,7 +64,6 @@ const onDirectionChange = (event: Event) => {
           {{ t('right') }}
         </span>
       </div>
-
       <div class="col-12 col-sm-6 text-center text-nowrap mb-2">
         <span
           :class="[
@@ -77,7 +74,6 @@ const onDirectionChange = (event: Event) => {
         >
           {{ t('close') }}
         </span>
-
         <div class="form-check-inline form-switch mx-0">
           <input
             :checked="store.direction === 'open'"
@@ -87,7 +83,6 @@ const onDirectionChange = (event: Event) => {
             @change="onDirectionChange"
           />
         </div>
-
         <span
           :class="[
             'label text-start ps-3',

@@ -175,7 +175,6 @@ const correctPercentage = computed(() => progress.value[2]);
         :stroke="idx === currentPosition ? '#495057' : strokeColor(idx)"
         :stroke-width="idx === currentPosition ? 2 : 1"
       />
-
       <text
         v-if="idx === currentPosition || typeof guessed[idx] === 'number'"
         :x="x + 29"
@@ -191,7 +190,6 @@ const correctPercentage = computed(() => progress.value[2]);
           {{ idx === currentPosition ? oct : format(tonal)[1] }}
         </tspan>
       </text>
-
       <text
         v-else-if="typeof guessed[idx] !== 'number'"
         :x="x + 29"
@@ -204,10 +202,8 @@ const correctPercentage = computed(() => progress.value[2]);
       </text>
     </g>
   </svg>
-
   <NavVariant :readonly="currentPosition > 0" />
   <NavTonic />
-
   <div v-if="!easyMode" class="mb-2 text-center">
     <button
       v-for="octave in octaves"
@@ -223,33 +219,28 @@ const correctPercentage = computed(() => progress.value[2]);
       {{ formatOctave(octave) }}
     </button>
   </div>
-
   <div class="progress mt-4">
     <div
       class="progress-bar bg-success"
       role="progressbar"
       :style="`width: ${progress[2]}%`"
     ></div>
-
     <div
       class="progress-bar bg-warning"
       role="progressbar"
       :style="`width: ${progress[1]}%`"
     ></div>
-
     <div
       class="progress-bar bg-danger"
       role="progressbar"
       :style="`width: ${progress[0]}%`"
     ></div>
   </div>
-
   <BaseModal ref="modal">
     <p class="text-center m-4 fs-5">
       <strong>{{ correctPercentage }}%</strong>
       {{ t('correct') }}
     </p>
-
     <div class="text-center m-4">
       <button
         class="btn btn-primary"

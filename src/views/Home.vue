@@ -186,7 +186,6 @@ const onReset = () => {
         :stroke-width="selected[tonal] ? 2 : 1"
         :fill-opacity="selected[tonal] ? 0.7 : 0.2"
       />
-
       <text
         :x="x + 29"
         :y="y + 36"
@@ -201,7 +200,6 @@ const onReset = () => {
         </tspan>
       </text>
     </g>
-
     <path
       v-for="(path, index) in scalePaths"
       :key="index"
@@ -214,7 +212,6 @@ const onReset = () => {
       fill="none"
     />
   </svg>
-
   <NavVariant />
   <NavTonic />
   <NavDisplay
