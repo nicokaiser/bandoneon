@@ -5,8 +5,7 @@ updates:
     schedule:
       interval: "weekly"
     commit-message:
-      prefix: "deps"
-      prefix-development: "chore"
+      prefix: "chore"
       include: "scope"
 
   - package-ecosystem: "docker"
