@@ -4,15 +4,15 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
-      commit-message:
-        prefix: "deps"
-        prefix-development: "chore"
-        include: "scope"
+    commit-message:
+      prefix: "deps"
+      prefix-development: "chore"
+      include: "scope"
 
   - package-ecosystem: "docker"
     directory: "/"
     schedule:
       interval: "weekly"
-      commit-message:
-        prefix: "deps"
-        include: "scope"
+    commit-message:
+      prefix: "deps"
+      include: "scope"
