@@ -18,7 +18,7 @@ watch(
   <TheHeader />
 
   <div class="container px-3 my-4">
-    <router-view />
+    <RouterView />
   </div>
 </template>
 

@@ -17,10 +17,10 @@ watch(
 <template>
   <nav class="navbar navbar-light">
     <div class="container px-3 py-2">
-      <router-link :to="{ name: 'home' }" class="navbar-brand me-auto mb-0 h1">
+      <RouterLink :to="{ name: 'home' }" class="navbar-brand me-auto mb-0 h1">
         Bandoneon.app
         <span v-if="route.name === 'game'" class="ms-2 text-muted"> Game </span>
-      </router-link>
+      </RouterLink>
       <button class="navbar-toggler" type="button" @click="toggle">
         <span class="navbar-toggler-icon"></span>
       </button>

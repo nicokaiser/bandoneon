@@ -82,13 +82,13 @@ const { availableLocales } = useI18n({ useScope: 'global' });
       </div>
       <div class="mb-0 d-flex justify-content-between text-muted small">
         <div>
-          <router-link
+          <RouterLink
             v-if="route.name !== 'game'"
             :to="{ name: 'game' }"
             class="link-secondary me-1"
           >
             Play a game!
-          </router-link>
+          </RouterLink>
         </div>
         <a
           href="mailto:nico@kaiser.me?subject=Bandoneon.app%20Feedback"

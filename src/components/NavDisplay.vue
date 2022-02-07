@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n';
 import { useStore } from '../stores/main';
-import IconReset from './icon/IconReset.vue';
-import IconDownload from './icon/IconDownload.vue';
-import IconColors from './icon/IconColors.vue';
-import IconPin from './icon/IconPin.vue';
+import IconReset from './icons/IconReset.vue';
+import IconDownload from './icons/IconDownload.vue';
+import IconColors from './icons/IconColors.vue';
+import IconPin from './icons/IconPin.vue';
 
 defineProps({
   modified: Boolean,
