@@ -1,4 +1,4 @@
-FROM node:16-slim as build-stage
+FROM node:17-slim as build-stage
 WORKDIR /app
 COPY package*.json ./
 RUN npm ci
