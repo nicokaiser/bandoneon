@@ -4,14 +4,15 @@
     "useDefineForClassFields": true,
     "module": "esnext",
     "moduleResolution": "node",
+    "isolatedModules": true,
     "strict": true,
     "jsx": "preserve",
     "sourceMap": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
-    "lib": ["esnext", "dom"],
-    "types": ["@intlify/vite-plugin-vue-i18n/client", "@types/bootstrap"]
+    "lib": ["esnext", "dom", "dom.iterable", "scripthost"],
+    "types": ["@intlify/vite-plugin-vue-i18n/client", "@types/bootstrap"],
+    "skipLibCheck": true
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "include": ["vite.config.*", "env.d.ts", "src/**/*", "src/**/*.vue"]
 }
