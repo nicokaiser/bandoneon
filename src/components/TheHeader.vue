@@ -21,11 +21,13 @@ watch(
         Bandoneon.app
         <span v-if="route.name === 'game'" class="ms-2 text-muted"> Game </span>
       </RouterLink>
+
       <button class="navbar-toggler" type="button" @click="toggle">
         <span class="navbar-toggler-icon"></span>
       </button>
     </div>
   </nav>
+
   <BaseCollapse ref="collapse">
     <TheSettings />
   </BaseCollapse>

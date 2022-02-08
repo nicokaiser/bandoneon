@@ -212,6 +212,7 @@ const onReset = () => {
       fill="none"
     />
   </svg>
+
   <NavVariant />
   <NavTonic />
   <NavDisplay

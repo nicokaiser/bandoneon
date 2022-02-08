@@ -202,8 +202,10 @@ const correctPercentage = computed(() => progress.value[2]);
       </text>
     </g>
   </svg>
+
   <NavVariant :readonly="currentPosition > 0" />
   <NavTonic />
+
   <div v-if="!easyMode" class="mb-2 text-center">
     <button
       v-for="octave in octaves"
@@ -219,6 +221,7 @@ const correctPercentage = computed(() => progress.value[2]);
       {{ formatOctave(octave) }}
     </button>
   </div>
+
   <div class="progress mt-4">
     <div
       class="progress-bar bg-success"
@@ -236,11 +239,13 @@ const correctPercentage = computed(() => progress.value[2]);
       :style="`width: ${progress[0]}%`"
     ></div>
   </div>
+
   <BaseModal ref="modal">
     <p class="text-center m-4 fs-5">
       <strong>{{ correctPercentage }}%</strong>
       {{ t('correct') }}
     </p>
+
     <div class="text-center m-4">
       <button
         class="btn btn-primary"

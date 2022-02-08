@@ -26,9 +26,11 @@ const { availableLocales } = useI18n({ useScope: 'global' });
               :value="item"
             />
           </select>
+
           <label v-t="'keyboard'" for="floatingSelectInstrument" />
         </div>
       </div>
+
       <div class="my-3">
         <div class="form-floating">
           <select
@@ -43,9 +45,11 @@ const { availableLocales } = useI18n({ useScope: 'global' });
               :value="item"
             />
           </select>
+
           <label v-t="'pitch_notation'" for="floatingSelectPitchNotation" />
         </div>
       </div>
+
       <div class="my-3">
         <div class="form-floating">
           <select
@@ -60,9 +64,11 @@ const { availableLocales } = useI18n({ useScope: 'global' });
               :value="item"
             />
           </select>
+
           <label v-t="'language'" for="floatingSelectLocale" />
         </div>
       </div>
+
       <div v-if="route.name === 'game'" class="my-3">
         <div class="form-floating">
           <select
@@ -77,9 +83,11 @@ const { availableLocales } = useI18n({ useScope: 'global' });
               :value="item"
             />
           </select>
+
           <label v-t="'difficulty'" for="floatingSelectDifficulty" />
         </div>
       </div>
+
       <div class="mb-0 d-flex justify-content-between text-muted small">
         <div>
           <RouterLink
@@ -90,6 +98,7 @@ const { availableLocales } = useI18n({ useScope: 'global' });
             Play a game!
           </RouterLink>
         </div>
+
         <a
           href="mailto:nico@kaiser.me?subject=Bandoneon.app%20Feedback"
           class="link-secondary"

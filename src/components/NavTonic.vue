@@ -38,6 +38,7 @@ const format = (noteName: string): string => {
         {{ format(item) }}
       </button>
     </span>
+
     <span class="d-inline-block text-nowrap">
       <button
         v-for="item in store.allNotes.slice(6)"

@@ -31,6 +31,7 @@ const { t } = useI18n();
         {{ t(item) }}
       </button>
     </div>
+
     <div class="btn-group mx-2">
       <button
         v-for="item in store.allChordTypes"
@@ -44,6 +45,7 @@ const { t } = useI18n();
         {{ item }}
       </button>
     </div>
+
     <div class="btn-group mx-2">
       <button
         class="btn btn-outline-secondary my-2"
@@ -52,6 +54,7 @@ const { t } = useI18n();
       >
         {{ store.showEnharmonics ? '♯' : '♭' }}
       </button>
+
       <button
         :class="[
           'btn btn-outline-secondary my-2',
@@ -61,6 +64,7 @@ const { t } = useI18n();
       >
         <IconColors />
       </button>
+
       <button
         class="btn btn-outline-secondary my-2"
         :title="t('save_image')"
@@ -68,6 +72,7 @@ const { t } = useI18n();
       >
         <IconDownload />
       </button>
+
       <button
         class="btn btn-outline-secondary my-2"
         :title="t('save_voicing')"
@@ -76,6 +81,7 @@ const { t } = useI18n();
       >
         <IconPin />
       </button>
+
       <button
         class="btn btn-outline-secondary my-2"
         :title="t('reset_voicing')"
