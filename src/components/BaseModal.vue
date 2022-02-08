@@ -21,13 +21,15 @@ defineExpose({ show, hide });
 </script>
 
 <template>
-  <div ref="modal" class="modal fade" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-body">
-          <slot />
+  <Teleport to="body">
+    <div ref="modal" class="modal fade" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-body">
+            <slot />
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  </Teleport>
 </template>
