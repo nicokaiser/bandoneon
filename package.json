@@ -39,9 +39,9 @@
     "eslint-plugin-vue": "^8.5.0",
     "prettier": "^2.5.1",
     "sass": "^1.49.9",
-    "typescript": "^4.5.5",
-    "vite": "^2.8.5",
-    "vue-tsc": "^0.32.0"
+    "typescript": "^4.6.2",
+    "vite": "^2.8.6",
+    "vue-tsc": "^0.32.1"
   },
   "prettier": {
     "singleQuote": true
