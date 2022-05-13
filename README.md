@@ -2,6 +2,8 @@
 
 A little JavaScript application that wants to help learning the bandoneon.
 
+![Screenshot](./screenshot.png)
+
 ## Building
 
     npm install
@@ -22,6 +24,10 @@ A little JavaScript application that wants to help learning the bandoneon.
 - https://twitter.com/nicokaiser
 - https://kaiser.me
 - https://github/nicokaiser
+
+## Related projects
+
+- [Keyboard Accordion](https://github.com/taniarascia/accordion) by [taniarascia](https://github.com/taniarascia) lets you play the 3-row diatonic button accordion with your computer keyboard
 
 ## License
 
