@@ -13,5 +13,6 @@ LABEL maintainer="Nico Kaiser <nico@kaiser.me>" \
     org.label-schema.vcs-url="https://github.com/nicokaiser/bandoneon" \
     org.label-schema.vendor="Nico Kaiser" \
     org.label-schema.schema-version="1.0"
+    org.label-schema.version="3.2.3"
 COPY --from=build-stage /app/dist /usr/share/nginx/html
 COPY ./docker/default.conf /etc/nginx/conf.d
