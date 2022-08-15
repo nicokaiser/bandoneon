@@ -34,7 +34,7 @@ export default function download(svgElement: HTMLElement, filename: string) {
     a.href = uri;
     a.download = filename;
     a.click();
-    window.URL.revokeObjectURL(uri);
+    win.revokeObjectURL(uri);
     document.body.removeChild(a);
   };
 
