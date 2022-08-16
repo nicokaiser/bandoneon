@@ -59,7 +59,7 @@ const { availableLocales } = useI18n({ useScope: 'global' });
           >
             <option
               v-for="item in availableLocales"
-              :key="item"
+              :key="String(item)"
               v-t="'language-' + item"
               :value="item"
             />
