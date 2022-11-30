@@ -30,6 +30,7 @@
     "@intlify/vite-plugin-vue-i18n": "^6.0.3",
     "@types/bootstrap": "^5.2.6",
     "@types/node": "18.11.9",
+    "@vitejs/plugin-legacy": "^2.3.1",
     "@vitejs/plugin-vue": "^3.2.0",
     "@vue/eslint-config-typescript": "^11.0.2",
     "autoprefixer": "^10.4.13",
