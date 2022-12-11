@@ -27,7 +27,7 @@
     "vue-router": "^4.1.6"
   },
   "devDependencies": {
-    "@intlify/vite-plugin-vue-i18n": "^6.0.3",
+    "@intlify/unplugin-vue-i18n": "^0.8.1",
     "@types/bootstrap": "^5.2.6",
     "@types/node": "18.11.12",
     "@vitejs/plugin-legacy": "^2.3.1",
