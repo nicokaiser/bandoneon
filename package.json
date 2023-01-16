@@ -18,7 +18,7 @@
     "prettier": "prettier src --write"
   },
   "dependencies": {
-    "@tonaljs/note": "^4.8.0",
+    "@tonaljs/note": "^4.10.0",
     "@tonaljs/scale": "^4.8.0",
     "bootstrap": "^5.2.3",
     "pinia": "^2.0.28",
