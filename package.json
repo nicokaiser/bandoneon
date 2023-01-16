@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "@tonaljs/note": "^4.10.0",
-    "@tonaljs/scale": "^4.8.0",
+    "@tonaljs/scale": "^4.10.0",
     "bootstrap": "^5.2.3",
     "pinia": "^2.0.28",
     "vue": "^3.2.45",
