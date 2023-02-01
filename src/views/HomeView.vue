@@ -182,14 +182,14 @@ const onReset = () => {
         :cy="y + 29"
         r="28"
         :fill="fill(tonal)"
-        :stroke="selected[tonal] ? '#343a40' : '#adb5bd'"
+        style="stroke: var(--bs-tertiary-color)"
         :stroke-width="selected[tonal] ? 2 : 1"
         :fill-opacity="selected[tonal] ? 0.7 : 0.2"
       />
       <text
         :x="x + 29"
         :y="y + 36"
-        fill="#212529"
+        style="fill: var(--bs-body-color)"
         font-family="-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif"
         font-size="20px"
         text-anchor="middle"

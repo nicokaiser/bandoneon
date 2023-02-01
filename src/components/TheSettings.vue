@@ -10,7 +10,7 @@ const { availableLocales } = useI18n({ useScope: 'global' });
 </script>
 
 <template>
-  <div class="bg-light">
+  <div class="bg-body-tertiary">
     <div class="container px-3 py-4">
       <div class="my-3">
         <div class="form-floating">
@@ -88,7 +88,7 @@ const { availableLocales } = useI18n({ useScope: 'global' });
         </div>
       </div>
 
-      <div class="mb-0 d-flex justify-content-between text-muted small">
+      <div class="mb-0 d-flex justify-content-between small">
         <div>
           <RouterLink
             v-if="route.name !== 'game'"

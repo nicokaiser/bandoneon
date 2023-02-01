@@ -29,6 +29,9 @@ $transition-collapse-width: width 0.2s ease !default;
 $btn-transition: none;
 $nav-link-transition: none;
 
+$primary: #dee2e6; // $gray-300
+$body-color-dark: #f8f9fa; // $gray-100
+
 @import 'bootstrap/scss/bootstrap';
 
 .container {

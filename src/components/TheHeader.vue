@@ -15,7 +15,7 @@ watch(
 </script>
 
 <template>
-  <nav class="navbar navbar-light">
+  <nav class="navbar">
     <div class="container px-3 py-2">
       <RouterLink :to="{ name: 'home' }" class="navbar-brand me-auto mb-0 h1">
         Bandoneon.app

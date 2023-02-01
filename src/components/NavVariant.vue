@@ -39,7 +39,7 @@ const onDirectionChange = (event: Event) => {
         <span
           :class="[
             'label text-end pe-3',
-            store.side === 'left' ? 'fw-bold' : 'text-muted',
+            store.side === 'left' ? 'fw-bold' : 'text-secondary',
           ]"
           @click="toggleSide"
         >
@@ -59,7 +59,7 @@ const onDirectionChange = (event: Event) => {
         <span
           :class="[
             'label text-start ps-3',
-            store.side === 'right' ? 'fw-bold' : 'text-muted',
+            store.side === 'right' ? 'fw-bold' : 'text-secondary',
           ]"
           @click="toggleSide"
         >
@@ -71,7 +71,7 @@ const onDirectionChange = (event: Event) => {
         <span
           :class="[
             'label text-end pe-3',
-            store.direction === 'close' ? 'fw-bold' : 'text-muted',
+            store.direction === 'close' ? 'fw-bold' : 'text-secondary',
           ]"
           @click="toggleDirection"
         >
@@ -91,7 +91,7 @@ const onDirectionChange = (event: Event) => {
         <span
           :class="[
             'label text-start ps-3',
-            store.direction === 'open' ? 'fw-bold' : 'text-muted',
+            store.direction === 'open' ? 'fw-bold' : 'text-secondary',
           ]"
           @click="toggleDirection"
         >

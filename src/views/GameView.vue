@@ -179,7 +179,7 @@ const correctPercentage = computed(() => progress.value[2]);
         v-if="idx === currentPosition || typeof guessed[idx] === 'number'"
         :x="x + 29"
         :y="y + 36"
-        fill="#212529"
+        style="fill: var(--bs-body-color)"
         font-size="20px"
         text-anchor="middle"
       >
