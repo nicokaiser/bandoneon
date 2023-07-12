@@ -68,8 +68,8 @@ const octaves = computed(() => {
       positions.value.map((position) => {
         const name = position[2];
         return name[name.length - 1];
-      })
-    )
+      }),
+    ),
   )
     .map((item) => parseInt(item, 10))
     .sort();
@@ -151,7 +151,7 @@ const progress = computed(() => {
   }
 
   return result.map((value) =>
-    Math.round((value / positions.value.length) * 100)
+    Math.round((value / positions.value.length) * 100),
   );
 });
 

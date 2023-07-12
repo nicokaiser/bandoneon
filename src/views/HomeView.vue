@@ -58,7 +58,7 @@ const scalePaths = computed(() => {
 
     for (let o = -1; o < 7; o++) {
       const notes = intervals.map((i) =>
-        Note.transpose(`${store.tonic}${o}`, i)
+        Note.transpose(`${store.tonic}${o}`, i),
       );
       notes.push(`${store.tonic}${o + 1}`);
       let pathString = '';
@@ -67,7 +67,7 @@ const scalePaths = computed(() => {
         const no = Note.get(n);
 
         const pos = store.keyPositions.find(
-          (v) => Note.get(v[2]).height === no.height
+          (v) => Note.get(v[2]).height === no.height,
         );
 
         if (pos) {
@@ -151,8 +151,8 @@ const onSave = () => {
       store.side,
       store.chordName,
       Object.keys(userSelected.value).filter(
-        (item) => !!userSelected.value[item]
-      )
+        (item) => !!userSelected.value[item],
+      ),
     );
   }
   resetSelected();

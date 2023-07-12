@@ -22,7 +22,7 @@ export default function download(svgElement: HTMLElement, filename: string) {
       margin,
       margin,
       canvas.width - 2 * margin,
-      canvas.height - 2 * margin
+      canvas.height - 2 * margin,
     );
     win.revokeObjectURL(url);
     const uri = canvas

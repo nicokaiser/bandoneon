@@ -82,7 +82,7 @@ export const useStore = defineStore('main', {
       const cols = Math.max(...keys.map((row: Array<any>) => row.length));
       const rows = keys.reduce(
         (acc: number, row: Array<any>) => acc + (row.length > 0 ? 1 : 0),
-        0
+        0,
       );
       if (cols < 9) offsetX += 39 * (9 - cols);
       if (rows < 6) offsetY -= 32 * (6 - rows);

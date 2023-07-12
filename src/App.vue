@@ -10,7 +10,7 @@ locale.value = settings.locale;
 
 watch(
   () => settings.locale,
-  () => (locale.value = settings.locale)
+  () => (locale.value = settings.locale),
 );
 </script>
 

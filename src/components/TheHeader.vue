@@ -10,7 +10,7 @@ const toggle = () => collapse.value.toggle();
 
 watch(
   () => route.path,
-  () => collapse.value.hide()
+  () => collapse.value.hide(),
 );
 </script>
 
