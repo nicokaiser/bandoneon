@@ -1,6 +1,6 @@
 {
   "name": "bandoneon",
-  "version": "3.5.3",
+  "version": "3.5.4",
   "description": "A little JavaScript application that wants to help learning the Alfred Arnold 142 bandoneon.",
   "private": true,
   "repository": {
