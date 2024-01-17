@@ -1,37 +1,3 @@
-<script setup lang="ts">
-import { useStore } from '../stores/main';
-import { useI18n } from 'vue-i18n';
-
-const props = defineProps({
-  readonly: Boolean,
-});
-
-const store = useStore();
-const { t } = useI18n();
-
-const toggleSide = () => {
-  if (props.readonly) return;
-  store.side = store.side === 'right' ? 'left' : 'right';
-};
-
-const onSideChange = (event: Event) => {
-  if (props.readonly) return;
-  const checked = (event.target as HTMLInputElement).checked;
-  store.side = checked ? 'right' : 'left';
-};
-
-const toggleDirection = () => {
-  if (props.readonly) return;
-  store.direction = store.direction === 'open' ? 'close' : 'open';
-};
-
-const onDirectionChange = (event: Event) => {
-  if (props.readonly) return;
-  const checked = (event.target as HTMLInputElement).checked;
-  store.direction = checked ? 'open' : 'close';
-};
-</script>
-
 <template>
   <div class="d-print-none container mb-4">
     <div class="row">
@@ -101,6 +67,40 @@ const onDirectionChange = (event: Event) => {
     </div>
   </div>
 </template>
+
+<script setup lang="ts">
+import { useStore } from '../stores/main';
+import { useI18n } from 'vue-i18n';
+
+const props = defineProps({
+  readonly: Boolean,
+});
+
+const store = useStore();
+const { t } = useI18n();
+
+const toggleSide = () => {
+  if (props.readonly) return;
+  store.side = store.side === 'right' ? 'left' : 'right';
+};
+
+const onSideChange = (event: Event) => {
+  if (props.readonly) return;
+  const checked = (event.target as HTMLInputElement).checked;
+  store.side = checked ? 'right' : 'left';
+};
+
+const toggleDirection = () => {
+  if (props.readonly) return;
+  store.direction = store.direction === 'open' ? 'close' : 'open';
+};
+
+const onDirectionChange = (event: Event) => {
+  if (props.readonly) return;
+  const checked = (event.target as HTMLInputElement).checked;
+  store.direction = checked ? 'open' : 'close';
+};
+</script>
 
 <style lang="scss" scoped>
 $primary: #6c757d;

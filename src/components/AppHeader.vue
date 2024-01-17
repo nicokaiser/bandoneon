@@ -1,19 +1,3 @@
-<script setup lang="ts">
-import { ref, watch } from 'vue';
-import { useRoute } from 'vue-router';
-import BaseCollapse from './BaseCollapse.vue';
-import AppSettings from './AppSettings.vue';
-
-const route = useRoute();
-const collapse = ref();
-const toggle = () => collapse.value.toggle();
-
-watch(
-  () => route.path,
-  () => collapse.value.hide(),
-);
-</script>
-
 <template>
   <nav class="navbar">
     <div class="container px-3 py-2">
@@ -32,6 +16,22 @@ watch(
     <AppSettings />
   </BaseCollapse>
 </template>
+
+<script setup lang="ts">
+import { ref, watch } from 'vue';
+import { useRoute } from 'vue-router';
+import BaseCollapse from './BaseCollapse.vue';
+import AppSettings from './AppSettings.vue';
+
+const route = useRoute();
+const collapse = ref();
+const toggle = () => collapse.value.toggle();
+
+watch(
+  () => route.path,
+  () => collapse.value.hide(),
+);
+</script>
 
 <style scoped>
 .navbar-toggler {

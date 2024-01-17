@@ -1,21 +1,3 @@
-<script setup lang="ts">
-import { useI18n } from 'vue-i18n';
-import { useStore } from '../stores/main';
-import IconReset from './icons/IconReset.vue';
-import IconDownload from './icons/IconDownload.vue';
-import IconColors from './icons/IconColors.vue';
-import IconPin from './icons/IconPin.vue';
-
-defineProps({
-  modified: Boolean,
-});
-
-const emit = defineEmits(['download', 'save', 'reset']);
-
-const store = useStore();
-const { t } = useI18n();
-</script>
-
 <template>
   <div class="mb-2 text-center d-print-none">
     <div class="btn-group mx-2">
@@ -93,3 +75,21 @@ const { t } = useI18n();
     </div>
   </div>
 </template>
+
+<script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+import { useStore } from '../stores/main';
+import IconReset from './icons/IconReset.vue';
+import IconDownload from './icons/IconDownload.vue';
+import IconColors from './icons/IconColors.vue';
+import IconPin from './icons/IconPin.vue';
+
+defineProps({
+  modified: Boolean,
+});
+
+const emit = defineEmits(['download', 'save', 'reset']);
+
+const store = useStore();
+const { t } = useI18n();
+</script>

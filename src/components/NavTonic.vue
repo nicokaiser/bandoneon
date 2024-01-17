@@ -1,26 +1,3 @@
-<script setup lang="ts">
-import { useStore } from '../stores/main';
-import { enharmonic } from '@tonaljs/note';
-
-defineProps({
-  disabled: Boolean,
-});
-
-const store = useStore();
-
-const format = (noteName: string): string => {
-  if (!store.showEnharmonics) {
-    return noteName.replace('#', '♯');
-  }
-
-  if (noteName.length === 2 && noteName[1] === '#') {
-    return enharmonic(noteName).replace('b', '♭');
-  }
-
-  return noteName;
-};
-</script>
-
 <template>
   <div class="mb-2 text-center d-print-none">
     <span class="d-inline-block text-nowrap">
@@ -56,3 +33,26 @@ const format = (noteName: string): string => {
     </span>
   </div>
 </template>
+
+<script setup lang="ts">
+import { useStore } from '../stores/main';
+import { enharmonic } from '@tonaljs/note';
+
+defineProps({
+  disabled: Boolean,
+});
+
+const store = useStore();
+
+const format = (noteName: string): string => {
+  if (!store.showEnharmonics) {
+    return noteName.replace('#', '♯');
+  }
+
+  if (noteName.length === 2 && noteName[1] === '#') {
+    return enharmonic(noteName).replace('b', '♭');
+  }
+
+  return noteName;
+};
+</script>

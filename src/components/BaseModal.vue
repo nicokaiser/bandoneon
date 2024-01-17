@@ -1,3 +1,17 @@
+<template>
+  <Teleport to="body">
+    <div ref="modal" class="modal fade" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-body">
+            <slot />
+          </div>
+        </div>
+      </div>
+    </div>
+  </Teleport>
+</template>
+
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref } from 'vue';
 import { Modal } from 'bootstrap';
@@ -19,17 +33,3 @@ const hide = () => bsModal.hide();
 
 defineExpose({ show, hide });
 </script>
-
-<template>
-  <Teleport to="body">
-    <div ref="modal" class="modal fade" tabindex="-1">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-body">
-            <slot />
-          </div>
-        </div>
-      </div>
-    </div>
-  </Teleport>
-</template>

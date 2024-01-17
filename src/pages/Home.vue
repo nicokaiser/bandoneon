@@ -1,3 +1,62 @@
+<template>
+  <svg
+    ref="svg"
+    class="keyboard mb-4"
+    viewBox="0 0 690 410"
+    width="720"
+    height="428"
+  >
+    <g
+      v-for="([x, y, tonal], idx) in store.keyPositions"
+      :key="idx"
+      @click="toggle(tonal)"
+    >
+      <circle
+        :cx="x + 29"
+        :cy="y + 29"
+        r="28"
+        :fill="fill(tonal)"
+        style="stroke: var(--bs-tertiary-color)"
+        :stroke-width="selected[tonal] ? 2 : 1"
+        :fill-opacity="selected[tonal] ? 0.7 : 0.2"
+      />
+      <text
+        :x="x + 29"
+        :y="y + 36"
+        style="fill: var(--bs-body-color)"
+        font-family="-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif"
+        font-size="20px"
+        text-anchor="middle"
+      >
+        <tspan>{{ format(tonal)[0] }}</tspan>
+        <tspan dx="2" font-size="16px">
+          {{ format(tonal)[1] }}
+        </tspan>
+      </text>
+    </g>
+    <path
+      v-for="(path, index) in scalePaths"
+      :key="index"
+      :stroke="getScaleColor(index)"
+      :d="path"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-opacity="0.7"
+      stroke-width="3px"
+      fill="none"
+    />
+  </svg>
+
+  <NavVariant />
+  <NavTonic />
+  <NavDisplay
+    :modified="modified"
+    @reset="onReset"
+    @download="onDownload"
+    @save="onSave"
+  />
+</template>
+
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue';
 import { useKeyboardNavigation } from '../composables/useKeyboardNavigation';
@@ -163,65 +222,6 @@ const onReset = () => {
   if (store.chordName) settings.resetUserChord(store.side, store.chordName);
 };
 </script>
-
-<template>
-  <svg
-    ref="svg"
-    class="keyboard mb-4"
-    viewBox="0 0 690 410"
-    width="720"
-    height="428"
-  >
-    <g
-      v-for="([x, y, tonal], idx) in store.keyPositions"
-      :key="idx"
-      @click="toggle(tonal)"
-    >
-      <circle
-        :cx="x + 29"
-        :cy="y + 29"
-        r="28"
-        :fill="fill(tonal)"
-        style="stroke: var(--bs-tertiary-color)"
-        :stroke-width="selected[tonal] ? 2 : 1"
-        :fill-opacity="selected[tonal] ? 0.7 : 0.2"
-      />
-      <text
-        :x="x + 29"
-        :y="y + 36"
-        style="fill: var(--bs-body-color)"
-        font-family="-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif"
-        font-size="20px"
-        text-anchor="middle"
-      >
-        <tspan>{{ format(tonal)[0] }}</tspan>
-        <tspan dx="2" font-size="16px">
-          {{ format(tonal)[1] }}
-        </tspan>
-      </text>
-    </g>
-    <path
-      v-for="(path, index) in scalePaths"
-      :key="index"
-      :stroke="getScaleColor(index)"
-      :d="path"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      stroke-opacity="0.7"
-      stroke-width="3px"
-      fill="none"
-    />
-  </svg>
-
-  <NavVariant />
-  <NavTonic />
-  <NavDisplay
-    :modified="modified"
-    @reset="onReset"
-    @download="onDownload"
-    @save="onSave"
-  />
-</template>
 
 <style scoped>
 .keyboard {

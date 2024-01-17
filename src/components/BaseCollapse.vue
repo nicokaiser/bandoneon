@@ -1,3 +1,9 @@
+<template>
+  <div ref="collapse" class="collapse">
+    <slot />
+  </div>
+</template>
+
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref } from 'vue';
 import { Collapse } from 'bootstrap';
@@ -17,9 +23,3 @@ const toggle = () => bsCollapse.toggle();
 
 defineExpose({ show, hide, toggle });
 </script>
-
-<template>
-  <div ref="collapse" class="collapse">
-    <slot />
-  </div>
-</template>

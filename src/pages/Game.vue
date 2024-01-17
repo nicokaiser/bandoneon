@@ -1,3 +1,105 @@
+<template>
+  <svg
+    ref="svg"
+    class="keyboard mb-4"
+    viewBox="0 0 690 410"
+    width="720"
+    height="428"
+  >
+    <g v-for="([x, y, tonal], idx) in positions" :key="idx">
+      <circle
+        :cx="x + 29"
+        :cy="y + 29"
+        r="28"
+        :fill="idx === currentPosition ? '#ced4da' : fillColor(idx)"
+        :stroke="idx === currentPosition ? '#495057' : strokeColor(idx)"
+        :stroke-width="idx === currentPosition ? 2 : 1"
+      />
+      <text
+        v-if="idx === currentPosition || typeof guessed[idx] === 'number'"
+        :x="x + 29"
+        :y="y + 36"
+        style="fill: var(--bs-body-color)"
+        font-size="20px"
+        text-anchor="middle"
+      >
+        <tspan>
+          {{ idx === currentPosition ? tonic : format(tonal)[0] }}
+        </tspan>
+        <tspan dx="2" font-size="16px">
+          {{ idx === currentPosition ? oct : format(tonal)[1] }}
+        </tspan>
+      </text>
+      <text
+        v-else-if="typeof guessed[idx] !== 'number'"
+        :x="x + 29"
+        :y="y + 36"
+        fill="#ced4da"
+        font-size="20px"
+        text-anchor="middle"
+      >
+        ?
+      </text>
+    </g>
+  </svg>
+
+  <NavVariant :readonly="currentPosition > 0" />
+  <NavTonic />
+
+  <div v-if="!easyMode" class="mb-2 text-center">
+    <button
+      v-for="octave in octaves"
+      :key="octave"
+      :disabled="!tonic"
+      :class="[
+        'btn btn-outline-secondary mx-1 my-2',
+        oct === octave ? 'active' : null,
+      ]"
+      style="width: 3.2em"
+      @click="toggleOctave(octave)"
+    >
+      {{ formatOctave(octave) }}
+    </button>
+  </div>
+
+  <div class="progress mt-4">
+    <div
+      class="progress-bar bg-success"
+      role="progressbar"
+      :style="`width: ${progress[2]}%`"
+    ></div>
+    <div
+      class="progress-bar bg-warning"
+      role="progressbar"
+      :style="`width: ${progress[1]}%`"
+    ></div>
+    <div
+      class="progress-bar bg-danger"
+      role="progressbar"
+      :style="`width: ${progress[0]}%`"
+    ></div>
+  </div>
+
+  <BaseModal ref="modal">
+    <p class="text-center m-4 fs-5">
+      <strong>{{ correctPercentage }}%</strong>
+      {{ t('correct') }}
+    </p>
+
+    <div class="text-center m-4">
+      <button
+        class="btn btn-primary"
+        @click="
+          modal.hide();
+          newGame();
+        "
+      >
+        {{ t('try_again') }}
+      </button>
+    </div>
+  </BaseModal>
+</template>
+
 <script setup lang="ts">
 import { computed, ref, watch, onMounted } from 'vue';
 import { useStore } from '../stores/main';
@@ -157,108 +259,6 @@ const progress = computed(() => {
 
 const correctPercentage = computed(() => progress.value[2]);
 </script>
-
-<template>
-  <svg
-    ref="svg"
-    class="keyboard mb-4"
-    viewBox="0 0 690 410"
-    width="720"
-    height="428"
-  >
-    <g v-for="([x, y, tonal], idx) in positions" :key="idx">
-      <circle
-        :cx="x + 29"
-        :cy="y + 29"
-        r="28"
-        :fill="idx === currentPosition ? '#ced4da' : fillColor(idx)"
-        :stroke="idx === currentPosition ? '#495057' : strokeColor(idx)"
-        :stroke-width="idx === currentPosition ? 2 : 1"
-      />
-      <text
-        v-if="idx === currentPosition || typeof guessed[idx] === 'number'"
-        :x="x + 29"
-        :y="y + 36"
-        style="fill: var(--bs-body-color)"
-        font-size="20px"
-        text-anchor="middle"
-      >
-        <tspan>
-          {{ idx === currentPosition ? tonic : format(tonal)[0] }}
-        </tspan>
-        <tspan dx="2" font-size="16px">
-          {{ idx === currentPosition ? oct : format(tonal)[1] }}
-        </tspan>
-      </text>
-      <text
-        v-else-if="typeof guessed[idx] !== 'number'"
-        :x="x + 29"
-        :y="y + 36"
-        fill="#ced4da"
-        font-size="20px"
-        text-anchor="middle"
-      >
-        ?
-      </text>
-    </g>
-  </svg>
-
-  <NavVariant :readonly="currentPosition > 0" />
-  <NavTonic />
-
-  <div v-if="!easyMode" class="mb-2 text-center">
-    <button
-      v-for="octave in octaves"
-      :key="octave"
-      :disabled="!tonic"
-      :class="[
-        'btn btn-outline-secondary mx-1 my-2',
-        oct === octave ? 'active' : null,
-      ]"
-      style="width: 3.2em"
-      @click="toggleOctave(octave)"
-    >
-      {{ formatOctave(octave) }}
-    </button>
-  </div>
-
-  <div class="progress mt-4">
-    <div
-      class="progress-bar bg-success"
-      role="progressbar"
-      :style="`width: ${progress[2]}%`"
-    ></div>
-    <div
-      class="progress-bar bg-warning"
-      role="progressbar"
-      :style="`width: ${progress[1]}%`"
-    ></div>
-    <div
-      class="progress-bar bg-danger"
-      role="progressbar"
-      :style="`width: ${progress[0]}%`"
-    ></div>
-  </div>
-
-  <BaseModal ref="modal">
-    <p class="text-center m-4 fs-5">
-      <strong>{{ correctPercentage }}%</strong>
-      {{ t('correct') }}
-    </p>
-
-    <div class="text-center m-4">
-      <button
-        class="btn btn-primary"
-        @click="
-          modal.hide();
-          newGame();
-        "
-      >
-        {{ t('try_again') }}
-      </button>
-    </div>
-  </BaseModal>
-</template>
 
 <style scoped>
 .keyboard {
