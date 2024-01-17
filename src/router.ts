@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import HomeView from './views/HomeView.vue';
-import GameView from './views/GameView.vue';
+import Home from './pages/Home.vue';
+import Game from './pages/Game.vue';
 
 export default createRouter({
   history: createWebHistory(),
@@ -8,12 +8,12 @@ export default createRouter({
     {
       name: 'home',
       path: '/',
-      component: HomeView,
+      component: Home,
     },
     {
       name: 'game',
       path: '/game',
-      component: GameView,
+      component: Game,
     },
     {
       name: 'NotFound',

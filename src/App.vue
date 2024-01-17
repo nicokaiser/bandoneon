@@ -2,7 +2,7 @@
 import { watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useSettingsStore } from './stores/settings';
-import TheHeader from './components/TheHeader.vue';
+import AppHeader from './components/AppHeader.vue';
 
 const settings = useSettingsStore();
 const { locale } = useI18n();
@@ -15,7 +15,7 @@ watch(
 </script>
 
 <template>
-  <TheHeader />
+  <AppHeader />
 
   <div class="container px-3 my-4">
     <RouterView />

@@ -2,7 +2,7 @@
 import { ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import BaseCollapse from './BaseCollapse.vue';
-import TheSettings from './TheSettings.vue';
+import AppSettings from './AppSettings.vue';
 
 const route = useRoute();
 const collapse = ref();
@@ -29,7 +29,7 @@ watch(
   </nav>
 
   <BaseCollapse ref="collapse">
-    <TheSettings />
+    <AppSettings />
   </BaseCollapse>
 </template>
 
