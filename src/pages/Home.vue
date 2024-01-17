@@ -6,44 +6,20 @@
     width="720"
     height="428"
   >
-    <g
+    <SvgButton
       v-for="([x, y, tonal], idx) in store.keyPositions"
       :key="idx"
+      :selected="selected[tonal]"
+      :x="x"
+      :y="y"
+      :tonal="tonal"
       @click="toggle(tonal)"
-    >
-      <circle
-        :cx="x + 29"
-        :cy="y + 29"
-        r="28"
-        :fill="fill(tonal)"
-        style="stroke: var(--bs-tertiary-color)"
-        :stroke-width="selected[tonal] ? 2 : 1"
-        :fill-opacity="selected[tonal] ? 0.7 : 0.2"
-      />
-      <text
-        :x="x + 29"
-        :y="y + 36"
-        style="fill: var(--bs-body-color)"
-        font-family="-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif"
-        font-size="20px"
-        text-anchor="middle"
-      >
-        <tspan>{{ format(tonal)[0] }}</tspan>
-        <tspan dx="2" font-size="16px">
-          {{ format(tonal)[1] }}
-        </tspan>
-      </text>
-    </g>
-    <path
-      v-for="(path, index) in scalePaths"
+    />
+    <SvgPath
+      v-for="(path, index) in store.scalePaths"
       :key="index"
       :stroke="getScaleColor(index)"
       :d="path"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      stroke-opacity="0.7"
-      stroke-width="3px"
-      fill="none"
     />
   </svg>
 
@@ -62,24 +38,16 @@ import { computed, ref, watch } from 'vue';
 import { useKeyboard } from '../composables/useKeyboard';
 import { useStore } from '../stores/main';
 import { useSettingsStore } from '../stores/settings';
-import Note from '@tonaljs/note';
-import Scale from '@tonaljs/scale';
 import download from '../utils/download';
-import helmholtz from '../utils/helmholtz';
 import NavVariant from '../components/NavVariant.vue';
 import NavTonic from '../components/NavTonic.vue';
 import NavDisplay from '../components/NavDisplay.vue';
+import SvgPath from '../components/SvgPath.vue';
+import SvgButton from '../components/SvgButton.vue';
 
 useKeyboard();
 
 const svg = ref();
-
-const COLORS_OCTAVE = [
-  '#198754', // green
-  '#ffc107', // yellow
-  '#0dcaf0', // cyan
-  '#dc3545', // red
-];
 
 const COLORS_SCALE = [
   '#ffc107', // yellow
@@ -94,76 +62,18 @@ const settings = useSettingsStore();
 const modified = ref(false);
 const userSelected = ref<Record<string, boolean>>({});
 
-const format = (tonal: string): string[] => {
-  const note = Note.get(store.showEnharmonics ? Note.enharmonic(tonal) : tonal);
-  if (note.empty) return ['', ''];
-
-  if (settings.pitchNotation === 'helmholtz') {
-    return [helmholtz(note.name), ''];
-  }
-
-  return [note.pc.replace('b', '♭').replace('#', '♯'), '' + note.oct];
-};
-
 const getScaleColor = (octave: number) => {
   return COLORS_SCALE[octave % COLORS_SCALE.length];
 };
 
-const scalePaths = computed(() => {
-  if (store.tonic && store.scaleType) {
-    const { intervals, empty } = Scale.get(store.scaleType);
-    if (empty) return [];
-    const paths = [];
-
-    for (let o = -1; o < 7; o++) {
-      const notes = intervals.map((i) =>
-        Note.transpose(`${store.tonic}${o}`, i),
-      );
-      notes.push(`${store.tonic}${o + 1}`);
-      let pathString = '';
-
-      notes.forEach((n) => {
-        const no = Note.get(n);
-
-        const pos = store.keyPositions.find(
-          (v) => Note.get(v[2]).height === no.height,
-        );
-
-        if (pos) {
-          pathString += `${pathString === '' ? 'M' : 'L'}${pos[0] + 30},${
-            pos[1] + 30
-          }`;
-        }
-      });
-
-      paths.push(pathString);
-    }
-
-    return paths;
-  }
-
-  return [];
-});
-
-const fill = (tonal: string) => {
-  let octave = +tonal.slice(1);
-  if (tonal[1] === '#') octave = +tonal.slice(2);
-  return store.showColors
-    ? COLORS_OCTAVE[octave % COLORS_OCTAVE.length]
-    : '#adb5bd'; // gray-500
-};
-
 const onDownload = () => {
-  let filename = `bandoneon-${settings.instrument}-${store.side}-${store.direction}`;
-  if (store.tonic) {
-    filename += '-' + store.tonic.replace('#', 's');
-    if (store.chordType) filename += store.chordType;
-    if (store.scaleType) filename += '-' + store.scaleType;
-  }
-  if (modified.value) {
-    filename += '-custom';
-  }
-  filename += '.png';
+  const filename =
+    `bandoneon-${settings.instrument}-${store.side}-${store.direction}` +
+    (store.tonic ? '-' + store.tonic.replace('#', 's') : '') +
+    (store.chordType ? store.chordType : '') +
+    (store.scaleType ? '-' + store.scaleType : '') +
+    (modified.value ? '-custom' : '') +
+    '.png';
 
   download(svg.value, filename);
 };
@@ -229,10 +139,4 @@ const onReset = () => {
   height: calc(100% / 720 * 428);
   max-height: calc(90vh - 5em);
 }
-
-.keyboard text {
-  user-select: none;
-  cursor: default;
-}
 </style>
-../composables/useKeyboard

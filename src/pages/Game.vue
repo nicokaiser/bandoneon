@@ -19,7 +19,7 @@
         v-if="idx === currentPosition || typeof guessed[idx] === 'number'"
         :x="x + 29"
         :y="y + 36"
-        style="fill: var(--bs-body-color)"
+        fill="#212529"
         font-size="20px"
         text-anchor="middle"
       >
@@ -62,23 +62,11 @@
     </button>
   </div>
 
-  <div class="progress mt-4">
-    <div
-      class="progress-bar bg-success"
-      role="progressbar"
-      :style="`width: ${progress[2]}%`"
-    ></div>
-    <div
-      class="progress-bar bg-warning"
-      role="progressbar"
-      :style="`width: ${progress[1]}%`"
-    ></div>
-    <div
-      class="progress-bar bg-danger"
-      role="progressbar"
-      :style="`width: ${progress[0]}%`"
-    ></div>
-  </div>
+  <GameProgress
+    :correct="progress[2]"
+    :partial="progress[1]"
+    :wrong="progress[0]"
+  />
 
   <BaseModal ref="modal">
     <p class="text-center m-4 fs-5">
@@ -110,6 +98,7 @@ import helmholtz from '../utils/helmholtz';
 import NavVariant from '../components/NavVariant.vue';
 import NavTonic from '../components/NavTonic.vue';
 import BaseModal from '../components/BaseModal.vue';
+import GameProgress from '../components/GameProgress.vue';
 
 const svg = ref();
 const modal = ref();
@@ -252,12 +241,10 @@ const progress = computed(() => {
     else if (g === 0) result[0]++;
   }
 
-  return result.map((value) =>
-    Math.round((value / positions.value.length) * 100),
-  );
+  return result.map((value) => value / positions.value.length);
 });
 
-const correctPercentage = computed(() => progress.value[2]);
+const correctPercentage = computed(() => Math.round(progress.value[2] * 100));
 </script>
 
 <style scoped>
