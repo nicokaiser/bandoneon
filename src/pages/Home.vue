@@ -59,7 +59,7 @@
 
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue';
-import { useKeyboardNavigation } from '../composables/useKeyboardNavigation';
+import { useKeyboard } from '../composables/useKeyboard';
 import { useStore } from '../stores/main';
 import { useSettingsStore } from '../stores/settings';
 import Note from '@tonaljs/note';
@@ -70,7 +70,7 @@ import NavVariant from '../components/NavVariant.vue';
 import NavTonic from '../components/NavTonic.vue';
 import NavDisplay from '../components/NavDisplay.vue';
 
-useKeyboardNavigation();
+useKeyboard();
 
 const svg = ref();
 
@@ -235,3 +235,4 @@ const onReset = () => {
   cursor: default;
 }
 </style>
+../composables/useKeyboard

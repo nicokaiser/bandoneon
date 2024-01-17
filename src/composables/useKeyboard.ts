@@ -1,7 +1,7 @@
 import { onMounted, onUnmounted } from 'vue';
 import { useStore } from '../stores/main';
 
-export function useKeyboardNavigation() {
+export function useKeyboard() {
   const store = useStore();
 
   function setSideAndDirection(side: string, direction: string) {
