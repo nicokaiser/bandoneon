@@ -1,11 +1,5 @@
 <template>
-  <svg
-    ref="svg"
-    class="keyboard mb-4"
-    viewBox="0 0 690 410"
-    width="720"
-    height="428"
-  >
+  <SvgKeyboard>
     <SvgButton
       v-for="([x, y, tonal], idx) in store.keyPositions"
       :key="idx"
@@ -21,7 +15,7 @@
       :stroke="getScaleColor(index)"
       :d="path"
     />
-  </svg>
+  </SvgKeyboard>
 
   <NavVariant />
   <NavTonic />
@@ -44,6 +38,7 @@ import NavTonic from '../components/NavTonic.vue';
 import NavDisplay from '../components/NavDisplay.vue';
 import SvgPath from '../components/SvgPath.vue';
 import SvgButton from '../components/SvgButton.vue';
+import SvgKeyboard from '../components/SvgKeyboard.vue';
 
 useKeyboard();
 
@@ -132,11 +127,3 @@ const onReset = () => {
   if (store.chordName) settings.resetUserChord(store.side, store.chordName);
 };
 </script>
-
-<style scoped>
-.keyboard {
-  width: 100%;
-  height: calc(100% / 720 * 428);
-  max-height: calc(90vh - 5em);
-}
-</style>
