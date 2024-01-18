@@ -4,10 +4,10 @@
       :cx="x + 29"
       :cy="y + 29"
       r="28"
-      :fill="fill"
-      stroke="#212529"
+      :fill="color || fill"
+      stroke="#6c757d"
       :stroke-width="selected ? 2 : 1"
-      :fill-opacity="selected ? 0.7 : 0.2"
+      :fill-opacity="selected ? 1 : 0.3"
     />
     <text
       :x="x + 29"
@@ -17,10 +17,15 @@
       font-size="20px"
       text-anchor="middle"
     >
-      <tspan>{{ format[0] }}</tspan>
-      <tspan dx="2" font-size="16px">
-        {{ format[1] }}
-      </tspan>
+      <template v-if="label !== null">
+        {{ label }}
+      </template>
+      <template v-else>
+        <tspan>{{ format[0] }}</tspan>
+        <tspan dx="2" font-size="16px">
+          {{ format[1] }}
+        </tspan>
+      </template>
     </text>
   </g>
 </template>
@@ -56,6 +61,14 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  label: {
+    type: String,
+    default: null,
+  },
+  color: {
+    type: String,
+    default: null,
+  },
 });
 
 const emit = defineEmits(['click']);
@@ -85,7 +98,7 @@ const fill = computed(() => {
   if (props.tonal[1] === '#') octave = +props.tonal.slice(2);
   return store.showColors
     ? COLORS_OCTAVE[octave % COLORS_OCTAVE.length]
-    : '#adb5bd'; // gray-500
+    : '#ced4da'; // gray-400
 });
 </script>
 

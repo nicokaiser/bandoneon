@@ -1,47 +1,17 @@
 <template>
-  <svg
-    ref="svg"
-    class="keyboard mb-4"
-    viewBox="0 0 690 410"
-    width="720"
-    height="428"
-  >
-    <g v-for="([x, y, tonal], idx) in positions" :key="idx">
-      <circle
-        :cx="x + 29"
-        :cy="y + 29"
-        r="28"
-        :fill="idx === currentPosition ? '#ced4da' : fillColor(idx)"
-        :stroke="idx === currentPosition ? '#495057' : strokeColor(idx)"
-        :stroke-width="idx === currentPosition ? 2 : 1"
-      />
-      <text
-        v-if="idx === currentPosition || typeof guessed[idx] === 'number'"
-        :x="x + 29"
-        :y="y + 36"
-        fill="#212529"
-        font-size="20px"
-        text-anchor="middle"
-      >
-        <tspan>
-          {{ idx === currentPosition ? tonic : format(tonal)[0] }}
-        </tspan>
-        <tspan dx="2" font-size="16px">
-          {{ idx === currentPosition ? oct : format(tonal)[1] }}
-        </tspan>
-      </text>
-      <text
-        v-else-if="typeof guessed[idx] !== 'number'"
-        :x="x + 29"
-        :y="y + 36"
-        fill="#ced4da"
-        font-size="20px"
-        text-anchor="middle"
-      >
-        ?
-      </text>
-    </g>
-  </svg>
+  <SvgKeyboard>
+    <SvgButton
+      v-for="([x, y, tonal], idx) in positions"
+      :key="idx"
+      :x="x"
+      :y="y"
+      :tonal="tonal"
+      :label="label(idx)"
+      :selected="idx === currentPosition"
+      :color="fillColor(idx)"
+      :opacity="label(idx) === '?' ? 0.5 : 1"
+    />
+  </SvgKeyboard>
 
   <NavVariant :readonly="currentPosition > 0" />
   <NavTonic />
@@ -93,14 +63,13 @@ import { computed, ref, watch, onMounted } from 'vue';
 import { useStore } from '../stores/main';
 import { useSettingsStore } from '../stores/settings';
 import { useI18n } from 'vue-i18n';
-import Note from '@tonaljs/note';
-import helmholtz from '../utils/helmholtz';
 import NavVariant from '../components/NavVariant.vue';
 import NavTonic from '../components/NavTonic.vue';
 import BaseModal from '../components/BaseModal.vue';
 import GameProgress from '../components/GameProgress.vue';
+import SvgKeyboard from '../components/SvgKeyboard.vue';
+import SvgButton from '../components/SvgButton.vue';
 
-const svg = ref();
 const modal = ref();
 
 const currentPosition = ref(0);
@@ -111,17 +80,6 @@ const positions = ref<[number, number, string][]>([]);
 const store = useStore();
 const settings = useSettingsStore();
 const { t } = useI18n();
-
-const format = (tonal: string): string[] => {
-  const note = Note.get(store.showEnharmonics ? Note.enharmonic(tonal) : tonal);
-  if (note.empty) return ['', ''];
-
-  if (settings.pitchNotation === 'helmholtz') {
-    return [helmholtz(note.name), ''];
-  }
-
-  return [note.pc.replace('b', '♭').replace('#', '♯'), '' + note.oct];
-};
 
 const formatOctave = (octave: number) => {
   if (settings.pitchNotation === 'scientific') {
@@ -139,18 +97,16 @@ const keyPositions = computed(() => store.keyPositions);
 
 const fillColor = (idx: number) => {
   if (guessed.value[idx] === 2 || (easyMode.value && guessed.value[idx] === 1))
-    return '#a3cfbb'; // green-200
-  if (guessed.value[idx] === 1) return '#ffe69c'; // yellow-200
-  if (guessed.value[idx] === 0) return '#f1aeb5'; // red-200
-  return '#f8f9fa'; // gray-100
+    return '#198754'; // green
+  if (guessed.value[idx] === 1) return '#ffc107'; // yellow
+  if (guessed.value[idx] === 0) return '#dc3545'; // red
+  return '#ced4da'; // gray-400
 };
 
-const strokeColor = (idx: number) => {
-  if (guessed.value[idx] === 2 || (easyMode.value && guessed.value[idx] === 1))
-    return '#146c43'; // green-500
-  if (guessed.value[idx] === 1) return '#cc9a06'; // yellow-600
-  if (guessed.value[idx] === 0) return '#b02a37'; // red-600
-  return '#6c757d'; // gray-600
+const label = (idx: number) => {
+  if (idx === currentPosition.value) return tonic.value || '';
+  if (typeof guessed.value[idx] === 'number') return undefined;
+  return '?';
 };
 
 const octaves = computed(() => {
