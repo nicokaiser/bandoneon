@@ -38,10 +38,10 @@ import { useSettingsStore } from '../stores/settings';
 import helmholtz from '../utils/helmholtz';
 
 const COLORS_OCTAVE = [
-  '#198754', // green
-  '#ffc107', // yellow
-  '#0dcaf0', // cyan
-  '#dc3545', // red
+  '#75b798', // green-300
+  '#ffda6a', // yellow-300
+  '#6edff6', // cyan-300
+  '#ea868f', // red-300
 ];
 
 const props = defineProps({

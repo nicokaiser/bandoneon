@@ -1,5 +1,5 @@
 <template>
-  <SvgKeyboard>
+  <SvgKeyboard ref="keyboard">
     <SvgButton
       v-for="([x, y, tonal], idx) in store.keyPositions"
       :key="idx"
@@ -32,7 +32,6 @@ import { computed, ref, watch } from 'vue';
 import { useKeyboard } from '../composables/useKeyboard';
 import { useStore } from '../stores/main';
 import { useSettingsStore } from '../stores/settings';
-import download from '../utils/download';
 import NavVariant from '../components/NavVariant.vue';
 import NavTonic from '../components/NavTonic.vue';
 import NavDisplay from '../components/NavDisplay.vue';
@@ -42,7 +41,7 @@ import SvgKeyboard from '../components/SvgKeyboard.vue';
 
 useKeyboard();
 
-const svg = ref();
+const keyboard = ref();
 
 const COLORS_SCALE = [
   '#ffc107', // yellow
@@ -70,7 +69,7 @@ const onDownload = () => {
     (modified.value ? '-custom' : '') +
     '.png';
 
-  download(svg.value, filename);
+  keyboard.value.download(filename);
 };
 
 const resetSelected = () => {
