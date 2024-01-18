@@ -60,6 +60,7 @@
 
 <script setup lang="ts">
 import { computed, ref, watch, onMounted } from 'vue';
+import { useKeyboard } from '../composables/useKeyboard';
 import { useStore } from '../stores/main';
 import { useSettingsStore } from '../stores/settings';
 import { useI18n } from 'vue-i18n';
@@ -69,6 +70,8 @@ import BaseModal from '../components/BaseModal.vue';
 import GameProgress from '../components/GameProgress.vue';
 import SvgKeyboard from '../components/SvgKeyboard.vue';
 import SvgButton from '../components/SvgButton.vue';
+
+useKeyboard();
 
 const modal = ref();
 

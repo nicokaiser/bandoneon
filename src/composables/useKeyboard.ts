@@ -19,6 +19,9 @@ export function useKeyboard() {
     if (['c', 'd', 'e', 'f', 'g', 'a', 'b'].includes(key)) {
       return store.setTonic(key.toUpperCase());
     }
+    if (['C', 'D', 'F', 'G', 'A'].includes(key)) {
+      return store.setTonic(key + '#');
+    }
 
     // Enharmonics
     if (key === '#') {
