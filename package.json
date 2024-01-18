@@ -59,6 +59,9 @@
       "defineEmits": true,
       "defineExpose": true,
       "defineProps": true
+    },
+    "rules": {
+      "vue/multi-word-component-names": "off"
     }
   },
   "type": "module"
