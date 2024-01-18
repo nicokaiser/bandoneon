@@ -1,24 +1,8 @@
 <template>
   <div class="mb-2 text-center d-print-none">
-    <span class="d-inline-block text-nowrap">
+    <span v-for="idx in [0, 1]" :key="idx" class="d-inline-block text-nowrap">
       <button
-        v-for="item in store.allNotes.slice(0, 6)"
-        :key="item"
-        :class="[
-          'btn btn-outline-secondary mx-1 my-1',
-          item === store.tonic ? 'active' : null,
-        ]"
-        :disabled="disabled"
-        style="width: 3em"
-        @click="store.setTonic(item === store.tonic ? null : item)"
-      >
-        {{ format(item) }}
-      </button>
-    </span>
-
-    <span class="d-inline-block text-nowrap">
-      <button
-        v-for="item in store.allNotes.slice(6)"
+        v-for="item in store.allNotes.slice(idx * 6, idx * 6 + 6)"
         :key="item"
         :class="[
           'btn btn-outline-secondary mx-1 my-1',
