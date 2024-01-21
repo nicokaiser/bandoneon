@@ -1,6 +1,6 @@
 <template>
-  <div class="bg-neutral-100 dark:bg-neutral-800">
-    <div class="mx-auto max-w-screen-md p-6">
+  <div class="border-b">
+    <div class="mx-auto max-w-screen-sm p-6">
       <div class="mb-4">
         <label
           class="block text-xs font-medium text-neutral-500 dark:text-neutral-400"

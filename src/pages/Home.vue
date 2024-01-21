@@ -1,23 +1,28 @@
 <template>
-  <div class="mx-auto max-w-screen-md p-6">
-    <SvgKeyboard ref="keyboard">
-      <SvgButton
-        v-for="([x, y, tonal], idx) in keyPositions"
-        :key="idx"
-        :selected="selected[tonal]"
-        :x="x"
-        :y="y"
-        :tonal="tonal"
-        @click="toggle(tonal)"
-      />
-      <SvgPath
-        v-for="(path, index) in scalePaths"
-        :key="index"
-        :stroke="getScaleColor(index)"
-        :d="path"
-      />
-    </SvgKeyboard>
+  <div class="mx-auto max-w-screen-lg p-6">
+    <div class="text-center font-bold my-6">
+      {{ $t(instrument) }}
+    </div>
 
+    <div class="border p-6 mb-8 rounded-lg shadow-md md:shadow-xl">
+      <SvgKeyboard ref="keyboard">
+        <SvgButton
+          v-for="([x, y, tonal], idx) in keyPositions"
+          :key="idx"
+          :selected="selected[tonal]"
+          :x="x"
+          :y="y"
+          :tonal="tonal"
+          @click="toggle(tonal)"
+        />
+        <SvgPath
+          v-for="(path, index) in scalePaths"
+          :key="index"
+          :stroke="getScaleColor(index)"
+          :d="path"
+        />
+      </SvgKeyboard>
+    </div>
     <NavVariant />
     <NavTonic />
     <NavDisplay

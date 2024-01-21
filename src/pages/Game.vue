@@ -1,18 +1,21 @@
 <template>
-  <div class="mx-auto max-w-screen-md p-6">
-    <SvgKeyboard>
-      <SvgButton
-        v-for="([x, y, tonal], idx) in positions"
-        :key="idx"
-        :x="x"
-        :y="y"
-        :tonal="tonal"
-        :label="label(idx)"
-        :selected="idx === currentPosition"
-        :color="fillColor(idx)"
-        :opacity="label(idx) === '?' ? 0.5 : 1"
-      />
-    </SvgKeyboard>
+  <div class="mx-auto max-w-screen-lg p-6">
+    <div class="text-center font-bold my-6">Instrument</div>
+    <div class="border p-6 mb-8 rounded-lg shadow-md md:shadow-xl">
+      <SvgKeyboard>
+        <SvgButton
+          v-for="([x, y, tonal], idx) in positions"
+          :key="idx"
+          :x="x"
+          :y="y"
+          :tonal="tonal"
+          :label="label(idx)"
+          :selected="idx === currentPosition"
+          :color="fillColor(idx)"
+          :opacity="label(idx) === '?' ? 0.5 : 1"
+        />
+      </SvgKeyboard>
+    </div>
 
     <NavVariant :readonly="currentPosition > 0" />
     <NavTonic />
