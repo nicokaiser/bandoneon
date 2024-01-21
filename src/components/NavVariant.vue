@@ -9,14 +9,13 @@
       <span
         :class="{
           'me-3 w-24 select-none text-end': true,
-          'font-medium text-neutral-800 dark:text-neutral-100':
-            store.side === 'left',
+          'font-medium text-neutral-800 dark:text-neutral-100': side === 'left',
         }"
       >
         {{ t('left') }}
       </span>
       <Switch
-        :checked="store.side === 'right'"
+        :checked="side === 'right'"
         :disabled="readonly"
         @change="onSideChange"
       />
@@ -24,7 +23,7 @@
         :class="{
           'ms-3 w-24 select-none text-start': true,
           'font-medium text-neutral-800 dark:text-neutral-100':
-            store.side === 'right',
+            side === 'right',
         }"
       >
         {{ t('right') }}
@@ -41,13 +40,13 @@
         :class="{
           'me-3 w-24 select-none text-end': true,
           'font-medium text-neutral-800 dark:text-neutral-100':
-            store.direction === 'close',
+            direction === 'close',
         }"
       >
         {{ t('close') }}
       </span>
       <Switch
-        :checked="store.direction === 'open'"
+        :checked="direction === 'open'"
         :disabled="readonly"
         @change="onDirectionChange"
       />
@@ -55,7 +54,7 @@
         :class="{
           'ms-3 w-24 select-none text-start': true,
           'font-medium text-neutral-800 dark:text-neutral-100':
-            store.direction === 'open',
+            direction === 'open',
         }"
       >
         {{ t('open') }}
@@ -65,26 +64,28 @@
 </template>
 
 <script setup lang="ts">
-import { useStore } from '../stores/main';
 import { useI18n } from 'vue-i18n';
+import { useStore } from '../stores/main';
 import Switch from './Switch.vue';
+import { storeToRefs } from 'pinia';
 
 const props = defineProps({
   readonly: Boolean,
 });
 
-const store = useStore();
 const { t } = useI18n();
+const store = useStore();
+const { side, direction } = storeToRefs(store);
 
 const onSideChange = (event: Event) => {
   if (props.readonly) return;
   const checked = (event.target as HTMLInputElement).checked;
-  store.side = checked ? 'right' : 'left';
+  side.value = checked ? 'right' : 'left';
 };
 
 const onDirectionChange = (event: Event) => {
   if (props.readonly) return;
   const checked = (event.target as HTMLInputElement).checked;
-  store.direction = checked ? 'open' : 'close';
+  direction.value = checked ? 'open' : 'close';
 };
 </script>

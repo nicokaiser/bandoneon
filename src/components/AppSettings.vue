@@ -10,10 +10,10 @@
         </label>
         <Select
           id="selectInstrument"
-          v-model="settings.instrument"
+          v-model="instrument"
           class="mt-1"
           :options="
-            settings.allInstruments.map((value) => ({
+            allInstruments.map((value) => ({
               name: $t(value),
               value,
             }))
@@ -30,10 +30,10 @@
         </label>
         <Select
           id="selectPitchNotation"
-          v-model="settings.pitchNotation"
+          v-model="pitchNotation"
           class="mt-1"
           :options="
-            settings.allPitchNotations.map((value) => ({
+            allPitchNotations.map((value) => ({
               name: $t(value),
               value,
             }))
@@ -51,7 +51,7 @@
 
         <Select
           id="selectLocale"
-          v-model="settings.locale"
+          v-model="locale"
           class="mt-1"
           :options="
             availableLocales.map((value) => ({
@@ -71,12 +71,14 @@
         </label>
         <Select
           id="selectDifficulty"
-          v-model="settings.difficulty"
+          v-model="difficulty"
           class="mt-1"
-          :options="[
-            { value: 'easy', name: $t('difficulty-easy') },
-            { value: 'medium', name: $t('difficulty-medium') },
-          ]"
+          :options="
+            difficulties.map((value) => ({
+              name: $t('difficulty-' + value),
+              value,
+            }))
+          "
         />
       </div>
 
@@ -113,9 +115,21 @@ import { useSettingsStore } from '../stores/settings';
 import { useRoute } from 'vue-router';
 import Select from './Select.vue';
 import GitHubIcon from './icons/GitHubIcon.vue';
+import { storeToRefs } from 'pinia';
 
 const settings = useSettingsStore();
 const route = useRoute();
+
+const {
+  instrument,
+  allInstruments,
+  pitchNotation,
+  allPitchNotations,
+  difficulty,
+  locale,
+} = storeToRefs(settings);
+
+const difficulties = ['easy', 'medium'];
 
 const { availableLocales } = useI18n({ useScope: 'global' });
 </script>

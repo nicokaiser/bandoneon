@@ -2,7 +2,7 @@
   <div class="mx-auto max-w-screen-md p-6">
     <SvgKeyboard ref="keyboard">
       <SvgButton
-        v-for="([x, y, tonal], idx) in store.keyPositions"
+        v-for="([x, y, tonal], idx) in keyPositions"
         :key="idx"
         :selected="selected[tonal]"
         :x="x"
@@ -11,7 +11,7 @@
         @click="toggle(tonal)"
       />
       <SvgPath
-        v-for="(path, index) in store.scalePaths"
+        v-for="(path, index) in scalePaths"
         :key="index"
         :stroke="getScaleColor(index)"
         :d="path"
@@ -40,6 +40,8 @@ import NavDisplay from '../components/NavDisplay.vue';
 import SvgPath from '../components/SvgPath.vue';
 import SvgButton from '../components/SvgButton.vue';
 import SvgKeyboard from '../components/SvgKeyboard.vue';
+import { onMounted } from 'vue';
+import { storeToRefs } from 'pinia';
 
 useKeyboard();
 
@@ -53,10 +55,23 @@ const COLORS_SCALE = [
 ];
 
 const store = useStore();
+const {
+  side,
+  direction,
+  tonic,
+  chordType,
+  chordNotes,
+  chordName,
+  keyPositions,
+  scaleType,
+  scalePaths,
+} = storeToRefs(store);
+
 const settings = useSettingsStore();
+const { instrument } = storeToRefs(settings);
 
 const modified = ref(false);
-const userSelected = ref<Record<string, boolean>>({});
+const userSelection = ref<Record<string, boolean>>({});
 
 const getScaleColor = (octave: number) => {
   return COLORS_SCALE[octave % COLORS_SCALE.length];
@@ -64,32 +79,29 @@ const getScaleColor = (octave: number) => {
 
 const onDownload = () => {
   const filename =
-    `bandoneon-${settings.instrument}-${store.side}-${store.direction}` +
-    (store.tonic ? '-' + store.tonic.replace('#', 's') : '') +
-    (store.chordType ? store.chordType : '') +
-    (store.scaleType ? '-' + store.scaleType : '') +
+    `bandoneon-${instrument.value}-${side.value}-${direction.value}` +
+    (tonic.value ? '-' + tonic.value.replace('#', 's') : '') +
+    (chordType.value ? chordType.value : '') +
+    (scaleType.value ? '-' + scaleType.value : '') +
     (modified.value ? '-custom' : '') +
     '.png';
 
   keyboard.value.download(filename);
 };
 
-const resetSelected = () => {
-  userSelected.value = {};
+const resetUserSelection = () => {
+  userSelection.value = {};
   modified.value = false;
 };
 
-const side = computed(() => store.side);
-const tonic = computed(() => store.tonic);
-const chordType = computed(() => store.chordType);
-watch([side, tonic, chordType], resetSelected);
+watch([side, tonic, chordType], resetUserSelection);
 
 const selected = computed(() => {
-  if (modified.value) return userSelected.value;
+  if (modified.value) return userSelection.value;
 
   const result: Record<string, boolean> = {};
 
-  const chord = store.chordNotes;
+  const chord = chordNotes.value;
   if (chord) {
     for (let i = 0; i <= chord.length; i++) {
       if (chord[i]) result[chord[i]] = true;
@@ -100,31 +112,37 @@ const selected = computed(() => {
 
 const toggle = (tonal: string) => {
   if (!modified.value) {
-    userSelected.value = { ...selected.value };
+    userSelection.value = { ...selected.value };
     modified.value = true;
   }
-  if (userSelected.value[tonal]) {
-    delete userSelected.value[tonal];
+  if (userSelection.value[tonal]) {
+    delete userSelection.value[tonal];
   } else {
-    userSelected.value[tonal] = true;
+    userSelection.value[tonal] = true;
   }
 };
 
 const onSave = () => {
-  if (modified.value && store.chordName) {
+  if (modified.value && chordName.value) {
     settings.saveUserChord(
-      store.side,
-      store.chordName,
-      Object.keys(userSelected.value).filter(
-        (item) => !!userSelected.value[item],
+      side.value,
+      chordName.value,
+      Object.keys(userSelection.value).filter(
+        (item) => !!userSelection.value[item],
       ),
     );
   }
-  resetSelected();
+  resetUserSelection();
 };
 
 const onReset = () => {
-  resetSelected();
-  if (store.chordName) settings.resetUserChord(store.side, store.chordName);
+  resetUserSelection();
+  if (chordName.value) settings.resetUserChord(side.value, chordName.value);
 };
+
+onMounted(() => {
+  tonic.value = null;
+  chordType.value = null;
+  scaleType.value = null;
+});
 </script>

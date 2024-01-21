@@ -6,7 +6,8 @@
       class="underline"
       target="_blank"
       href="https://github.com/nicokaiser/bandoneon/"
-      >GitHub</a
+    >
+      GitHub</a
     >.
   </div>
 </template>

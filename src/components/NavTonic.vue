@@ -2,12 +2,12 @@
   <div class="mb-3 flex flex-wrap justify-center print:hidden">
     <span v-for="idx in [0, 1]" :key="idx" class="inline-block text-nowrap">
       <Button
-        v-for="item in store.allNotes.slice(idx * 6, idx * 6 + 6)"
+        v-for="item in allNotes.slice(idx * 6, idx * 6 + 6)"
         :key="item"
-        :active="item === store.tonic"
+        :active="item === tonic"
         :disabled="disabled"
         class="m-1 w-12"
-        @click="store.setTonic(item === store.tonic ? null : item)"
+        @click="store.setTonic(item === tonic ? null : item)"
       >
         {{ format(item) }}
       </Button>
@@ -19,15 +19,17 @@
 import { useStore } from '../stores/main';
 import { enharmonic } from '@tonaljs/note';
 import Button from './Button.vue';
+import { storeToRefs } from 'pinia';
 
 defineProps({
   disabled: Boolean,
 });
 
 const store = useStore();
+const { tonic, allNotes, showEnharmonics } = storeToRefs(store);
 
 const format = (noteName: string): string => {
-  if (!store.showEnharmonics) {
+  if (!showEnharmonics.value) {
     return noteName.replace('#', '♯');
   }
 

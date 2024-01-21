@@ -17,14 +17,16 @@
     <NavVariant :readonly="currentPosition > 0" />
     <NavTonic />
 
-    <div v-if="!easyMode" class="mb-2 flex flex-wrap justify-center">
+    <div
+      v-if="difficulty !== 'easy'"
+      class="mb-2 flex flex-wrap justify-center"
+    >
       <Button
         v-for="octave in octaves"
         :key="octave"
         :disabled="!tonic"
-        :active="oct === octave"
         class="m-1 w-12"
-        @click="toggleOctave(octave)"
+        @click="oct = octave"
       >
         {{ formatOctave(octave) }}
       </Button>
@@ -69,6 +71,7 @@ import SvgButton from '../components/SvgButton.vue';
 import Button from '../components/Button.vue';
 import Modal from '../components/Modal.vue';
 import { onUnmounted } from 'vue';
+import { storeToRefs } from 'pinia';
 
 useKeyboard();
 
@@ -78,12 +81,16 @@ const oct = ref<number | null>(null);
 const positions = ref<[number, number, string][]>([]);
 const isModalOpen = ref(false);
 
-const store = useStore();
-const settings = useSettingsStore();
 const { t } = useI18n();
 
+const store = useStore();
+const { tonic, keyPositions } = storeToRefs(store);
+
+const settings = useSettingsStore();
+const { pitchNotation, difficulty } = storeToRefs(settings);
+
 const formatOctave = (octave: number) => {
-  if (settings.pitchNotation === 'scientific') {
+  if (pitchNotation.value === 'scientific') {
     return '' + octave;
   }
   const noteName = tonic.value || 'X';
@@ -94,10 +101,11 @@ const formatOctave = (octave: number) => {
   );
 };
 
-const keyPositions = computed(() => store.keyPositions);
-
 const fillColor = (idx: number) => {
-  if (guessed.value[idx] === 2 || (easyMode.value && guessed.value[idx] === 1))
+  if (
+    guessed.value[idx] === 2 ||
+    (difficulty.value === 'easy' && guessed.value[idx] === 1)
+  )
     return '#bbf7d0'; // green-200
   if (guessed.value[idx] === 1) return '#fef08a'; // yellow-200
   if (guessed.value[idx] === 0) return '#fecaca'; // red-200
@@ -122,12 +130,6 @@ const octaves = computed(() => {
     .map((item) => parseInt(item, 10))
     .sort();
 });
-
-const tonic = computed(() => store.tonic);
-
-const toggleOctave = (value: number) => {
-  oct.value = oct.value === value ? null : value;
-};
 
 function resetGame() {
   currentPosition.value = 0;
@@ -180,12 +182,10 @@ function check() {
 }
 
 watch([tonic, oct], () => {
-  if (tonic.value && (easyMode.value || oct.value)) {
+  if (tonic.value && (difficulty.value === 'easy' || oct.value)) {
     check();
   }
 });
-
-const easyMode = computed(() => settings.difficulty === 'easy');
 
 const progress = computed(() => {
   if (positions.value.length === 0) return [0, 0, 0];
@@ -193,7 +193,7 @@ const progress = computed(() => {
   const result = [0, 0, 0];
 
   for (const g of guessed.value) {
-    if (g === 2 || (g === 1 && easyMode.value)) result[2]++;
+    if (g === 2 || (g === 1 && difficulty.value === 'easy')) result[2]++;
     else if (g === 1) result[1]++;
     else if (g === 0) result[0]++;
   }

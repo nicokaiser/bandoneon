@@ -8,9 +8,9 @@
       </div>
       <ButtonGroup class="mx-2 mb-3">
         <Button
-          v-for="item in store.allScaleTypes"
+          v-for="item in allScaleTypes"
           :key="item"
-          :active="item === store.scaleType"
+          :active="item === scaleType"
           @click="store.setScaleType(item)"
         >
           {{ t(item) }}
@@ -26,9 +26,9 @@
       </div>
       <ButtonGroup class="mx-2 mb-3">
         <Button
-          v-for="item in store.allChordTypes"
+          v-for="item in allChordTypes"
           :key="item"
-          :active="item === store.chordType"
+          :active="item === chordType"
           @click="store.setChordType(item)"
         >
           {{ item }}
@@ -43,14 +43,11 @@
         {{ t('display') }}
       </div>
       <ButtonGroup class="mx-2 mb-3">
-        <Button @click="store.showEnharmonics = !store.showEnharmonics">
-          {{ store.showEnharmonics ? '♯' : '♭' }}
+        <Button @click="showEnharmonics = !showEnharmonics">
+          {{ showEnharmonics ? '♯' : '♭' }}
         </Button>
 
-        <Button
-          :active="store.showColors"
-          @click="store.showColors = !store.showColors"
-        >
+        <Button :active="showColors" @click="showColors = !showColors">
           <PaletteIcon class="inline-block h-5 w-5 align-[-0.25em]" />
         </Button>
 
@@ -64,7 +61,7 @@
 
         <Button
           :title="t('save_voicing')"
-          :disabled="!modified || !store.chordType"
+          :disabled="!modified || !chordType"
           @click="emit('save')"
         >
           <PinIcon class="inline-block h-5 w-5 align-[-0.25em]" />
@@ -72,7 +69,7 @@
 
         <Button
           :title="t('reset_voicing')"
-          :disabled="!store.isUserChord"
+          :disabled="!isUserChord"
           @click="emit('reset')"
         >
           <ArrowUturnLeftIcon class="inline-block h-5 w-5 align-[-0.25em]" />
@@ -91,6 +88,7 @@ import PaletteIcon from './icons/PaletteIcon.vue';
 import PinIcon from './icons/PinIcon.vue';
 import Button from './Button.vue';
 import ButtonGroup from './ButtonGroup.vue';
+import { storeToRefs } from 'pinia';
 
 defineProps({
   modified: Boolean,
@@ -98,6 +96,15 @@ defineProps({
 
 const emit = defineEmits(['download', 'save', 'reset']);
 
-const store = useStore();
 const { t } = useI18n();
+const store = useStore();
+const {
+  scaleType,
+  allScaleTypes,
+  allChordTypes,
+  showColors,
+  showEnharmonics,
+  chordType,
+  isUserChord,
+} = storeToRefs(store);
 </script>
