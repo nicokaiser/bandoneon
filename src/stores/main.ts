@@ -1,7 +1,7 @@
-import { defineStore } from 'pinia';
-import { useSettingsStore } from './settings';
 import Note from '@tonaljs/note';
 import Scale from '@tonaljs/scale';
+import { defineStore } from 'pinia';
+import { useSettingsStore } from './settings';
 
 import CHORDS from '../constants/chords.json';
 import INSTRUMENTS from '../constants/instruments';

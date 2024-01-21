@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import Home from './pages/Home.vue';
 import Game from './pages/Game.vue';
+import Home from './pages/Home.vue';
 
 export default createRouter({
   history: createWebHistory(),

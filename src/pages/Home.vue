@@ -30,18 +30,17 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue';
+import { storeToRefs } from 'pinia';
+import { computed, onMounted, ref, watch } from 'vue';
+import NavDisplay from '../components/NavDisplay.vue';
+import NavTonic from '../components/NavTonic.vue';
+import NavVariant from '../components/NavVariant.vue';
+import SvgButton from '../components/SvgButton.vue';
+import SvgKeyboard from '../components/SvgKeyboard.vue';
+import SvgPath from '../components/SvgPath.vue';
 import { useKeyboard } from '../composables/useKeyboard';
 import { useStore } from '../stores/main';
 import { useSettingsStore } from '../stores/settings';
-import NavVariant from '../components/NavVariant.vue';
-import NavTonic from '../components/NavTonic.vue';
-import NavDisplay from '../components/NavDisplay.vue';
-import SvgPath from '../components/SvgPath.vue';
-import SvgButton from '../components/SvgButton.vue';
-import SvgKeyboard from '../components/SvgKeyboard.vue';
-import { onMounted } from 'vue';
-import { storeToRefs } from 'pinia';
 
 useKeyboard();
 

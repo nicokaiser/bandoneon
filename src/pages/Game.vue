@@ -58,20 +58,19 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, watch, onMounted } from 'vue';
+import { storeToRefs } from 'pinia';
+import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
+import { useI18n } from 'vue-i18n';
+import Button from '../components/Button.vue';
+import GameProgress from '../components/GameProgress.vue';
+import Modal from '../components/Modal.vue';
+import NavTonic from '../components/NavTonic.vue';
+import NavVariant from '../components/NavVariant.vue';
+import SvgButton from '../components/SvgButton.vue';
+import SvgKeyboard from '../components/SvgKeyboard.vue';
 import { useKeyboard } from '../composables/useKeyboard';
 import { useStore } from '../stores/main';
 import { useSettingsStore } from '../stores/settings';
-import { useI18n } from 'vue-i18n';
-import NavVariant from '../components/NavVariant.vue';
-import NavTonic from '../components/NavTonic.vue';
-import GameProgress from '../components/GameProgress.vue';
-import SvgKeyboard from '../components/SvgKeyboard.vue';
-import SvgButton from '../components/SvgButton.vue';
-import Button from '../components/Button.vue';
-import Modal from '../components/Modal.vue';
-import { onUnmounted } from 'vue';
-import { storeToRefs } from 'pinia';
 
 useKeyboard();
 
