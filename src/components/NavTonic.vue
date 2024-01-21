@@ -1,19 +1,16 @@
 <template>
-  <div class="mb-2 text-center d-print-none">
-    <span v-for="idx in [0, 1]" :key="idx" class="d-inline-block text-nowrap">
-      <button
+  <div class="mb-3 flex flex-wrap justify-center print:hidden">
+    <span v-for="idx in [0, 1]" :key="idx" class="inline-block text-nowrap">
+      <Button
         v-for="item in store.allNotes.slice(idx * 6, idx * 6 + 6)"
         :key="item"
-        :class="[
-          'btn btn-outline-secondary mx-1 my-1',
-          item === store.tonic ? 'active' : null,
-        ]"
+        :active="item === store.tonic"
         :disabled="disabled"
-        style="width: 3em"
+        class="m-1 w-12"
         @click="store.setTonic(item === store.tonic ? null : item)"
       >
         {{ format(item) }}
-      </button>
+      </Button>
     </span>
   </div>
 </template>
@@ -21,6 +18,7 @@
 <script setup lang="ts">
 import { useStore } from '../stores/main';
 import { enharmonic } from '@tonaljs/note';
+import Button from './Button.vue';
 
 defineProps({
   disabled: Boolean,

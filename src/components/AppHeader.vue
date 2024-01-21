@@ -1,42 +1,42 @@
 <template>
-  <nav class="navbar">
-    <div class="container px-3 py-2">
-      <RouterLink :to="{ name: 'home' }" class="navbar-brand me-auto mb-0 h1">
-        Bandoneon.app
-        <span v-if="route.name === 'game'" class="ms-2 text-muted"> Game </span>
-      </RouterLink>
+  <header
+    class="mx-auto flex h-16 max-w-screen-md items-center justify-between px-4"
+  >
+    <RouterLink :to="{ name: 'home' }" class="px-2 py-1 text-xl font-medium">
+      Bandoneon.app
+      <span v-if="route.name === 'game'" class="ms-2 text-neutral-400">
+        Game
+      </span>
+    </RouterLink>
 
-      <button class="navbar-toggler" type="button" @click="toggle">
-        <span class="navbar-toggler-icon"></span>
+    <div class="inline-flex items-center gap-1">
+      <!--
+      <button class="p-2">
+        <QuestionMarkCircleIcon class="h-5 w-5" />
+      </button>
+      -->
+
+      <button type="button" class="p-2" title="Settings" @click="menu = !menu">
+        <Bars3Icon class="h-5 w-5" />
       </button>
     </div>
-  </nav>
+  </header>
 
-  <BaseCollapse ref="collapse">
-    <AppSettings />
-  </BaseCollapse>
+  <AppSettings v-if="menu" />
 </template>
 
 <script setup lang="ts">
 import { ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
-import BaseCollapse from './BaseCollapse.vue';
 import AppSettings from './AppSettings.vue';
+import Bars3Icon from './icons/Bars3Icon.vue';
+// import QuestionMarkCircleIcon from './icons/QuestionMarkCircleIcon.vue';
 
 const route = useRoute();
-const collapse = ref();
-const toggle = () => collapse.value.toggle();
+const menu = ref(false);
 
 watch(
   () => route.path,
-  () => collapse.value.hide(),
+  () => (menu.value = false),
 );
 </script>
-
-<style scoped>
-.navbar-toggler {
-  border: 0;
-  padding: 0;
-  margin: 0.25em 0;
-}
-</style>

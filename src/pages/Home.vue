@@ -1,30 +1,32 @@
 <template>
-  <SvgKeyboard ref="keyboard">
-    <SvgButton
-      v-for="([x, y, tonal], idx) in store.keyPositions"
-      :key="idx"
-      :selected="selected[tonal]"
-      :x="x"
-      :y="y"
-      :tonal="tonal"
-      @click="toggle(tonal)"
-    />
-    <SvgPath
-      v-for="(path, index) in store.scalePaths"
-      :key="index"
-      :stroke="getScaleColor(index)"
-      :d="path"
-    />
-  </SvgKeyboard>
+  <div class="mx-auto max-w-screen-md p-6">
+    <SvgKeyboard ref="keyboard">
+      <SvgButton
+        v-for="([x, y, tonal], idx) in store.keyPositions"
+        :key="idx"
+        :selected="selected[tonal]"
+        :x="x"
+        :y="y"
+        :tonal="tonal"
+        @click="toggle(tonal)"
+      />
+      <SvgPath
+        v-for="(path, index) in store.scalePaths"
+        :key="index"
+        :stroke="getScaleColor(index)"
+        :d="path"
+      />
+    </SvgKeyboard>
 
-  <NavVariant />
-  <NavTonic />
-  <NavDisplay
-    :modified="modified"
-    @reset="onReset"
-    @download="onDownload"
-    @save="onSave"
-  />
+    <NavVariant />
+    <NavTonic />
+    <NavDisplay
+      :modified="modified"
+      @reset="onReset"
+      @download="onDownload"
+      @save="onSave"
+    />
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -44,10 +46,10 @@ useKeyboard();
 const keyboard = ref();
 
 const COLORS_SCALE = [
-  '#ffc107', // yellow
-  '#0d6efd', // blue
-  '#dc3545', // red
-  '#198754', // green
+  '#ca8a04', // yellow-600
+  '#2563eb', // blue-600
+  '#dc2626', // red-600
+  '#16a34a', // green-600
 ];
 
 const store = useStore();

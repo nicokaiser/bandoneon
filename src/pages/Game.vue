@@ -1,61 +1,58 @@
 <template>
-  <SvgKeyboard>
-    <SvgButton
-      v-for="([x, y, tonal], idx) in positions"
-      :key="idx"
-      :x="x"
-      :y="y"
-      :tonal="tonal"
-      :label="label(idx)"
-      :selected="idx === currentPosition"
-      :color="fillColor(idx)"
-      :opacity="label(idx) === '?' ? 0.5 : 1"
+  <div class="mx-auto max-w-screen-md p-6">
+    <SvgKeyboard>
+      <SvgButton
+        v-for="([x, y, tonal], idx) in positions"
+        :key="idx"
+        :x="x"
+        :y="y"
+        :tonal="tonal"
+        :label="label(idx)"
+        :selected="idx === currentPosition"
+        :color="fillColor(idx)"
+        :opacity="label(idx) === '?' ? 0.5 : 1"
+      />
+    </SvgKeyboard>
+
+    <NavVariant :readonly="currentPosition > 0" />
+    <NavTonic />
+
+    <div v-if="!easyMode" class="mb-2 flex flex-wrap justify-center">
+      <Button
+        v-for="octave in octaves"
+        :key="octave"
+        :disabled="!tonic"
+        :active="oct === octave"
+        class="m-1 w-12"
+        @click="toggleOctave(octave)"
+      >
+        {{ formatOctave(octave) }}
+      </Button>
+    </div>
+
+    <GameProgress
+      :correct="progress[2]"
+      :partial="progress[1]"
+      :wrong="progress[0]"
     />
-  </SvgKeyboard>
-
-  <NavVariant :readonly="currentPosition > 0" />
-  <NavTonic />
-
-  <div v-if="!easyMode" class="mb-2 text-center">
-    <button
-      v-for="octave in octaves"
-      :key="octave"
-      :disabled="!tonic"
-      :class="[
-        'btn btn-outline-secondary mx-1 my-2',
-        oct === octave ? 'active' : null,
-      ]"
-      style="width: 3.2em"
-      @click="toggleOctave(octave)"
-    >
-      {{ formatOctave(octave) }}
-    </button>
   </div>
 
-  <GameProgress
-    :correct="progress[2]"
-    :partial="progress[1]"
-    :wrong="progress[0]"
-  />
-
-  <BaseModal ref="modal">
-    <p class="text-center m-4 fs-5">
-      <strong>{{ correctPercentage }}%</strong>
-      {{ t('correct') }}
-    </p>
-
-    <div class="text-center m-4">
-      <button
-        class="btn btn-primary"
+  <Modal v-model="isModalOpen">
+    <div class="px-4 py-8 text-center">
+      <p class="mb-3">
+        <strong>{{ correctPercentage }}%</strong>
+        {{ t('correct') }}
+      </p>
+      <Button
         @click="
-          modal.hide();
+          isModalOpen = false;
           newGame();
         "
       >
         {{ t('try_again') }}
-      </button>
+      </Button>
     </div>
-  </BaseModal>
+  </Modal>
 </template>
 
 <script setup lang="ts">
@@ -66,19 +63,20 @@ import { useSettingsStore } from '../stores/settings';
 import { useI18n } from 'vue-i18n';
 import NavVariant from '../components/NavVariant.vue';
 import NavTonic from '../components/NavTonic.vue';
-import BaseModal from '../components/BaseModal.vue';
 import GameProgress from '../components/GameProgress.vue';
 import SvgKeyboard from '../components/SvgKeyboard.vue';
 import SvgButton from '../components/SvgButton.vue';
+import Button from '../components/Button.vue';
+import Modal from '../components/Modal.vue';
+import { onUnmounted } from 'vue';
 
 useKeyboard();
-
-const modal = ref();
 
 const currentPosition = ref(0);
 const guessed = ref<number[]>([]);
 const oct = ref<number | null>(null);
 const positions = ref<[number, number, string][]>([]);
+const isModalOpen = ref(false);
 
 const store = useStore();
 const settings = useSettingsStore();
@@ -100,10 +98,10 @@ const keyPositions = computed(() => store.keyPositions);
 
 const fillColor = (idx: number) => {
   if (guessed.value[idx] === 2 || (easyMode.value && guessed.value[idx] === 1))
-    return '#198754'; // green
-  if (guessed.value[idx] === 1) return '#ffc107'; // yellow
-  if (guessed.value[idx] === 0) return '#dc3545'; // red
-  return '#ced4da'; // gray-400
+    return '#bbf7d0'; // green-200
+  if (guessed.value[idx] === 1) return '#fef08a'; // yellow-200
+  if (guessed.value[idx] === 0) return '#fecaca'; // red-200
+  return '#fff'; // white
 };
 
 const label = (idx: number) => {
@@ -177,7 +175,7 @@ function check() {
   oct.value = null;
 
   if (currentPosition.value >= positions.value.length) {
-    modal.value.show();
+    isModalOpen.value = true;
   }
 }
 
@@ -204,17 +202,14 @@ const progress = computed(() => {
 });
 
 const correctPercentage = computed(() => Math.round(progress.value[2] * 100));
+
+// Keyboard shortcuts for octave
+function keydownListener({ key }: { key: string }) {
+  if (!tonic.value) return;
+  for (const octave of octaves.value) {
+    if (key === '' + octave) oct.value = octave;
+  }
+}
+onMounted(() => document.addEventListener('keydown', keydownListener));
+onUnmounted(() => document.removeEventListener('keydown', keydownListener));
 </script>
-
-<style scoped>
-.keyboard {
-  width: 100%;
-  height: calc(100% / 720 * 428);
-  max-height: calc(90vh - 5em);
-}
-
-.keyboard text {
-  user-select: none;
-  cursor: default;
-}
-</style>

@@ -11,8 +11,8 @@
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "lib": ["esnext", "dom", "dom.iterable", "scripthost"],
-    "types": ["@intlify/unplugin-vue-i18n/messages", "@types/bootstrap"],
-    "skipLibCheck": true
+    "types": ["@intlify/unplugin-vue-i18n/messages"],
+    "skipLibCheck": true,
   },
-  "include": ["vite.config.*", "env.d.ts", "src/**/*", "src/**/*.vue"]
+  "include": ["vite.config.*", "env.d.ts", "src/**/*", "src/**/*.vue"],
 }

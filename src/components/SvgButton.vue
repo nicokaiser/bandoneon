@@ -4,15 +4,15 @@
       :cx="x + 29"
       :cy="y + 29"
       r="28"
-      :fill="color || fill"
-      stroke="#6c757d"
-      :stroke-width="selected ? 2 : 1"
-      :fill-opacity="selected ? 1 : 0.3"
+      :fill="color || (selected ? '#262626' : fill)"
+      :stroke="selected ? '#262626' : '#a3a3a3'"
+      stroke-width="1"
+      :fill-opacity="selected ? 1 : 1"
     />
     <text
       :x="x + 29"
       :y="y + 36"
-      fill="#212529"
+      :fill="selected && !color ? '#ffffff' : '#262626'"
       font-family="-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif"
       font-size="20px"
       text-anchor="middle"
@@ -38,10 +38,10 @@ import { useSettingsStore } from '../stores/settings';
 import helmholtz from '../utils/helmholtz';
 
 const COLORS_OCTAVE = [
-  '#75b798', // green-300
-  '#ffda6a', // yellow-300
-  '#6edff6', // cyan-300
-  '#ea868f', // red-300
+  '#bbf7d0', // green-200
+  '#fef08a', // yellow-200
+  '#bae6fd', // blue-200
+  '#fecaca', // red-200
 ];
 
 const props = defineProps({
@@ -98,7 +98,7 @@ const fill = computed(() => {
   if (props.tonal[1] === '#') octave = +props.tonal.slice(2);
   return store.showColors
     ? COLORS_OCTAVE[octave % COLORS_OCTAVE.length]
-    : '#ced4da'; // gray-400
+    : '#fff';
 });
 </script>
 
@@ -107,4 +107,9 @@ text {
   user-select: none;
   cursor: default;
 }
+/*
+circle {
+  filter: drop-shadow(0 5px 5px rgb(0 0 0 / 0.1));
+}
+*/
 </style>

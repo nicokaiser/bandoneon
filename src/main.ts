@@ -3,6 +3,7 @@ import { createI18n } from 'vue-i18n';
 import { createPinia } from 'pinia';
 import router from './router';
 import messages from '@intlify/unplugin-vue-i18n/messages';
+import './style.css';
 import App from './App.vue';
 
 const i18n = createI18n({
