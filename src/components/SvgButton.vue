@@ -7,7 +7,6 @@
       :fill="color || (selected ? '#262626' : fill)"
       :stroke="selected ? '#262626' : '#a3a3a3'"
       stroke-width="1"
-      :fill-opacity="selected ? 1 : 1"
     />
     <text
       :x="x + 29"

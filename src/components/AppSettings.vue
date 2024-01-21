@@ -3,7 +3,7 @@
     <div class="mx-auto max-w-screen-md p-6">
       <div class="mb-4">
         <label
-          class="block text-xs font-medium text-neutral-400"
+          class="block text-xs font-medium text-neutral-500 dark:text-neutral-400"
           for="selectInstrument"
         >
           {{ $t('keyboard') }}
@@ -23,7 +23,7 @@
 
       <div class="mb-4">
         <label
-          class="block text-xs font-medium text-neutral-400"
+          class="block text-xs font-medium text-neutral-500 dark:text-neutral-400"
           for="selectPitchNotation"
         >
           {{ $t('pitch_notation') }}
@@ -43,7 +43,7 @@
 
       <div class="mb-4">
         <label
-          class="block text-xs font-medium text-neutral-400"
+          class="block text-xs font-medium text-neutral-500 dark:text-neutral-400"
           for="selectLocale"
         >
           {{ $t('language') }}
@@ -64,7 +64,7 @@
 
       <div v-if="route.name === 'game'" class="mb-4">
         <label
-          class="block text-xs font-medium text-neutral-400"
+          class="block text-xs font-medium text-neutral-500 dark:text-neutral-400"
           for="selectDifficulty"
         >
           {{ $t('difficulty') }}

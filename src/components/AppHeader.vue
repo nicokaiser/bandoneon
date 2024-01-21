@@ -1,10 +1,10 @@
 <template>
   <header
-    class="mx-auto flex h-16 max-w-screen-md items-center justify-between px-4"
+    class="mx-auto flex h-16 w-full max-w-screen-md items-center justify-between px-4"
   >
     <RouterLink :to="{ name: 'home' }" class="px-2 py-1 text-xl font-medium">
       Bandoneon.app
-      <span v-if="route.name === 'game'" class="ms-2 text-neutral-400">
+      <span v-if="route.name === 'game'" class="ms-2 text-neutral-500">
         Game
       </span>
     </RouterLink>

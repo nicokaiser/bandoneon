@@ -2,14 +2,15 @@
   <div class="mb-4 flex flex-wrap justify-center gap-x-24 print:hidden">
     <label
       :class="{
-        'mb-3 inline-flex cursor-pointer items-center text-neutral-400': true,
+        'mb-3 inline-flex cursor-pointer items-center text-neutral-500': true,
         'cursor-not-allowed': readonly,
       }"
     >
       <span
         :class="{
           'me-3 w-24 select-none text-end': true,
-          'text-neutral-800 dark:text-neutral-100': store.side === 'left',
+          'font-medium text-neutral-800 dark:text-neutral-100':
+            store.side === 'left',
         }"
       >
         {{ t('left') }}
@@ -22,7 +23,8 @@
       <span
         :class="{
           'ms-3 w-24 select-none text-start': true,
-          'text-neutral-800 dark:text-neutral-100': store.side === 'right',
+          'font-medium text-neutral-800 dark:text-neutral-100':
+            store.side === 'right',
         }"
       >
         {{ t('right') }}
@@ -31,14 +33,15 @@
 
     <label
       :class="{
-        'mb-3 inline-flex cursor-pointer items-center text-neutral-400': true,
+        'mb-3 inline-flex cursor-pointer items-center text-neutral-500': true,
         'cursor-not-allowed': readonly,
       }"
     >
       <span
         :class="{
           'me-3 w-24 select-none text-end': true,
-          'text-neutral-800 dark:text-neutral-100': store.direction === 'close',
+          'font-medium text-neutral-800 dark:text-neutral-100':
+            store.direction === 'close',
         }"
       >
         {{ t('close') }}
@@ -51,7 +54,8 @@
       <span
         :class="{
           'ms-3 w-24 select-none text-start': true,
-          'text-neutral-800 dark:text-neutral-100': store.direction === 'open',
+          'font-medium text-neutral-800 dark:text-neutral-100':
+            store.direction === 'open',
         }"
       >
         {{ t('open') }}

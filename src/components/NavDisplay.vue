@@ -1,7 +1,9 @@
 <template>
   <div class="flex flex-wrap justify-center print:hidden">
     <div class="flex flex-col items-center">
-      <div class="mb-1 text-xs font-medium text-neutral-400">
+      <div
+        class="mb-1 text-xs font-medium text-neutral-500 dark:text-neutral-400"
+      >
         {{ t('scale') }}
       </div>
       <ButtonGroup class="mx-2 mb-3">
@@ -17,7 +19,9 @@
     </div>
 
     <div class="flex flex-col items-center">
-      <div class="mb-1 text-xs font-medium text-neutral-400">
+      <div
+        class="mb-1 text-xs font-medium text-neutral-500 dark:text-neutral-400"
+      >
         {{ t('chord') }}
       </div>
       <ButtonGroup class="mx-2 mb-3">
@@ -33,7 +37,9 @@
     </div>
 
     <div class="flex flex-col items-center">
-      <div class="mb-1 text-xs font-medium text-neutral-400">
+      <div
+        class="mb-1 text-xs font-medium text-neutral-500 dark:text-neutral-400"
+      >
         {{ t('display') }}
       </div>
       <ButtonGroup class="mx-2 mb-3">
