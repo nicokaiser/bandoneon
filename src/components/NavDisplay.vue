@@ -8,7 +8,7 @@
       </div>
       <ButtonGroup class="mx-2 mb-3">
         <Button
-          v-for="item in allScaleTypes"
+          v-for="item in scaleTypes"
           :key="item"
           :active="item === scaleType"
           @click="store.setScaleType(item)"
@@ -26,7 +26,7 @@
       </div>
       <ButtonGroup class="mx-2 mb-3">
         <Button
-          v-for="item in allChordTypes"
+          v-for="item in chordTypes"
           :key="item"
           :active="item === chordType"
           @click="store.setChordType(item)"
@@ -89,6 +89,7 @@ import PinIcon from './icons/PinIcon.vue';
 import Button from './Button.vue';
 import ButtonGroup from './ButtonGroup.vue';
 import { storeToRefs } from 'pinia';
+import { scaleTypes, chordTypes } from '../data/index';
 
 defineProps({
   modified: Boolean,
@@ -98,13 +99,6 @@ const emit = defineEmits(['download', 'save', 'reset']);
 
 const { t } = useI18n();
 const store = useStore();
-const {
-  scaleType,
-  allScaleTypes,
-  allChordTypes,
-  showColors,
-  showEnharmonics,
-  chordType,
-  isUserChord,
-} = storeToRefs(store);
+const { scaleType, showColors, showEnharmonics, chordType, isUserChord } =
+  storeToRefs(store);
 </script>

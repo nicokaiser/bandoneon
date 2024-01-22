@@ -4,7 +4,10 @@ import { useStore } from '../stores/main';
 export function useKeyboard() {
   const store = useStore();
 
-  function setSideAndDirection(side: string, direction: string) {
+  function setSideAndDirection(
+    side: 'left' | 'right',
+    direction: 'open' | 'close',
+  ) {
     store.$patch({ side, direction });
   }
 

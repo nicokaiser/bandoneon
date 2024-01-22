@@ -1,34 +1,22 @@
 import Note from '@tonaljs/note';
 import Scale from '@tonaljs/scale';
 import { defineStore } from 'pinia';
+import chords from '../data/chords';
+import { instruments } from '../data/index';
 import { useSettingsStore } from './settings';
-
-import CHORDS from '../constants/chords.json';
-import INSTRUMENTS from '../constants/instruments';
-
-const NOTES = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
-
-const chords = <any>CHORDS;
-const instruments = <any>INSTRUMENTS;
 
 export const useStore = defineStore('main', {
   state: () => ({
     showColors: false,
     showEnharmonics: false,
-    side: 'right',
-    direction: 'open',
+    side: 'right' as 'right' | 'left',
+    direction: 'open' as 'open' | 'close',
     tonic: null as null | string,
     chordType: null as null | string,
     scaleType: null as null | string,
   }),
 
   getters: {
-    allNotes: () => NOTES,
-
-    allScaleTypes: () => ['major', 'minor', 'chromatic'],
-
-    allChordTypes: () => ['M', 'm', '7', 'dim', 'm7', 'M7'],
-
     chordName(state) {
       if (state.tonic && state.chordType) {
         return `${state.tonic}${state.chordType}`;
@@ -72,7 +60,8 @@ export const useStore = defineStore('main', {
 
       const keys = Array.isArray(instruments[settings.instrument][state.side])
         ? instruments[settings.instrument][state.side]
-        : instruments[settings.instrument][state.side][state.direction];
+        : // @ts-expect-error TODO
+          instruments[settings.instrument][state.side][state.direction];
 
       if (!keys) return [];
 
@@ -113,14 +102,14 @@ export const useStore = defineStore('main', {
         const paths = [];
 
         for (let o = -1; o < 7; o++) {
-          const notes = intervals.map((i) =>
+          const scaleNotes = intervals.map((i) =>
             Note.transpose(`${this.tonic}${o}`, i),
           );
-          notes.push(`${this.tonic}${o + 1}`);
+          scaleNotes.push(`${this.tonic}${o + 1}`);
           let pathString = '';
 
-          notes.forEach((n) => {
-            const no = Note.get(n);
+          scaleNotes.forEach((note) => {
+            const no = Note.get(note);
 
             const pos = this.keyPositions.find(
               (v) => Note.get(v[2]).height === no.height,

@@ -43,32 +43,21 @@ const COLORS_OCTAVE = [
   '#fecaca', // red-200
 ];
 
-const props = defineProps({
-  x: {
-    type: Number,
-    required: true,
+const props = withDefaults(
+  defineProps<{
+    x: number;
+    y: number;
+    tonal: string;
+    selected?: boolean;
+    label?: string | null;
+    color?: string;
+  }>(),
+  {
+    selected: false,
+    label: null,
+    color: undefined,
   },
-  y: {
-    type: Number,
-    required: true,
-  },
-  tonal: {
-    type: String,
-    required: true,
-  },
-  selected: {
-    type: Boolean,
-    default: false,
-  },
-  label: {
-    type: String,
-    default: null,
-  },
-  color: {
-    type: String,
-    default: null,
-  },
-});
+);
 
 const emit = defineEmits(['click']);
 

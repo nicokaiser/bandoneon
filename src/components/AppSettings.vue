@@ -13,7 +13,7 @@
           v-model="instrument"
           class="mt-1"
           :options="
-            allInstruments.map((value) => ({
+            Object.keys(instruments).map((value) => ({
               name: $t(value),
               value,
             }))
@@ -33,7 +33,7 @@
           v-model="pitchNotation"
           class="mt-1"
           :options="
-            allPitchNotations.map((value) => ({
+            pitchNotations.map((value) => ({
               name: $t(value),
               value,
             }))
@@ -116,20 +116,12 @@ import { useRoute } from 'vue-router';
 import Select from './Select.vue';
 import GitHubIcon from './icons/GitHubIcon.vue';
 import { storeToRefs } from 'pinia';
+import { difficulties, instruments, pitchNotations } from '../data/index';
 
 const settings = useSettingsStore();
 const route = useRoute();
 
-const {
-  instrument,
-  allInstruments,
-  pitchNotation,
-  allPitchNotations,
-  difficulty,
-  locale,
-} = storeToRefs(settings);
-
-const difficulties = ['easy', 'medium'];
+const { instrument, pitchNotation, difficulty, locale } = storeToRefs(settings);
 
 const { availableLocales } = useI18n({ useScope: 'global' });
 </script>

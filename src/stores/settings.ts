@@ -1,19 +1,13 @@
 import { defineStore } from 'pinia';
-import INSTRUMENTS from '../constants/instruments';
 
 export const useSettingsStore = defineStore('settings', {
   state: () => ({
     instrument: 'rheinische142',
     locale: navigator.language?.split('-')[0] || 'en',
-    pitchNotation: 'scientific',
+    pitchNotation: 'scientific' as 'scientific' | 'helmholtz',
     userChords: {} as Record<string, Record<string, string[]>>,
-    difficulty: 'medium',
+    difficulty: 'medium' as 'medium' | 'easy',
   }),
-
-  getters: {
-    allInstruments: () => Object.keys(INSTRUMENTS),
-    allPitchNotations: () => ['helmholtz', 'scientific'],
-  },
 
   actions: {
     saveUserChord(side: string, chordName: string, notes: string[]) {

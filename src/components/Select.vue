@@ -6,7 +6,7 @@
       @input="onInput"
     >
       <option
-        v-for="option in options"
+        v-for="option of options"
         :key="option.value"
         :value="option.value"
         :selected="option.value === modelValue"
@@ -36,20 +36,18 @@
 </template>
 
 <script setup lang="ts">
-defineProps({
-  id: {
-    type: String,
-    default: null,
+withDefaults(
+  defineProps<{
+    id?: string;
+    options: Array<{ name: string; value: string }>;
+    modelValue?: string;
+  }>(),
+  {
+    id: undefined,
+    options: () => [],
+    modelValue: undefined,
   },
-  options: {
-    type: Object,
-    default: () => {},
-  },
-  modelValue: {
-    type: String,
-    default: null,
-  },
-});
+);
 
 const emit = defineEmits(['update:modelValue']);
 

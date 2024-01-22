@@ -11,14 +11,11 @@
 </template>
 
 <script setup lang="ts">
-defineProps({
-  stroke: {
-    type: String,
-    required: true,
-  },
-  d: {
-    type: String,
-    required: true,
-  },
-});
+withDefaults(
+  defineProps<{
+    stroke: string;
+    d: string;
+  }>(),
+  {},
+);
 </script>

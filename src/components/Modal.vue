@@ -23,7 +23,7 @@
 </template>
 
 <script setup lang="ts">
-import { watch } from 'vue';
+import { watchEffect } from 'vue';
 
 const props = defineProps({
   modelValue: Boolean,
@@ -43,16 +43,11 @@ function allowScroll() {
   document.documentElement.style.paddingRight = '0';
 }
 
-if (props.modelValue) preventScroll();
-
-watch(
-  () => props.modelValue,
-  (modelValue) => {
-    if (modelValue) {
-      preventScroll();
-    } else {
-      allowScroll();
-    }
-  },
-);
+watchEffect(() => {
+  if (props.modelValue) {
+    preventScroll();
+  } else {
+    allowScroll();
+  }
+});
 </script>
