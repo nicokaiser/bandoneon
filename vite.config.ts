@@ -4,6 +4,7 @@ import vue from '@vitejs/plugin-vue';
 import path from 'path';
 import { defineConfig } from 'vite';
 
+/** @type {import('vite').UserConfig} */
 export default defineConfig({
   plugins: [
     vue(),
