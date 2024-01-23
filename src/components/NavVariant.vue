@@ -64,7 +64,7 @@
 </template>
 
 <script setup lang="ts">
-import { useI18n } from 'vue-i18n';
+import { useI18n } from 'petite-vue-i18n';
 import { useStore } from '../stores/main';
 import Switch from './Switch.vue';
 import { storeToRefs } from 'pinia';

@@ -1,14 +1,15 @@
-import messages from '@intlify/unplugin-vue-i18n/messages';
+import { createI18n } from 'petite-vue-i18n';
 import { createPinia } from 'pinia';
 import { createApp } from 'vue';
-import { createI18n } from 'vue-i18n';
 import App from './App.vue';
+import de from './locales/de.json';
+import en from './locales/en.json';
 import router from './router';
 import './style.css';
 
 const i18n = createI18n({
   legacy: false,
-  messages,
+  messages: { en, de },
   locale: 'en',
   fallbackLocale: 'en',
 });

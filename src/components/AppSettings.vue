@@ -110,7 +110,7 @@
 </template>
 
 <script setup lang="ts">
-import { useI18n } from 'vue-i18n';
+import { useI18n } from 'petite-vue-i18n';
 import { useSettingsStore } from '../stores/settings';
 import { useRoute } from 'vue-router';
 import Select from './Select.vue';

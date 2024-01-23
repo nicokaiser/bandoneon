@@ -10,7 +10,7 @@
 
 <script setup lang="ts">
 import { watch } from 'vue';
-import { useI18n } from 'vue-i18n';
+import { useI18n } from 'petite-vue-i18n';
 import { useSettingsStore } from './stores/settings';
 import AppHeader from './components/AppHeader.vue';
 import AppFooter from './components/AppFooter.vue';
