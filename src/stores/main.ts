@@ -70,9 +70,9 @@ export const useStore = defineStore('main', {
       let offsetY = 0;
 
       // Center
-      const cols = Math.max(...keys.map((row: Array<any>) => row.length));
+      const cols = Math.max(...keys.map((row: string[]) => row.length));
       const rows = keys.reduce(
-        (acc: number, row: Array<any>) => acc + (row.length > 0 ? 1 : 0),
+        (acc: number, row: string[]) => acc + (row.length > 0 ? 1 : 0),
         0,
       );
       if (cols < 9) offsetX += 39 * (9 - cols);
