@@ -35,6 +35,7 @@
     </div>
 
     <GameProgress
+      class="mt-8"
       :correct="progress[2]"
       :partial="progress[1]"
       :wrong="progress[0]"
