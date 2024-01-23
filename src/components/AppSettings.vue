@@ -62,7 +62,7 @@
         />
       </div>
 
-      <div v-if="route.name === 'game'" class="mb-4">
+      <div v-if="route.path === '/game'" class="mb-4">
         <label
           class="block text-xs font-medium text-neutral-500 dark:text-neutral-400"
           for="selectDifficulty"
@@ -85,8 +85,8 @@
       <div class="flex justify-between text-sm">
         <div>
           <RouterLink
-            v-if="route.name !== 'game'"
-            :to="{ name: 'game' }"
+            v-if="route.path !== '/game'"
+            to="/game"
             class="me-1 underline"
           >
             Play a game!

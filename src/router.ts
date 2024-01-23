@@ -1,24 +1,21 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import Game from './pages/Game.vue';
-import Home from './pages/Home.vue';
+import game from './pages/game.vue';
+import index from './pages/index.vue';
 
 export default createRouter({
   history: createWebHistory(),
   routes: [
     {
-      name: 'home',
       path: '/',
-      component: Home,
+      component: index,
     },
     {
-      name: 'game',
       path: '/game',
-      component: Game,
+      component: game,
     },
     {
-      name: 'NotFound',
       path: '/:pathMatch(.*)*',
-      redirect: () => ({ name: 'home' }),
+      redirect: () => '/',
     },
   ],
 });
