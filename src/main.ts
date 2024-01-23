@@ -7,6 +7,7 @@ import router from './router';
 import './style.css';
 
 const i18n = createI18n({
+  legacy: false,
   messages,
   locale: 'en',
   fallbackLocale: 'en',

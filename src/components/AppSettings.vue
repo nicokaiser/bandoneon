@@ -6,7 +6,7 @@
           class="block text-xs font-medium text-neutral-500 dark:text-neutral-400"
           for="selectInstrument"
         >
-          {{ $t('keyboard') }}
+          {{ t('keyboard') }}
         </label>
         <Select
           id="selectInstrument"
@@ -14,7 +14,7 @@
           class="mt-1"
           :options="
             Object.keys(instruments).map((value) => ({
-              name: $t(value),
+              name: t(value),
               value,
             }))
           "
@@ -26,7 +26,7 @@
           class="block text-xs font-medium text-neutral-500 dark:text-neutral-400"
           for="selectPitchNotation"
         >
-          {{ $t('pitch_notation') }}
+          {{ t('pitch_notation') }}
         </label>
         <Select
           id="selectPitchNotation"
@@ -34,7 +34,7 @@
           class="mt-1"
           :options="
             pitchNotations.map((value) => ({
-              name: $t(value),
+              name: t(value),
               value,
             }))
           "
@@ -46,7 +46,7 @@
           class="block text-xs font-medium text-neutral-500 dark:text-neutral-400"
           for="selectLocale"
         >
-          {{ $t('language') }}
+          {{ t('language') }}
         </label>
 
         <Select
@@ -55,7 +55,7 @@
           class="mt-1"
           :options="
             availableLocales.map((value) => ({
-              name: $t('language-' + value),
+              name: t('language-' + value),
               value,
             }))
           "
@@ -67,7 +67,7 @@
           class="block text-xs font-medium text-neutral-500 dark:text-neutral-400"
           for="selectDifficulty"
         >
-          {{ $t('difficulty') }}
+          {{ t('difficulty') }}
         </label>
         <Select
           id="selectDifficulty"
@@ -75,7 +75,7 @@
           class="mt-1"
           :options="
             difficulties.map((value) => ({
-              name: $t('difficulty-' + value),
+              name: t('difficulty-' + value),
               value,
             }))
           "
@@ -123,5 +123,5 @@ const route = useRoute();
 
 const { instrument, pitchNotation, difficulty, locale } = storeToRefs(settings);
 
-const { availableLocales } = useI18n({ useScope: 'global' });
+const { availableLocales, t } = useI18n({ useScope: 'global' });
 </script>
