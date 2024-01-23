@@ -4,8 +4,7 @@
     :d="d"
     stroke-linecap="round"
     stroke-linejoin="round"
-    stroke-opacity="0.7"
-    stroke-width="3px"
+    stroke-width="3"
     fill="none"
   />
 </template>

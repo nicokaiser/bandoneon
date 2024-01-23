@@ -10,7 +10,9 @@
         :label="label(idx)"
         :selected="idx === currentPosition"
         :color="fillColor(idx)"
-        :opacity="label(idx) === '?' ? 0.5 : 1"
+        :opacity="
+          idx === currentPosition || typeof guessed[idx] === 'number' ? 1 : 0.5
+        "
       />
     </SvgKeyboard>
 
@@ -105,14 +107,14 @@ const fillColor = (idx: number) => {
     guessed.value[idx] === 2 ||
     (difficulty.value === 'easy' && guessed.value[idx] === 1)
   )
-    return '#bbf7d0'; // green-200
-  if (guessed.value[idx] === 1) return '#fef08a'; // yellow-200
-  if (guessed.value[idx] === 0) return '#fecaca'; // red-200
-  return '#fff'; // white
+    return '#22c55e'; // green-500
+  if (guessed.value[idx] === 1) return '#eab308'; // yellow-500
+  if (guessed.value[idx] === 0) return '#ef4444'; // red-500
+  return 'transparent';
 };
 
 const label = (idx: number) => {
-  if (idx === currentPosition.value) return tonic.value || '';
+  if (idx === currentPosition.value) return tonic.value || '?';
   if (typeof guessed.value[idx] === 'number') return undefined;
   return '?';
 };

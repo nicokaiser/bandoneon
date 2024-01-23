@@ -1,17 +1,18 @@
 <template>
-  <g @click="click">
+  <g :class="{ selected }" @click="click">
     <circle
       :cx="x + 29"
       :cy="y + 29"
       r="28"
-      :fill="color || (selected ? '#262626' : fill)"
-      :stroke="selected ? '#262626' : '#a3a3a3'"
+      :fill="fill"
+      :stroke="stroke"
       stroke-width="1"
+      :opacity="selected ? 1 : 0.33"
     />
     <text
       :x="x + 29"
       :y="y + 36"
-      :fill="selected && !color ? '#ffffff' : '#262626'"
+      :fill="selected ? '#fff' : 'currentColor'"
       font-family="-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif"
       font-size="20px"
       text-anchor="middle"
@@ -35,13 +36,6 @@ import { computed } from 'vue';
 import { useStore } from '../stores/main';
 import { useSettingsStore } from '../stores/settings';
 import helmholtz from '../utils/helmholtz';
-
-const COLORS_OCTAVE = [
-  '#bbf7d0', // green-200
-  '#fef08a', // yellow-200
-  '#bae6fd', // blue-200
-  '#fecaca', // red-200
-];
 
 const props = withDefaults(
   defineProps<{
@@ -82,11 +76,13 @@ const format = computed(() => {
 });
 
 const fill = computed(() => {
-  let octave = +props.tonal.slice(1);
-  if (props.tonal[1] === '#') octave = +props.tonal.slice(2);
-  return store.showColors
-    ? COLORS_OCTAVE[octave % COLORS_OCTAVE.length]
-    : '#fff';
+  if (props.selected) return 'currentColor';
+  if (props.color) return props.color;
+  return 'transparent';
+});
+
+const stroke = computed(() => {
+  return props.selected ? 'currentColor' : '#000';
 });
 </script>
 
@@ -95,9 +91,16 @@ text {
   user-select: none;
   cursor: default;
 }
-/*
-circle {
-  filter: drop-shadow(0 5px 5px rgb(0 0 0 / 0.1));
+
+.dark circle {
+  stroke: #fff;
 }
-*/
+
+.dark .selected circle {
+  fill: #f5f5f5;
+}
+
+.dark .selected text {
+  fill: #262626;
+}
 </style>

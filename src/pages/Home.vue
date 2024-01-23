@@ -8,6 +8,7 @@
         :x="x"
         :y="y"
         :tonal="tonal"
+        :color="color(tonal)"
         @click="toggle(tonal)"
       />
       <SvgPath
@@ -41,29 +42,24 @@ import SvgPath from '../components/SvgPath.vue';
 import { useKeyboard } from '../composables/useKeyboard';
 import { useStore } from '../stores/main';
 import { useSettingsStore } from '../stores/settings';
+import { colors } from '../data/index';
 
 useKeyboard();
 
 const keyboard = ref();
 
-const COLORS_SCALE = [
-  '#ca8a04', // yellow-600
-  '#2563eb', // blue-600
-  '#dc2626', // red-600
-  '#16a34a', // green-600
-];
-
 const store = useStore();
 const {
-  side,
-  direction,
-  tonic,
-  chordType,
-  chordNotes,
   chordName,
+  chordNotes,
+  chordType,
+  direction,
   keyPositions,
-  scaleType,
   scalePaths,
+  scaleType,
+  showColors,
+  side,
+  tonic,
 } = storeToRefs(store);
 
 const settings = useSettingsStore();
@@ -73,7 +69,7 @@ const modified = ref(false);
 const userSelection = ref<Record<string, boolean>>({});
 
 const getScaleColor = (octave: number) => {
-  return COLORS_SCALE[octave % COLORS_SCALE.length];
+  return colors[(octave - 1) % colors.length];
 };
 
 const onDownload = () => {
@@ -108,6 +104,15 @@ const selected = computed(() => {
   }
   return result;
 });
+
+function color(tonal: string) {
+  if (showColors.value) {
+    let octave = +tonal.slice(1);
+    if (tonal[1] === '#') octave = +tonal.slice(2);
+    return colors[octave % colors.length];
+  }
+  return 'transparent';
+}
 
 const toggle = (tonal: string) => {
   if (!modified.value) {

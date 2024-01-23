@@ -26,15 +26,7 @@ export function useKeyboard() {
       return store.setTonic(key + '#');
     }
 
-    // Enharmonics
-    if (key === '#') {
-      const tonic = store.tonic;
-      if (tonic && tonic.length === 1) {
-        return store.setTonic(tonic + '#');
-      }
-    }
-
-    // Chords
+    // Chord
     if (key === 'M') return store.setChordType('M');
     if (key === 'm') return store.setChordType('m');
     if (key === '7') return store.setChordType('7');
