@@ -26,7 +26,7 @@ pinia.use(({ options, store }) => {
   const fromStorage = localStorage.getItem(store.$id);
   if (fromStorage) store.$patch(JSON.parse(fromStorage));
 
-  store.$subscribe((mutation, state) => {
+  store.$subscribe((_mutation, state) => {
     localStorage.setItem(store.$id, JSON.stringify(state));
   });
 });
