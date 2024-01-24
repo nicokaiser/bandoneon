@@ -4,12 +4,13 @@ import { createApp } from 'vue';
 import App from './App.vue';
 import de from './locales/de.json';
 import en from './locales/en.json';
+import es from './locales/es.json';
 import router from './router';
 import './style.css';
 
 const i18n = createI18n({
   legacy: false,
-  messages: { en, de },
+  messages: { en, de, es },
   locale: 'en',
   fallbackLocale: 'en',
 });
