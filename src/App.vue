@@ -9,7 +9,7 @@
 </template>
 
 <script setup lang="ts">
-import { watch } from 'vue';
+import { watchEffect } from 'vue';
 import { useI18n } from 'petite-vue-i18n';
 import { useSettingsStore } from './stores/settings';
 import AppHeader from './components/AppHeader.vue';
@@ -17,10 +17,10 @@ import AppFooter from './components/AppFooter.vue';
 
 const settings = useSettingsStore();
 const { locale } = useI18n();
-locale.value = settings.locale;
 
-watch(
-  () => settings.locale,
-  () => (locale.value = settings.locale),
-);
+watchEffect(() => {
+  const lang = settings.locale;
+  locale.value = lang;
+  window!.document.querySelector('html')!.lang = lang;
+});
 </script>
