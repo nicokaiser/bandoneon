@@ -44,7 +44,7 @@
 
   <Modal v-model="isModalOpen">
     <div class="px-4 py-8 text-center">
-      <p class="mb-3">
+      <p class="mb-8">
         <strong>{{ correctPercentage }}%</strong>
         {{ t('correct') }}
       </p>
