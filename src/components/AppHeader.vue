@@ -4,7 +4,10 @@
   >
     <RouterLink to="/" class="px-2 py-1 text-xl font-medium">
       Bandoneon.app
-      <span v-if="route.path === '/game'" class="ms-2 text-neutral-500">
+      <span
+        v-if="route.path === '/game'"
+        class="ms-2 text-neutral-500 dark:text-neutral-400"
+      >
         Game
       </span>
     </RouterLink>
