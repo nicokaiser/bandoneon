@@ -1,73 +1,38 @@
 <template>
-  <div class="mb-4 flex flex-wrap justify-center gap-x-24 print:hidden">
-    <label
-      :class="{
-        'mb-3 inline-flex cursor-pointer items-center text-neutral-500': true,
-        'cursor-not-allowed': readonly,
-      }"
+  <div class="mb-5 flex flex-wrap justify-center gap-x-24 print:hidden">
+    <Tabs
+      v-model="side"
+      class="mb-3"
+      :options="[
+        { label: t('left'), value: 'left', disabled: readonly },
+        { label: t('right'), value: 'right', disabled: readonly },
+      ]"
     >
-      <span
-        :class="{
-          'me-3 w-24 select-none text-end': true,
-          'font-medium text-neutral-800 dark:text-neutral-100': side === 'left',
-        }"
-      >
-        {{ t('left') }}
-      </span>
-      <Switch
-        :checked="side === 'right'"
-        :disabled="readonly"
-        @change="onSideChange"
-      />
-      <span
-        :class="{
-          'ms-3 w-24 select-none text-start': true,
-          'font-medium text-neutral-800 dark:text-neutral-100':
-            side === 'right',
-        }"
-      >
-        {{ t('right') }}
-      </span>
-    </label>
+      <template #item="{ item }">
+        <div class="w-24">{{ item.label }}</div>
+      </template>
+    </Tabs>
 
-    <label
-      :class="{
-        'mb-3 inline-flex cursor-pointer items-center text-neutral-500': true,
-        'cursor-not-allowed': readonly,
-      }"
+    <Tabs
+      v-model="direction"
+      class="mb-3"
+      :options="[
+        { label: t('close'), value: 'close', disabled: readonly },
+        { label: t('open'), value: 'open', disabled: readonly },
+      ]"
     >
-      <span
-        :class="{
-          'me-3 w-24 select-none text-end': true,
-          'font-medium text-neutral-800 dark:text-neutral-100':
-            direction === 'close',
-        }"
-      >
-        {{ t('close') }}
-      </span>
-      <Switch
-        :checked="direction === 'open'"
-        :disabled="readonly"
-        @change="onDirectionChange"
-      />
-      <span
-        :class="{
-          'ms-3 w-24 select-none text-start': true,
-          'font-medium text-neutral-800 dark:text-neutral-100':
-            direction === 'open',
-        }"
-      >
-        {{ t('open') }}
-      </span>
-    </label>
+      <template #item="{ item }">
+        <div class="w-24">{{ item.label }}</div>
+      </template>
+    </Tabs>
   </div>
 </template>
 
 <script setup lang="ts">
 import { useI18n } from 'petite-vue-i18n';
 import { useStore } from '../stores/main';
-import Switch from './Switch.vue';
 import { storeToRefs } from 'pinia';
+import Tabs from './Tabs.vue';
 
 const props = defineProps({
   readonly: Boolean,
@@ -76,6 +41,8 @@ const props = defineProps({
 const { t } = useI18n();
 const store = useStore();
 const { side, direction } = storeToRefs(store);
+
+// TODO: readonly
 
 const onSideChange = (event: Event) => {
   if (props.readonly) return;
