@@ -34,25 +34,11 @@ import { useStore } from '../stores/main';
 import { storeToRefs } from 'pinia';
 import Tabs from './Tabs.vue';
 
-const props = defineProps({
+defineProps({
   readonly: Boolean,
 });
 
 const { t } = useI18n();
 const store = useStore();
 const { side, direction } = storeToRefs(store);
-
-// TODO: readonly
-
-const onSideChange = (event: Event) => {
-  if (props.readonly) return;
-  const checked = (event.target as HTMLInputElement).checked;
-  side.value = checked ? 'right' : 'left';
-};
-
-const onDirectionChange = (event: Event) => {
-  if (props.readonly) return;
-  const checked = (event.target as HTMLInputElement).checked;
-  direction.value = checked ? 'open' : 'close';
-};
 </script>
