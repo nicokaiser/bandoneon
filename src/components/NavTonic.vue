@@ -7,7 +7,7 @@
         :active="item === tonic"
         :disabled="disabled"
         class="m-1 w-12"
-        @click="store.setTonic(item === tonic ? null : item)"
+        @click.prevent="store.setTonic(item === tonic ? null : item)"
       >
         {{ format(item) }}
       </Button>

@@ -28,7 +28,7 @@
         :key="octave"
         :disabled="!tonic"
         class="m-1 w-12"
-        @click="oct = octave"
+        @click.prevent="oct = octave"
       >
         {{ formatOctave(octave) }}
       </Button>
@@ -49,7 +49,7 @@
         {{ t('correct') }}
       </p>
       <Button
-        @click="
+        @click.prevent="
           isModalOpen = false;
           newGame();
         "

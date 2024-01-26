@@ -13,12 +13,17 @@
     </RouterLink>
 
     <div class="inline-flex items-center gap-1">
-      <button class="p-2" @click="isDark = !isDark">
+      <button class="p-2" @click.prevent="isDark = !isDark">
         <SunIcon v-if="!isDark" class="h-5 w-5" />
         <MoonIcon v-else class="h-5 w-5" />
       </button>
 
-      <button type="button" class="p-2" title="Settings" @click="menu = !menu">
+      <button
+        type="button"
+        class="p-2"
+        title="Settings"
+        @click.prevent="menu = !menu"
+      >
         <Bars3Icon class="h-5 w-5" />
       </button>
     </div>

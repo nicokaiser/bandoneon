@@ -1,5 +1,5 @@
 <template>
-  <g :class="{ selected }" @click="click">
+  <g :class="{ selected }" @click.prevent="click">
     <circle
       :cx="x + 29"
       :cy="y + 29"

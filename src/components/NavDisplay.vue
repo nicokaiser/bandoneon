@@ -11,7 +11,7 @@
           v-for="item in scaleTypes"
           :key="item"
           :active="item === scaleType"
-          @click="store.setScaleType(item)"
+          @click.prevent="store.setScaleType(item)"
         >
           {{ t(item) }}
         </Button>
@@ -29,7 +29,7 @@
           v-for="item in chordTypes"
           :key="item"
           :active="item === chordType"
-          @click="store.setChordType(item)"
+          @click.prevent="store.setChordType(item)"
         >
           {{ item }}
         </Button>
@@ -43,18 +43,18 @@
         {{ t('display') }}
       </div>
       <ButtonGroup class="mx-2 mb-3">
-        <Button @click="showEnharmonics = !showEnharmonics">
+        <Button @click.prevent="showEnharmonics = !showEnharmonics">
           {{ showEnharmonics ? '♯' : '♭' }}
         </Button>
 
-        <Button :active="showColors" @click="showColors = !showColors">
+        <Button :active="showColors" @click.prevent="showColors = !showColors">
           <PaletteIcon class="inline-block h-5 w-5 align-[-0.25em]" />
         </Button>
 
         <Button
           class="button"
           :title="t('save_image')"
-          @click="emit('download')"
+          @click.prevent="emit('download')"
         >
           <DownloadIcon class="inline-block h-5 w-5 align-[-0.25em]" />
         </Button>
@@ -62,7 +62,7 @@
         <Button
           :title="t('save_voicing')"
           :disabled="!modified || !chordType"
-          @click="emit('save')"
+          @click.prevent="emit('save')"
         >
           <PinIcon class="inline-block h-5 w-5 align-[-0.25em]" />
         </Button>
@@ -70,7 +70,7 @@
         <Button
           :title="t('reset_voicing')"
           :disabled="!isUserChord"
-          @click="emit('reset')"
+          @click.prevent="emit('reset')"
         >
           <ArrowUturnLeftIcon class="inline-block h-5 w-5 align-[-0.25em]" />
         </Button>
