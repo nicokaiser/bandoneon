@@ -14,12 +14,12 @@
 
     <div class="inline-flex items-center gap-1">
       <button class="p-2" @click="isDark = !isDark">
-        <Icon v-if="!isDark" class="h-5 w-5" icon="heroicons:sun-20-solid" />
-        <Icon v-else class="h-5 w-5" icon="heroicons:moon-20-solid" />
+        <SunIcon v-if="!isDark" class="h-5 w-5" />
+        <MoonIcon v-else class="h-5 w-5" />
       </button>
 
       <button type="button" class="p-2" title="Settings" @click="menu = !menu">
-        <Icon class="h-5 w-5" icon="heroicons:bars-3-20-solid" />
+        <Bars3Icon class="h-5 w-5" />
       </button>
     </div>
   </header>
@@ -31,8 +31,11 @@
 import { ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import { useDark } from '../composables/useDark';
-import { Icon } from '@iconify/vue';
+
 import AppSettings from './AppSettings.vue';
+import Bars3Icon from './icons/Bars3Icon.vue';
+import SunIcon from './icons/SunIcon.vue';
+import MoonIcon from './icons/MoonIcon.vue';
 
 const route = useRoute();
 const menu = ref(false);

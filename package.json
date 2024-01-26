@@ -26,7 +26,6 @@
     "vue-router": "^4.2.5"
   },
   "devDependencies": {
-    "@iconify/vue": "^4.1.1",
     "@types/node": "20.11.5",
     "@vitejs/plugin-legacy": "^5.2.0",
     "@vitejs/plugin-vue": "^5.0.3",
