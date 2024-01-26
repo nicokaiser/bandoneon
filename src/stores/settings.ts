@@ -19,6 +19,4 @@ export const useSettingsStore = defineStore('settings', {
       if (this.userChords[side]) delete this.userChords[side][chordName];
     },
   },
-
-  persist: true,
 });

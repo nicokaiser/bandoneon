@@ -23,4 +23,11 @@ watchEffect(() => {
   locale.value = lang;
   window!.document.querySelector('html')!.lang = lang;
 });
+
+// Persist settings to localStorage
+const storedSettings = localStorage.getItem('settings');
+if (storedSettings) settings.$patch(JSON.parse(storedSettings));
+settings.$subscribe((_mutation, state) => {
+  localStorage.setItem('settings', JSON.stringify(state));
+});
 </script>
