@@ -1,5 +1,5 @@
 <template>
-  <!-- i-heroicons-bars-3 -->
+  <!-- heroicons:bars-3-20-solid -->
   <svg
     data-slot="icon"
     fill="currentColor"

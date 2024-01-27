@@ -95,7 +95,7 @@
 
         <div class="flex items-center gap-3">
           <a target="_blank" href="https://github.com/nicokaiser/bandoneon/">
-            <GitHubIcon class="h-4 w-4" />
+            <IconGitHub class="h-4 w-4" />
           </a>
           <a
             href="mailto:nico@kaiser.me?subject=Bandoneon.app%20Feedback"
@@ -114,7 +114,7 @@ import { useI18n } from 'petite-vue-i18n';
 import { useSettingsStore } from '../stores/settings';
 import { useRoute } from 'vue-router';
 import Select from './Select.vue';
-import GitHubIcon from './icons/GitHubIcon.vue';
+import IconGitHub from './icons/IconGitHub.vue';
 import { storeToRefs } from 'pinia';
 import { difficulties, instruments, pitchNotations } from '../data/index';
 

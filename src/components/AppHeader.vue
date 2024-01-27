@@ -14,8 +14,8 @@
 
     <div class="inline-flex items-center gap-1">
       <button class="p-2" @click.prevent="isDark = !isDark">
-        <SunIcon v-if="!isDark" class="h-5 w-5" />
-        <MoonIcon v-else class="h-5 w-5" />
+        <IconSun v-if="!isDark" class="h-5 w-5" />
+        <IconMoon v-else class="h-5 w-5" />
       </button>
 
       <button
@@ -24,7 +24,7 @@
         title="Settings"
         @click.prevent="menu = !menu"
       >
-        <Bars3Icon class="h-5 w-5" />
+        <IconBars3 class="h-5 w-5" />
       </button>
     </div>
   </header>
@@ -38,9 +38,9 @@ import { useRoute } from 'vue-router';
 import { useDark } from '../composables/useDark';
 
 import AppSettings from './AppSettings.vue';
-import Bars3Icon from './icons/Bars3Icon.vue';
-import SunIcon from './icons/SunIcon.vue';
-import MoonIcon from './icons/MoonIcon.vue';
+import IconBars3 from './icons/IconBars3.vue';
+import IconSun from './icons/IconSun.vue';
+import IconMoon from './icons/IconMoon.vue';
 
 const route = useRoute();
 const menu = ref(false);

@@ -48,7 +48,7 @@
         </Button>
 
         <Button :active="showColors" @click.prevent="showColors = !showColors">
-          <PaletteIcon class="inline-block h-5 w-5 align-[-0.25em]" />
+          <IconPalette class="inline-block h-5 w-5 align-[-0.25em]" />
         </Button>
 
         <Button
@@ -56,7 +56,7 @@
           :title="t('save_image')"
           @click.prevent="emit('download')"
         >
-          <DownloadIcon class="inline-block h-5 w-5 align-[-0.25em]" />
+          <IconArrowDownTray class="inline-block h-5 w-5 align-[-0.25em]" />
         </Button>
 
         <Button
@@ -64,7 +64,7 @@
           :disabled="!modified || !chordType"
           @click.prevent="emit('save')"
         >
-          <PinIcon class="inline-block h-5 w-5 align-[-0.25em]" />
+          <IconPin class="inline-block h-5 w-5 align-[-0.25em]" />
         </Button>
 
         <Button
@@ -72,7 +72,7 @@
           :disabled="!isUserChord"
           @click.prevent="emit('reset')"
         >
-          <ArrowUturnLeftIcon class="inline-block h-5 w-5 align-[-0.25em]" />
+          <IconArrowUturnLeft class="inline-block h-5 w-5 align-[-0.25em]" />
         </Button>
       </ButtonGroup>
     </div>
@@ -82,10 +82,10 @@
 <script setup lang="ts">
 import { useI18n } from 'petite-vue-i18n';
 import { useStore } from '../stores/main';
-import ArrowUturnLeftIcon from './icons/ArrowUturnLeftIcon.vue';
-import DownloadIcon from './icons/DownloadIcon.vue';
-import PaletteIcon from './icons/PaletteIcon.vue';
-import PinIcon from './icons/PinIcon.vue';
+import IconArrowUturnLeft from './icons/IconArrowUturnLeft.vue';
+import IconArrowDownTray from './icons/IconArrowDownTray.vue';
+import IconPalette from './icons/IconPalette.vue';
+import IconPin from './icons/IconPin.vue';
 import Button from './Button.vue';
 import ButtonGroup from './ButtonGroup.vue';
 import { storeToRefs } from 'pinia';

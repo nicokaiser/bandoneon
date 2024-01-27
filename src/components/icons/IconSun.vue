@@ -1,5 +1,5 @@
 <template>
-  <!-- i-heroicons-sun-20-solid -->
+  <!-- heroicons:sun-20-solid -->
   <svg
     data-slot="icon"
     fill="currentColor"
