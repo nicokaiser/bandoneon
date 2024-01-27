@@ -19,6 +19,7 @@
     <NavVariant :readonly="currentPosition > 0" />
     <NavTonic />
 
+    <!-- Medium mode: display octave buttons -->
     <div
       v-if="difficulty !== 'easy'"
       class="mb-2 flex flex-wrap justify-center"
@@ -34,11 +35,13 @@
       </Button>
     </div>
 
-    <GameProgress
+    <Progress
       class="mt-8"
-      :correct="progress[2]"
-      :partial="progress[1]"
-      :wrong="progress[0]"
+      :values="[
+        { value: progress[2], color: '#22c55e' /* green-500 */ },
+        { value: progress[1], color: '#eab308' /* yellow-500 */ },
+        { value: progress[0], color: '#ef4444' /* red-500 */ },
+      ]"
     />
   </div>
 
@@ -65,7 +68,7 @@ import { storeToRefs } from 'pinia';
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
 import { useI18n } from 'petite-vue-i18n';
 import Button from '../components/Button.vue';
-import GameProgress from '../components/GameProgress.vue';
+import Progress from '../components/Progress.vue';
 import Modal from '../components/Modal.vue';
 import NavTonic from '../components/NavTonic.vue';
 import NavVariant from '../components/NavVariant.vue';
