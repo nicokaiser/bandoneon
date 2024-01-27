@@ -14,7 +14,7 @@
           class="mt-1"
           :options="
             Object.keys(instruments).map((value) => ({
-              name: t(value),
+              label: t(value),
               value,
             }))
           "
@@ -34,7 +34,7 @@
           class="mt-1"
           :options="
             pitchNotations.map((value) => ({
-              name: t(value),
+              label: t(value),
               value,
             }))
           "
@@ -55,7 +55,7 @@
           class="mt-1"
           :options="
             availableLocales.map((value) => ({
-              name: t('language-' + value),
+              label: t('language-' + value),
               value,
             }))
           "
@@ -75,7 +75,7 @@
           class="mt-1"
           :options="
             difficulties.map((value) => ({
-              name: t('difficulty-' + value),
+              label: t('difficulty-' + value),
               value,
             }))
           "

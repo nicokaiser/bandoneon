@@ -11,7 +11,7 @@
         :value="option.value"
         :selected="option.value === modelValue"
       >
-        {{ option.name }}
+        {{ option.label }}
       </option>
     </select>
 
@@ -39,7 +39,7 @@
 withDefaults(
   defineProps<{
     id?: string;
-    options: Array<{ name: string; value: string }>;
+    options: Array<{ label: string; value: string }>;
     modelValue?: string;
   }>(),
   {
