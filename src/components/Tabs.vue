@@ -8,13 +8,9 @@
       v-for="option of options"
       :key="option.value"
       :aria-checked="option.value === modelValue"
-      :class="{
-        'my-1 h-8 px-2 py-1 rounded-md': true,
-        'bg-white dark:bg-neutral-900 shadow-sm': option.value === modelValue,
-        'text-neutral-500': option.value !== modelValue,
-        'cursor-not-allowed opacity-75': option.disabled,
-      }"
-      @click="!option.disabled && emit('update:modelValue', option.value)"
+      :disabled="option.disabled"
+      class="my-1 h-8 px-2 py-1 rounded-md text-neutral-500 aria-checked:text-inherit aria-checked:bg-white aria-checked:dark:bg-neutral-900 aria-checked:shadow-sm disabled:cursor-not-allowed disabled:opacity-75"
+      @click.prevent="emit('update:modelValue', option.value)"
     >
       <slot name="item" :item="option">{{ option.label }}</slot>
     </button>

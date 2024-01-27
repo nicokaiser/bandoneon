@@ -10,7 +10,7 @@
         <Button
           v-for="item in scaleTypes"
           :key="item"
-          :active="item === scaleType"
+          :aria-pressed="item === scaleType"
           @click.prevent="store.setScaleType(item)"
         >
           {{ t(item) }}
@@ -28,7 +28,7 @@
         <Button
           v-for="item in chordTypes"
           :key="item"
-          :active="item === chordType"
+          :aria-pressed="item === chordType"
           @click.prevent="store.setChordType(item)"
         >
           {{ item }}
@@ -47,7 +47,10 @@
           {{ showEnharmonics ? '♯' : '♭' }}
         </Button>
 
-        <Button :active="showColors" @click.prevent="showColors = !showColors">
+        <Button
+          :aria-pressed="showColors"
+          @click.prevent="showColors = !showColors"
+        >
           <IconPalette class="inline-block h-5 w-5 align-[-0.25em]" />
         </Button>
 
