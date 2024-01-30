@@ -27,8 +27,8 @@
       <Button
         v-for="octave in octaves"
         :key="octave"
-        :disabled="!tonic"
         class="m-1 w-12"
+        :disabled="!tonic"
         @click.prevent="oct = octave"
       >
         {{ formatOctave(octave) }}

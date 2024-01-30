@@ -4,9 +4,9 @@
       <Button
         v-for="item in notes.slice(idx * 6, idx * 6 + 6)"
         :key="item"
+        class="m-1 w-12"
         :aria-pressed="item === tonic"
         :disabled="disabled"
-        class="m-1 w-12"
         @click.prevent="store.setTonic(item === tonic ? null : item)"
       >
         {{ format(item) }}

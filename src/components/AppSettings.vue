@@ -86,8 +86,8 @@
         <div>
           <RouterLink
             v-if="route.path !== '/game'"
-            to="/game"
             class="me-1 underline"
+            to="/game"
           >
             Play a game!
           </RouterLink>
@@ -98,8 +98,8 @@
             <IconGitHub class="h-4 w-4" />
           </a>
           <a
-            href="mailto:nico@kaiser.me?subject=Bandoneon.app%20Feedback"
             class="underline"
+            href="mailto:nico@kaiser.me?subject=Bandoneon.app%20Feedback"
           >
             Feedback
           </a>
