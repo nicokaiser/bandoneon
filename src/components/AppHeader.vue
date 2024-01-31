@@ -3,7 +3,7 @@
     <nav class="mx-auto flex min-h-16 w-full max-w-screen-md items-center p-2">
       <div class="flex-1">
         <RouterLink
-          class="btn-ghost inline-flex min-h-12 select-none flex-wrap items-center justify-center rounded-lg px-4 text-xl font-semibold hover:bg-neutral-100 hover:dark:bg-neutral-800"
+          class="btn-ghost inline-flex min-h-12 select-none flex-wrap items-center justify-center rounded-lg px-4 text-xl font-semibold hover:dark:bg-neutral-800 [@media(hover:hover)]:hover:bg-neutral-100"
           to="/"
         >
           Bandoneon.app
@@ -17,7 +17,7 @@
       </div>
       <div class="flex-none">
         <button
-          class="inline-flex h-12 w-12 select-none flex-wrap items-center justify-center rounded-lg font-semibold hover:bg-neutral-100 hover:dark:bg-neutral-800"
+          class="inline-flex h-12 w-12 select-none flex-wrap items-center justify-center rounded-lg font-semibold [@media(hover:hover)]:hover:bg-neutral-100 [@media(hover:hover)]:hover:dark:bg-neutral-800"
           @click.prevent="isDark = !isDark"
         >
           <IconSun v-if="!isDark" class="h-5 w-5" />
@@ -25,7 +25,7 @@
         </button>
 
         <button
-          class="inline-flex h-12 w-12 select-none flex-wrap items-center justify-center rounded-lg font-semibold hover:bg-neutral-100 hover:dark:bg-neutral-800"
+          class="inline-flex h-12 w-12 select-none flex-wrap items-center justify-center rounded-lg font-semibold [@media(hover:hover)]:hover:bg-neutral-100 [@media(hover:hover)]:hover:dark:bg-neutral-800"
           type="button"
           title="Settings"
           @click.prevent="menu = !menu"
