@@ -43,7 +43,6 @@
 import { ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import { useDark } from '../composables/useDark';
-
 import AppSettings from './AppSettings.vue';
 import IconBars3 from './icons/IconBars3.vue';
 import IconSun from './icons/IconSun.vue';
@@ -59,5 +58,3 @@ watch(
   () => (menu.value = false),
 );
 </script>
-
-<style scoped></style>
