@@ -1,5 +1,5 @@
 <template>
-  <g :class="{ selected }" @click.prevent="click">
+  <g :class="{ selected }" @click.prevent="emit('click')">
     <circle
       :cx="x + 29"
       :cy="y + 29"
@@ -57,10 +57,6 @@ const emit = defineEmits(['click']);
 
 const store = useStore();
 const settings = useSettingsStore();
-
-const click = () => {
-  emit('click');
-};
 
 const format = computed(() => {
   const note = Note.get(
