@@ -1,6 +1,6 @@
 <template>
   <header>
-    <nav class="mx-auto flex min-h-16 w-full max-w-screen-md items-center p-2">
+    <nav class="mx-auto flex min-h-16 w-full items-center p-2">
       <div class="flex-1">
         <RouterLink
           class="btn-ghost inline-flex min-h-12 select-none flex-wrap items-center justify-center rounded-lg px-4 text-xl font-semibold [@media(hover:hover)]:hover:bg-neutral-100 [@media(hover:hover)]:hover:dark:bg-neutral-800"
