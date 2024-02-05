@@ -137,11 +137,13 @@ const octaves = computed(() => {
 });
 
 function resetGame() {
+  // Reset guesses
   currentPosition.value = 0;
   oct.value = null;
   guessed.value = [];
   store.setTonic(null);
 
+  // Randomize position order
   const array = [...keyPositions.value];
   const random = array.map(Math.random);
   array.sort((a, b) => random[array.indexOf(a)] - random[array.indexOf(b)]);
@@ -149,6 +151,7 @@ function resetGame() {
 }
 
 function newGame() {
+  // Randomize side, direction
   store.$patch({
     side: Math.random() < 0.5 ? 'right' : 'left',
     direction: Math.random() < 0.5 ? 'open' : 'close',
@@ -161,26 +164,29 @@ onMounted(() => newGame());
 watch(keyPositions, () => resetGame());
 
 function check() {
+  // Current guess is not complete
   if (positions.value.length <= currentPosition.value) return;
 
+  // Current guess is complete
   const solution = positions.value[currentPosition.value][2];
-
   if (
     tonic.value !== null &&
     oct.value !== null &&
     tonic.value + oct.value === solution
   ) {
     guessed.value[currentPosition.value] = 2;
-  } else if (tonic.value === solution.substr(0, solution.length - 1)) {
+  } else if (tonic.value === solution.substring(0, solution.length - 1)) {
     guessed.value[currentPosition.value] = 1;
   } else {
     guessed.value[currentPosition.value] = 0;
   }
 
+  // Proceed to next position
   currentPosition.value++;
   store.setTonic(null);
   oct.value = null;
 
+  // Game is done
   if (currentPosition.value >= positions.value.length) {
     isModalOpen.value = true;
   }
