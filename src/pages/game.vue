@@ -77,6 +77,9 @@ import SvgKeyboard from '../components/SvgKeyboard.vue';
 import { useKeyboard } from '../composables/useKeyboard';
 import { useStore } from '../stores/main';
 import { useSettingsStore } from '../stores/settings';
+import { useHead } from '@unhead/vue';
+
+useHead({ title: 'Play a game! – Bandoneon.app' });
 
 useKeyboard();
 

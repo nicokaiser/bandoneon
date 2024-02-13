@@ -1,3 +1,4 @@
+import { createHead } from '@unhead/vue';
 import { createI18n } from 'petite-vue-i18n';
 import { createPinia } from 'pinia';
 import { createApp } from 'vue';
@@ -16,9 +17,11 @@ const i18n = createI18n({
 });
 
 const pinia = createPinia();
+const head = createHead();
 
 const app = createApp(App);
 app.use(pinia);
+app.use(head);
 app.use(router);
 app.use(i18n);
 app.mount('#app');
