@@ -13,10 +13,6 @@ A little JavaScript application that wants to help learning the bandoneon.
 
     npm run dev
 
-## Running as Docker container
-
-    docker run -d -p 80:80 nicokaiser/bandoneon
-
 ## Author
 
 ### Nico Kaiser
