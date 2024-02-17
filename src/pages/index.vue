@@ -43,6 +43,9 @@ import { useKeyboard } from '../composables/useKeyboard';
 import { useStore } from '../stores/main';
 import { useSettingsStore } from '../stores/settings';
 import { colors } from '../data/index';
+import { useHead } from '@unhead/vue';
+
+useHead({ title: 'Bandoneon keyboard, chords and scales – Bandoneon.app' });
 
 useKeyboard();
 
