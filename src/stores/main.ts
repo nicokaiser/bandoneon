@@ -61,7 +61,7 @@ export const useStore = defineStore('main', {
       const keys = Array.isArray(instruments[settings.instrument][state.side])
         ? instruments[settings.instrument][state.side]
         : // @ts-expect-error TODO
-          instruments[settings.instrument][state.side][state.direction];
+        instruments[settings.instrument][state.side][state.direction];
 
       if (!keys) return [];
 
@@ -85,8 +85,10 @@ export const useStore = defineStore('main', {
             const x = offsetX + col * 79 + 40 - (row % 2) * 40;
             const y =
               offsetY +
-              row * 64 +
-              30 * (1 - Math.sin(((x / 320) * Math.PI) / 2));
+              // row:
+              row * 60 +
+              // curvature:
+              (row / 2 + 1) * 15 * (1 - Math.sin(((x / 320) * Math.PI) / 2));
             positions.push([x, y, tonal]);
           }
         }
