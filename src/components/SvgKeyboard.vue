@@ -66,5 +66,6 @@ defineExpose({ download });
   width: 100%;
   height: calc(100% / 720 * 428);
   max-height: calc(90vh - 5em);
+  min-height: 10rem;
 }
 </style>
