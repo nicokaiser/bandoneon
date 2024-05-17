@@ -1,13 +1,13 @@
 <template>
   <div
-    class="flex h-10 items-center gap-1 rounded-lg bg-neutral-100 p-1 text-sm font-medium dark:bg-neutral-800"
+    class="flex h-10 items-center gap-1 rounded-lg border border-neutral-500 p-1 text-sm font-medium dark:border-neutral-400"
     role="group"
     aria-orientation="horizontal"
   >
     <button
       v-for="option of options"
       :key="option.value"
-      class="my-1 h-8 select-none rounded-md px-2 py-1 text-neutral-500 disabled:cursor-not-allowed disabled:opacity-75 aria-checked:bg-white aria-checked:text-inherit aria-checked:shadow-sm aria-checked:dark:bg-neutral-900"
+      class="my-1 h-8 select-none rounded-md px-2 py-1 disabled:cursor-not-allowed disabled:opacity-75 aria-checked:bg-neutral-800 aria-checked:text-white aria-checked:dark:bg-neutral-100 aria-checked:dark:text-neutral-900"
       :aria-checked="option.value === modelValue"
       :disabled="option.disabled"
       @click.prevent="emit('update:modelValue', option.value)"

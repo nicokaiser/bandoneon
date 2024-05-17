@@ -11,7 +11,7 @@
         :selected="idx === currentPosition"
         :color="fillColor(idx)"
         :opacity="
-          idx === currentPosition || typeof guessed[idx] === 'number' ? 1 : 0.5
+          idx === currentPosition || typeof guessed[idx] === 'number' ? 1 : 0.75
         "
       />
     </SvgKeyboard>
