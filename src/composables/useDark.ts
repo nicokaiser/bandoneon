@@ -40,12 +40,8 @@ export function useDark() {
       return mode.value === 'dark';
     },
     set(v) {
-      const modeVal = v ? 'dark' : 'light';
-      if (system.value === modeVal) {
-        mode.value = 'auto';
-      } else {
-        mode.value = modeVal;
-      }
+      const modeValue = v ? 'dark' : 'light';
+      mode.value = (system.value === modeValue) ? 'auto' : modeValue;
       localStorage.setItem('color-scheme', mode.value);
     },
   });
@@ -54,13 +50,13 @@ export function useDark() {
     const el = window?.document.querySelector('html');
     if (!el) return;
     const value = mode.value === 'auto' ? system.value : mode.value;
-    ['light', 'dark'].forEach((v) => {
+    for (const v of ['light', 'dark']) {
       if (value === v) {
         el.classList.add(v);
       } else {
         el.classList.remove(v);
       }
-    });
+    };
   });
 
   return { isDark, mode, system };

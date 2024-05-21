@@ -110,7 +110,7 @@ export const useStore = defineStore('main', {
           scaleNotes.push(`${this.tonic}${o + 1}`);
           let pathString = '';
 
-          scaleNotes.forEach((note) => {
+          for (const note of scaleNotes) {
             const no = Note.get(note);
 
             const pos = this.keyPositions.find(
@@ -120,7 +120,7 @@ export const useStore = defineStore('main', {
             if (pos) {
               pathString += `${pathString === '' ? 'M' : 'L'}${pos[0] + 30},${pos[1] + 30}`;
             }
-          });
+          };
 
           paths.push(pathString);
         }
@@ -132,15 +132,15 @@ export const useStore = defineStore('main', {
 
   actions: {
     setTonic(tonic: string | null) {
-      if (!tonic) {
-        this.tonic = null;
-        this.chordType = null;
-        this.scaleType = null;
-      } else {
+      if (tonic) {
         this.tonic = tonic;
         if (!this.scaleType && !this.chordType) {
           this.chordType = 'M';
         }
+      } else {
+        this.tonic = null;
+        this.chordType = null;
+        this.scaleType = null;
       }
     },
 

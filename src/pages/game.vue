@@ -122,20 +122,20 @@ const fillColor = (idx: number) => {
 
 const label = (idx: number) => {
   if (idx === currentPosition.value) return tonic.value || '?';
-  if (typeof guessed.value[idx] === 'number') return undefined;
+  if (typeof guessed.value[idx] === 'number') return;
   return '?';
 };
 
 const octaves = computed(() => {
-  return Array.from(
-    new Set(
+  return [
+    ...new Set(
       positions.value.map((position) => {
         const name = position[2];
         return name[name.length - 1];
       }),
     ),
-  )
-    .map((item) => parseInt(item, 10))
+  ]
+    .map((item) => Number.parseInt(item, 10))
     .sort();
 });
 
@@ -148,7 +148,7 @@ function resetGame() {
 
   // Randomize position order
   const array = [...keyPositions.value];
-  const random = array.map(Math.random);
+  const random = array.map(() => Math.random());
   array.sort((a, b) => random[array.indexOf(a)] - random[array.indexOf(b)]);
   positions.value = array;
 }

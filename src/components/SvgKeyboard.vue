@@ -28,13 +28,13 @@ const download = (filename: string) => {
   const blob = new Blob([data], { type: 'image/svg+xml' });
   const url = win.createObjectURL(blob);
 
-  img.onload = () => {
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
+  img.addEventListener('load', () => {
+    const context = canvas.getContext('2d');
+    if (!context) return;
 
-    ctx.fillStyle = 'white';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    ctx.drawImage(
+    context.fillStyle = 'white';
+    context.fillRect(0, 0, canvas.width, canvas.height);
+    context.drawImage(
       img,
       margin,
       margin,
@@ -46,14 +46,14 @@ const download = (filename: string) => {
       .toDataURL('image/png')
       .replace('image/png', 'octet/stream');
     const a = document.createElement('a');
-    document.body.appendChild(a);
+    document.body.append(a);
     a.style.display = 'none';
     a.href = uri;
     a.download = filename;
     a.click();
     win.revokeObjectURL(uri);
-    document.body.removeChild(a);
-  };
+    a.remove();
+  });
 
   img.src = url;
 };
