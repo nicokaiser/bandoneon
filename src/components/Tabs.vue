@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex h-10 items-center gap-1 rounded-lg border border-neutral-500 p-1 text-sm font-medium dark:border-neutral-400"
+    class="flex h-10 items-center gap-1 rounded-lg border border-neutral-500 p-1 text-sm font-medium dark:border-neutral-500"
     role="group"
     aria-orientation="horizontal"
   >
