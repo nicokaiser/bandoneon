@@ -7,7 +7,6 @@
       :fill="fill"
       :stroke="stroke"
       stroke-width="1.5"
-      :opacity="selected ? 1 : 0.66"
     />
     <text
       :x="x + 29"

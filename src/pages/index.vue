@@ -112,7 +112,7 @@ function color(tonal: string) {
   if (showColors.value) {
     let octave = +tonal.slice(1);
     if (tonal[1] === '#') octave = +tonal.slice(2);
-    return colors[octave % colors.length];
+    return colors[octave % colors.length] + '80';
   }
   return 'transparent';
 }

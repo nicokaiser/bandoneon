@@ -114,9 +114,9 @@ const fillColor = (idx: number) => {
     guessed.value[idx] === 2 ||
     (difficulty.value === 'easy' && guessed.value[idx] === 1)
   )
-    return '#22c55e'; // green-500
-  if (guessed.value[idx] === 1) return '#eab308'; // yellow-500
-  if (guessed.value[idx] === 0) return '#ef4444'; // red-500
+    return '#22c55eaa'; // green-500
+  if (guessed.value[idx] === 1) return '#eab308aa'; // yellow-500
+  if (guessed.value[idx] === 0) return '#ef4444aa'; // red-500
   return 'transparent';
 };
 
