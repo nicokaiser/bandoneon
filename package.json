@@ -27,7 +27,7 @@
   },
   "devDependencies": {
     "@types/node": "20.12.12",
-    "@unhead/vue": "^1.9.10",
+    "@unhead/vue": "^1.9.11",
     "@vitejs/plugin-legacy": "^5.4.0",
     "@vitejs/plugin-vue": "^5.0.4",
     "@vue/tsconfig": "^0.5.1",
