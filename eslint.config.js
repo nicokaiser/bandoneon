@@ -19,7 +19,6 @@ export default [
     languageOptions: {
       parserOptions: {
         parser: tseslint.parser,
-        project: true,
         extraFileExtensions: ['.vue'],
         sourceType: 'module',
       },
