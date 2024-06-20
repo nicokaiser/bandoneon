@@ -61,7 +61,7 @@ export const useStore = defineStore('main', {
       const keys = Array.isArray(instruments[settings.instrument][state.side])
         ? instruments[settings.instrument][state.side]
         : // @ts-expect-error TODO
-        instruments[settings.instrument][state.side][state.direction];
+          instruments[settings.instrument][state.side][state.direction];
 
       if (!keys) return [];
 
@@ -120,7 +120,7 @@ export const useStore = defineStore('main', {
             if (pos) {
               pathString += `${pathString === '' ? 'M' : 'L'}${pos[0] + 30},${pos[1] + 30}`;
             }
-          };
+          }
 
           paths.push(pathString);
         }

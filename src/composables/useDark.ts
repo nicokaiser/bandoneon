@@ -41,7 +41,7 @@ export function useDark() {
     },
     set(v) {
       const modeValue = v ? 'dark' : 'light';
-      mode.value = (system.value === modeValue) ? 'auto' : modeValue;
+      mode.value = system.value === modeValue ? 'auto' : modeValue;
       localStorage.setItem('color-scheme', mode.value);
     },
   });
@@ -56,7 +56,7 @@ export function useDark() {
       } else {
         el.classList.remove(v);
       }
-    };
+    }
   });
 
   return { isDark, mode, system };
