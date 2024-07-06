@@ -15,19 +15,22 @@
     "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview --port 5050",
     "lint": "eslint .",
-    "prettier": "prettier src --write"
+    "prettier": "prettier src --write",
+    "generate-pwa-assets": "pwa-assets-generator"
   },
   "dependencies": {
     "@tonaljs/note": "^4.10.3",
     "@tonaljs/scale": "^4.12.6",
     "petite-vue-i18n": "^9.13.1",
     "pinia": "^2.1.7",
+    "vite-plugin-pwa": "^0.20.0",
     "vue": "^3.4.31",
     "vue-router": "^4.4.0"
   },
   "devDependencies": {
     "@types/node": "^20.14.9",
     "@unhead/vue": "^1.9.14",
+    "@vite-pwa/assets-generator": "^0.2.4",
     "@vitejs/plugin-legacy": "^5.4.1",
     "@vitejs/plugin-vue": "^5.0.5",
     "@vue/tsconfig": "^0.5.1",
