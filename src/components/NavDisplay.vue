@@ -84,15 +84,15 @@
 
 <script setup lang="ts">
 import { useI18n } from 'petite-vue-i18n';
+import { storeToRefs } from 'pinia';
+import { chordTypes, scaleTypes } from '../data/index';
 import { useStore } from '../stores/main';
-import IconArrowUturnLeft from './icons/IconArrowUturnLeft.vue';
-import IconArrowDownTray from './icons/IconArrowDownTray.vue';
-import IconPalette from './icons/IconPalette.vue';
-import IconPin from './icons/IconPin.vue';
 import Button from './Button.vue';
 import ButtonGroup from './ButtonGroup.vue';
-import { storeToRefs } from 'pinia';
-import { scaleTypes, chordTypes } from '../data/index';
+import IconArrowDownTray from './icons/IconArrowDownTray.vue';
+import IconArrowUturnLeft from './icons/IconArrowUturnLeft.vue';
+import IconPalette from './icons/IconPalette.vue';
+import IconPin from './icons/IconPin.vue';
 
 defineProps({
   modified: Boolean,

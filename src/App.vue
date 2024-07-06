@@ -9,12 +9,12 @@
 </template>
 
 <script setup lang="ts">
-import { watchEffect } from 'vue';
-import { useI18n } from 'petite-vue-i18n';
-import { useSettingsStore } from './stores/settings';
-import AppHeader from './components/AppHeader.vue';
-import AppFooter from './components/AppFooter.vue';
 import { useHead } from '@unhead/vue';
+import { useI18n } from 'petite-vue-i18n';
+import { watchEffect } from 'vue';
+import AppFooter from './components/AppFooter.vue';
+import AppHeader from './components/AppHeader.vue';
+import { useSettingsStore } from './stores/settings';
 
 useHead({ title: 'Bandoneon.app' });
 

@@ -64,20 +64,20 @@
 </template>
 
 <script setup lang="ts">
+import { useHead } from '@unhead/vue';
+import { useI18n } from 'petite-vue-i18n';
 import { storeToRefs } from 'pinia';
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
-import { useI18n } from 'petite-vue-i18n';
 import Button from '../components/Button.vue';
-import Progress from '../components/Progress.vue';
 import Modal from '../components/Modal.vue';
 import NavTonic from '../components/NavTonic.vue';
 import NavVariant from '../components/NavVariant.vue';
+import Progress from '../components/Progress.vue';
 import SvgButton from '../components/SvgButton.vue';
 import SvgKeyboard from '../components/SvgKeyboard.vue';
 import { useKeyboard } from '../composables/useKeyboard';
 import { useStore } from '../stores/main';
 import { useSettingsStore } from '../stores/settings';
-import { useHead } from '@unhead/vue';
 
 useHead({ title: 'Play a game! – Bandoneon.app' });
 

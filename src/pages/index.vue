@@ -31,6 +31,7 @@
 </template>
 
 <script setup lang="ts">
+import { useHead } from '@unhead/vue';
 import { storeToRefs } from 'pinia';
 import { computed, onMounted, ref, watch } from 'vue';
 import NavDisplay from '../components/NavDisplay.vue';
@@ -40,10 +41,9 @@ import SvgButton from '../components/SvgButton.vue';
 import SvgKeyboard from '../components/SvgKeyboard.vue';
 import SvgPath from '../components/SvgPath.vue';
 import { useKeyboard } from '../composables/useKeyboard';
+import { colors } from '../data/index';
 import { useStore } from '../stores/main';
 import { useSettingsStore } from '../stores/settings';
-import { colors } from '../data/index';
-import { useHead } from '@unhead/vue';
 
 useHead({ title: 'Bandoneon keyboard, chords and scales – Bandoneon.app' });
 

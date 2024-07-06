@@ -111,12 +111,12 @@
 
 <script setup lang="ts">
 import { useI18n } from 'petite-vue-i18n';
-import { useSettingsStore } from '../stores/settings';
+import { storeToRefs } from 'pinia';
 import { useRoute } from 'vue-router';
+import { difficulties, instruments, pitchNotations } from '../data/index';
+import { useSettingsStore } from '../stores/settings';
 import Select from './Select.vue';
 import IconGitHub from './icons/IconGitHub.vue';
-import { storeToRefs } from 'pinia';
-import { difficulties, instruments, pitchNotations } from '../data/index';
 
 const settings = useSettingsStore();
 const route = useRoute();

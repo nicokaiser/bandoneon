@@ -16,11 +16,11 @@
 </template>
 
 <script setup lang="ts">
-import { useStore } from '../stores/main';
 import { enharmonic } from '@tonaljs/note';
-import Button from './Button.vue';
 import { storeToRefs } from 'pinia';
 import { notes } from '../data/index';
+import { useStore } from '../stores/main';
+import Button from './Button.vue';
 
 defineProps({
   disabled: Boolean,

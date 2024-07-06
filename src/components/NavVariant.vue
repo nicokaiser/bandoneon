@@ -30,8 +30,8 @@
 
 <script setup lang="ts">
 import { useI18n } from 'petite-vue-i18n';
-import { useStore } from '../stores/main';
 import { storeToRefs } from 'pinia';
+import { useStore } from '../stores/main';
 import Tabs from './Tabs.vue';
 
 defineProps({
