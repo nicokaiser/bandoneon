@@ -1,7 +1,7 @@
 // @ts-check
 
 import js from '@eslint/js';
-import eslintConfigPrettier from 'eslint-config-prettier';
+import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
 import pluginVue from 'eslint-plugin-vue';
 import tseslint from 'typescript-eslint';
 
@@ -24,7 +24,7 @@ export default [
       },
     },
   },
-  eslintConfigPrettier,
+  eslintPluginPrettierRecommended,
   {
     rules: {
       'vue/multi-word-component-names': 'off',
