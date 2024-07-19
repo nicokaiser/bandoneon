@@ -1,3 +1,4 @@
 {
-  "extends": "@vue/tsconfig/tsconfig.dom.json"
+  "extends": "@vue/tsconfig/tsconfig.dom.json",
+  "include": ["./src/**/*.ts", "./src/**/*.vue", "./typed-router.d.ts"]
 }

@@ -1,11 +1,13 @@
 import legacy from '@vitejs/plugin-legacy';
 import vue from '@vitejs/plugin-vue';
+import VueRouter from 'unplugin-vue-router/vite';
 import { defineConfig } from 'vite';
 import { VitePWA } from 'vite-plugin-pwa';
 
 /** @type {import('vite').UserConfig} */
 export default defineConfig({
   plugins: [
+    VueRouter(),
     vue(),
     legacy({
       targets: ['defaults', 'not IE 11'],
