@@ -5,7 +5,6 @@
   "packageRules": [
     {
       "matchDatasources": ["npm"],
-      "matchUpdateTypes": ["minor", "patch"],
       "excludePackageNames": ["node", "@types/node"],
       "rangeStrategy": "bump"
     }
