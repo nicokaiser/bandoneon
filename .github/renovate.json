@@ -1,5 +1,14 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["config:recommended"],
-  "schedule": ["before 4am on monday"]
+  "schedule": ["before 4am on monday"],
+  "packageRules": [
+    {
+      "matchDatasources": ["npm"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "excludePackageNames": ["node", "@types/node"],
+      "rangeStrategy": "bump"
+    }
+  ],
+  "labels": ["dependencies"]
 }
