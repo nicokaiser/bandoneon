@@ -29,5 +29,5 @@ withDefaults(
   },
 );
 
-const emit = defineEmits(['update:modelValue']);
+const emit = defineEmits<{ 'update:modelValue': [string] }>();
 </script>

@@ -94,11 +94,13 @@ import IconArrowUturnLeft from './icons/IconArrowUturnLeft.vue';
 import IconPalette from './icons/IconPalette.vue';
 import IconPin from './icons/IconPin.vue';
 
-defineProps({
-  modified: Boolean,
-});
+defineProps<{ modified: boolean }>();
 
-const emit = defineEmits(['download', 'save', 'reset']);
+const emit = defineEmits<{
+  download: [];
+  save: [];
+  reset: [];
+}>();
 
 const { t } = useI18n();
 const store = useStore();

@@ -1,6 +1,6 @@
 <template>
   <div class="mx-auto max-w-screen-md p-6">
-    <SvgKeyboard ref="keyboard">
+    <SvgKeyboard ref="keyboardEl">
       <SvgButton
         v-for="([x, y, tonal], idx) in keyPositions"
         :key="idx"
@@ -49,7 +49,7 @@ useHead({ title: 'Bandoneon keyboard, chords and scales – Bandoneon.app' });
 
 useKeyboard();
 
-const keyboard = ref();
+const keyboardEl = ref<typeof SvgKeyboard>();
 
 const store = useStore();
 const {
@@ -84,7 +84,7 @@ const onDownload = () => {
     (modified.value ? '-custom' : '') +
     '.png';
 
-  keyboard.value.download(filename);
+  keyboardEl.value?.download(filename);
 };
 
 const resetUserSelection = () => {

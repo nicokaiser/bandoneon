@@ -25,9 +25,7 @@
 <script setup lang="ts">
 import { watchEffect } from 'vue';
 
-const props = defineProps({
-  modelValue: Boolean,
-});
+const props = defineProps<{ modelValue: boolean }>();
 
 function preventScroll() {
   const scrollbarWidth = Math.max(

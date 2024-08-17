@@ -1,6 +1,6 @@
 <template>
   <svg
-    ref="svg"
+    ref="svgEl"
     class="keyboard mb-4"
     viewBox="0 0 690 410"
     width="720"
@@ -13,16 +13,16 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 
-const svg = ref();
+const svgEl = ref();
 
 const download = (filename: string) => {
   // https://mybyways.com/blog/convert-svg-to-png-using-your-browser
 
   const margin = 30;
   const canvas = document.createElement('canvas');
-  canvas.width = (svg.value.getBoundingClientRect().width + margin) * 2;
-  canvas.height = (svg.value.getBoundingClientRect().height + margin) * 2;
-  const data = new XMLSerializer().serializeToString(svg.value);
+  canvas.width = (svgEl.value.getBoundingClientRect().width + margin) * 2;
+  canvas.height = (svgEl.value.getBoundingClientRect().height + margin) * 2;
+  const data = new XMLSerializer().serializeToString(svgEl.value);
   const win = window.URL || window.webkitURL || window;
   const img = new Image();
   const blob = new Blob([data], { type: 'image/svg+xml' });

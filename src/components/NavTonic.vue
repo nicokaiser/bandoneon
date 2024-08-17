@@ -22,9 +22,7 @@ import { notes } from '../data/index';
 import { useStore } from '../stores/main';
 import Button from './Button.vue';
 
-defineProps({
-  disabled: Boolean,
-});
+defineProps<{ disabled?: boolean }>();
 
 const store = useStore();
 const { tonic, showEnharmonics } = storeToRefs(store);

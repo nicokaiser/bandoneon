@@ -52,7 +52,7 @@ const props = withDefaults(
   },
 );
 
-const emit = defineEmits(['click']);
+const emit = defineEmits<{ click: [] }>();
 
 const store = useStore();
 const settings = useSettingsStore();

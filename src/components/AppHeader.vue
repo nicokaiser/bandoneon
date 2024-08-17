@@ -27,14 +27,14 @@
         class="inline-flex h-12 w-12 select-none flex-wrap items-center justify-center rounded-lg font-semibold"
         type="button"
         title="Settings"
-        @click.prevent="menu = !menu"
+        @click.prevent="showMenu = !showMenu"
       >
         <IconBars3 class="h-5 w-5" />
       </button>
     </div>
   </nav>
 
-  <AppSettings v-if="menu" />
+  <AppSettings v-if="showMenu" />
 </template>
 
 <script setup lang="ts">
@@ -47,12 +47,12 @@ import IconMoon from './icons/IconMoon.vue';
 import IconSun from './icons/IconSun.vue';
 
 const route = useRoute();
-const menu = ref(false);
+const showMenu = ref(false);
 
 const { isDark } = useDark();
 
 watch(
   () => route.path,
-  () => (menu.value = false),
+  () => (showMenu.value = false),
 );
 </script>

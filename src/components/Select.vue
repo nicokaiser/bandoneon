@@ -49,7 +49,7 @@ withDefaults(
   },
 );
 
-const emit = defineEmits(['update:modelValue']);
+const emit = defineEmits<{ 'update:modelValue': [string] }>();
 
 const onInput = (event: Event) =>
   emit('update:modelValue', (event.target as HTMLInputElement).value);

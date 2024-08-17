@@ -34,9 +34,7 @@ import { storeToRefs } from 'pinia';
 import { useStore } from '../stores/main';
 import Tabs from './Tabs.vue';
 
-defineProps({
-  readonly: Boolean,
-});
+defineProps<{ readonly?: boolean }>();
 
 const { t } = useI18n();
 const store = useStore();
