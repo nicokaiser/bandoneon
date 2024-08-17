@@ -1,0 +1,1 @@
+import{_ as e,o as t,c}from"./index-CX8WZ_7V.js";const o={},_={class:"mx-auto max-w-screen-md p-6 text-center"};function n(s,r){return t(),c("div",_,"Not Found")}const d=e(o,[["render",n]]);export{d as default};
