@@ -22,7 +22,6 @@
         <IconSun v-if="!isDark" class="h-5 w-5" />
         <IconMoon v-else class="h-5 w-5" />
       </button>
-
       <button
         class="inline-flex h-12 w-12 select-none flex-wrap items-center justify-center rounded-lg font-semibold"
         type="button"

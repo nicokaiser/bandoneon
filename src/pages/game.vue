@@ -15,10 +15,8 @@
         "
       />
     </SvgKeyboard>
-
     <NavVariant :readonly="currentPosition > 0" />
     <NavTonic />
-
     <!-- Medium mode: display octave buttons -->
     <div
       v-if="difficulty !== 'easy'"
@@ -34,7 +32,6 @@
         {{ formatOctave(octave) }}
       </Button>
     </div>
-
     <Progress
       class="mt-8"
       :values="[
@@ -44,7 +41,6 @@
       ]"
     />
   </div>
-
   <Modal v-model="isModalOpen">
     <div class="px-4 py-8 text-center">
       <p class="mb-8">

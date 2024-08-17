@@ -2,7 +2,7 @@
   <div class="flex flex-wrap justify-center print:hidden">
     <div class="flex flex-col items-center">
       <div
-        class="mb-1 text-xs font-medium text-neutral-500 dark:text-neutral-400"
+        class="mb-1 select-none text-xs font-medium text-neutral-500 dark:text-neutral-400"
       >
         {{ t('scale') }}
       </div>
@@ -17,10 +17,9 @@
         </Button>
       </ButtonGroup>
     </div>
-
     <div class="flex flex-col items-center">
       <div
-        class="mb-1 text-xs font-medium text-neutral-500 dark:text-neutral-400"
+        class="mb-1 select-none text-xs font-medium text-neutral-500 dark:text-neutral-400"
       >
         {{ t('chord') }}
       </div>
@@ -35,10 +34,9 @@
         </Button>
       </ButtonGroup>
     </div>
-
     <div class="flex flex-col items-center">
       <div
-        class="mb-1 text-xs font-medium text-neutral-500 dark:text-neutral-400"
+        class="mb-1 select-none text-xs font-medium text-neutral-500 dark:text-neutral-400"
       >
         {{ t('display') }}
       </div>
@@ -46,14 +44,12 @@
         <Button @click.prevent="showEnharmonics = !showEnharmonics">
           {{ showEnharmonics ? '♯' : '♭' }}
         </Button>
-
         <Button
           :aria-pressed="showColors"
           @click.prevent="showColors = !showColors"
         >
           <IconPalette class="inline-block h-5 w-5 align-[-0.25em]" />
         </Button>
-
         <Button
           class="button"
           :title="t('save_image')"
@@ -61,7 +57,6 @@
         >
           <IconArrowDownTray class="inline-block h-5 w-5 align-[-0.25em]" />
         </Button>
-
         <Button
           :title="t('save_voicing')"
           :disabled="!modified || !chordType"
@@ -69,7 +64,6 @@
         >
           <IconPin class="inline-block h-5 w-5 align-[-0.25em]" />
         </Button>
-
         <Button
           :title="t('reset_voicing')"
           :disabled="!isUserChord"

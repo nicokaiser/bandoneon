@@ -14,7 +14,6 @@
         {{ option.label }}
       </option>
     </select>
-
     <span
       class="pointer-events-none absolute inset-y-0 end-0 flex items-center px-2.5"
     >

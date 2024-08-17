@@ -12,7 +12,6 @@
         <div class="w-24">{{ item.label }}</div>
       </template>
     </Tabs>
-
     <Tabs
       v-model="direction"
       class="mb-3"

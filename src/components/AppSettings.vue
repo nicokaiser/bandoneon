@@ -1,15 +1,11 @@
 <template>
   <div class="bg-neutral-100 dark:bg-neutral-800">
     <div class="mx-auto max-w-screen-md p-6">
-      <div class="mb-4">
-        <label
-          class="block text-xs font-medium text-neutral-500 dark:text-neutral-400"
-          for="selectInstrument"
-        >
-          {{ t('keyboard') }}
-        </label>
+      <label
+        class="mb-4 block text-xs font-medium text-neutral-500 dark:text-neutral-400"
+      >
+        {{ t('keyboard') }}
         <Select
-          id="selectInstrument"
           v-model="instrument"
           class="mt-1"
           :options="
@@ -19,17 +15,13 @@
             }))
           "
         />
-      </div>
+      </label>
 
-      <div class="mb-4">
-        <label
-          class="block text-xs font-medium text-neutral-500 dark:text-neutral-400"
-          for="selectPitchNotation"
-        >
-          {{ t('pitch_notation') }}
-        </label>
+      <label
+        class="mb-4 block text-xs font-medium text-neutral-500 dark:text-neutral-400"
+      >
+        {{ t('pitch_notation') }}
         <Select
-          id="selectPitchNotation"
           v-model="pitchNotation"
           class="mt-1"
           :options="
@@ -39,18 +31,13 @@
             }))
           "
         />
-      </div>
+      </label>
 
-      <div class="mb-4">
-        <label
-          class="block text-xs font-medium text-neutral-500 dark:text-neutral-400"
-          for="selectLocale"
-        >
-          {{ t('language') }}
-        </label>
-
+      <label
+        class="mb-4 block text-xs font-medium text-neutral-500 dark:text-neutral-400"
+      >
+        {{ t('language') }}
         <Select
-          id="selectLocale"
           v-model="locale"
           class="mt-1"
           :options="
@@ -60,17 +47,14 @@
             }))
           "
         />
-      </div>
+      </label>
 
-      <div v-if="route.path === '/game'" class="mb-4">
-        <label
-          class="block text-xs font-medium text-neutral-500 dark:text-neutral-400"
-          for="selectDifficulty"
-        >
-          {{ t('difficulty') }}
-        </label>
+      <label
+        v-if="route.path === '/game'"
+        class="mb-4 block text-xs font-medium text-neutral-500 dark:text-neutral-400"
+      >
+        {{ t('difficulty') }}
         <Select
-          id="selectDifficulty"
           v-model="difficulty"
           class="mt-1"
           :options="
@@ -80,7 +64,7 @@
             }))
           "
         />
-      </div>
+      </label>
 
       <div class="flex justify-between text-sm">
         <div>

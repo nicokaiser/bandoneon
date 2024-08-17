@@ -18,7 +18,6 @@
         :d="path"
       />
     </SvgKeyboard>
-
     <NavVariant />
     <NavTonic />
     <NavDisplay
@@ -147,9 +146,5 @@ const onReset = () => {
   if (chordName.value) settings.resetUserChord(side.value, chordName.value);
 };
 
-onMounted(() => {
-  tonic.value = null;
-  chordType.value = null;
-  scaleType.value = null;
-});
+onMounted(() => store.$reset());
 </script>
