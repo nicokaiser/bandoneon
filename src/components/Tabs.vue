@@ -18,16 +18,10 @@
 </template>
 
 <script setup lang="ts">
-withDefaults(
-  defineProps<{
-    options: Array<{ label: string; value: string; disabled?: boolean }>;
-    modelValue?: string;
-  }>(),
-  {
-    options: () => [],
-    modelValue: undefined,
-  },
-);
+defineProps<{
+  options: Array<{ label: string; value: string; disabled?: boolean }>;
+  modelValue?: string;
+}>();
 
 const emit = defineEmits<{ 'update:modelValue': [string] }>();
 </script>

@@ -10,11 +10,8 @@
 </template>
 
 <script setup lang="ts">
-withDefaults(
-  defineProps<{
-    stroke: string;
-    d: string;
-  }>(),
-  {},
-);
+defineProps<{
+  stroke: string;
+  d: string;
+}>();
 </script>

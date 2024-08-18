@@ -35,18 +35,11 @@
 </template>
 
 <script setup lang="ts">
-withDefaults(
-  defineProps<{
-    id?: string;
-    options: Array<{ label: string; value: string }>;
-    modelValue?: string;
-  }>(),
-  {
-    id: undefined,
-    options: () => [],
-    modelValue: undefined,
-  },
-);
+defineProps<{
+  id?: string;
+  options: Array<{ label: string; value: string }>;
+  modelValue?: string;
+}>();
 
 const emit = defineEmits<{ 'update:modelValue': [string] }>();
 

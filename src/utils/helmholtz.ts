@@ -1,4 +1,4 @@
-import Note from '@tonaljs/note';
+import * as Note from '@tonaljs/note';
 
 export default function helmholtz(input: string): string {
   const note = Note.get(input);

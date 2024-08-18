@@ -30,7 +30,7 @@
 </template>
 
 <script setup lang="ts">
-import Note from '@tonaljs/note';
+import * as Note from '@tonaljs/note';
 import { computed } from 'vue';
 import { useStore } from '../stores/main';
 import { useSettingsStore } from '../stores/settings';
