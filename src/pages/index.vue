@@ -21,7 +21,7 @@
     <NavVariant />
     <NavTonic />
     <NavDisplay
-      :modified="modified"
+      :modified="isModified"
       @reset="onReset"
       @download="onDownload"
       @save="onSave"
@@ -30,6 +30,8 @@
 </template>
 
 <script setup lang="ts">
+import * as Note from '@tonaljs/note';
+import * as Scale from '@tonaljs/scale';
 import { useHead } from '@unhead/vue';
 import { storeToRefs } from 'pinia';
 import { computed, onMounted, ref, watch } from 'vue';
@@ -57,7 +59,6 @@ const {
   chordType,
   direction,
   keyPositions,
-  scalePaths,
   scaleType,
   showColors,
   side,
@@ -67,12 +68,37 @@ const {
 const settings = useSettingsStore();
 const { instrument } = storeToRefs(settings);
 
-const modified = ref(false);
+const isModified = ref(false);
 const userSelection = ref<Record<string, boolean>>({});
 
 const getScaleColor = (octave: number) => {
   return colors[(octave - 1) % colors.length];
 };
+
+const scalePaths = computed(() => {
+  if (!tonic.value || !scaleType.value) return [];
+  const { intervals, empty } = Scale.get(scaleType.value);
+  if (empty) return [];
+  const paths = [];
+  for (let o = -1; o < 7; o++) {
+    const scaleNotes = intervals.map((i) =>
+      Note.transpose(`${tonic.value}${o}`, i),
+    );
+    scaleNotes.push(`${tonic.value}${o + 1}`);
+    let pathString = '';
+    for (const note of scaleNotes) {
+      const no = Note.get(note);
+      const pos = keyPositions.value.find(
+        (v) => Note.get(v[2]).height === no.height,
+      );
+      if (pos) {
+        pathString += `${pathString === '' ? 'M' : 'L'}${pos[0] + 30},${pos[1] + 30}`;
+      }
+    }
+    paths.push(pathString);
+  }
+  return paths;
+});
 
 const onDownload = () => {
   const filename =
@@ -80,7 +106,7 @@ const onDownload = () => {
     (tonic.value ? '-' + tonic.value.replace('#', 's') : '') +
     (chordType.value ? chordType.value : '') +
     (scaleType.value ? '-' + scaleType.value : '') +
-    (modified.value ? '-custom' : '') +
+    (isModified.value ? '-custom' : '') +
     '.png';
 
   keyboardEl.value?.download(filename);
@@ -88,13 +114,13 @@ const onDownload = () => {
 
 const resetUserSelection = () => {
   userSelection.value = {};
-  modified.value = false;
+  isModified.value = false;
 };
 
 watch([side, tonic, chordType], resetUserSelection);
 
 const selected = computed(() => {
-  if (modified.value) return userSelection.value;
+  if (isModified.value) return userSelection.value;
 
   const result: Record<string, boolean> = {};
 
@@ -117,9 +143,9 @@ function color(tonal: string) {
 }
 
 const toggle = (tonal: string) => {
-  if (!modified.value) {
+  if (!isModified.value) {
     userSelection.value = { ...selected.value };
-    modified.value = true;
+    isModified.value = true;
   }
   if (userSelection.value[tonal]) {
     delete userSelection.value[tonal];
@@ -129,7 +155,7 @@ const toggle = (tonal: string) => {
 };
 
 const onSave = () => {
-  if (modified.value && chordName.value) {
+  if (isModified.value && chordName.value) {
     settings.saveUserChord(
       side.value,
       chordName.value,

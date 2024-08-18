@@ -1,5 +1,3 @@
-import Note from '@tonaljs/note';
-import Scale from '@tonaljs/scale';
 import { defineStore } from 'pinia';
 import chords from '../data/chords';
 import { instruments } from '../data/index';
@@ -95,38 +93,6 @@ export const useStore = defineStore('main', {
       }
 
       return positions;
-    },
-
-    scalePaths() {
-      if (this.tonic && this.scaleType) {
-        const { intervals, empty } = Scale.get(this.scaleType);
-        if (empty) return [];
-        const paths = [];
-
-        for (let o = -1; o < 7; o++) {
-          const scaleNotes = intervals.map((i) =>
-            Note.transpose(`${this.tonic}${o}`, i),
-          );
-          scaleNotes.push(`${this.tonic}${o + 1}`);
-          let pathString = '';
-
-          for (const note of scaleNotes) {
-            const no = Note.get(note);
-
-            const pos = this.keyPositions.find(
-              (v) => Note.get(v[2]).height === no.height,
-            );
-
-            if (pos) {
-              pathString += `${pathString === '' ? 'M' : 'L'}${pos[0] + 30},${pos[1] + 30}`;
-            }
-          }
-
-          paths.push(pathString);
-        }
-
-        return paths;
-      }
     },
   },
 
