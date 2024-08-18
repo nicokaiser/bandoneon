@@ -41,7 +41,7 @@
         {{ t('display') }}
       </div>
       <ButtonGroup class="mx-2 mb-3">
-        <Button @click.prevent="showEnharmonics = !showEnharmonics">
+        <Button class="w-9" @click.prevent="showEnharmonics = !showEnharmonics">
           {{ showEnharmonics ? '♯' : '♭' }}
         </Button>
         <Button
