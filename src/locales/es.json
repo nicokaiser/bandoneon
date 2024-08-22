@@ -5,7 +5,7 @@
   "colors": "colores",
   "display": "visualización",
   "einheitsbandonion144": "144 tonos, Einheitsbandonion",
-  "helmholtz": "Notación musical de Helmholtz (c♯’’)",
+  "helmholtz": "Helmholtz (c♯’’)",
   "keyboard": "Teclado",
   "language": "Idioma",
   "language-de": "Deutsch",
@@ -25,5 +25,5 @@
   "save_mage": "Guardar imagen",
   "save_voicing": "Utilizar voces",
   "scale": "escala",
-  "scientific": "Notación musical cientifica (C♯5)"
+  "scientific": "Cientifica (C♯5)"
 }

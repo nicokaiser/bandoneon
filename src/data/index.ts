@@ -17,9 +17,12 @@ export const instruments = <Record<string, Instrument>>{
   manouri148,
 };
 
-export const difficulties = ['easy', 'medium'];
+export const difficulties = <Array<'easy' | 'medium'>>['easy', 'medium'];
 
-export const pitchNotations = ['helmholtz', 'scientific'];
+export const pitchNotations = <Array<'scientific' | 'helmholtz'>>[
+  'scientific',
+  'helmholtz',
+];
 
 export const notes = [
   'C',
