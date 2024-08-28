@@ -1,29 +1,27 @@
 <template>
   <div class="mb-5 flex flex-wrap justify-center gap-x-24 print:hidden">
-    <Tabs
-      v-model="side"
-      class="mb-3"
-      :options="[
-        { label: t('left'), value: 'left', disabled: readonly },
-        { label: t('right'), value: 'right', disabled: readonly },
-      ]"
-    >
-      <template #item="{ item }">
-        <div class="w-24">{{ item.label }}</div>
-      </template>
-    </Tabs>
-    <Tabs
-      v-model="direction"
-      class="mb-3"
-      :options="[
-        { label: t('close'), value: 'close', disabled: readonly },
-        { label: t('open'), value: 'open', disabled: readonly },
-      ]"
-    >
-      <template #item="{ item }">
-        <div class="w-24">{{ item.label }}</div>
-      </template>
-    </Tabs>
+    <ButtonGroup class="mb-3">
+      <Button
+        v-for="value in ['left', 'right']"
+        :key="value"
+        :aria-pressed="side === value"
+        class="w-28"
+        @click="side = value === 'left' ? 'left' : 'right'"
+      >
+        {{ t(value) }}
+      </Button>
+    </ButtonGroup>
+    <ButtonGroup class="mb-3">
+      <Button
+        v-for="value in ['close', 'open']"
+        :key="value"
+        :aria-pressed="direction === value"
+        class="w-28"
+        @click="direction = value === 'close' ? 'close' : 'open'"
+      >
+        {{ t(value) }}
+      </Button>
+    </ButtonGroup>
   </div>
 </template>
 
@@ -31,7 +29,8 @@
 import { useI18n } from 'petite-vue-i18n';
 import { storeToRefs } from 'pinia';
 import { useStore } from '../stores/main';
-import Tabs from './Tabs.vue';
+import Button from './Button.vue';
+import ButtonGroup from './ButtonGroup.vue';
 
 defineProps<{ readonly?: boolean }>();
 
