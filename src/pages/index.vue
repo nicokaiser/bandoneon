@@ -1,5 +1,5 @@
 <template>
-  <div class="mx-auto max-w-screen-md p-6">
+  <div class="mx-auto flex w-full max-w-[896px] flex-1 items-center px-6 pt-6">
     <SvgKeyboard ref="keyboardEl">
       <SvgButton
         v-for="([x, y, tonal], idx) in keyPositions"
@@ -18,6 +18,8 @@
         :d="path"
       />
     </SvgKeyboard>
+  </div>
+  <div class="mx-auto max-w-screen-md px-6 pb-6">
     <NavVariant />
     <NavTonic />
     <NavDisplay
