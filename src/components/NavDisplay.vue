@@ -48,28 +48,28 @@
           :aria-pressed="showColors"
           @click.prevent="showColors = !showColors"
         >
-          <IconPalette class="inline-block h-5 w-5 align-[-0.25em]" />
+          <IconPalette class="inline-block h-4 w-4 align-[-0.25em]" />
         </Button>
         <Button
           class="button"
           :title="t('save_image')"
           @click.prevent="emit('download')"
         >
-          <IconArrowDownTray class="inline-block h-5 w-5 align-[-0.25em]" />
+          <IconArrowDownTray class="inline-block h-4 w-4 align-[-0.25em]" />
         </Button>
         <Button
           :title="t('save_voicing')"
           :disabled="!modified || !chordType"
           @click.prevent="emit('save')"
         >
-          <IconPin class="inline-block h-5 w-5 align-[-0.25em]" />
+          <IconPin class="inline-block h-4 w-4 align-[-0.25em]" />
         </Button>
         <Button
           :title="t('reset_voicing')"
           :disabled="!isUserChord"
           @click.prevent="emit('reset')"
         >
-          <IconArrowUturnLeft class="inline-block h-5 w-5 align-[-0.25em]" />
+          <IconArrowUturnLeft class="inline-block h-4 w-4 align-[-0.25em]" />
         </Button>
       </ButtonGroup>
     </div>
