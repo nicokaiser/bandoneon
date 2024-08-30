@@ -82,17 +82,23 @@ const stroke = computed(() => {
 </script>
 
 <style scoped>
+circle {
+  stroke: #a3a3a3; /* neutral-400 */
+}
+
+.selected circle {
+  fill: #262626;
+  stroke: #262626;
+}
+
 text {
   user-select: none;
   cursor: default;
 }
 
-.dark circle {
-  stroke: #fff;
-}
-
 .dark .selected circle {
   fill: #f5f5f5;
+  stroke: #f5f5f5;
 }
 
 .dark .selected text {
