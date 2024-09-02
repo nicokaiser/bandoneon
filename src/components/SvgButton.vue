@@ -34,7 +34,7 @@ import * as Note from '@tonaljs/note';
 import { computed } from 'vue';
 import { useStore } from '../stores/main';
 import { useSettingsStore } from '../stores/settings';
-import helmholtz from '../utils/helmholtz';
+import { scientificToHelmholtzNotation } from '../utils/helmholtz';
 
 const props = withDefaults(
   defineProps<{
@@ -64,7 +64,7 @@ const format = computed(() => {
   if (note.empty) return ['', ''];
 
   if (settings.pitchNotation === 'helmholtz') {
-    return [helmholtz(note.name), ''];
+    return [scientificToHelmholtzNotation(note.name), ''];
   }
 
   return [note.pc.replace('b', '♭').replace('#', '♯'), '' + note.oct];

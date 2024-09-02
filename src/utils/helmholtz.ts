@@ -1,12 +1,12 @@
 import * as Note from '@tonaljs/note';
 
-export default function helmholtz(input: string): string {
-  const note = Note.get(input);
-  if (note.empty || !note.oct) return '';
-  return (
-    (note.oct < 3 ? note.letter : note.letter.toLowerCase()) +
-    note.acc.replace('b', '♭').replace('#', '♯') +
-    (note.oct > 3 ? '’'.repeat(note.oct - 3) : '') +
-    (note.oct < 2 ? ','.repeat(-(note.oct - 2)) : '')
-  );
+export function scientificToHelmholtzNotation(str: string): string {
+  const n = Note.get(str);
+  if (n.empty || (!n.oct && n.oct !== 0)) return '';
+  const { letter, acc, oct } = n;
+  const a = acc[0] === 'b' ? acc.replace(/b/g, '♭') : acc.replace(/#/g, '♯');
+  const l = oct > 2 ? letter.toLowerCase() : letter;
+  const o =
+    oct === 3 ? '' : oct > 2 ? '’'.repeat(oct - 3) : ','.repeat(2 - oct);
+  return l + a + o;
 }
