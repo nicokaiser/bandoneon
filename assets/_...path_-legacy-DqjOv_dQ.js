@@ -1,0 +1,1 @@
+System.register(["./index-legacy-YNboF503.js"],(function(e,t){"use strict";var n,r,c;return{setters:[e=>{n=e._,r=e.o,c=e.c}],execute:function(){const t={class:"mx-auto max-w-screen-md flex-1 p-16 text-center"};e("default",n({},[["render",function(e,n){return r(),c("div",t,"Not Found")}]]))}}}));
