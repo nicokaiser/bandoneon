@@ -21,13 +21,32 @@ import { storeToRefs } from 'pinia';
 import { notes } from '../data/index';
 import { useStore } from '../stores/main';
 import Button from './Button.vue';
+import { scientificToSolfegeNotation } from '../utils/solfege';
+import { useSettingsStore } from '../stores/settings';
 
 defineProps<{ disabled?: boolean }>();
 
 const store = useStore();
 const { tonic, showEnharmonics } = storeToRefs(store);
 
+const settings = useSettingsStore();
+
 const format = (noteName: string): string => {
+  if (settings.pitchNotation === 'solfege') {
+    if (!showEnharmonics.value) {
+      return scientificToSolfegeNotation(noteName).replace('#', '♯');
+    }
+
+    if (noteName.length === 2 && noteName[1] === '#') {
+      return scientificToSolfegeNotation(enharmonic(noteName)).replace(
+        'b',
+        '♭',
+      );
+    }
+
+    return scientificToSolfegeNotation(noteName);
+  }
+
   if (!showEnharmonics.value) {
     return noteName.replace('#', '♯');
   }

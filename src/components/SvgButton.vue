@@ -35,6 +35,7 @@ import { computed } from 'vue';
 import { useStore } from '../stores/main';
 import { useSettingsStore } from '../stores/settings';
 import { scientificToHelmholtzNotation } from '../utils/helmholtz';
+import { scientificToSolfegeNotation } from '../utils/solfege';
 
 const props = withDefaults(
   defineProps<{
@@ -65,6 +66,14 @@ const format = computed(() => {
 
   if (settings.pitchNotation === 'helmholtz') {
     return [scientificToHelmholtzNotation(note.name), ''];
+  } else if (settings.pitchNotation === 'solfege') {
+    return [
+      scientificToSolfegeNotation(note.name)
+        .slice(0, -1)
+        .replace('b', '♭')
+        .replace('#', '♯'),
+      '' + note.oct,
+    ];
   }
 
   return [note.pc.replace('b', '♭').replace('#', '♯'), '' + note.oct];

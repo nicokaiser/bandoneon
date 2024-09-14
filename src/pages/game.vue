@@ -93,7 +93,7 @@ const settings = useSettingsStore();
 const { pitchNotation, difficulty } = storeToRefs(settings);
 
 const formatOctave = (octave: number) => {
-  if (pitchNotation.value === 'scientific') {
+  if (pitchNotation.value !== 'helmholtz') {
     return '' + octave;
   }
   const noteName = tonic.value || 'X';
