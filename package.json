@@ -45,7 +45,7 @@
     "prettier-plugin-organize-imports": "^4.1.0",
     "prettier-plugin-tailwindcss": "^0.6.8",
     "tailwindcss": "^3.4.13",
-    "terser": "^5.33.0",
+    "terser": "^5.34.1",
     "typescript": "^5.6.2",
     "typescript-eslint": "^8.7.0",
     "unplugin-vue-router": "^0.10.8",
