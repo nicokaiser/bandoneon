@@ -1,0 +1,1 @@
+import{_ as e,o as t,c}from"./index-BPmFHbXq.js";const o={},_={class:"mx-auto max-w-screen-md flex-1 p-16 text-center"};function n(s,r){return t(),c("div",_,"Not Found")}const d=e(o,[["render",n]]);export{d as default};
