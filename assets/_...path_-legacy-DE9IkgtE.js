@@ -1,0 +1,1 @@
+System.register(["./index-legacy-BK-YeYYT.js"],(function(e,t){"use strict";var n,r,c;return{setters:[e=>{n=e._,r=e.c,c=e.o}],execute:function(){const t={class:"mx-auto max-w-screen-md flex-1 p-16 text-center"};e("default",n({},[["render",function(e,n){return c(),r("div",t,"Not Found")}]]))}}}));
