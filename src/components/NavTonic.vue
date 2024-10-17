@@ -20,9 +20,9 @@ import { enharmonic } from '@tonaljs/note';
 import { storeToRefs } from 'pinia';
 import { notes } from '../data/index';
 import { useStore } from '../stores/main';
-import Button from './Button.vue';
-import { scientificToSolfegeNotation } from '../utils/solfege';
 import { useSettingsStore } from '../stores/settings';
+import { scientificToSolfegeNotation } from '../utils/solfege';
+import Button from './Button.vue';
 
 defineProps<{ disabled?: boolean }>();
 
