@@ -47,7 +47,7 @@
     "tailwindcss": "^3.4.14",
     "terser": "^5.36.0",
     "typescript": "^5.6.3",
-    "typescript-eslint": "^8.9.0",
+    "typescript-eslint": "^8.10.0",
     "unplugin-vue-router": "^0.10.8",
     "vite": "^5.4.9",
     "vue-tsc": "^2.1.6"
