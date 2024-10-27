@@ -1,4 +1,4 @@
-import * as Note from '@tonaljs/note';
+import { Note } from 'tonal';
 
 export function scientificToHelmholtzNotation(str: string): string {
   const n = Note.get(str);

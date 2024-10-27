@@ -19,10 +19,9 @@
     "generate-pwa-assets": "pwa-assets-generator"
   },
   "dependencies": {
-    "@tonaljs/note": "^4.11.0",
-    "@tonaljs/scale": "^4.13.0",
     "petite-vue-i18n": "^10.0.4",
     "pinia": "^2.2.4",
+    "tonal": "^6.3.0",
     "vite-plugin-pwa": "^0.20.5",
     "vue": "^3.5.12",
     "vue-router": "^4.4.5"

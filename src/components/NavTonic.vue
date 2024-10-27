@@ -16,8 +16,8 @@
 </template>
 
 <script setup lang="ts">
-import { enharmonic } from '@tonaljs/note';
 import { storeToRefs } from 'pinia';
+import { Note } from 'tonal';
 import { notes } from '../data/index';
 import { useStore } from '../stores/main';
 import { useSettingsStore } from '../stores/settings';
@@ -38,7 +38,7 @@ const format = (noteName: string): string => {
     }
 
     if (noteName.length === 2 && noteName[1] === '#') {
-      return scientificToSolfegeNotation(enharmonic(noteName)).replace(
+      return scientificToSolfegeNotation(Note.enharmonic(noteName)).replace(
         'b',
         '♭',
       );
@@ -52,7 +52,7 @@ const format = (noteName: string): string => {
   }
 
   if (noteName.length === 2 && noteName[1] === '#') {
-    return enharmonic(noteName).replace('b', '♭');
+    return Note.enharmonic(noteName).replace('b', '♭');
   }
 
   return noteName;
