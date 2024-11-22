@@ -20,11 +20,12 @@ jobs:
           name: bandoneon
           path: dist
           if-no-files-found: error
-      - name: Upload to server
+      - name: Set up SSH key
         run: |
           mkdir -p ~/.ssh
-          chmod 700 ~/.ssh
           echo "${{ secrets.ARTIFACT_SSH_KEY }}" > ~/.ssh/id_ed25519
           chmod 600 ~/.ssh/id_ed25519
-          ssh-keyscan -p 22 ${{ secrets.ARTIFACT_HOST }} >> ~/.ssh/known_hosts
+          ssh-keyscan -p 22 -t ed25519 ${{ secrets.ARTIFACT_HOST }} >> ~/.ssh/known_hosts
+      - name: Deploy to server
+        run: |
           rsync -az --delete dist/ bandoneonapp@${{ secrets.ARTIFACT_HOST }}:/srv/bandoneonapp/public/
