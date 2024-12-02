@@ -20,7 +20,7 @@
     "test": "vitest"
   },
   "dependencies": {
-    "petite-vue-i18n": "^10.0.4",
+    "petite-vue-i18n": "^10.0.5",
     "pinia": "^2.2.8",
     "tonal": "^6.3.0",
     "vite-plugin-pwa": "^0.21.0",
