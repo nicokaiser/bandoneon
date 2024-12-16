@@ -29,7 +29,7 @@
   },
   "devDependencies": {
     "@types/node": "^22.10.1",
-    "@unhead/vue": "^1.11.13",
+    "@unhead/vue": "^1.11.14",
     "@vite-pwa/assets-generator": "^0.2.6",
     "@vitejs/plugin-legacy": "^6.0.0",
     "@vitejs/plugin-vue": "^5.2.1",
