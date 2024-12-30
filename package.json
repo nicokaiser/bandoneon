@@ -20,7 +20,7 @@
     "test": "vitest"
   },
   "dependencies": {
-    "petite-vue-i18n": "^10.0.5",
+    "petite-vue-i18n": "^11.0.1",
     "pinia": "^2.3.0",
     "tonal": "^6.3.0",
     "vite-plugin-pwa": "^0.21.1",
@@ -28,7 +28,7 @@
     "vue-router": "^4.5.0"
   },
   "devDependencies": {
-    "@types/node": "^22.10.1",
+    "@types/node": "^22.10.2",
     "@unhead/vue": "^1.11.14",
     "@vite-pwa/assets-generator": "^0.2.6",
     "@vitejs/plugin-legacy": "^6.0.0",
@@ -46,12 +46,12 @@
     "prettier-plugin-tailwindcss": "^0.6.9",
     "tailwindcss": "^3.4.17",
     "terser": "^5.37.0",
-    "typescript": "5.6.3",
-    "typescript-eslint": "^8.17.0",
+    "typescript": "^5.7.2",
+    "typescript-eslint": "^8.18.2",
     "unplugin-vue-router": "^0.10.9",
     "vite": "^6.0.6",
     "vitest": "^2.1.8",
-    "vue-tsc": "^2.1.10"
+    "vue-tsc": "^2.2.0"
   },
   "type": "module"
 }
