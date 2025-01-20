@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "petite-vue-i18n": "^11.0.1",
-    "pinia": "^2.3.0",
+    "pinia": "^2.3.1",
     "tonal": "^6.4.0",
     "vite-plugin-pwa": "^0.21.1",
     "vue": "^3.5.13",
@@ -37,7 +37,7 @@
     "autoprefixer": "^10.4.20",
     "eslint": "9.18.0",
     "eslint-config-prettier": "^10.0.1",
-    "eslint-plugin-prettier": "^5.2.2",
+    "eslint-plugin-prettier": "^5.2.3",
     "eslint-plugin-vue": "^9.32.0",
     "globals": "^15.14.0",
     "postcss": "^8.5.1",
@@ -49,7 +49,7 @@
     "typescript": "^5.7.3",
     "typescript-eslint": "^8.20.0",
     "unplugin-vue-router": "^0.10.9",
-    "vite": "^6.0.7",
+    "vite": "^6.0.8",
     "vitest": "^3.0.2",
     "vue-tsc": "^2.2.0"
   },
