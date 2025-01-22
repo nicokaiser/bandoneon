@@ -6,8 +6,8 @@
   "packageRules": [
     {
       "matchDatasources": ["npm"],
-      "excludePackageNames": ["node", "@types/node"],
-      "rangeStrategy": "bump"
+      "rangeStrategy": "bump",
+      "matchPackageNames": ["!node", "!@types/node"]
     }
   ],
   "labels": ["dependencies"]
