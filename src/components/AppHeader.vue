@@ -2,7 +2,7 @@
   <nav class="mx-auto flex min-h-16 w-full items-center p-2">
     <div class="flex-1">
       <RouterLink
-        class="inline-flex min-h-12 select-none flex-wrap items-center justify-center rounded-lg px-4 text-xl font-semibold"
+        class="inline-flex min-h-12 flex-wrap items-center justify-center rounded-lg px-4 text-xl font-semibold select-none"
         to="/"
       >
         Bandoneon.app
@@ -16,14 +16,14 @@
     </div>
     <div class="flex-none">
       <button
-        class="inline-flex h-12 w-12 select-none flex-wrap items-center justify-center rounded-lg font-semibold"
+        class="inline-flex h-12 w-12 flex-wrap items-center justify-center rounded-lg font-semibold select-none"
         @click.prevent="isDark = !isDark"
       >
         <IconSun v-if="!isDark" class="h-5 w-5" />
         <IconMoon v-else class="h-5 w-5" />
       </button>
       <button
-        class="inline-flex h-12 w-12 select-none flex-wrap items-center justify-center rounded-lg font-semibold"
+        class="inline-flex h-12 w-12 flex-wrap items-center justify-center rounded-lg font-semibold select-none"
         type="button"
         title="Settings"
         @click.prevent="showMenu = !showMenu"

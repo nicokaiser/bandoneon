@@ -13,7 +13,7 @@
       />
     </SvgKeyboard>
   </div>
-  <div class="mx-auto max-w-screen-md px-6 pb-6">
+  <div class="mx-auto max-w-(--breakpoint-md) px-6 pb-6">
     <NavVariant :readonly="currentPosition > 0" />
     <NavTonic />
     <!-- Medium mode: display octave buttons -->
