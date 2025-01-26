@@ -31,7 +31,7 @@
     "tailwindcss": "^4.0.0",
     "tonal": "^6.4.0",
     "typescript": "^5.7.3",
-    "unplugin-vue-router": "^0.11.1",
+    "unplugin-vue-router": "^0.11.2",
     "vite": "^6.0.11",
     "vite-plugin-pwa": "^0.21.1",
     "vue": "^3.5.13",
@@ -39,17 +39,17 @@
     "vue-tsc": "^2.2.0"
   },
   "devDependencies": {
-    "@types/node": "^22.10.7",
-    "eslint": "9.18.0",
+    "@types/node": "^22.10.10",
+    "eslint": "9.19.0",
     "eslint-config-prettier": "^10.0.1",
     "eslint-plugin-prettier": "^5.2.3",
     "eslint-plugin-vue": "^9.32.0",
     "prettier": "^3.4.2",
     "prettier-plugin-organize-imports": "^4.1.0",
-    "prettier-plugin-tailwindcss": "^0.6.10",
+    "prettier-plugin-tailwindcss": "^0.6.11",
     "terser": "^5.37.0",
     "typescript-eslint": "^8.21.0",
-    "vitest": "^3.0.3"
+    "vitest": "^3.0.4"
   },
   "type": "module"
 }
