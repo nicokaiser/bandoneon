@@ -1,3 +1,4 @@
+import tailwindcss from '@tailwindcss/vite';
 import legacy from '@vitejs/plugin-legacy';
 import vue from '@vitejs/plugin-vue';
 import VueRouter from 'unplugin-vue-router/vite';
@@ -7,6 +8,7 @@ import { VitePWA } from 'vite-plugin-pwa';
 /** @type {import('vite').UserConfig} */
 export default defineConfig({
   plugins: [
+    tailwindcss(),
     VueRouter(),
     vue(),
     legacy({

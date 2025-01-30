@@ -28,4 +28,4 @@ jobs:
           ssh-keyscan -p 22 -t ed25519 ${{ secrets.ARTIFACT_HOST }} >> ~/.ssh/known_hosts
       - name: Deploy to server
         run: |
-          rsync -az --delete dist/ bandoneonapp@${{ secrets.ARTIFACT_HOST }}:/srv/bandoneonapp/public/
+          rsync -az --delete dist/ bandoneonapp@${{ secrets.ARTIFACT_HOST }}:/srv/www/bandoneon.app/public_html/

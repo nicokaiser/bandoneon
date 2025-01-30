@@ -2,7 +2,7 @@
   <div class="flex flex-wrap justify-center print:hidden">
     <div class="flex flex-col items-center">
       <div
-        class="mb-1 select-none text-xs font-medium text-neutral-500 dark:text-neutral-400"
+        class="mb-1 text-xs font-medium text-neutral-500 select-none dark:text-neutral-400"
       >
         {{ t('scale') }}
       </div>
@@ -19,7 +19,7 @@
     </div>
     <div class="flex flex-col items-center">
       <div
-        class="mb-1 select-none text-xs font-medium text-neutral-500 dark:text-neutral-400"
+        class="mb-1 text-xs font-medium text-neutral-500 select-none dark:text-neutral-400"
       >
         {{ t('chord') }}
       </div>
@@ -36,7 +36,7 @@
     </div>
     <div class="flex flex-col items-center">
       <div
-        class="mb-1 select-none text-xs font-medium text-neutral-500 dark:text-neutral-400"
+        class="mb-1 text-xs font-medium text-neutral-500 select-none dark:text-neutral-400"
       >
         {{ t('display') }}
       </div>

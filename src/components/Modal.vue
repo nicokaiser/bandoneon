@@ -12,7 +12,7 @@
           class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0"
         >
           <div
-            class="relative w-full overflow-hidden rounded-lg bg-white text-left shadow-xl dark:bg-neutral-900 sm:my-8 sm:max-w-lg"
+            class="relative w-full overflow-hidden rounded-lg bg-white text-left shadow-xl sm:my-8 sm:max-w-lg dark:bg-neutral-900"
           >
             <slot />
           </div>
