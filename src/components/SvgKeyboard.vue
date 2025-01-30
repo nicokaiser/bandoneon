@@ -2,8 +2,8 @@
   <svg
     ref="svgEl"
     class="keyboard mb-4"
-    viewBox="0 0 900 410"
-    width="900"
+    viewBox="0 0 690 410"
+    width="720"
     height="428"
   >
     <slot />

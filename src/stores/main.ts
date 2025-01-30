@@ -75,12 +75,14 @@ export const useStore = defineStore('main', {
       );
       if (cols < 9) offsetX += 39 * (9 - cols);
       if (rows < 6) offsetY -= 32 * (6 - rows);
+      let gapX = 79;
+      if (cols >= 10) gapX = 65; // TODO: improve calculation
 
       for (let row = 0; row < keys.length; row++) {
         for (let col = 0; col < keys[row].length; col++) {
           const tonal = keys[row][col];
           if (tonal) {
-            const x = offsetX + col * 79 + 40 - (row % 2) * 40;
+            const x = offsetX + col * gapX + 40 - (row % 2) * 40;
             const y =
               offsetY +
               // row:

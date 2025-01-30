@@ -3,8 +3,7 @@ import manouri148 from './instruments/manouri148';
 import peguri146 from './instruments/peguri146';
 import rheinische142 from './instruments/rheinische142';
 import rheinische152 from './instruments/rheinische152';
-import unitaria128 from './instruments/unitaria128'; 
-
+import unitaria128 from './instruments/unitaria128';
 
 type Instrument = Record<
   'right' | 'left',
@@ -17,7 +16,7 @@ export const instruments = <Record<string, Instrument>>{
   einheitsbandonion144,
   peguri146,
   manouri148,
-  unitaria128
+  unitaria128,
 };
 
 export const difficulties = <Array<'easy' | 'medium'>>['easy', 'medium'];
