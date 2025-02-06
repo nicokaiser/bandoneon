@@ -47,7 +47,7 @@
     "prettier": "^3.4.2",
     "prettier-plugin-organize-imports": "^4.1.0",
     "prettier-plugin-tailwindcss": "^0.6.11",
-    "terser": "^5.37.0",
+    "terser": "^5.38.0",
     "typescript-eslint": "^8.22.0",
     "vitest": "^3.0.4"
   },
