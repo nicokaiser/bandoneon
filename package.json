@@ -32,7 +32,7 @@
     "tonal": "^6.4.0",
     "typescript": "^5.7.3",
     "unplugin-vue-router": "^0.11.2",
-    "vite": "^6.0.11",
+    "vite": "^6.1.0",
     "vite-plugin-pwa": "^0.21.1",
     "vue": "^3.5.13",
     "vue-router": "^4.5.0",
