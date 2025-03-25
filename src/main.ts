@@ -1,4 +1,4 @@
-import { createHead } from '@unhead/vue';
+import { createHead } from '@unhead/vue/client';
 import { createI18n } from 'petite-vue-i18n';
 import { createPinia } from 'pinia';
 import { createApp } from 'vue';
