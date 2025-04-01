@@ -20,7 +20,7 @@
     "test": "vitest"
   },
   "dependencies": {
-    "@tailwindcss/vite": "^4.0.17",
+    "@tailwindcss/vite": "^4.1.0",
     "@unhead/vue": "^2.0.2",
     "@vite-pwa/assets-generator": "^1.0.0",
     "@vitejs/plugin-legacy": "^6.0.2",
@@ -28,7 +28,7 @@
     "@vue/tsconfig": "^0.7.0",
     "petite-vue-i18n": "^11.1.2",
     "pinia": "^3.0.1",
-    "tailwindcss": "^4.0.17",
+    "tailwindcss": "^4.1.0",
     "tonal": "^6.4.1",
     "typescript": "^5.8.2",
     "unplugin-vue-router": "^0.12.0",
@@ -39,7 +39,7 @@
     "vue-tsc": "^2.2.8"
   },
   "devDependencies": {
-    "@types/node": "^22.13.16",
+    "@types/node": "^22.13.17",
     "eslint": "9.23.0",
     "eslint-config-prettier": "^10.1.1",
     "eslint-plugin-prettier": "^5.2.5",
