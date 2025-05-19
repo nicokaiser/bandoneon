@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.7",
-    "@unhead/vue": "^2.0.8",
+    "@unhead/vue": "^2.0.9",
     "@vite-pwa/assets-generator": "^1.0.0",
     "@vitejs/plugin-legacy": "^6.1.1",
     "@vitejs/plugin-vue": "^5.2.4",
