@@ -20,7 +20,7 @@
     "test": "vitest"
   },
   "dependencies": {
-    "@tailwindcss/vite": "^4.1.10",
+    "@tailwindcss/vite": "^4.1.11",
     "@unhead/vue": "^2.0.11",
     "@vite-pwa/assets-generator": "^1.0.0",
     "@vitejs/plugin-legacy": "^6.1.1",
@@ -28,7 +28,7 @@
     "@vue/tsconfig": "^0.7.0",
     "petite-vue-i18n": "^11.1.7",
     "pinia": "^3.0.3",
-    "tailwindcss": "^4.1.10",
+    "tailwindcss": "^4.1.11",
     "tonal": "^6.4.2",
     "typescript": "^5.8.3",
     "unplugin-vue-router": "^0.12.0",
