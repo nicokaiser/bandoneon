@@ -23,7 +23,7 @@
     "@tailwindcss/vite": "^4.1.11",
     "@unhead/vue": "^2.0.12",
     "@vite-pwa/assets-generator": "^1.0.0",
-    "@vitejs/plugin-legacy": "^7.0.0",
+    "@vitejs/plugin-legacy": "^7.0.1",
     "@vitejs/plugin-vue": "^6.0.0",
     "@vue/tsconfig": "^0.7.0",
     "petite-vue-i18n": "^11.1.10",
