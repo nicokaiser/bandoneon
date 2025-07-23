@@ -26,7 +26,7 @@
     "@vitejs/plugin-legacy": "^7.1.0",
     "@vitejs/plugin-vue": "^6.0.0",
     "@vue/tsconfig": "^0.7.0",
-    "petite-vue-i18n": "^11.1.10",
+    "petite-vue-i18n": "^11.1.11",
     "pinia": "^3.0.3",
     "tailwindcss": "^4.1.11",
     "tonal": "^6.4.2",
