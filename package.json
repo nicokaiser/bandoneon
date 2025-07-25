@@ -36,7 +36,7 @@
     "vite-plugin-pwa": "^1.0.1",
     "vue": "^3.5.18",
     "vue-router": "^4.5.1",
-    "vue-tsc": "3.0.3"
+    "vue-tsc": "3.0.4"
   },
   "devDependencies": {
     "@types/node": "^24.1.0",
