@@ -1,8 +1,5 @@
 export default <
-  Record<
-    'right-open' | 'right-close' | 'left-open' | 'left-close',
-    Record<string, Array<string>>
-  >
+  Record<'right-open' | 'right-close' | 'left-open' | 'left-close', Record<string, Array<string>>>
 >{
   'right-open': {
     CM: ['C4', 'E4', 'G4'],

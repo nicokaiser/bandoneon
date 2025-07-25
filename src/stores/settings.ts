@@ -4,9 +4,7 @@ import { ref } from 'vue';
 export const useSettingsStore = defineStore('settings', () => {
   const instrument = ref('rheinische142');
   const locale = ref(navigator.language?.split('-')[0] || 'en');
-  const pitchNotation = ref<'scientific' | 'helmholtz' | 'solfege'>(
-    'scientific',
-  );
+  const pitchNotation = ref<'scientific' | 'helmholtz' | 'solfege'>('scientific');
   const userChords = ref<Record<string, Record<string, string[]>>>({});
   const difficulty = ref<'medium' | 'easy'>('medium');
 

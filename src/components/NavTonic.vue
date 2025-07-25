@@ -38,10 +38,7 @@ const format = (noteName: string): string => {
     }
 
     if (noteName.length === 2 && noteName[1] === '#') {
-      return scientificToSolfegeNotation(Note.enharmonic(noteName)).replace(
-        'b',
-        '♭',
-      );
+      return scientificToSolfegeNotation(Note.enharmonic(noteName)).replace('b', '♭');
     }
 
     return scientificToSolfegeNotation(noteName);

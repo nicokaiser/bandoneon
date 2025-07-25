@@ -3,6 +3,7 @@
 import js from '@eslint/js';
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
 import pluginVue from 'eslint-plugin-vue';
+import { globalIgnores } from 'eslint/config';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
 
@@ -21,9 +22,7 @@ export default [
       },
     },
   },
-  {
-    ignores: ['dist', 'node_modules'],
-  },
+  globalIgnores(['**/dist/**', '**/dist-ssr/**', '**/coverage/**']),
   eslintPluginPrettierRecommended,
   {
     rules: {

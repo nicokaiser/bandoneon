@@ -5,10 +5,7 @@ import peguri146 from './instruments/peguri146';
 import rheinische142 from './instruments/rheinische142';
 import rheinische152 from './instruments/rheinische152';
 
-type Instrument = Record<
-  'right' | 'left',
-  Record<'open' | 'close', string[][]> | string[][]
->;
+type Instrument = Record<'right' | 'left', Record<'open' | 'close', string[][]> | string[][]>;
 
 export const instruments = <Record<string, Instrument>>{
   rheinische142,
@@ -27,20 +24,7 @@ export const pitchNotations = <Array<'scientific' | 'helmholtz' | 'solfege'>>[
   'solfege',
 ];
 
-export const notes = [
-  'C',
-  'C#',
-  'D',
-  'D#',
-  'E',
-  'F',
-  'F#',
-  'G',
-  'G#',
-  'A',
-  'A#',
-  'B',
-];
+export const notes = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
 
 export const scaleTypes = ['major', 'minor', 'chromatic'];
 

@@ -1,11 +1,5 @@
 <template>
-  <svg
-    ref="svgEl"
-    class="keyboard mb-4"
-    viewBox="0 0 690 410"
-    width="720"
-    height="428"
-  >
+  <svg ref="svgEl" class="keyboard mb-4" viewBox="0 0 690 410" width="720" height="428">
     <slot />
   </svg>
 </template>
@@ -34,17 +28,9 @@ const download = (filename: string) => {
 
     context.fillStyle = 'white';
     context.fillRect(0, 0, canvas.width, canvas.height);
-    context.drawImage(
-      img,
-      margin,
-      margin,
-      canvas.width - 2 * margin,
-      canvas.height - 2 * margin,
-    );
+    context.drawImage(img, margin, margin, canvas.width - 2 * margin, canvas.height - 2 * margin);
     win.revokeObjectURL(url);
-    const uri = canvas
-      .toDataURL('image/png')
-      .replace('image/png', 'octet/stream');
+    const uri = canvas.toDataURL('image/png').replace('image/png', 'octet/stream');
     const a = document.createElement('a');
     document.body.append(a);
     a.style.display = 'none';

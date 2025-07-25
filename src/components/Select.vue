@@ -14,13 +14,8 @@
         {{ option.label }}
       </option>
     </select>
-    <span
-      class="pointer-events-none absolute inset-y-0 end-0 flex items-center px-2.5"
-    >
-      <span
-        class="h-5 w-5 text-neutral-400 dark:text-neutral-500"
-        aria-hidden="true"
-      >
+    <span class="pointer-events-none absolute inset-y-0 end-0 flex items-center px-2.5">
+      <span class="h-5 w-5 text-neutral-400 dark:text-neutral-500" aria-hidden="true">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
           <path
             fill="currentColor"

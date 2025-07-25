@@ -22,12 +22,7 @@
   <div class="mx-auto max-w-(--breakpoint-md) px-6 pb-6">
     <NavVariant />
     <NavTonic />
-    <NavDisplay
-      :modified="isModified"
-      @reset="onReset"
-      @download="onDownload"
-      @save="onSave"
-    />
+    <NavDisplay :modified="isModified" @reset="onReset" @download="onDownload" @save="onSave" />
   </div>
 </template>
 
@@ -82,16 +77,12 @@ const scalePaths = computed(() => {
   if (empty) return [];
   const paths = [];
   for (let o = -1; o < 7; o++) {
-    const scaleNotes = intervals.map((i) =>
-      Note.transpose(`${tonic.value}${o}`, i),
-    );
+    const scaleNotes = intervals.map((i) => Note.transpose(`${tonic.value}${o}`, i));
     scaleNotes.push(`${tonic.value}${o + 1}`);
     let pathString = '';
     for (const note of scaleNotes) {
       const no = Note.get(note);
-      const pos = keyPositions.value.find(
-        (v) => Note.get(v[2]).height === no.height,
-      );
+      const pos = keyPositions.value.find((v) => Note.get(v[2]).height === no.height);
       if (pos) {
         pathString += `${pathString === '' ? 'M' : 'L'}${pos[0] + 30},${pos[1] + 30}`;
       }
@@ -160,9 +151,7 @@ const onSave = () => {
     settings.saveUserChord(
       side.value,
       chordName.value,
-      Object.keys(userSelection.value).filter(
-        (item) => !!userSelection.value[item],
-      ),
+      Object.keys(userSelection.value).filter((item) => !!userSelection.value[item]),
     );
   }
   resetUserSelection();

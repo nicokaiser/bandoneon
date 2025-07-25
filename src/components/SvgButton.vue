@@ -1,13 +1,6 @@
 <template>
   <g :class="{ selected }" @click.prevent="emit('click')">
-    <circle
-      :cx="x + 29"
-      :cy="y + 29"
-      r="28"
-      :fill="fill"
-      :stroke="stroke"
-      stroke-width="1.5"
-    />
+    <circle :cx="x + 29" :cy="y + 29" r="28" :fill="fill" :stroke="stroke" stroke-width="1.5" />
     <text
       :x="x + 29"
       :y="y + 36"
@@ -59,19 +52,14 @@ const store = useStore();
 const settings = useSettingsStore();
 
 const format = computed(() => {
-  const note = Note.get(
-    store.showEnharmonics ? Note.enharmonic(props.tonal) : props.tonal,
-  );
+  const note = Note.get(store.showEnharmonics ? Note.enharmonic(props.tonal) : props.tonal);
   if (note.empty) return ['', ''];
 
   if (settings.pitchNotation === 'helmholtz') {
     return [scientificToHelmholtzNotation(note.name), ''];
   } else if (settings.pitchNotation === 'solfege') {
     return [
-      scientificToSolfegeNotation(note.name)
-        .slice(0, -1)
-        .replace('b', '♭')
-        .replace('#', '♯'),
+      scientificToSolfegeNotation(note.name).slice(0, -1).replace('b', '♭').replace('#', '♯'),
       '' + note.oct,
     ];
   }

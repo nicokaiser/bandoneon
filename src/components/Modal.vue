@@ -1,11 +1,6 @@
 <template>
   <Teleport to="body">
-    <div
-      v-if="modelValue"
-      class="relative z-50"
-      role="dialog"
-      aria-modal="true"
-    >
+    <div v-if="modelValue" class="relative z-50" role="dialog" aria-modal="true">
       <div class="fixed inset-0 bg-neutral-200/75 dark:bg-neutral-800/75"></div>
       <div class="fixed inset-0 overflow-y-auto">
         <div
@@ -28,10 +23,7 @@ import { watchEffect } from 'vue';
 const props = defineProps<{ modelValue: boolean }>();
 
 function preventScroll() {
-  const scrollbarWidth = Math.max(
-    0,
-    window.innerWidth - document.documentElement.clientWidth,
-  );
+  const scrollbarWidth = Math.max(0, window.innerWidth - document.documentElement.clientWidth);
   document.documentElement.style.overflow = 'hidden';
   document.documentElement.style.paddingRight = `${scrollbarWidth}px`;
 }

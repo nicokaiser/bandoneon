@@ -17,10 +17,7 @@
     <NavVariant :readonly="currentPosition > 0" />
     <NavTonic />
     <!-- Medium mode: display octave buttons -->
-    <div
-      v-if="difficulty !== 'easy'"
-      class="mb-2 flex flex-wrap justify-center"
-    >
+    <div v-if="difficulty !== 'easy'" class="mb-2 flex flex-wrap justify-center">
       <Button
         v-for="octave in octaves"
         :key="octave"
@@ -105,10 +102,7 @@ const formatOctave = (octave: number) => {
 };
 
 const fillColor = (idx: number) => {
-  if (
-    guessed.value[idx] === 2 ||
-    (difficulty.value === 'easy' && guessed.value[idx] === 1)
-  )
+  if (guessed.value[idx] === 2 || (difficulty.value === 'easy' && guessed.value[idx] === 1))
     return '#22c55e88'; // green-500
   if (guessed.value[idx] === 1) return '#eab30888'; // yellow-500
   if (guessed.value[idx] === 0) return '#ef444488'; // red-500
@@ -167,11 +161,7 @@ function check() {
 
   // Current guess is complete
   const solution = positions.value[currentPosition.value][2];
-  if (
-    tonic.value !== null &&
-    oct.value !== null &&
-    tonic.value + oct.value === solution
-  ) {
+  if (tonic.value !== null && oct.value !== null && tonic.value + oct.value === solution) {
     guessed.value[currentPosition.value] = 2;
   } else if (tonic.value === solution.substring(0, solution.length - 1)) {
     guessed.value[currentPosition.value] = 1;

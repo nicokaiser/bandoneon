@@ -5,11 +5,7 @@
     <div>Made with <span class="text-red-500">♥</span> in Vienna.</div>
     <div>
       The source code is available on
-      <a
-        class="underline"
-        target="_blank"
-        href="https://github.com/nicokaiser/bandoneon/"
-      >
+      <a class="underline" target="_blank" href="https://github.com/nicokaiser/bandoneon/">
         GitHub</a
       >.
     </div>

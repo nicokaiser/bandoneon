@@ -14,10 +14,7 @@ export function useDark() {
   };
 
   const stopWatch = watchEffect(() => {
-    const isSupported =
-      window &&
-      'matchMedia' in window &&
-      typeof window.matchMedia === 'function';
+    const isSupported = window && 'matchMedia' in window && typeof window.matchMedia === 'function';
     if (!isSupported) return;
     cleanup();
     mediaQuery = window!.matchMedia('(prefers-color-scheme: dark)');

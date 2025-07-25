@@ -2,9 +2,7 @@
   <div class="bg-neutral-100 dark:bg-neutral-800">
     <div class="mx-auto max-w-(--breakpoint-md) p-6">
       <div class="mb-4">
-        <label
-          class="block text-xs font-medium text-neutral-500 dark:text-neutral-400"
-        >
+        <label class="block text-xs font-medium text-neutral-500 dark:text-neutral-400">
           {{ t('keyboard') }}
           <Select
             v-model="instrument"
@@ -20,9 +18,7 @@
       </div>
 
       <div class="mb-4">
-        <label
-          class="block text-xs font-medium text-neutral-500 dark:text-neutral-400"
-        >
+        <label class="block text-xs font-medium text-neutral-500 dark:text-neutral-400">
           {{ t('pitch_notation') }}
         </label>
         <div class="mt-1 flex w-full flex-row gap-2">
@@ -39,9 +35,7 @@
       </div>
 
       <div class="mb-4">
-        <label
-          class="block text-xs font-medium text-neutral-500 dark:text-neutral-400"
-        >
+        <label class="block text-xs font-medium text-neutral-500 dark:text-neutral-400">
           {{ t('language') }}
         </label>
         <div class="mt-1 flex w-full flex-row gap-2">
@@ -58,9 +52,7 @@
       </div>
 
       <div v-if="route.path === '/game'" class="mb-4">
-        <label
-          class="block text-xs font-medium text-neutral-500 dark:text-neutral-400"
-        >
+        <label class="block text-xs font-medium text-neutral-500 dark:text-neutral-400">
           {{ t('difficulty') }}
         </label>
         <div class="mt-1 flex w-full flex-row gap-2">
@@ -78,11 +70,7 @@
 
       <div class="flex justify-between text-sm">
         <div>
-          <RouterLink
-            v-if="route.path !== '/game'"
-            class="me-1 underline"
-            to="/game"
-          >
+          <RouterLink v-if="route.path !== '/game'" class="me-1 underline" to="/game">
             Play a game!
           </RouterLink>
         </div>
@@ -91,10 +79,7 @@
           <a target="_blank" href="https://github.com/nicokaiser/bandoneon/">
             <IconGitHub class="h-4 w-4" />
           </a>
-          <a
-            class="underline"
-            href="mailto:nico@kaiser.me?subject=Bandoneon.app%20Feedback"
-          >
+          <a class="underline" href="mailto:nico@kaiser.me?subject=Bandoneon.app%20Feedback">
             Feedback
           </a>
         </div>

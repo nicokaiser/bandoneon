@@ -26,10 +26,7 @@ export const useStore = defineStore('main', {
       const settings = useSettingsStore();
 
       if (this.side && this.direction && this.chordName) {
-        if (
-          settings.userChords[this.side] &&
-          settings.userChords[this.side][this.chordName]
-        ) {
+        if (settings.userChords[this.side] && settings.userChords[this.side][this.chordName]) {
           return settings.userChords[this.side][this.chordName];
         }
 
@@ -42,10 +39,7 @@ export const useStore = defineStore('main', {
       const settings = useSettingsStore();
 
       if (this.side && this.direction && this.chordName) {
-        if (
-          settings.userChords[this.side] &&
-          settings.userChords[this.side][this.chordName]
-        )
+        if (settings.userChords[this.side] && settings.userChords[this.side][this.chordName])
           return true;
       }
       return false;
@@ -69,10 +63,7 @@ export const useStore = defineStore('main', {
 
       // Center
       const cols = Math.max(...keys.map((row: string[]) => row.length));
-      const rows = keys.reduce(
-        (acc: number, row: string[]) => acc + (row.length > 0 ? 1 : 0),
-        0,
-      );
+      const rows = keys.reduce((acc: number, row: string[]) => acc + (row.length > 0 ? 1 : 0), 0);
       if (cols < 9) offsetX += 39 * (9 - cols);
       if (rows < 6) offsetY -= 32 * (6 - rows);
       let gapX = 79;

@@ -1,9 +1,7 @@
 <template>
   <div class="flex flex-wrap justify-center print:hidden">
     <div class="flex flex-col items-center">
-      <div
-        class="mb-1 text-xs font-medium text-neutral-500 select-none dark:text-neutral-400"
-      >
+      <div class="mb-1 text-xs font-medium text-neutral-500 select-none dark:text-neutral-400">
         {{ t('scale') }}
       </div>
       <ButtonGroup class="mx-2 mb-3">
@@ -18,9 +16,7 @@
       </ButtonGroup>
     </div>
     <div class="flex flex-col items-center">
-      <div
-        class="mb-1 text-xs font-medium text-neutral-500 select-none dark:text-neutral-400"
-      >
+      <div class="mb-1 text-xs font-medium text-neutral-500 select-none dark:text-neutral-400">
         {{ t('chord') }}
       </div>
       <ButtonGroup class="mx-2 mb-3">
@@ -35,26 +31,17 @@
       </ButtonGroup>
     </div>
     <div class="flex flex-col items-center">
-      <div
-        class="mb-1 text-xs font-medium text-neutral-500 select-none dark:text-neutral-400"
-      >
+      <div class="mb-1 text-xs font-medium text-neutral-500 select-none dark:text-neutral-400">
         {{ t('display') }}
       </div>
       <ButtonGroup class="mx-2 mb-3">
         <Button class="w-9" @click.prevent="showEnharmonics = !showEnharmonics">
           {{ showEnharmonics ? '♯' : '♭' }}
         </Button>
-        <Button
-          :aria-pressed="showColors"
-          @click.prevent="showColors = !showColors"
-        >
+        <Button :aria-pressed="showColors" @click.prevent="showColors = !showColors">
           <IconPalette class="inline-block h-4 w-4 align-[-0.25em]" />
         </Button>
-        <Button
-          class="button"
-          :title="t('save_image')"
-          @click.prevent="emit('download')"
-        >
+        <Button class="button" :title="t('save_image')" @click.prevent="emit('download')">
           <IconArrowDownTray class="inline-block h-4 w-4 align-[-0.25em]" />
         </Button>
         <Button
@@ -64,11 +51,7 @@
         >
           <IconPin class="inline-block h-4 w-4 align-[-0.25em]" />
         </Button>
-        <Button
-          :title="t('reset_voicing')"
-          :disabled="!isUserChord"
-          @click.prevent="emit('reset')"
-        >
+        <Button :title="t('reset_voicing')" :disabled="!isUserChord" @click.prevent="emit('reset')">
           <IconArrowUturnLeft class="inline-block h-4 w-4 align-[-0.25em]" />
         </Button>
       </ButtonGroup>
@@ -98,6 +81,5 @@ const emit = defineEmits<{
 
 const { t } = useI18n();
 const store = useStore();
-const { scaleType, showColors, showEnharmonics, chordType, isUserChord } =
-  storeToRefs(store);
+const { scaleType, showColors, showEnharmonics, chordType, isUserChord } = storeToRefs(store);
 </script>

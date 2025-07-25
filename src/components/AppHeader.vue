@@ -6,10 +6,7 @@
         to="/"
       >
         Bandoneon.app
-        <span
-          v-if="route.path === '/game'"
-          class="ms-2 text-neutral-500 dark:text-neutral-400"
-        >
+        <span v-if="route.path === '/game'" class="ms-2 text-neutral-500 dark:text-neutral-400">
           Game
         </span>
       </RouterLink>
