@@ -9,9 +9,9 @@ ChordType.add(['1P', '3M', '7M'], ['M7']); // M7no5
 
 describe('chords', () => {
   for (const direction in chords) {
-    describe(direction, () => {
+    describe('' + direction, () => {
       for (const chord in chords[direction]) {
-        it(chord, () => {
+        it('' + chord, () => {
           // Compare chromas
           assert.deepEqual(
             chords[direction][chord].map(Note.chroma).toSorted(),
