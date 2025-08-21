@@ -120,7 +120,7 @@ const octaves = computed(() => {
     ...new Set(
       positions.value.map((position) => {
         const name = position[2];
-        return name[name.length - 1];
+        return name[name.length - 1] || '';
       }),
     ),
   ]
@@ -138,7 +138,7 @@ function resetGame() {
   // Randomize position order
   const array = [...keyPositions.value];
   const random = array.map(() => Math.random());
-  array.sort((a, b) => random[array.indexOf(a)] - random[array.indexOf(b)]);
+  array.sort((a, b) => (random[array.indexOf(a)] || 0) - (random[array.indexOf(b)] || 0));
   positions.value = array;
 }
 
@@ -160,6 +160,7 @@ function check() {
   if (positions.value.length <= currentPosition.value) return;
 
   // Current guess is complete
+  // @ts-expect-error TODO
   const solution = positions.value[currentPosition.value][2];
   if (tonic.value !== null && oct.value !== null && tonic.value + oct.value === solution) {
     guessed.value[currentPosition.value] = 2;
@@ -186,10 +187,10 @@ watch([tonic, oct], () => {
   }
 });
 
-const progress = computed(() => {
+const progress = computed<[number, number, number]>((): [number, number, number] => {
   if (positions.value.length === 0) return [0, 0, 0];
 
-  const result = [0, 0, 0];
+  const result: [number, number, number] = [0, 0, 0];
 
   for (const g of guessed.value) {
     if (g === 2 || (g === 1 && difficulty.value === 'easy')) result[2]++;
@@ -197,10 +198,10 @@ const progress = computed(() => {
     else if (g === 0) result[0]++;
   }
 
-  return result.map((value) => value / positions.value.length);
+  return result.map((value) => value / positions.value.length) as [number, number, number];
 });
 
-const correctPercentage = computed(() => Math.round(progress.value[2] * 100));
+const correctPercentage = computed(() => Math.round((progress.value[2] || 0) * 100));
 
 // Keyboard shortcuts for octave
 function keydownListener({ key }: { key: string }) {

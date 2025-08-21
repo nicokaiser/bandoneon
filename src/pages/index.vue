@@ -68,7 +68,7 @@ const isModified = ref(false);
 const userSelection = ref<Record<string, boolean>>({});
 
 const getScaleColor = (octave: number) => {
-  return colors[(octave - 1) % colors.length];
+  return colors[(octave - 1) % colors.length] || '';
 };
 
 const scalePaths = computed(() => {
@@ -119,7 +119,7 @@ const selected = computed(() => {
   const chord = chordNotes.value;
   if (chord) {
     for (let i = 0; i <= chord.length; i++) {
-      if (chord[i]) result[chord[i]] = true;
+      if (chord[i]) result[chord[i] || ''] = true;
     }
   }
   return result;

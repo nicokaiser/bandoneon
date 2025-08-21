@@ -1,5 +1,4 @@
 import tailwindcss from '@tailwindcss/vite';
-import legacy from '@vitejs/plugin-legacy';
 import vue from '@vitejs/plugin-vue';
 import VueRouter from 'unplugin-vue-router/vite';
 import { defineConfig } from 'vite';
@@ -11,9 +10,6 @@ export default defineConfig({
     tailwindcss(),
     VueRouter(),
     vue(),
-    legacy({
-      targets: ['defaults', 'not IE 11'],
-    }),
     VitePWA({
       includeAssets: ['favicon.ico', 'apple-touch-icon-180x180.png'],
       manifest: {
