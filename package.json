@@ -37,7 +37,7 @@
     "@tailwindcss/vite": "^4.1.16",
     "@tsconfig/node24": "^24.0.1",
     "@types/jsdom": "^27.0.0",
-    "@types/node": "^24.10.0",
+    "@types/node": "^24.10.1",
     "@vite-pwa/assets-generator": "^1.0.2",
     "@vitejs/plugin-vue": "^6.0.1",
     "@vitest/eslint-plugin": "^1.4.2",
