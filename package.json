@@ -35,7 +35,7 @@
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.1.16",
-    "@tsconfig/node24": "^24.0.1",
+    "@tsconfig/node24": "^24.0.2",
     "@types/jsdom": "^27.0.0",
     "@types/node": "^24.10.0",
     "@vite-pwa/assets-generator": "^1.0.2",
