@@ -30,7 +30,7 @@
     "tonal": "^6.4.3",
     "vite": "^7.3.1",
     "vite-plugin-pwa": "^1.2.0",
-    "vue": "^3.5.28",
+    "vue": "^3.5.29",
     "vue-router": "^5.0.3"
   },
   "devDependencies": {
