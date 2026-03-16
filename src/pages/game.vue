@@ -160,7 +160,6 @@ function check() {
   if (positions.value.length <= currentPosition.value) return;
 
   // Current guess is complete
-  // @ts-expect-error TODO
   const solution = positions.value[currentPosition.value][2];
   if (tonic.value !== null && oct.value !== null && tonic.value + oct.value === solution) {
     guessed.value[currentPosition.value] = 2;

@@ -26,13 +26,10 @@ export const useStore = defineStore('main', {
       const settings = useSettingsStore();
 
       if (this.side && this.direction && this.chordName) {
-        // @ts-expect-error TODO
         if (settings.userChords[this.side] && settings.userChords[this.side][this.chordName]) {
-          // @ts-expect-error TODO
           return settings.userChords[this.side][this.chordName];
         }
 
-        // @ts-expect-error TODO
         return chords[`${this.side}-${this.direction}`][this.chordName];
       }
       return [];
@@ -42,7 +39,6 @@ export const useStore = defineStore('main', {
       const settings = useSettingsStore();
 
       if (this.side && this.direction && this.chordName) {
-        // @ts-expect-error TODO
         if (settings.userChords[this.side] && settings.userChords[this.side][this.chordName])
           return true;
       }
@@ -54,12 +50,11 @@ export const useStore = defineStore('main', {
 
       if (!settings.instrument) return [];
 
-      // @ts-expect-error TODO
       const keys = Array.isArray(instruments[settings.instrument][state.side])
-        ? // @ts-expect-error TODO
-          instruments[settings.instrument][state.side]
+        ?
+        instruments[settings.instrument][state.side]
         : // @ts-expect-error TODO
-          instruments[settings.instrument][state.side][state.direction];
+        instruments[settings.instrument][state.side][state.direction];
 
       if (!keys) return [];
 
