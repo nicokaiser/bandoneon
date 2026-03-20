@@ -1,5 +1,5 @@
 <template>
-  <div class="mx-auto flex w-full max-w-[896px] flex-1 items-center px-6 pt-6">
+  <div class="mx-auto flex w-full max-w-4xl flex-1 items-center px-6 pt-6">
     <SvgKeyboard>
       <SvgButton
         v-for="([x, y, tonal], idx) in positions"

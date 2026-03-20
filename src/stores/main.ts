@@ -51,10 +51,9 @@ export const useStore = defineStore('main', {
       if (!settings.instrument) return [];
 
       const keys = Array.isArray(instruments[settings.instrument][state.side])
-        ?
-        instruments[settings.instrument][state.side]
+        ? instruments[settings.instrument][state.side]
         : // @ts-expect-error TODO
-        instruments[settings.instrument][state.side][state.direction];
+          instruments[settings.instrument][state.side][state.direction];
 
       if (!keys) return [];
 
