@@ -3,5 +3,7 @@
   "ignorePatterns": ["typed-router.d.ts"],
   "useTabs": false,
   "printWidth": 100,
-  "singleQuote": true
+  "singleQuote": true,
+  "sortTailwindcss": true,
+  "sortImports": true
 }

@@ -10,6 +10,7 @@
 import { useHead } from '@unhead/vue';
 import { useI18n } from 'petite-vue-i18n';
 import { watchEffect } from 'vue';
+
 import AppFooter from './components/AppFooter.vue';
 import AppHeader from './components/AppHeader.vue';
 import { instruments } from './data/index';

@@ -92,11 +92,12 @@
 import { useI18n } from 'petite-vue-i18n';
 import { storeToRefs } from 'pinia';
 import { useRoute } from 'vue-router';
+
 import { difficulties, instruments, pitchNotations } from '../data/index';
 import { useSettingsStore } from '../stores/settings';
 import Button from './Button.vue';
-import Select from './Select.vue';
 import IconGitHub from './icons/IconGitHub.vue';
+import Select from './Select.vue';
 
 const settings = useSettingsStore();
 const route = useRoute();

@@ -28,6 +28,7 @@
 <script setup lang="ts">
 import { useI18n } from 'petite-vue-i18n';
 import { storeToRefs } from 'pinia';
+
 import { useStore } from '../stores/main';
 import Button from './Button.vue';
 import ButtonGroup from './ButtonGroup.vue';

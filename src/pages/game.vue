@@ -60,6 +60,7 @@ import { useHead } from '@unhead/vue';
 import { useI18n } from 'petite-vue-i18n';
 import { storeToRefs } from 'pinia';
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
+
 import Button from '../components/Button.vue';
 import Modal from '../components/Modal.vue';
 import NavTonic from '../components/NavTonic.vue';

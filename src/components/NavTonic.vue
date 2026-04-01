@@ -18,6 +18,7 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
 import { Note } from 'tonal';
+
 import { notes } from '../data/index';
 import { useStore } from '../stores/main';
 import { useSettingsStore } from '../stores/settings';

@@ -36,6 +36,7 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
+
 import { useDark } from '../composables/useDark';
 import AppSettings from './AppSettings.vue';
 import IconBars3 from './icons/IconBars3.vue';

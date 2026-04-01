@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia';
+
 import chords from '../data/chords';
 import { instruments } from '../data/index';
 import { useSettingsStore } from './settings';

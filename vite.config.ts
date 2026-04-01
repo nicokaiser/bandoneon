@@ -1,8 +1,8 @@
 import tailwindcss from '@tailwindcss/vite';
 import vue from '@vitejs/plugin-vue';
-import VueRouter from 'vue-router/vite';
 import { defineConfig } from 'vite';
 import { VitePWA } from 'vite-plugin-pwa';
+import VueRouter from 'vue-router/vite';
 
 /** @type {import('vite').UserConfig} */
 export default defineConfig({

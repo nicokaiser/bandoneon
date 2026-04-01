@@ -31,6 +31,7 @@ import { useHead } from '@unhead/vue';
 import { storeToRefs } from 'pinia';
 import { Note, Scale } from 'tonal';
 import { computed, onMounted, ref, watch } from 'vue';
+
 import NavDisplay from '../components/NavDisplay.vue';
 import NavTonic from '../components/NavTonic.vue';
 import NavVariant from '../components/NavVariant.vue';

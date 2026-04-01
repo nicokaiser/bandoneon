@@ -62,6 +62,7 @@
 <script setup lang="ts">
 import { useI18n } from 'petite-vue-i18n';
 import { storeToRefs } from 'pinia';
+
 import { chordTypes, scaleTypes } from '../data/index';
 import { useStore } from '../stores/main';
 import Button from './Button.vue';

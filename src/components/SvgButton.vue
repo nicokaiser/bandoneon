@@ -25,6 +25,7 @@
 <script setup lang="ts">
 import { Note } from 'tonal';
 import { computed } from 'vue';
+
 import { useStore } from '../stores/main';
 import { useSettingsStore } from '../stores/settings';
 import { scientificToHelmholtzNotation } from '../utils/helmholtz';

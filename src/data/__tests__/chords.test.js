@@ -1,5 +1,6 @@
 import { Chord, ChordType, Note } from 'tonal';
 import { assert, describe, it } from 'vitest';
+
 import chords from '../chords';
 
 ChordType.add(['1P', '3M', '7m'], ['7']); // 7no5
