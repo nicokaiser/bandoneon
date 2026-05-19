@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "@unhead/vue": "^3.1.0",
-    "petite-vue-i18n": "^11.4.2",
+    "petite-vue-i18n": "^11.4.4",
     "pinia": "^3.0.4",
     "tailwindcss": "^4.3.0",
     "tonal": "^6.4.3",
@@ -42,12 +42,12 @@
     "@vitejs/plugin-vue": "^6.0.7",
     "@vue/tsconfig": "^0.9.1",
     "jsdom": "^29.1.1",
-    "npm-run-all2": "^8.0.4",
-    "oxfmt": "^0.49.0",
-    "oxlint": "^1.64.0",
+    "npm-run-all2": "^9.0.0",
+    "oxfmt": "^0.51.0",
+    "oxlint": "^1.66.0",
     "typescript": "^6.0.3",
     "vitest": "^4.1.6",
-    "vue-tsc": "^3.2.9"
+    "vue-tsc": "^3.3.0"
   },
   "overrides": {
     "vite-plugin-pwa": {
