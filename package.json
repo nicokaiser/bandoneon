@@ -46,7 +46,7 @@
     "oxfmt": "^0.53.0",
     "oxlint": "^1.68.0",
     "typescript": "^6.0.3",
-    "vitest": "^4.1.8",
+    "vitest": "^4.1.9",
     "vue-tsc": "^3.3.4"
   },
   "overrides": {
