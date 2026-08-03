@@ -47,7 +47,7 @@
     "oxlint": "^1.71.0",
     "typescript": "6.0.3",
     "vitest": "^4.1.10",
-    "vue-tsc": "^3.3.8"
+    "vue-tsc": "^3.3.9"
   },
   "overrides": {
     "vite-plugin-pwa": {
