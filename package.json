@@ -23,7 +23,7 @@
     "test": "vitest"
   },
   "dependencies": {
-    "@unhead/vue": "^3.2.3",
+    "@unhead/vue": "^3.3.1",
     "petite-vue-i18n": "^11.4.8",
     "pinia": "^4.0.2",
     "tailwindcss": "^4.3.3",
@@ -36,22 +36,17 @@
   "devDependencies": {
     "@tailwindcss/vite": "^4.3.3",
     "@tsconfig/node24": "^24.0.4",
-    "@types/jsdom": "^28.0.3",
+    "@types/jsdom": "^30.0.0",
     "@types/node": "ts5.9",
     "@vite-pwa/assets-generator": "^1.0.2",
     "@vitejs/plugin-vue": "^6.0.8",
     "@vue/tsconfig": "^0.9.1",
     "jsdom": "^30.0.1",
     "npm-run-all2": "^9.0.3",
-    "oxfmt": "^0.61.0",
-    "oxlint": "^1.76.0",
+    "oxfmt": "^0.62.0",
+    "oxlint": "^1.77.0",
     "typescript": "6.0.3",
     "vitest": "^4.1.10",
     "vue-tsc": "^3.3.9"
-  },
-  "overrides": {
-    "vite-plugin-pwa": {
-      "vite": "$vite"
-    }
   }
 }
