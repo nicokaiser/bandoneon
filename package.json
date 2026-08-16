@@ -25,7 +25,7 @@
   "dependencies": {
     "@unhead/vue": "^3.3.1",
     "petite-vue-i18n": "^11.4.8",
-    "pinia": "^4.0.2",
+    "pinia": "^4.0.3",
     "tailwindcss": "^4.3.3",
     "tonal": "^6.4.3",
     "vite": "^8.2.1",
