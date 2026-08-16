@@ -45,7 +45,7 @@
     "npm-run-all2": "^9.0.3",
     "oxfmt": "^0.62.0",
     "oxlint": "^1.78.0",
-    "typescript": "npm:typescript-native-bridge@^6.0.3-bridge.12.tsgo.7.0.2",
+    "typescript": "npm:typescript-native-bridge@^6.0.3-bridge.13.tsgo.7.0.2",
     "vitest": "^4.1.10",
     "vue-tsc": "^3.3.9"
   },
