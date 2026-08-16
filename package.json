@@ -47,7 +47,7 @@
     "oxlint": "^1.78.0",
     "typescript": "npm:typescript-native-bridge@^6.0.3-bridge.12.tsgo.7.0.2",
     "vitest": "^4.1.10",
-    "vue-tsc": "^3.3.9"
+    "vue-tsc": "^3.3.10"
   },
   "overrides": {
     "typescript": "$typescript"
