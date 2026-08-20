@@ -1,25 +1,29 @@
 <template>
-  <div class="mx-auto flex w-full max-w-4xl flex-1 items-center px-6 pt-6">
-    <SvgKeyboard ref="keyboardEl">
-      <SvgButton
-        v-for="([x, y, tonal], idx) in keyPositions"
-        :key="idx"
-        :selected="selected[tonal]"
-        :x="x"
-        :y="y"
-        :tonal="tonal"
-        :color="color(tonal)"
-        @click="toggle(tonal)"
-      />
-      <SvgPath
-        v-for="(path, index) in scalePaths"
-        :key="index"
-        :stroke="getScaleColor(index)"
-        :d="path"
-      />
-    </SvgKeyboard>
+  <div
+    class="flex flex-1 flex-col rounded-2xl border-neutral-200 sm:mx-6 sm:border dark:border-neutral-800"
+  >
+    <div class="mx-auto flex w-full max-w-4xl flex-1 items-center px-6 pt-6">
+      <SvgKeyboard ref="keyboardEl">
+        <SvgButton
+          v-for="([x, y, tonal], idx) in keyPositions"
+          :key="idx"
+          :selected="selected[tonal]"
+          :x="x"
+          :y="y"
+          :tonal="tonal"
+          :color="color(tonal)"
+          @click="toggle(tonal)"
+        />
+        <SvgPath
+          v-for="(path, index) in scalePaths"
+          :key="index"
+          :stroke="getScaleColor(index)"
+          :d="path"
+        />
+      </SvgKeyboard>
+    </div>
   </div>
-  <div class="mx-auto max-w-(--breakpoint-md) px-6 pb-6">
+  <div class="mx-auto max-w-(--breakpoint-md) px-6 py-6 sm:pt-9">
     <NavVariant />
     <NavTonic />
     <NavDisplay :modified="isModified" @reset="onReset" @download="onDownload" @save="onSave" />

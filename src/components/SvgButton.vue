@@ -1,6 +1,6 @@
 <template>
   <g :class="{ selected }" @click.prevent="emit('click')">
-    <circle :cx="x + 29" :cy="y + 29" r="28" :fill="fill" :stroke="stroke" stroke-width="1.5" />
+    <circle :cx="x + 29" :cy="y + 29" r="28" :fill="fill" :stroke="stroke" stroke-width="1.25" />
     <text
       :x="x + 29"
       :y="y + 36"
