@@ -23,7 +23,7 @@
     "test": "vitest"
   },
   "dependencies": {
-    "@unhead/vue": "^3.3.2",
+    "@unhead/vue": "^3.4.0",
     "petite-vue-i18n": "^11.4.10",
     "pinia": "^4.0.3",
     "tailwindcss": "^4.3.3",
