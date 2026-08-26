@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "@unhead/vue": "^3.4.0",
-    "petite-vue-i18n": "^11.4.10",
+    "petite-vue-i18n": "^11.4.9",
     "pinia": "^4.0.3",
     "tailwindcss": "^4.3.3",
     "tonal": "^6.4.3",
@@ -45,11 +45,15 @@
     "npm-run-all2": "^9.0.3",
     "oxfmt": "^0.65.0",
     "oxlint": "^1.80.0",
-    "typescript": "npm:typescript-native-bridge@^6.0.3-bridge.15.tsgo.7.0.2",
+    "typescript": "npm:typescript-native-bridge@^6.0.3-bridge.13.tsgo.7.0.2",
     "vitest": "^4.1.11",
     "vue-tsc": "^3.3.11"
   },
   "overrides": {
     "typescript": "$typescript"
+  },
+  "allowScripts": {
+    "fsevents@2.3.3": true,
+    "sharp@0.33.5": true
   }
 }
