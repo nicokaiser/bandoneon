@@ -2,7 +2,7 @@
   <div class="relative">
     <select
       :id="id"
-      class="relative block min-h-11 w-full appearance-none rounded-lg border-0 bg-neutral-100 p-2.5 pe-9 text-base font-semibold select-none ring-inset focus:ring-2 focus:outline-hidden disabled:cursor-not-allowed disabled:opacity-75 dark:bg-neutral-800"
+      class="relative block min-h-11 w-full appearance-none rounded-lg border-0 bg-neutral-100 p-2.5 pe-9 text-base font-semibold text-neutral-950 select-none ring-inset focus:ring-2 focus:outline-hidden disabled:cursor-not-allowed disabled:opacity-75 dark:bg-neutral-800 dark:text-white"
       @input="onInput"
     >
       <option

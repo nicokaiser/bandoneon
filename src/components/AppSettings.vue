@@ -1,6 +1,6 @@
 <template>
   <div class="print:hidden">
-    <div class="mx-auto max-w-3xl px-4 py-6">
+    <div class="p-5">
       <div class="mb-4">
         <label class="block text-sm font-medium text-neutral-600 dark:text-neutral-400">
           {{ t('keyboard') }}

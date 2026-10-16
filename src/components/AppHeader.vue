@@ -1,10 +1,11 @@
 <template>
-  <nav class="flex h-16 w-full items-center gap-2 px-2 print:hidden">
+  <nav class="relative flex h-16 w-full items-center gap-2 px-2 print:hidden">
     <div class="flex-1">
       <RouterLink
-        class="inline-flex min-h-12 items-center rounded-lg px-3 text-lg font-bold select-none"
+        class="inline-flex min-h-12 items-center gap-3 rounded-lg px-2 text-lg font-bold tracking-tight select-none"
         to="/"
       >
+        <img src="/favicon.svg" alt="" class="h-8 w-8 rounded-lg" />
         Bandoneon.app
         <span v-if="route.path === '/game'" class="ms-2 text-neutral-500 dark:text-neutral-400">
           Game
@@ -29,9 +30,13 @@
     >
       <IconBars3 class="h-6 w-6" />
     </button>
+    <template v-if="showMenu">
+      <div class="fixed inset-0 z-30" @click="showMenu = false"></div>
+      <AppSettings
+        class="absolute inset-e-2 top-16 z-40 w-[min(26rem,calc(100vw-1rem))] rounded-2xl bg-white shadow-2xl dark:bg-neutral-900"
+      />
+    </template>
   </nav>
-
-  <AppSettings v-if="showMenu" />
 </template>
 
 <script setup lang="ts">
