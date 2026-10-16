@@ -1,29 +1,31 @@
 <template>
-  <div class="mx-auto flex w-full max-w-4xl flex-1 items-center px-6 pt-6">
-    <SvgKeyboard ref="keyboardEl">
-      <SvgButton
-        v-for="([x, y, tonal], idx) in keyPositions"
-        :key="idx"
-        :selected="selected[tonal]"
-        :x="x"
-        :y="y"
-        :tonal="tonal"
-        :color="color(tonal)"
-        @click="toggle(tonal)"
-      />
-      <SvgPath
-        v-for="(path, index) in scalePaths"
-        :key="index"
-        :stroke="getScaleColor(index)"
-        :d="path"
-      />
-    </SvgKeyboard>
-  </div>
-  <div class="mx-auto max-w-(--breakpoint-md) px-6 pb-6">
-    <NavVariant />
-    <NavTonic />
-    <NavDisplay :modified="isModified" @reset="onReset" @download="onDownload" @save="onSave" />
-  </div>
+  <main class="mx-auto flex w-full max-w-4xl flex-1 flex-col px-4 pb-6">
+    <div class="flex flex-1 items-center">
+      <SvgKeyboard ref="keyboardEl">
+        <SvgButton
+          v-for="([x, y, tonal], idx) in keyPositions"
+          :key="idx"
+          :selected="selected[tonal]"
+          :x="x"
+          :y="y"
+          :tonal="tonal"
+          :color="color(tonal)"
+          @click="toggle(tonal)"
+        />
+        <SvgPath
+          v-for="(path, index) in scalePaths"
+          :key="index"
+          :stroke="getScaleColor(index)"
+          :d="path"
+        />
+      </SvgKeyboard>
+    </div>
+    <div class="mx-auto flex w-full max-w-3xl flex-col gap-3">
+      <NavVariant />
+      <NavTonic />
+      <NavDisplay :modified="isModified" @reset="onReset" @download="onDownload" @save="onSave" />
+    </div>
+  </main>
 </template>
 
 <script setup lang="ts">

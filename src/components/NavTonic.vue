@@ -1,17 +1,15 @@
 <template>
-  <div class="mb-3 flex flex-wrap justify-center print:hidden">
-    <span v-for="idx in [0, 1]" :key="idx" class="inline-block text-nowrap">
-      <Button
-        v-for="item in notes.slice(idx * 6, idx * 6 + 6)"
-        :key="item"
-        class="m-1 w-12"
-        :aria-pressed="item === tonic"
-        :disabled="disabled"
-        @click.prevent="store.setTonic(item === tonic ? null : item)"
-      >
-        {{ format(item) }}
-      </Button>
-    </span>
+  <div class="grid grid-cols-6 gap-1 sm:grid-cols-12 print:hidden">
+    <Button
+      v-for="item in notes"
+      :key="item"
+      class="min-w-0 px-0"
+      :aria-pressed="item === tonic"
+      :disabled="disabled"
+      @click.prevent="store.setTonic(item === tonic ? null : item)"
+    >
+      {{ format(item) }}
+    </Button>
   </div>
 </template>
 

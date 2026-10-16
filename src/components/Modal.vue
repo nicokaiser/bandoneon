@@ -1,13 +1,13 @@
 <template>
   <Teleport to="body">
     <div v-if="modelValue" class="relative z-50" role="dialog" aria-modal="true">
-      <div class="fixed inset-0 bg-neutral-200/75 dark:bg-neutral-800/75"></div>
+      <div class="fixed inset-0 bg-neutral-950/50 dark:bg-neutral-950/75"></div>
       <div class="fixed inset-0 overflow-y-auto">
         <div
           class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0"
         >
           <div
-            class="relative w-full overflow-hidden rounded-lg bg-white text-left shadow-xl sm:my-8 sm:max-w-lg dark:bg-neutral-900"
+            class="relative w-full overflow-hidden rounded-2xl bg-white text-left text-lg shadow-xl sm:my-8 sm:max-w-sm dark:bg-neutral-900"
           >
             <slot />
           </div>

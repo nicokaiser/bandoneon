@@ -1,8 +1,7 @@
 <template>
-  <div class="flex min-h-screen flex-col">
+  <div class="flex min-h-dvh flex-col">
     <AppHeader />
     <RouterView />
-    <AppFooter />
   </div>
 </template>
 
@@ -11,7 +10,6 @@ import { useHead } from '@unhead/vue';
 import { useI18n } from 'petite-vue-i18n';
 import { watchEffect } from 'vue';
 
-import AppFooter from './components/AppFooter.vue';
 import AppHeader from './components/AppHeader.vue';
 import { instruments } from './data/index';
 import { useSettingsStore } from './stores/settings';

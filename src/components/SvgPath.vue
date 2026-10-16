@@ -4,7 +4,7 @@
     :d="d"
     stroke-linecap="round"
     stroke-linejoin="round"
-    stroke-width="3"
+    stroke-width="4"
     fill="none"
   />
 </template>

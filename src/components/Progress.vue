@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex-start flex h-2.5 w-full overflow-hidden rounded-full bg-neutral-200 dark:bg-neutral-700"
+    class="flex-start flex h-3 w-full overflow-hidden rounded-full bg-neutral-100 dark:bg-neutral-800"
   >
     <div
       v-for="(value, i) of values"

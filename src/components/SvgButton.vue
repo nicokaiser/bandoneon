@@ -1,12 +1,14 @@
 <template>
   <g :class="{ selected }" @click.prevent="emit('click')">
-    <circle :cx="x + 29" :cy="y + 29" r="28" :fill="fill" :stroke="stroke" stroke-width="1.5" />
+    <circle class="bg" :cx="x + 29" :cy="y + 29" r="28" fill="#fff" />
+    <circle :cx="x + 29" :cy="y + 29" r="28" :fill="fill" :stroke="stroke" stroke-width="2" />
     <text
       :x="x + 29"
-      :y="y + 36"
+      :y="y + 37"
       :fill="selected ? '#fff' : 'currentColor'"
       font-family="-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif"
-      font-size="20px"
+      font-size="22px"
+      font-weight="600"
       text-anchor="middle"
     >
       <template v-if="label !== null">
@@ -14,7 +16,7 @@
       </template>
       <template v-else>
         <tspan>{{ format[0] }}</tspan>
-        <tspan dx="2" font-size="16px">
+        <tspan dx="1" font-size="15px" font-weight="500">
           {{ format[1] }}
         </tspan>
       </template>
@@ -84,9 +86,21 @@ circle {
   stroke: #a3a3a3; /* neutral-400 */
 }
 
+.bg {
+  stroke: none;
+}
+
+.dark .bg {
+  fill: #0a0a0a; /* neutral-950 */
+}
+
+.dark circle {
+  stroke: #737373; /* neutral-500 */
+}
+
 .selected circle {
-  fill: #262626;
-  stroke: #262626;
+  fill: #171717;
+  stroke: #171717;
 }
 
 text {
@@ -95,11 +109,11 @@ text {
 }
 
 .dark .selected circle {
-  fill: #f5f5f5;
-  stroke: #f5f5f5;
+  fill: #fff;
+  stroke: #fff;
 }
 
 .dark .selected text {
-  fill: #262626;
+  fill: #0a0a0a;
 }
 </style>

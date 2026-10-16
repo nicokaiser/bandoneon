@@ -1,13 +1,14 @@
 <template>
-  <div class="flex flex-wrap justify-center print:hidden">
-    <div class="flex flex-col items-center">
-      <div class="mb-1 text-xs font-medium text-neutral-500 select-none dark:text-neutral-400">
+  <div class="flex flex-wrap gap-x-3 gap-y-2 print:hidden">
+    <div class="flex-auto">
+      <div class="mb-1 px-1 text-xs font-medium text-neutral-600 select-none dark:text-neutral-400">
         {{ t('scale') }}
       </div>
-      <ButtonGroup class="mx-2 mb-3">
+      <ButtonGroup>
         <Button
           v-for="item in scaleTypes"
           :key="item"
+          class="flex-1"
           :aria-pressed="item === scaleType"
           @click.prevent="store.setScaleType(item)"
         >
@@ -15,14 +16,15 @@
         </Button>
       </ButtonGroup>
     </div>
-    <div class="flex flex-col items-center">
-      <div class="mb-1 text-xs font-medium text-neutral-500 select-none dark:text-neutral-400">
+    <div class="flex-auto">
+      <div class="mb-1 px-1 text-xs font-medium text-neutral-600 select-none dark:text-neutral-400">
         {{ t('chord') }}
       </div>
-      <ButtonGroup class="mx-2 mb-3">
+      <ButtonGroup>
         <Button
           v-for="item in chordTypes"
           :key="item"
+          class="flex-1"
           :aria-pressed="item === chordType"
           @click.prevent="store.setChordType(item)"
         >
@@ -30,29 +32,40 @@
         </Button>
       </ButtonGroup>
     </div>
-    <div class="flex flex-col items-center">
-      <div class="mb-1 text-xs font-medium text-neutral-500 select-none dark:text-neutral-400">
+    <div class="flex-auto">
+      <div class="mb-1 px-1 text-xs font-medium text-neutral-600 select-none dark:text-neutral-400">
         {{ t('display') }}
       </div>
-      <ButtonGroup class="mx-2 mb-3">
-        <Button class="w-9" @click.prevent="showEnharmonics = !showEnharmonics">
+      <ButtonGroup>
+        <Button class="flex-1 text-xl" @click.prevent="showEnharmonics = !showEnharmonics">
           {{ showEnharmonics ? '♯' : '♭' }}
         </Button>
-        <Button :aria-pressed="showColors" @click.prevent="showColors = !showColors">
-          <IconPalette class="inline-block h-4 w-4 align-[-0.25em]" />
+        <Button
+          class="flex-1"
+          :title="t('colors')"
+          :aria-pressed="showColors"
+          @click.prevent="showColors = !showColors"
+        >
+          <IconPalette class="h-5 w-5" />
         </Button>
-        <Button class="button" :title="t('save_image')" @click.prevent="emit('download')">
-          <IconArrowDownTray class="inline-block h-4 w-4 align-[-0.25em]" />
+        <Button class="flex-1" :title="t('save_image')" @click.prevent="emit('download')">
+          <IconArrowDownTray class="h-5 w-5" />
         </Button>
         <Button
+          class="flex-1"
           :title="t('save_voicing')"
           :disabled="!modified || !chordType"
           @click.prevent="emit('save')"
         >
-          <IconPin class="inline-block h-4 w-4 align-[-0.25em]" />
+          <IconPin class="h-5 w-5" />
         </Button>
-        <Button :title="t('reset_voicing')" :disabled="!isUserChord" @click.prevent="emit('reset')">
-          <IconArrowUturnLeft class="inline-block h-4 w-4 align-[-0.25em]" />
+        <Button
+          class="flex-1"
+          :title="t('reset_voicing')"
+          :disabled="!isUserChord"
+          @click.prevent="emit('reset')"
+        >
+          <IconArrowUturnLeft class="h-5 w-5" />
         </Button>
       </ButtonGroup>
     </div>

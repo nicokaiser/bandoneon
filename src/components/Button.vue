@@ -1,6 +1,6 @@
 <template>
   <button
-    class="rounded-md border border-neutral-400 px-3 py-2 text-sm font-semibold select-none hover:bg-neutral-100 disabled:cursor-not-allowed disabled:text-neutral-300 disabled:hover:bg-inherit aria-pressed:border-neutral-800 aria-pressed:bg-neutral-800 aria-pressed:text-white aria-pressed:hover:bg-neutral-700 dark:border-neutral-500 dark:hover:bg-neutral-700 dark:disabled:border-neutral-500 dark:disabled:text-neutral-600 dark:disabled:hover:bg-inherit dark:aria-pressed:border-neutral-200 dark:aria-pressed:bg-neutral-100 dark:aria-pressed:text-neutral-900 dark:aria-pressed:hover:bg-neutral-200"
+    class="inline-flex min-h-11 min-w-11 touch-manipulation items-center justify-center rounded-lg bg-neutral-100 px-3 text-base font-semibold select-none hover:bg-neutral-200 active:bg-neutral-300 disabled:cursor-not-allowed disabled:opacity-35 disabled:hover:bg-neutral-100 in-[.segmented]:bg-transparent in-[.segmented]:disabled:hover:bg-transparent aria-pressed:bg-neutral-900 aria-pressed:text-white aria-pressed:hover:bg-neutral-800 dark:bg-neutral-800 dark:hover:bg-neutral-700 dark:active:bg-neutral-600 dark:disabled:hover:bg-neutral-800 dark:aria-pressed:bg-white dark:aria-pressed:text-neutral-950 dark:aria-pressed:hover:bg-neutral-200"
   >
     <slot />
   </button>

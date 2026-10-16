@@ -1,8 +1,8 @@
 <template>
-  <nav class="mx-auto flex min-h-16 w-full items-center p-2">
+  <nav class="flex h-16 w-full items-center gap-2 px-2 print:hidden">
     <div class="flex-1">
       <RouterLink
-        class="inline-flex min-h-12 flex-wrap items-center justify-center rounded-lg px-4 text-xl font-semibold select-none"
+        class="inline-flex min-h-12 items-center rounded-lg px-3 text-lg font-bold select-none"
         to="/"
       >
         Bandoneon.app
@@ -11,23 +11,24 @@
         </span>
       </RouterLink>
     </div>
-    <div class="flex-none">
-      <button
-        class="inline-flex h-12 w-12 flex-wrap items-center justify-center rounded-lg font-semibold select-none"
-        @click.prevent="isDark = !isDark"
-      >
-        <IconSun v-if="!isDark" class="h-5 w-5" />
-        <IconMoon v-else class="h-5 w-5" />
-      </button>
-      <button
-        class="inline-flex h-12 w-12 flex-wrap items-center justify-center rounded-lg font-semibold select-none"
-        type="button"
-        title="Settings"
-        @click.prevent="showMenu = !showMenu"
-      >
-        <IconBars3 class="h-5 w-5" />
-      </button>
-    </div>
+    <button
+      class="inline-flex h-12 w-12 touch-manipulation items-center justify-center rounded-lg select-none hover:bg-neutral-100 dark:hover:bg-neutral-800"
+      type="button"
+      :title="isDark ? 'Light mode' : 'Dark mode'"
+      @click.prevent="isDark = !isDark"
+    >
+      <IconSun v-if="!isDark" class="h-6 w-6" />
+      <IconMoon v-else class="h-6 w-6" />
+    </button>
+    <button
+      class="inline-flex h-12 w-12 touch-manipulation items-center justify-center rounded-lg select-none hover:bg-neutral-100 aria-expanded:bg-neutral-900 aria-expanded:text-white dark:hover:bg-neutral-800 dark:aria-expanded:bg-white dark:aria-expanded:text-neutral-950"
+      type="button"
+      title="Settings"
+      :aria-expanded="showMenu"
+      @click.prevent="showMenu = !showMenu"
+    >
+      <IconBars3 class="h-6 w-6" />
+    </button>
   </nav>
 
   <AppSettings v-if="showMenu" />

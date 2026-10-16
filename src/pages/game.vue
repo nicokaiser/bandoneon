@@ -1,42 +1,43 @@
 <template>
-  <div class="mx-auto flex w-full max-w-4xl flex-1 items-center px-6 pt-6">
-    <SvgKeyboard>
-      <SvgButton
-        v-for="([x, y, tonal], idx) in positions"
-        :key="idx"
-        :x="x"
-        :y="y"
-        :tonal="tonal"
-        :label="label(idx)"
-        :selected="idx === currentPosition"
-        :color="fillColor(idx)"
-      />
-    </SvgKeyboard>
-  </div>
-  <div class="mx-auto max-w-(--breakpoint-md) px-6 pb-6">
-    <NavVariant :readonly="currentPosition > 0" />
-    <NavTonic />
-    <!-- Medium mode: display octave buttons -->
-    <div v-if="difficulty !== 'easy'" class="mb-2 flex flex-wrap justify-center">
-      <Button
-        v-for="octave in octaves"
-        :key="octave"
-        class="m-1 w-12"
-        :disabled="!tonic"
-        @click.prevent="oct = octave"
-      >
-        {{ formatOctave(octave) }}
-      </Button>
+  <main class="mx-auto flex w-full max-w-4xl flex-1 flex-col px-4 pb-6">
+    <div class="flex flex-1 items-center">
+      <SvgKeyboard>
+        <SvgButton
+          v-for="([x, y, tonal], idx) in positions"
+          :key="idx"
+          :x="x"
+          :y="y"
+          :tonal="tonal"
+          :label="label(idx)"
+          :selected="idx === currentPosition"
+          :color="fillColor(idx)"
+        />
+      </SvgKeyboard>
     </div>
-    <Progress
-      class="mt-8"
-      :values="[
-        { value: progress[2], color: '#22c55e' /* green-500 */ },
-        { value: progress[1], color: '#eab308' /* yellow-500 */ },
-        { value: progress[0], color: '#ef4444' /* red-500 */ },
-      ]"
-    />
-  </div>
+    <div class="mx-auto flex w-full max-w-3xl flex-col gap-3">
+      <NavVariant :readonly="currentPosition > 0" />
+      <NavTonic />
+      <!-- Medium mode: display octave buttons -->
+      <div v-if="difficulty !== 'easy'" class="flex flex-wrap justify-center gap-1.5">
+        <Button
+          v-for="octave in octaves"
+          :key="octave"
+          class="w-12"
+          :disabled="!tonic"
+          @click.prevent="oct = octave"
+        >
+          {{ formatOctave(octave) }}
+        </Button>
+      </div>
+      <Progress
+        :values="[
+          { value: progress[2], color: '#22c55e' /* green-500 */ },
+          { value: progress[1], color: '#eab308' /* yellow-500 */ },
+          { value: progress[0], color: '#ef4444' /* red-500 */ },
+        ]"
+      />
+    </div>
+  </main>
   <Modal v-model="isModalOpen">
     <div class="px-4 py-8 text-center">
       <p class="mb-8">
