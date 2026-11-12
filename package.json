@@ -46,7 +46,7 @@
     "oxfmt": "^0.75.0",
     "oxlint": "^1.90.0",
     "typescript": "npm:typescript-native-bridge@^6.0.3-bridge.19.tsgo.7.0.2",
-    "vitest": "^5.0.5",
+    "vitest": "^5.1.0",
     "vue-tsc": "^3.3.14"
   },
   "overrides": {
