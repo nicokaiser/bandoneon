@@ -27,11 +27,11 @@
     "petite-vue-i18n": "^11.4.20",
     "pinia": "^4.1.0",
     "tailwindcss": "^4.3.5",
-    "tonal": "6.5.1",
+    "tonal": "6.6.0",
     "vite": "^8.3.8",
     "vite-plugin-pwa": "^2.0.0",
     "vue": "^3.5.45",
-    "vue-router": "^5.5.0"
+    "vue-router": "^5.5.1"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.3.5",
@@ -43,8 +43,8 @@
     "@vue/tsconfig": "^0.9.1",
     "jsdom": "^31.0.1",
     "npm-run-all2": "^9.0.4",
-    "oxfmt": "^0.78.0",
-    "oxlint": "^1.93.0",
+    "oxfmt": "^0.79.0",
+    "oxlint": "^1.94.0",
     "typescript": "npm:typescript-native-bridge@^6.0.3-bridge.19.tsgo.7.0.2",
     "vitest": "^5.1.0",
     "vue-tsc": "^3.3.14"
